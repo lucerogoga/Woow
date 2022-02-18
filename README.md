@@ -882,3 +882,11 @@ yarn start
 * [Qué es Serverless? | FooBar - YouTube](https://www.youtube.com/watch?v=_SYHUpLi-2U)
 * [Firebase](https://firebase.google.com/)
 * [Serverless Architectures - Martin Fowler](https://www.martinfowler.com/articles/serverless.html)
+
+#### Rules for good Cooding
+
+* Codebase and Commits in English.
+* Use Camel Case for functions ex. myFunction.
+* CSS - BEM(Block-elemnt-modificador) * [BEM](http://getbem.com/naming/).
+* Name of variables camel case ex. myVariable.
+* Componets with Pascal Case  MyComponent.
