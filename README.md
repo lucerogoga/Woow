@@ -887,6 +887,6 @@ yarn start
 
 * Codebase and Commits in English.
 * Use Camel Case for functions ex. myFunction.
-* CSS - BEM(Block-elemnt-modificador) * [BEM](http://getbem.com/naming/).
+* CSS - BEM(Block-element-modifier) * [BEM](http://getbem.com/naming/).
 * Name of variables camel case ex. myVariable.
 * Componets with Pascal Case  MyComponent.
