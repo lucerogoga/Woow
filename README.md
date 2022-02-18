@@ -2,14 +2,14 @@
 
 ## Índice
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Pistas, tips y lecturas complementarias](#6-pistas-tips-y-lecturas-complementarias)
+- [1. Preámbulo](#1-preámbulo)
+- [2. Resumen del proyecto](#2-resumen-del-proyecto)
+- [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
+- [4. Consideraciones generales](#4-consideraciones-generales)
+- [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
+- [6. Pistas, tips y lecturas complementarias](#6-pistas-tips-y-lecturas-complementarias)
 
-***
+---
 
 ## 1. Preámbulo
 
@@ -56,35 +56,35 @@ Esta es la información que tenemos del cliente:
 >
 > Tenemos 2 menús: uno muy sencillo para el desayuno:
 >
-> | Ítem                      |Precio $|
-> |---------------------------|------|
-> | Café americano            |    5 |
-> | Café con leche            |    7 |
-> | Sandwich de jamón y queso |   10 |
-> | Jugo de frutas natural              |    7 |
+> | Ítem                      | Precio $ |
+> | ------------------------- | -------- |
+> | Café americano            | 5        |
+> | Café con leche            | 7        |
+> | Sandwich de jamón y queso | 10       |
+> | Jugo de frutas natural    | 7        |
 >
 > Y otro menú para el resto del día:
 >
-> | Ítem                      |Precio|
-> |---------------------------|------|
-> |**Hamburguesas**           |   **$**   |
-> |Hamburguesa simple         |    10|
-> |Hamburguesa doble          |    15|
-> |**Acompañamientos**        |   **$**   |
-> |Papas fritas               |     5|
-> |Aros de cebolla            |     5|
-> |**Para tomar**             |   **$**   |
-> |Agua 500ml                 |     5|
-> |Agua 750ml                 |     7|
-> |Bebida/gaseosa 500ml       |     7|
-> |Bebida/gaseosa 750ml       |     10|
+> | Ítem                 | Precio |
+> | -------------------- | ------ |
+> | **Hamburguesas**     | **$**  |
+> | Hamburguesa simple   | 10     |
+> | Hamburguesa doble    | 15     |
+> | **Acompañamientos**  | **$**  |
+> | Papas fritas         | 5      |
+> | Aros de cebolla      | 5      |
+> | **Para tomar**       | **$**  |
+> | Agua 500ml           | 5      |
+> | Agua 750ml           | 7      |
+> | Bebida/gaseosa 500ml | 7      |
+> | Bebida/gaseosa 750ml | 10     |
 >
 > **Importante:** Los clientes pueden escoger entre hamburguesas de res,
 > de pollo, o vegetariana. Además, por $ 1 adicional, pueden agregarle queso
 > o huevo.
 >
 > Nuestros clientes son bastante indecisos, por lo que es muy común que cambien
->el su pedido varias veces antes de finalizarlo.
+> el su pedido varias veces antes de finalizarlo.
 
 La interfaz debe mostrar los dos menús (desayuno y resto del día), cada uno
 con todos sus _productos_. El usuario debe poder ir eligiendo qué _productos_
@@ -109,127 +109,127 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 - [ ] **Uso de HTML semántico**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [HTML semántico](https://curriculum.laboratoria.la/es/topics/html/02-html5/02-semantic-html)
-  * [Semantics - MDN Web Docs Glossary](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
-</p></details>
+  - [HTML semántico](https://curriculum.laboratoria.la/es/topics/html/02-html5/02-semantic-html)
+  - [Semantics - MDN Web Docs Glossary](https://developer.mozilla.org/en-US/docs/Glossary/Semantics#Semantics_in_HTML)
+  </p></details>
 
 ### CSS
 
 - [ ] **Uso de selectores de CSS**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Intro a CSS](https://curriculum.laboratoria.la/es/topics/css/01-css/01-intro-css)
-  * [CSS Selectors - MDN](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Selectors)
-</p></details>
+  - [Intro a CSS](https://curriculum.laboratoria.la/es/topics/css/01-css/01-intro-css)
+  - [CSS Selectors - MDN](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Selectors)
+  </p></details>
 
 - [ ] **Modelo de caja (box model): borde, margen, padding**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Box Model & Display](https://curriculum.laboratoria.la/es/topics/css/01-css/02-boxmodel-and-display)
-  * [The box model - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
-  * [Introduction to the CSS box model - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)
-  * [CSS display - MDN](https://developer.mozilla.org/pt-BR/docs/Web/CSS/display)
-  * [display - CSS Tricks](https://css-tricks.com/almanac/properties/d/display/)
-</p></details>
+  - [Box Model & Display](https://curriculum.laboratoria.la/es/topics/css/01-css/02-boxmodel-and-display)
+  - [The box model - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model)
+  - [Introduction to the CSS box model - MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)
+  - [CSS display - MDN](https://developer.mozilla.org/pt-BR/docs/Web/CSS/display)
+  - [display - CSS Tricks](https://css-tricks.com/almanac/properties/d/display/)
+  </p></details>
 
 - [ ] **Uso de flexbox en CSS**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [A Complete Guide to Flexbox - CSS Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
-  * [Flexbox Froggy](https://flexboxfroggy.com/#es)
-  * [Flexbox - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
-</p></details>
+  - [A Complete Guide to Flexbox - CSS Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+  - [Flexbox Froggy](https://flexboxfroggy.com/#es)
+  - [Flexbox - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
+  </p></details>
 
 - [ ] **Uso de CSS Grid Layout**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [A Complete Guide to Grid - CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)
-  * [Grids - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
-</p></details>
+  - [A Complete Guide to Grid - CSS Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)
+  - [Grids - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids)
+  </p></details>
 
 - [ ] **Uso de media queries**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [CSS media queries - MDN](https://developer.mozilla.org/es/docs/CSS/Media_queries)
-</p></details>
+  - [CSS media queries - MDN](https://developer.mozilla.org/es/docs/CSS/Media_queries)
+  </p></details>
 
 ### JavaScript
 
 - [ ] **Arrays (arreglos)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
-  * [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
-  * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-  * [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-  * [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-  * [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
-  * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
-</p></details>
+  - [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
+  - [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
+  - [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+  - [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+  - [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+  - [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+  - [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+  </p></details>
 
 - [ ] **Objetos (key, value)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Objetos en JavaScript](https://curriculum.laboratoria.la/es/topics/javascript/05-objects/01-objects)
-</p></details>
+  - [Objetos en JavaScript](https://curriculum.laboratoria.la/es/topics/javascript/05-objects/01-objects)
+  </p></details>
 
 - [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
 
 - [ ] **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Estructuras condicionales y repetitivas](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/01-conditionals-and-loops)
-  * [Tomando decisiones en tu código — condicionales - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/conditionals)
-</p></details>
+  - [Estructuras condicionales y repetitivas](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/01-conditionals-and-loops)
+  - [Tomando decisiones en tu código — condicionales - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/conditionals)
+  </p></details>
 
 - [ ] **Funciones (params, args, return)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Funciones (control de flujo)](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/03-functions)
-  * [Funciones clásicas](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/01-classic)
-  * [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
-  * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
-</p></details>
+  - [Funciones (control de flujo)](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/03-functions)
+  - [Funciones clásicas](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/01-classic)
+  - [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
+  - [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
+  </p></details>
 
 - [ ] **Pruebas unitarias (unit tests)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Empezando con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/getting-started)
-</p></details>
+  - [Empezando con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/getting-started)
+  </p></details>
 
 - [ ] **Pruebas asíncronas**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Tests de código asincrónico con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/asynchronous)
-</p></details>
+  - [Tests de código asincrónico con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/asynchronous)
+  </p></details>
 
 - [ ] **Uso de mocks y espías**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Manual Mocks con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/manual-mocks)
-</p></details>
+  - [Manual Mocks con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/manual-mocks)
+  </p></details>
 
 - [ ] **Módulos de ECMAScript (ES Modules)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [import - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import)
-  * [export - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export)
-</p></details>
+  - [import - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/import)
+  - [export - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export)
+  </p></details>
 
 - [ ] **Uso de linter (ESLINT)**
 
@@ -239,18 +239,18 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 - [ ] **Callbacks**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
-</p></details>
+  - [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
+  </p></details>
 
 - [ ] **Promesas**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Promise - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-  * [How to Write a JavaScript Promise - freecodecamp (en inglés)](https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)
-</p></details>
+  - [Promise - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+  - [How to Write a JavaScript Promise - freecodecamp (en inglés)](https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)
+  </p></details>
 
 ### Control de Versiones (Git y GitHub)
 
@@ -264,10 +264,10 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 - [ ] **GitHub: Despliegue con GitHub Pages**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Sitio oficial de GitHub Pages](https://pages.github.com/)
-</p></details>
+  - [Sitio oficial de GitHub Pages](https://pages.github.com/)
+  </p></details>
 
 - [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
 
@@ -291,217 +291,217 @@ Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en t
 
 - [ ] **Firebase Auth**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Primeros pasos con Firebase Authentication en sitios web - Documentación oficial](https://firebase.google.com/docs/auth/web/start?hl=es)
-  * [Administra usuarios en Firebase (onAuthStateChanged)](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
-</p></details>
+  - [Primeros pasos con Firebase Authentication en sitios web - Documentación oficial](https://firebase.google.com/docs/auth/web/start?hl=es)
+  - [Administra usuarios en Firebase (onAuthStateChanged)](https://firebase.google.com/docs/auth/web/manage-users?hl=es#get_the_currently_signed-in_user)
+  </p></details>
 
 - [ ] **Firestore**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Firestore - Documentación oficial](https://firebase.google.com/docs/firestore?hl=es)
-  * [Reglas de seguridad de Firestore - Documentación oficial](https://firebase.google.com/docs/rules?hl=es)
-  * [Obtén actualizaciones en tiempo real con Cloud Firestore - Documentación oficial](https://firebase.google.com/docs/firestore/query-data/listen?hl=es)
-</p></details>
+  - [Firestore - Documentación oficial](https://firebase.google.com/docs/firestore?hl=es)
+  - [Reglas de seguridad de Firestore - Documentación oficial](https://firebase.google.com/docs/rules?hl=es)
+  - [Obtén actualizaciones en tiempo real con Cloud Firestore - Documentación oficial](https://firebase.google.com/docs/firestore/query-data/listen?hl=es)
+  </p></details>
 
 ### Angular
 
 - [ ] **Components & templates**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Angular Components Overview - Documentación oficial (en inglés)](https://angular.io/guide/component-overview)
-  * [Introduction to components and templates - Documentación oficial (en inglés)](https://angular.io/guide/architecture-components#introduction-to-components)
-</p></details>
+  - [Angular Components Overview - Documentación oficial (en inglés)](https://angular.io/guide/component-overview)
+  - [Introduction to components and templates - Documentación oficial (en inglés)](https://angular.io/guide/architecture-components#introduction-to-components)
+  </p></details>
 
 - [ ] **Directivas estructurales (ngIf / ngFor)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Writing structural directives - Documentación oficial (en inglés)](https://angular.io/guide/structural-directives)
-</p></details>
+  - [Writing structural directives - Documentación oficial (en inglés)](https://angular.io/guide/structural-directives)
+  </p></details>
 
 - [ ] **@Input | @Ouput**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Component interaction - Documentación oficial (en inglés)](https://angular.io/guide/component-interaction#component-interaction)
-</p></details>
+  - [Component interaction - Documentación oficial (en inglés)](https://angular.io/guide/component-interaction#component-interaction)
+  </p></details>
 
 - [ ] **Creación y uso de servicios**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Providing services - Documentación oficial (en inglés)](https://angular.io/guide/architecture-services#providing-services)
-</p></details>
+  - [Providing services - Documentación oficial (en inglés)](https://angular.io/guide/architecture-services#providing-services)
+  </p></details>
 
 - [ ] **Manejo de rutas**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [In-app navigation: routing to views - Documentación oficial (en inglés)](https://angular.io/guide/router)
-</p></details>
+  - [In-app navigation: routing to views - Documentación oficial (en inglés)](https://angular.io/guide/router)
+  </p></details>
 
 - [ ] **Creación y uso Observables.**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Observables in Angular - Documentación oficial (en inglés)](https://angular.io/guide/observables-in-angular)
-</p></details>
+  - [Observables in Angular - Documentación oficial (en inglés)](https://angular.io/guide/observables-in-angular)
+  </p></details>
 
 - [ ] **Uso de HttpClient**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Communicating with backend services using HTTP - Documentación oficial (en inglés)](https://angular.io/guide/http)
-</p></details>
+  - [Communicating with backend services using HTTP - Documentación oficial (en inglés)](https://angular.io/guide/http)
+  </p></details>
 
 - [ ] **Estilos de componentes (ngStyle / ngClass)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Template syntax - Documentación oficial (en inglés)](https://angular.io/guide/template-syntax#built-in-directives)
-</p></details>
+  - [Template syntax - Documentación oficial (en inglés)](https://angular.io/guide/template-syntax#built-in-directives)
+  </p></details>
 
 ### React
 
 - [ ] **JSX**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Presentando JSX - Documentación oficial](https://es.reactjs.org/docs/introducing-jsx.html)
-</p></details>
+  - [Presentando JSX - Documentación oficial](https://es.reactjs.org/docs/introducing-jsx.html)
+  </p></details>
 
 - [ ] **Componentes y propiedades (props)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Componentes y propiedades - Documentación oficial](https://es.reactjs.org/docs/components-and-props.html)
-</p></details>
+  - [Componentes y propiedades - Documentación oficial](https://es.reactjs.org/docs/components-and-props.html)
+  </p></details>
 
 - [ ] **Manejo de eventos**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Manejando eventos - Documentación oficial](https://es.reactjs.org/docs/handling-events.html)
-</p></details>
+  - [Manejando eventos - Documentación oficial](https://es.reactjs.org/docs/handling-events.html)
+  </p></details>
 
 - [ ] **Listas y keys**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Listas y keys - Documentación oficial](https://es.reactjs.org/docs/lists-and-keys.html)
-</p></details>
+  - [Listas y keys - Documentación oficial](https://es.reactjs.org/docs/lists-and-keys.html)
+  </p></details>
 
 - [ ] **Renderizado condicional**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Renderizado condicional - Documentación oficial](https://es.reactjs.org/docs/conditional-rendering.html)
-</p></details>
+  - [Renderizado condicional - Documentación oficial](https://es.reactjs.org/docs/conditional-rendering.html)
+  </p></details>
 
 - [ ] **Elevación de estado**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Levantando el estado - Documentación oficial](https://es.reactjs.org/docs/lifting-state-up.html)
-</p></details>
+  - [Levantando el estado - Documentación oficial](https://es.reactjs.org/docs/lifting-state-up.html)
+  </p></details>
 
 - [ ] **Hooks**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Presentando Hooks - Documentación oficial](https://es.reactjs.org/docs/hooks-intro.html)
-</p></details>
+  - [Presentando Hooks - Documentación oficial](https://es.reactjs.org/docs/hooks-intro.html)
+  </p></details>
 
 - [ ] **CSS modules**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Adding a CSS Modules Stylesheet - Documentación de Create React App (en inglés)](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
-</p></details>
+  - [Adding a CSS Modules Stylesheet - Documentación de Create React App (en inglés)](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/)
+  </p></details>
 
 - [ ] **React Router**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Quick Start - Documentación oficial (en inglés)](https://reactrouter.com/web/guides/quick-start)
-</p></details>
+  - [Quick Start - Documentación oficial (en inglés)](https://reactrouter.com/web/guides/quick-start)
+  </p></details>
 
 ### Vue
 
 - [ ] **Instancia de Vue.js**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [La instancia Vue - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html)
-</p></details>
+  - [La instancia Vue - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html)
+  </p></details>
 
 - [ ] **Datos y métodos**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Datos y Métodos - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html#Datos-y-Metodos)
-</p></details>
+  - [Datos y Métodos - Documentación oficial](https://es.vuejs.org/v2/guide/instance.html#Datos-y-Metodos)
+  </p></details>
 
 - [ ] **Uso y creación de componentes**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Conceptos Básicos de Componentes - Documentación oficial](https://es.vuejs.org/v2/guide/components.html)
-</p></details>
+  - [Conceptos Básicos de Componentes - Documentación oficial](https://es.vuejs.org/v2/guide/components.html)
+  </p></details>
 
 - [ ] **Props**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Pasando datos a componentes secundarios con Props - Documentación oficial](https://es.vuejs.org/v2/guide/components.html#Pasando-datos-a-componentes-secundarios-con-Props)
-</p></details>
+  - [Pasando datos a componentes secundarios con Props - Documentación oficial](https://es.vuejs.org/v2/guide/components.html#Pasando-datos-a-componentes-secundarios-con-Props)
+  </p></details>
 
 - [ ] **Directivas (v-bind | v-model)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [v-bind - Documentación oficial](https://es.vuejs.org/v2/api/#v-bind)
-  * [Binding en Formularios - Documentación oficial](https://es.vuejs.org/v2/guide/forms.html)
-</p></details>
+  - [v-bind - Documentación oficial](https://es.vuejs.org/v2/api/#v-bind)
+  - [Binding en Formularios - Documentación oficial](https://es.vuejs.org/v2/guide/forms.html)
+  </p></details>
 
 - [ ] **Iteración (v-for)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Mapeando una matriz a elementos con v-for - Documentación oficial](https://es.vuejs.org/v2/guide/list.html#Mapeando-una-matriz-a-elementos-con-v-for)
-</p></details>
+  - [Mapeando una matriz a elementos con v-for - Documentación oficial](https://es.vuejs.org/v2/guide/list.html#Mapeando-una-matriz-a-elementos-con-v-for)
+  </p></details>
 
 - [ ] **Eventos (v-on)**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Manejo de eventos - Documentación oficial](https://es.vuejs.org/v2/guide/events.html)
-</p></details>
+  - [Manejo de eventos - Documentación oficial](https://es.vuejs.org/v2/guide/events.html)
+  </p></details>
 
 - [ ] **Propiedades Computadas y Observadores**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Propiedades Computadas y Observadores](https://es.vuejs.org/v2/guide/computed.html)
-</p></details>
+  - [Propiedades Computadas y Observadores](https://es.vuejs.org/v2/guide/computed.html)
+  </p></details>
 
 - [ ] **Routing**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Getting Started - Documentación oficial de Vue Router](https://router.vuejs.org/guide/#html)
-</p></details>
+  - [Getting Started - Documentación oficial de Vue Router](https://router.vuejs.org/guide/#html)
+  </p></details>
 
 - [ ] **Clases y Estilos**
 
-  <details><summary>Links</summary><p>
+    <details><summary>Links</summary><p>
 
-  * [Enlace Clases y Estilos - Documentación oficial](https://es.vuejs.org/v2/guide/class-and-style.html)
-</p></details>
+  - [Enlace Clases y Estilos - Documentación oficial](https://es.vuejs.org/v2/guide/class-and-style.html)
+  </p></details>
 
 ## 4. Consideraciones generales
 
@@ -521,8 +521,8 @@ _tablet_, pero **no queremos una app nativa**, sino una web app que sea
 **responsive** y pueda funcionar **offline**.
 
 Necesitamos pensar bien en el aspecto UX de quienes van a tomar los pedidos,
- el tamaño y aspecto de los botones, la visibilidad del estado actual del
- pedido, etc.
+el tamaño y aspecto de los botones, la visibilidad del estado actual del
+pedido, etc.
 
 La aplicación desplegada debe tener 80% o más el las puntuaciones de
 Performance, Progressive Web App, Accessibility y Best Practices de Lighthouse.
@@ -564,7 +564,7 @@ El [_Product Owner_](https://youtu.be/r2hU7MVIzxs) nos
 presenta este _backlog_ que es el resultado de su trabajo con el cliente hasta
 hoy.
 
-***
+---
 
 #### [Historia de usuario 1] Mesero/a debe poder tomar pedido de cliente
 
@@ -576,23 +576,23 @@ que se puedan ir preparando en orden.
 
 Lo que debe ocurrir para que se satisfagan las necesidades del usuario)
 
-* Anotar nombre de cliente.
-* Agregar productos al pedido.
-* Eliminar productos.
-* Ver resumen y el total de la compra.
-* Enviar pedido a cocina (guardar en alguna base de datos).
-* Se ve y funciona bien en una _tablet_
+- Anotar nombre de cliente.
+- Agregar productos al pedido.
+- Eliminar productos.
+- Ver resumen y el total de la compra.
+- Enviar pedido a cocina (guardar en alguna base de datos).
+- Se ve y funciona bien en una _tablet_
 
 ##### Definición de terminado
 
 Lo acordado que debe ocurrir para decir que la historia está terminada.
 
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+- Debes haber recibido _code review_ de al menos una compañera.
+- Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+- Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+- Desplegaste tu aplicación y has etiquetado tu versión (git tag).
 
-***
+---
 
 #### [Historia de usuario 2] Jefe de cocina debe ver los pedidos
 
@@ -602,19 +602,19 @@ que un pedido está listo para servirlo a un cliente.
 
 ##### Criterios de aceptación
 
-* Ver los pedidos ordenados según se van haciendo.
-* Marcar los pedidos que se han preparado y están listos para servirse.
-* Ver el tiempo que tomó prepara el pedido desde que llegó hasta que se
+- Ver los pedidos ordenados según se van haciendo.
+- Marcar los pedidos que se han preparado y están listos para servirse.
+- Ver el tiempo que tomó prepara el pedido desde que llegó hasta que se
   marcó como completado.
 
 ##### Definición de terminado
 
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+- Debes haber recibido _code review_ de al menos una compañera.
+- Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+- Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+- Desplegaste tu aplicación y has etiquetado tu versión (git tag).
 
-***
+---
 
 #### [Historia de usuario 3] Meserx debe ver pedidos listos para servir
 
@@ -623,19 +623,19 @@ rápidamente a los clientes que las hicieron.
 
 ##### Criterios de aceptación
 
-* Ver listado de pedido listos para servir.
-* Marcar pedidos que han sido entregados.
+- Ver listado de pedido listos para servir.
+- Marcar pedidos que han sido entregados.
 
 ##### Definición de terminado
 
-* Debes haber recibido _code review_ de al menos una compañera.
-* Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-* Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-* Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-* Los datos se deben mantener íntegros, incluso después de que un pedido ha
+- Debes haber recibido _code review_ de al menos una compañera.
+- Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+- Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+- Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+- Los datos se deben mantener íntegros, incluso después de que un pedido ha
   terminado. Todo esto para poder tener estadísticas en el futuro.
 
-***
+---
 
 ## 6. Pistas, tips y lecturas complementarias
 
@@ -760,10 +760,10 @@ para sitios web estáticos.
 Para usarlo primero necesitas crear una cuenta en
 [Netlify](http://netlify.com) y después puedes conectar tu repo.
 
-* [Netlify y Angular](https://www.netlify.com/blog/2019/09/23/first-steps-using-netlify-angular/)
-* [Netlify y Vue](https://cli.vuejs.org/guide/deployment.html#gitlab-pages)
-* [Netlify y Vue](https://medium.com/vue-mastery/deploying-a-vue-app-to-netlify-8f8f7d36f8fb)
-* [Netlify y React](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/)
+- [Netlify y Angular](https://www.netlify.com/blog/2019/09/23/first-steps-using-netlify-angular/)
+- [Netlify y Vue](https://cli.vuejs.org/guide/deployment.html#gitlab-pages)
+- [Netlify y Vue](https://medium.com/vue-mastery/deploying-a-vue-app-to-netlify-8f8f7d36f8fb)
+- [Netlify y React](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/)
 
 Para desplegar tu aplicación en netlify seleccionas acceder con GitHub
 y luego concedes los permisos para que Netlify acceda a tus repositorios y
@@ -797,7 +797,7 @@ Puedes usar `netlify` con continuous deployment (despliegue continuo) y así
 cada vez que agregues un commit se va a compilar y desplegar tu app con
 los nuevos cambios. Alternativamente, también puedes hacer depliegue manual.
 
-Para continuous deployment corre `netlify init`  y sigue las instrucciones
+Para continuous deployment corre `netlify init` y sigue las instrucciones
 para conectar un repo de tu github.
 Puedes configurar deploy settings (comando para el build, directorio de la
 carpeta y la rama para producción) en "deploy settings" de tu site en netlify.
@@ -812,9 +812,9 @@ netlify deploy --dir=dist`
 
 #### Github pages
 
-* [Github pages y Vue](https://cli.vuejs.org/guide/deployment.html#github-pages)
-* [Github pages y Angular](https://angular.io/guide/deployment#deploy-to-github-pages)
-* [Github pages y React](https://create-react-app.dev/docs/deployment/#github-pages-https-pagesgithubcom)
+- [Github pages y Vue](https://cli.vuejs.org/guide/deployment.html#github-pages)
+- [Github pages y Angular](https://angular.io/guide/deployment#deploy-to-github-pages)
+- [Github pages y React](https://create-react-app.dev/docs/deployment/#github-pages-https-pagesgithubcom)
 
 #### Heroku
 
@@ -858,35 +858,35 @@ yarn start
 
 #### Frameworks / libraries
 
-* [React](https://es.reactjs.org/)
-* [Vue](https://vuejs.org/)
-* [Angular](https://angular.io/)
+- [React](https://es.reactjs.org/)
+- [Vue](https://vuejs.org/)
+- [Angular](https://angular.io/)
 
 #### Herramientas
 
-* [npm-scripts](https://docs.npmjs.com/misc/scripts)
-* [Babel](https://babeljs.io/)
-* [webpack](https://webpack.js.org/)
+- [npm-scripts](https://docs.npmjs.com/misc/scripts)
+- [Babel](https://babeljs.io/)
+- [webpack](https://webpack.js.org/)
 
 #### PWA
 
-* [Tu primera Progressive Web App - Google developers](https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/?hl=es)
-* [Progressive Web Apps - codigofacilito.com](https://codigofacilito.com/articulos/progressive-apps)
-* [offlinefirst.org](http://offlinefirst.org/)
-* [Usando Service Workers - MDN](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-* [Cómo habilitar datos sin conexión - Firebase Docs](https://firebase.google.com/docs/firestore/manage-data/enable-offline?hl=es-419)
+- [Tu primera Progressive Web App - Google developers](https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/?hl=es)
+- [Progressive Web Apps - codigofacilito.com](https://codigofacilito.com/articulos/progressive-apps)
+- [offlinefirst.org](http://offlinefirst.org/)
+- [Usando Service Workers - MDN](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+- [Cómo habilitar datos sin conexión - Firebase Docs](https://firebase.google.com/docs/firestore/manage-data/enable-offline?hl=es-419)
 
 #### Serverless
 
-* [Qué es eso de serverless? - @PamRucinque en Medium](https://medium.com/@PamRucinque/qu%C3%A9-es-eso-de-serverless-f4f6c8949b87)
-* [Qué es Serverless? | FooBar - YouTube](https://www.youtube.com/watch?v=_SYHUpLi-2U)
-* [Firebase](https://firebase.google.com/)
-* [Serverless Architectures - Martin Fowler](https://www.martinfowler.com/articles/serverless.html)
+- [Qué es eso de serverless? - @PamRucinque en Medium](https://medium.com/@PamRucinque/qu%C3%A9-es-eso-de-serverless-f4f6c8949b87)
+- [Qué es Serverless? | FooBar - YouTube](https://www.youtube.com/watch?v=_SYHUpLi-2U)
+- [Firebase](https://firebase.google.com/)
+- [Serverless Architectures - Martin Fowler](https://www.martinfowler.com/articles/serverless.html)
 
 #### Rules for good Cooding
 
-* Codebase and Commits in English.
-* Use Camel Case for functions ex. myFunction.
-* CSS - BEM(Block-element-modifier) * [BEM](http://getbem.com/naming/).
-* Name of variables camel case ex. myVariable.
-* Componets with Pascal Case  MyComponent.
+- Codebase and Commits in English.
+- Use Camel Case for functions ex. myFunction.
+- CSS - BEM(Block-element-modifier) \* [BEM](http://getbem.com/naming/).
+- Name of variables camel case ex. myVariable.
+- Componets with Pascal Case MyComponent.
