@@ -6,7 +6,20 @@ const Login = () => {
     <>
       <div class="login">
         <h1 class="login--title">WOOW</h1>
-        <button>LogIn</button>
+
+        <form class="login--form">
+          <input
+            id="email"
+            class="login--input"
+            placeholder="User email"
+          ></input>
+          <input
+            id="password"
+            class="login--input"
+            placeholder="User password"
+          ></input>
+          <button class="login--submit">Login</button>
+        </form>
       </div>
     </>
   );

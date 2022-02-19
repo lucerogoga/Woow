@@ -1,3 +1,86 @@
-html, body {
-    background-color: blue;
+html {
+  box-sizing: border-box;
+
+  font-size: 16px;
+  height: 100%;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.login {
+  background-image: url("./login-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.login--form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.login--title {
+  color: #fff;
+}
+
+.login--input {
+  margin-bottom: 0.5rem;
+  border-radius: 2rem;
+  border: none;
+  height: 2rem;
+  font-size: 0.8em;
+  padding: 1.5rem;
+  width: 80%;
+}
+
+.login--input::placeholder {
+  color: #283159;
+}
+
+.login--submit {
+  margin-bottom: 0.5rem;
+  border-radius: 2rem;
+  border: none;
+  height: 2rem;
+  font-size: 0.8em;
+  padding: 1.5rem;
+  width: 80%;
+  background-color: #ff9aa3;
+  color: #fff;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  margin-top: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login--submit:hover {
+  background-color: #fecc68;
 }
