@@ -1,7 +1,7 @@
 // Login component
 import "../Assets/Login.css";
 import logo from "../Assets/woow.PNG";
-// import Error from "./Error";
+import Error from "./Error";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
 import React, { useState } from "react";
@@ -9,7 +9,7 @@ import React, { useState } from "react";
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState("");
   //   const showMessage = () => {
   //     <Error message="Datos inválidos." />;
   //   };
@@ -18,10 +18,12 @@ const Login = () => {
     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((res) => {
         console.log(res);
+        setErrorMessage("");
         console.log(auth.currentUser.uid);
       })
       .catch((error) => {
         console.log(error.message);
+        setErrorMessage(error.message);
       });
   };
 
@@ -29,7 +31,6 @@ const Login = () => {
     <>
       {/* <div>{<Error("Datos")/>}</div> */}
       <div className="login">
-        {/* <Error message="Datos inválidos." />; */}
         <img alt="logoWoow" className="login--logo" src={logo} />
         <div className="login--form ">
           <input
@@ -51,7 +52,10 @@ const Login = () => {
           >
             Login
           </button>
-          <h4>user Logged in :</h4>
+          {/* <Error message={errorMessage} />; */}
+          {errorMessage && (
+            <div className="error"> {<Error message={errorMessage} />} </div>
+          )}
           {/* {user?.uid} */}
         </div>
       </div>
