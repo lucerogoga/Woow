@@ -1,5 +1,5 @@
 import "../Assets/ProductCard.css";
-import app from "../Config/initialize.js";
+import { app } from "../Config/initialize.js";
 // import { getAuth } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 // const auth = getAuth(app);
