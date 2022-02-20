@@ -36,6 +36,11 @@ body {
   height: 100%;
 }
 
+.login--logo {
+  width: 70%;
+  margin-bottom: 50px;
+}
+
 .login--form {
   display: flex;
   flex-direction: column;
@@ -54,7 +59,7 @@ body {
   border-radius: 2rem;
   border: none;
   height: 2rem;
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 1.5rem;
   width: 80%;
 }
