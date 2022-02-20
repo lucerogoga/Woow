@@ -2,66 +2,27 @@
 import "../Assets/Login.css";
 import logo from "../Assets/woow.PNG";
 // import Error from "./Error";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState({});
 
-  onAuthStateChanged(auth, (userfirebase) => {
-    if (userfirebase) {
-      const UserData = {
-        uid: userfirebase.uid,
-        email: userfirebase.email,
-      };
-      setUser(UserData);
-    } else {
-      setUser(null);
-    }
-  });
   //   const showMessage = () => {
   //     <Error message="Datos inválidos." />;
   //   };
-  //   const [email, setEmail] = useState("");
-  //   const enviarIngreso = (email, password) => {
-  //     return signInWithEmailAndPassword(auth, email, password);
-  //   };
 
   const handleSubmit = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      console.log(user);
-      user.then((user) => {
-        console.log(user.email);
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then((res) => {
+        console.log(res);
+        console.log(auth.currentUser.uid);
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
-    } catch (error) {
-      console.log(error.message);
-    }
-
-    // .then((res) => {
-    //   console.log(res);
-    // })
-    //   .catch((error) => {
-    //     console.log("probando", error);
-    //   });
-    //   enviarIngreso.then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log("probando", err);
-    // });
-
-    //   const [loginEmail, setLoginEmail] = useState("");
-    //   const login = async () => {
-    //     await signInWithEmailAndPassword(auth, email, password);
   };
 
   return (
@@ -91,7 +52,7 @@ const Login = () => {
             Login
           </button>
           <h4>user Logged in :</h4>
-          {user?.email}
+          {/* {user?.uid} */}
         </div>
       </div>
     </>
