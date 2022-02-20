@@ -1,25 +1,29 @@
 // Login component
 import "../Assets/Login.css";
 import logo from "../Assets/woow.PNG";
+import Home from "./Home";
 import Error from "./Error";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   //   const showMessage = () => {
   //     <Error message="Datos inválidos." />;
   //   };
-
   const handleSubmit = async () => {
+    setErrorMessage("");
     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((res) => {
         console.log(res);
-        setErrorMessage("");
         console.log(auth.currentUser.uid);
+        navigate("/home");
+        // <Redirect to="/home" component={<Home />} />;
       })
       .catch((error) => {
         console.log(error.message);
@@ -56,6 +60,7 @@ const Login = () => {
           {errorMessage && (
             <div className="error"> {<Error message={errorMessage} />} </div>
           )}
+          {!errorMessage && <div>ok</div>}
           {/* {user?.uid} */}
         </div>
       </div>
