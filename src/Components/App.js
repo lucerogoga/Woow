@@ -2,7 +2,13 @@ import "../Assets/App.css";
 import Login from "./Login";
 import Home from "./Home";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Link,
+  Routes,
+  Route,
+  useRoutes,
+} from "react-router-dom";
 import { auth } from "../Config/initialize.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -31,14 +37,19 @@ function App() {
   //     {user && <Home />}
   //   </>
   // );
-  return (
-    <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </>
-  );
+  let routes = useRoutes([
+    { path: "/", element: <Login /> },
+    { path: "/home", element: <Home /> },
+    // ...
+  ]);
+  return routes;
 }
 
-export default App;
+const AppWrapper = () => {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+};
+export default AppWrapper;

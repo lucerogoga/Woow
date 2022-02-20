@@ -1,7 +1,6 @@
 // Login component
 import "../Assets/Login.css";
 import logo from "../Assets/woow.PNG";
-import Home from "./Home";
 import Error from "./Error";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
