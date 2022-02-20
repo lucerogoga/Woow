@@ -1,37 +1,67 @@
 // Login component
 import "../Assets/Login.css";
 import logo from "../Assets/woow.PNG";
-import Error from "./Error";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import app from "../Config/initialize.js";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
+// import Error from "./Error";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Config/initialize.js";
 
-const auth = getAuth(app);
+import React, { useState, useEffect } from "react";
 
 const Login = () => {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (userfirebase) => {
+    if (userfirebase) {
+      const UserData = {
+        uid: userfirebase.uid,
+        email: userfirebase.email,
+      };
+      setUser(UserData);
+    } else {
+      setUser(null);
+    }
+  });
   //   const showMessage = () => {
   //     <Error message="Datos inválidos." />;
   //   };
-
-  //   const handleSubmit = () => {
-  //     const email = document.querySelector("#email");
-  //     const password = document.querySelector("#password");
-
-  //     console.log(email.value);
-  //     console.log(password.value);
-  //     return enviarIngreso(email, password)
-  //       .then((res) => {
-  //         console.log(res);
-  //       })
-  //       .catch((err) => {
-  //         console.log("probando", err);
-  //       });
+  //   const [email, setEmail] = useState("");
+  //   const enviarIngreso = (email, password) => {
+  //     return signInWithEmailAndPassword(auth, email, password);
   //   };
 
-  const [loginEmail, setLoginEmail] = useState("");
-  const login = async () => {
-    await signInWithEmailAndPassword(auth, email, password);
+  const handleSubmit = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      console.log(user);
+      user.then((user) => {
+        console.log(user.email);
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    //   .catch((error) => {
+    //     console.log("probando", error);
+    //   });
+    //   enviarIngreso.then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log("probando", err);
+    // });
+
+    //   const [loginEmail, setLoginEmail] = useState("");
+    //   const login = async () => {
+    //     await signInWithEmailAndPassword(auth, email, password);
   };
 
   return (
@@ -45,29 +75,23 @@ const Login = () => {
             id="email"
             className="login--input"
             placeholder="User email"
-            onChange={(event) => {
-              setLoginEmail(event.target.value);
-            }}
+            onChange={(ev) => setLoginEmail(ev.target.value)}
           ></input>
           <input
             id="password"
             className="login--input"
             placeholder="User password"
-            onChange={(event) => {
-              setLoginEmail(event.target.value);
-            }}
+            onChange={(ev) => setLoginPassword(ev.target.value)}
           ></input>
-          {/* <button onClick={(e) => e.preventDefault()} className="login--submit"> */}
           <button
             onClick={handleSubmit}
-            // onClick={(e) => {
-            //   //   e.preventDefault();
-            //   handleSubmit();
-            // }}
+            id="btnLogin"
             className="login--submit"
           >
             Login
           </button>
+          <h4>user Logged in :</h4>
+          {user?.email}
         </div>
       </div>
     </>
@@ -75,7 +99,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// function enviarIngreso(email, password) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }
