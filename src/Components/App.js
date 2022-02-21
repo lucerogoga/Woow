@@ -1,17 +1,16 @@
 import "../Assets/App.css";
 import Login from "./Login";
 import Home from "./Home";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { auth } from "../Config/initialize.js";
-import { authProvider } from "./Context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext";
 import { ProtectedRouter } from "./ProtectedRoutes";
 
 function App() {
   return (
-    <authProvider>
+    <AuthProvider>
       <Routes>
-        <Route path="/" element={Login}></Route>
+        <Route path="/" element={<Login />}></Route>
         <Route
           path="/home"
           element={
@@ -21,7 +20,7 @@ function App() {
           }
         ></Route>
       </Routes>
-    </authProvider>
+    </AuthProvider>
   );
 }
 

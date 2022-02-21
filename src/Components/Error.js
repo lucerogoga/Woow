@@ -5,8 +5,8 @@ const Error = ({ message }) => {
   console.log(message);
   return (
     <>
-      <div class="err-msg">
-        <h1 class="err-msg--text">{message}</h1>
+      <div className="err-msg">
+        <h1 clasName="err-msg--text">{message}</h1>
       </div>
       {/* <h1>Datos inválidos</h1> */}
     </>

@@ -1,21 +1,19 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Config/initialize.js";
-// import { auth } from "../Config/initialize.js";
-import { useNavigate } from "react-router-dom";
 
 const authContext = createContext();
 
 // useContext
 export const useAuth = () => useContext(authContext);
 
-export const authProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   // const [errorMessage, setErrorMessage] = useState("");
 
   const login = async (email, password) => {
     console.log("login");
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {}
@@ -29,8 +27,13 @@ export const authProvider = ({ children }) => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
   }, []);
 
-  return <authContext.Provider value={login}>{children}</authContext.Provider>;
+  return (
+    <authContext.Provider value={(login, user, loading)}>
+      {children}
+    </authContext.Provider>
+  );
 };
