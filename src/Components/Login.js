@@ -19,9 +19,11 @@ const Login = () => {
     try {
       console.log("entramos a validar");
       await login(loginEmail, loginPassword);
+      console.log("si se pudo loguear");
       navigate("/home");
     } catch (e) {
       console.log("seteas???");
+      console.log("error registro");
       setErrorMessage(e.message);
     }
   };
