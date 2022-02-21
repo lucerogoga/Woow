@@ -4,9 +4,9 @@ import Home from "./Home";
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter,
-  Link,
-  Routes,
-  Route,
+  // Link,
+  // Routes,
+  // Route,
   useRoutes,
 } from "react-router-dom";
 import { auth } from "../Config/initialize.js";
@@ -29,12 +29,14 @@ function App() {
   }, []);
 
   if (user) {
-    console.log("hola soy user");
+    console.log("hola soy user2");
   }
+
   // return (
-  //   <>
-  //     <Login />
-  //     {user && <Home />}
+    //   <>
+    //     <Login />
+    // ! Consultar a dani
+      // {user && <Home />}
   //   </>
   // );
   let routes = useRoutes([

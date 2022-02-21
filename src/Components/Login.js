@@ -1,6 +1,8 @@
 // Login component
 import "../Assets/Login.css";
-import logo from "../Assets/woow.PNG";
+import logo from "../Assets/logo-rotate.svg";
+// import logo from "../Assets/logo-woow.svg";
+// import logo from "../Assets/woow.PNG";
 import Error from "./Error";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
@@ -59,7 +61,7 @@ const Login = () => {
           {errorMessage && (
             <div className="error"> {<Error message={errorMessage} />} </div>
           )}
-          {!errorMessage && <div>ok</div>}
+          {/* {!errorMessage && <div>ok</div>} */}
           {/* {user?.uid} */}
         </div>
       </div>

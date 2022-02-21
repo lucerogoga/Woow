@@ -1,6 +1,8 @@
 import { getProducts } from "./ProductCard";
 import ProductCart from "./ProductCard";
 import { useEffect, useState } from "react";
+import logo from "../Assets/logo-rotate.svg";
+import "../Assets/Home.css";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -11,6 +13,11 @@ function Home() {
 
   return (
     <>
+      <nav class="nav-home">
+        {/* <img src="../Assets/logo-woow.svg"></img> */}
+        <img alt="logoWoow" className="login--logo" src={logo} />
+      </nav>
+
       {products.map((p) => {
         return <ProductCart product={p} />;
       })}

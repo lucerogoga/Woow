@@ -39,6 +39,7 @@ body {
 .login--logo {
   width: 70%;
   margin-bottom: 50px;
+  /* transform: rotate(333deg); */
 }
 
 .login--form {
