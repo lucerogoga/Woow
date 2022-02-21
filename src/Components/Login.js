@@ -22,8 +22,7 @@ const Login = () => {
       console.log("si se pudo loguear");
       navigate("/home");
     } catch (e) {
-      console.log("seteas???");
-      console.log("error registro");
+      console.log("error ingreso");
       setErrorMessage(e.message);
     }
   };
