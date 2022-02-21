@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 
-export const ProtectedRouter = (children) => {
+export const ProtectedRouter = ({ children }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -11,6 +11,9 @@ export const ProtectedRouter = (children) => {
   if (!user) {
     return <Navigate to="/"></Navigate>;
   }
+  // if (user) {
+  //   return <Navigate to="/home"></Navigate>;
+  // }
 
   return <>{children}</>;
 };

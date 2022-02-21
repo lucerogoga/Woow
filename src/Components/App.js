@@ -10,7 +10,6 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
         <Route
           path="/home"
           element={
@@ -19,6 +18,7 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
+        <Route path="/" element={<Login />}></Route>
       </Routes>
     </AuthProvider>
   );

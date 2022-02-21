@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -23,7 +23,7 @@ const Login = () => {
       navigate("/home");
     } catch (e) {
       console.log("seteas???");
-      console.log("error registro");
+      console.log("error registro", e.message);
       setErrorMessage(e.message);
     }
   };
