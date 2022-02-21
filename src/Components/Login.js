@@ -8,33 +8,28 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Config/initialize.js";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./Context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  //   const showMessage = () => {
-  //     <Error message="Datos inválidos." />;
-  //   };
+  const { login } = useAuth;
+
   const handleSubmit = async () => {
     setErrorMessage("");
-    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-      .then((res) => {
-        console.log(res);
-        console.log(auth.currentUser.uid);
-        navigate("/home");
-        // <Redirect to="/home" component={<Home />} />;
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setErrorMessage(error.message);
-      });
+
+    try {
+      await login(loginEmail, loginPassword);
+      navigate("/home");
+    } catch (e) {
+      setErrorMessage(e.message);
+    }
   };
 
   return (
     <>
-      {/* <div>{<Error("Datos")/>}</div> */}
       <div className="login">
         <img alt="logoWoow" className="login--logo" src={logo} />
         <div className="login--form ">
