@@ -11,15 +11,17 @@ const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAuth;
+  const { login } = useAuth();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setErrorMessage("");
-
     try {
+      console.log("entramos a validar");
       await login(loginEmail, loginPassword);
       navigate("/home");
     } catch (e) {
+      console.log("seteas???");
       setErrorMessage(e.message);
     }
   };
@@ -37,6 +39,7 @@ const Login = () => {
           ></input>
           <input
             id="password"
+            type="password"
             className="login--input"
             placeholder="User password"
             onChange={(ev) => setLoginPassword(ev.target.value)}
@@ -48,12 +51,9 @@ const Login = () => {
           >
             Login
           </button>
-          {/* <Error message={errorMessage} />; */}
           {errorMessage && (
             <div className="error"> {<Error message={errorMessage} />} </div>
           )}
-          {/* {!errorMessage && <div>ok</div>} */}
-          {/* {user?.uid} */}
         </div>
       </div>
     </>

@@ -10,13 +10,9 @@ export const useAuth = () => useContext(authContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
 
-  const login = async (email, password) => {
-    console.log("login");
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {}
+  const login = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password);
   };
 
   // ! PENDIENTE
@@ -32,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <authContext.Provider value={(login, user, loading)}>
+    <authContext.Provider value={{ login, user, loading }}>
       {children}
     </authContext.Provider>
   );
