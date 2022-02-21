@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../Config/initialize.js";
+import { auth } from "../../Config/initialize.js";
+// import { auth } from "../Config/initialize.js";
 import { useNavigate } from "react-router-dom";
 
 const authContext = createContext();
@@ -8,7 +9,7 @@ const authContext = createContext();
 // useContext
 export const useAuth = () => useContext(authContext);
 
-export const authProvider = ({children}) => {
+export const authProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   // const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,7 +21,7 @@ export const authProvider = ({children}) => {
     } catch (err) {}
   };
 
-  //   ! PENDIENTE
+  // ! PENDIENTE
   //   const logout = () => {
   //     console.log("logout");
   //   };
