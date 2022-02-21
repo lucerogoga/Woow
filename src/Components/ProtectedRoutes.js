@@ -9,7 +9,7 @@ export const ProtectedRouter = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/"></Navigate>;
+    return <Navigate to="/" />;
   }
   // if (user) {
   //   return <Navigate to="/home"></Navigate>;

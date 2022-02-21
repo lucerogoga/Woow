@@ -3,10 +3,14 @@ import { getProducts } from "./ProductCard";
 import { useEffect, useState } from "react";
 import logo from "../Assets/logo-rotate.svg";
 import "../Assets/Home.css";
+import { useAuth } from "./Context/AuthContext";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);
-
+  const { user, logout } = useAuth();
+  const handleLogout = async () => {
+    await logout();
+  };
   useEffect(() => {
     getProducts().then((p) => setProducts(p));
   }, []);
@@ -14,10 +18,15 @@ export const Home = () => {
   return (
     <>
       <nav class="nav-home">
-        {/* <img src="../Assets/logo-woow.svg"></img> */}
+        <img src="../Assets/logo-woow.svg"></img>
         <img alt="logoWoow" className="login--logo" src={logo} />
       </nav>
+<<<<<<< HEAD
 
+=======
+      <h1>{user.uid}</h1>
+      <button onClick={handleLogout}>logout</button>
+>>>>>>> dev-lucero
       {/* {products.map((p) => {
         return <ProductCart product={p} />;
       })} */}

@@ -22,8 +22,12 @@ export const Login = () => {
       console.log("si se pudo loguear");
       navigate("/home");
     } catch (e) {
+<<<<<<< HEAD
       console.log("seteas???");
       console.log("error registro", e.message);
+=======
+      console.log("error ingreso");
+>>>>>>> dev-lucero
       setErrorMessage(e.message);
     }
   };
