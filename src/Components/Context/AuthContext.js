@@ -12,7 +12,7 @@ const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
   const login = async (email, password) => {

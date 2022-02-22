@@ -21,7 +21,6 @@ export function ProductCard(props) {
 
 export async function getProducts() {
   const productsData = await getDocs(collection(firestore, "products"));
-  debugger;
   return productsData.docs.map((p) => {
     return {
       id: p.id,
