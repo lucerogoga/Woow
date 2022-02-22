@@ -20,13 +20,16 @@ export const Home = () => {
     <>
       <nav className="nav-home">
         {/* <img src="../Assets/logo-woow.svg"></img> */}
-        <img alt="logoWoow" className="login--logo" src={logo} />
+        <img alt="logoWoow" className="login--logo--nav" src={logo} />
       </nav>
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
-      {products.map((p) => {
-        return <ProductCart product={p} />;
-      })}
+
+      <div className="products-container">
+        {products.map((p) => {
+          return <ProductCart product={p} />;
+        })}
+      </div>
     </>
   );
 };

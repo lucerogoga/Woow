@@ -23,3 +23,17 @@ body {
 .nav-home {
   background-color: rgb(235, 115, 135);
 }
+
+.login--logo--nav {
+  /* width: 20%; */
+  width: 70px;
+  margin: 10px;
+}
+
+.products-container {
+  /* background-color: blue; */
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+  padding: 1rem;
+}
