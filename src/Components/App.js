@@ -5,6 +5,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { ProtectedRouter } from "./ProtectedRoutes";
+import NavBar from "./NavBar";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         ></Route>
         {/* Waiter Views */}
         <Route path="/" element={<Login />}></Route>
-        <Route path="/waiter" element={<h1>Listado de productos</h1>}></Route>
+        <Route path="/waiter" element={<NavBar />}></Route>
+        {/* <Route path="/waiter" element={<h1>Listado de productos</h1>}></Route> */}
         <Route
           path="/waiter/product-detail"
           element={<h1>-Producto Detallado</h1>}
