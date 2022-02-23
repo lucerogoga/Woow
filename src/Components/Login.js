@@ -28,6 +28,7 @@ export const Login = () => {
   };
 
   // Si el usuario ya está logueado, entonces cambia a la vista de Home
+  // if (user.currentUser && user.user_role) {
   if (user.currentUser) {
     return <Navigate to="/home" />;
   }

@@ -14,9 +14,10 @@ export const ProtectedRouter = ({ children }) => {
     return <Navigate to="/" />;
   }
 
-  // if (user.currentUser) {
-  //   return <Navigate to="/home"></Navigate>;
+  // if (user.currentUser && user.user_rol === 'waiter') {
+  //   return <Navigate to="/waiter"></Navigate>;
   // }
+
 
   return <>{children}</>;
 };

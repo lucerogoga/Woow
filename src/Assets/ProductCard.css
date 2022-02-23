@@ -59,6 +59,11 @@ body {
   align-items: center;
 }
 
+.product-card--buttonIcon {
+  color: #fff;
+  font-weight: 800;
+}
+
 .product-card--button {
   background-color: #ff9aa3;
   width: 25px;
