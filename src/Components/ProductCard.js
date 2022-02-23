@@ -4,8 +4,6 @@ import { app } from "../Config/initialize.js";
 // import { getAuth } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 // const auth = getAuth(app);
-const firestore = getFirestore(app);
-
 export function ProductCard(props) {
   const { product } = props;
   return (
@@ -35,14 +33,5 @@ export function ProductCard(props) {
   );
 }
 
-export async function getProducts() {
-  const productsData = await getDocs(collection(firestore, "products"));
-  return productsData.docs.map((p) => {
-    return {
-      id: p.id,
-      ...p.data(),
-    };
-  });
-}
 
 export default ProductCard;

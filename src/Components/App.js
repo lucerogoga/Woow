@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { ProtectedRouter } from "./ProtectedRoutes";
 import NavBar from "./NavBar";
-import ButtonFilter from "./ButtonFilter";
 
 function App() {
   return (
@@ -29,7 +28,7 @@ function App() {
           element={<h1>-Producto Detallado</h1>}
         ></Route>
         <Route path="/waiter/order-cart" element={<h1>Carrito</h1>}></Route>
-        <Route path="/Button" element={<ButtonFilter />}></Route>
+        {/* <Route path="/Button" element={<ButtonFilter />}></Route> */}
         {/* Chef Views */}
         <Route
           path="/chef"

@@ -2,9 +2,11 @@
 import "../Assets/Login.css";
 import logo from "../Assets/logo-rotate.svg";
 import Error from "./Error";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
+// import { getUser } from "./Context/FirestoreContext";
+import { getUser } from "./Context/FirestoreContext";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login, user } = useAuth();
+  const [userFirestore, setUserFirestore] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +32,43 @@ export const Login = () => {
 
   // Si el usuario ya está logueado, entonces cambia a la vista de Home
   // if (user.currentUser && user.user_role) {
+
+  useEffect(() => {
+    async function getUserFirestore() {
+      // const resultado = await getUser(user.currentUser);
+      // console.log("resuuuuuuuuul", resultado);
+      const resultado = await getUser(user.currentUser);
+      console.log("resuuuuuuuuul", resultado);
+
+      setUserFirestore(resultado);
+
+    }
+    const prueba =getUserFirestore();
+  }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
+
+  
+  //! · · ·
+  const fetchData = useCallback(async () => {
+    const data = await fetch('https://yourapi.com');
+  
+    setData(data);
+  }, [])
+  
+  // the useEffect is only there to call `fetchData` at the right time
+  useEffect(() => {
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);;
+  }, [fetchData])
+  //! · · ·
+
   if (user.currentUser) {
+    // if (user.currentUser.uid === "8CdkznA4a6UerRNnUqz7eXOeXpV2") {
+    console.log("seteadooooooooo", userFirestore);
+    console.log("ooooooooooo", user.currentUser);
+    // getUser(user.currentUser).then((res) =>
+    // );
+
     return <Navigate to="/home" />;
   }
 
