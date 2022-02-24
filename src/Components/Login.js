@@ -33,17 +33,17 @@ export const Login = () => {
   // Si el usuario ya está logueado, entonces cambia a la vista de Home
   // if (user.currentUser && user.user_role) {
 
-  // useEffect(() => {
-  //   async function getUserFirestore() {
-  //     // const resultado = await getUser(user.currentUser);
-  //     // console.log("resuuuuuuuuul", resultado);
-  //     const resultado = await getUser(user.currentUser);
-  //     console.log("resuuuuuuuuul", resultado);
+  useEffect(() => {
+    async function getUserFirestore() {
+      // const resultado = await getUser(user.currentUser);
+      // console.log("resuuuuuuuuul", resultado);
+      const resultado = await getUser(user.currentUser);
+      console.log("resuuuuuuuuul", resultado);
 
-  //     setUserFirestore(resultado);
-
-  //   }
-  //   const prueba =getUserFirestore();
+      setUserFirestore(resultado);
+    }
+    getUserFirestore();
+  }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
   // }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
 
   // //! · · ·
@@ -67,8 +67,13 @@ export const Login = () => {
     // console.log("ooooooooooo", user.currentUser);
     // getUser(user.currentUser).then((res) =>
     // );
-
-    return <Navigate to="/home" />;
+    // if(userFirestore.user_rol ===)
+    console.log("probandooooooo, ", userFirestore);
+    // return <Navigate to="/home" />;
+    setTimeout(() => {
+      window.location = "/home";
+      // return <Navigate to="/home" />;
+    });
   }
 
   return (

@@ -30,6 +30,7 @@ function App() {
         <Route path="/waiter/order-cart" element={<h1>Carrito</h1>}></Route>
         {/* <Route path="/Button" element={<ButtonFilter />}></Route> */}
         {/* Chef Views */}
+
         <Route
           path="/chef"
           element={<h1>Vista de pedidos enviados por el mesero</h1>}

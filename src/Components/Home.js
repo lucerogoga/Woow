@@ -28,6 +28,12 @@ export const Home = () => {
     getProductsCategories().then((category) => setProductCategories(category));
   }, []);
 
+  const handleClick = ({ cat_uid, cat_name }) => {
+    // console.log("consoleateeeeeeeee", e);
+    handleCategorie(cat_uid, cat_name).then((items) => {
+      setProducts(items);
+    });
+  };
   return (
     <>
       <NavBar>
@@ -63,10 +69,12 @@ export const Home = () => {
               item={cat.cat_name}
               uid={cat.cat_uid}
               icon={iconComponents[i]}
+              key={cat.cat_uid}
+              // cat = {objeto}
+              // funcion 1
+              //funcion 2
               onClick={() => {
-                handleCategorie(cat.cat_uid, cat.cat_name).then((items) => {
-                  setProducts(items);
-                });
+                handleClick(cat);
               }}
             />
           );
