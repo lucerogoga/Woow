@@ -1,15 +1,31 @@
 import React from "react";
 import LogoWoow from "./LogoWoow";
+import { Link } from "react-router-dom";
+import "../Assets/"
 
-// import {reactComponent as nombreAlAzar} from "./archivo.svg"
+import "../Assets/NavBar.css";
 
 const NavBar = () => {
   return (
-    <nav className="nav-home">
-      {/* <img src="../Assets/logo-woow.svg"></img> */}
-      {/* <img alt="logoWoow" className="login--logo--nav" src={LogoWoow} /> */}
-      <LogoWoow fill="#fff" width="35" height="35" />
-      <p>si</p>
+    <nav className="NavBar">
+      <LogoWoow className="navBar--logo" />
+      <LogoWoow fill="#800" width="80" height="80" />
+      {/* <LogoWoow className="navBar--logo" fill="#800" width="80" height="80" /> */}
+
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/waiter/product-detail">Product Detail</Link>
+        </li>
+        <li>
+          <Link to="/chef">Chef</Link>
+        </li>
+        <li>
+          <Link to="/waiter/order-cart">Order Cart</Link>
+        </li>
+      </ul>
     </nav>
   );
 };

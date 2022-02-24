@@ -48,19 +48,19 @@ export const Login = () => {
 
   
   //! · · ·
-  const fetchData = useCallback(async () => {
-    const data = await fetch('https://yourapi.com');
+  // const fetchData = useCallback(async () => {
+  //   const data = await fetch('https://yourapi.com');
   
-    setData(data);
-  }, [])
+  //   setData(data);
+  // }, [])
   
-  // the useEffect is only there to call `fetchData` at the right time
-  useEffect(() => {
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);;
-  }, [fetchData])
-  //! · · ·
+  // // the useEffect is only there to call `fetchData` at the right time
+  // useEffect(() => {
+  //   fetchData()
+  //     // make sure to catch any error
+  //     .catch(console.error);;
+  // }, [fetchData])
+  // //! · · ·
 
   if (user.currentUser) {
     // if (user.currentUser.uid === "8CdkznA4a6UerRNnUqz7eXOeXpV2") {

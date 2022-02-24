@@ -1,0 +1,12 @@
+.navBar {
+  background-color: rgb(235, 115, 135);
+}
+
+.navBar--logo {
+  margin-left: 100px;
+  background-color: red;
+  width: 20px;
+}
+/* .navBar--logo {
+    margin-left: 100px;
+  } */

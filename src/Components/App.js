@@ -19,13 +19,14 @@ function App() {
             </ProtectedRouter>
           }
         ></Route>
+
         {/* Waiter Views */}
         <Route path="/" element={<Login />}></Route>
         <Route path="/waiter" element={<NavBar />}></Route>
         {/* <Route path="/waiter" element={<h1>Listado de productos</h1>}></Route> */}
         <Route
           path="/waiter/product-detail"
-          element={<h1>-Producto Detallado</h1>}
+          element={<h1>Producto Detallado</h1>}
         ></Route>
         <Route path="/waiter/order-cart" element={<h1>Carrito</h1>}></Route>
         {/* <Route path="/Button" element={<ButtonFilter />}></Route> */}
