@@ -43,7 +43,7 @@ export const Login = () => {
       setUserFirestore(resultado);
 
     }
-    const prueba =getUserFirestore();
+    const prueba = getUserFirestore();
   }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
 
   
