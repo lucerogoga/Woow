@@ -47,8 +47,15 @@ body {
   background-color: #fff;
   color: #283159;
 }
-
+.categories-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
 .button-card:hover path {
+  fill: #fff;
+}
+.button-card:hover circle {
   fill: #fff;
 }
 .button-card:hover {
