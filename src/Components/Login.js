@@ -69,11 +69,11 @@ export const Login = () => {
     // );
     // if(userFirestore.user_rol ===)
     console.log("probandooooooo, ", userFirestore);
-    // return <Navigate to="/home" />;
-    setTimeout(() => {
-      window.location = "/home";
-      // return <Navigate to="/home" />;
-    });
+    return <Navigate to="/home" />;
+    // setTimeout(() => {
+    //   window.location = "/home";
+    //   // return <Navigate to="/home" />;
+    // });
   }
 
   return (

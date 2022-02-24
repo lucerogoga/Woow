@@ -1,3 +1,4 @@
+import React from "react";
 import ProductCart from "./ProductCard";
 import ButtonFilter from "./ButtonFilter";
 import iconComponents from "../Assets/CustomLogo";
@@ -6,6 +7,10 @@ import "../Assets/Home.css";
 import { useAuth } from "./Context/AuthContext";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
+import NavItem from "./NavItem";
+import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
+import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
+
 import {
   getProducts,
   getProductsCategories,
@@ -37,26 +42,11 @@ export const Home = () => {
   return (
     <>
       <NavBar>
-        <li>
-          <Link className="navBar--link" to="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link className="navBar--link" to="/waiter/product-detail">
-            Product Detail
-          </Link>
-        </li>
-        <li>
-          <Link className="navBar--link" to="/chef">
-            Chef
-          </Link>
-        </li>
-        <li>
-          <Link className="navBar--link" to="/waiter/order-cart">
-            Order Cart
-          </Link>
-        </li>
+        <NavItem icon={<Salad />} path="/sandwich" />
+        <NavItem icon={<Salad />} path="/pancito" />
+        <NavItem icon={<ShoppingCart />} path="/waiter/order-cart" />
+        {/* <NavItem icon={<ShoppingCart />} path="/shopping-cart" /> */}
+        {/* <NavItem icon={<ShoppingCart />} /> */}
       </NavBar>
 
       <h1>{user.uid}</h1>
@@ -90,3 +80,26 @@ export const Home = () => {
 };
 
 export default Home;
+
+// <NavBar>
+//         <li>
+//           <Link className="navBar--link" to="/">
+//             Home
+//           </Link>
+//         </li>
+//         <li>
+//           <Link className="navBar--link" to="/waiter/product-detail">
+//             Product Detail
+//           </Link>
+//         </li>
+//         <li>
+//           <Link className="navBar--link" to="/chef">
+//             Chef
+//           </Link>
+//         </li>
+//         <li>
+//           <Link className="navBar--link" to="/waiter/order-cart">
+//             Order Cart
+//           </Link>
+//         </li>
+//       </NavBar>

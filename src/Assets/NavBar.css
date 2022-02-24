@@ -2,7 +2,7 @@
   background-color: rgb(235, 115, 135);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 10px;
   height: 56px;
 }
@@ -15,7 +15,8 @@
 .navBar--list {
   display: flex;
   width: 80%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   list-style: none;
 }
 
