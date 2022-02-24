@@ -1,16 +1,16 @@
-import Heart from "../Assets/CustomLogo";
+import React from "react";
 
 export function ButtonFilter(props) {
-  //   const { items } = props;
-  //   const Hover = () => {
-  //     <Heart fill="#fff" />;
-  //   };
+  const { item, icon, onClick } = props;
   return (
-    <button className="button-card">
-      {/* <img src={Salty} className="button-image" alt="product.name" /> */}
-      <Heart fill="#283159" className="button-card" />
-      <h3 className="button-card--title">All</h3>
-    </button>
+    <>
+      <button className="button-card" onClick={onClick}>
+        {/* renderiamos el icono por props */}
+        {icon}
+        {/* renderizamos el item name por props */}
+        <h3 className="button-card--title">{item}</h3>
+      </button>
+    </>
   );
 }
 

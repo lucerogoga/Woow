@@ -1,6 +1,14 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 // import { collection, doc , getDoc, getDocs , query, where} from "firebase/firestore";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import { db } from "../../Config/initialize";
 import { useAuth } from "./AuthContext";
 
@@ -41,4 +49,38 @@ export async function getProducts() {
       ...p.data(),
     };
   });
+}
+
+export async function getProductsCategories() {
+  const catRef = collection(db, "product_categories");
+  const q = query(catRef, orderBy("cat_name"));
+  const categoriesData = await getDocs(q);
+  return categoriesData.docs.map((category) => {
+    return {
+      cat_uid: category.id,
+      cat_name: category.data().cat_name,
+      //  ...category.data(),
+    };
+  });
+}
+
+export async function filterProductByCategorie(catId, catName) {
+  if (catName === "All") {
+    return getProducts();
+  } else {
+    const q1 = query(
+      collection(db, "products"),
+      where("cat_id", "==", catId),
+      orderBy("product_name", "desc")
+    );
+    const querySnapshotProduct = await getDocs(q1);
+    const productFilterDocs = querySnapshotProduct.docs;
+    return productFilterDocs.map((p) => {
+      console.log("productos de esta categoriiiiiiia", p);
+      return {
+        id: p.id,
+        ...p.data(),
+      };
+    });
+  }
 }

@@ -33,39 +33,38 @@ export const Login = () => {
   // Si el usuario ya está logueado, entonces cambia a la vista de Home
   // if (user.currentUser && user.user_role) {
 
-  useEffect(() => {
-    async function getUserFirestore() {
-      // const resultado = await getUser(user.currentUser);
-      // console.log("resuuuuuuuuul", resultado);
-      const resultado = await getUser(user.currentUser);
-      console.log("resuuuuuuuuul", resultado);
+  // useEffect(() => {
+  //   async function getUserFirestore() {
+  //     // const resultado = await getUser(user.currentUser);
+  //     // console.log("resuuuuuuuuul", resultado);
+  //     const resultado = await getUser(user.currentUser);
+  //     console.log("resuuuuuuuuul", resultado);
 
-      setUserFirestore(resultado);
+  //     setUserFirestore(resultado);
 
-    }
-    const prueba = getUserFirestore();
-  }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
+  //   }
+  //   const prueba =getUserFirestore();
+  // }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
 
-  
-  //! · · ·
+  // //! · · ·
   // const fetchData = useCallback(async () => {
   //   const data = await fetch('https://yourapi.com');
-  
+
   //   setData(data);
   // }, [])
-  
+
   // // the useEffect is only there to call `fetchData` at the right time
   // useEffect(() => {
   //   fetchData()
   //     // make sure to catch any error
   //     .catch(console.error);;
   // }, [fetchData])
-  // //! · · ·
+  //! · · ·
 
   if (user.currentUser) {
     // if (user.currentUser.uid === "8CdkznA4a6UerRNnUqz7eXOeXpV2") {
-    console.log("seteadooooooooo", userFirestore);
-    console.log("ooooooooooo", user.currentUser);
+    // console.log("seteadooooooooo", userFirestore);
+    // console.log("ooooooooooo", user.currentUser);
     // getUser(user.currentUser).then((res) =>
     // );
 
