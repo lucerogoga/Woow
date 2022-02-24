@@ -1,22 +1,31 @@
 import ProductCart from "./ProductCard";
+import ButtonFilter from "./ButtonFilter";
+import iconComponents from "../Assets/CustomLogo";
 import { useEffect, useState } from "react";
-import logo from "../Assets/logo-rotate.svg";
 import "../Assets/Home.css";
 import { useAuth } from "./Context/AuthContext";
 import NavBar from "./NavBar";
-import { getUser, getProducts } from "./Context/FirestoreContext";
+import {
+  getUser,
+  getProducts,
+  getProductsCategories,
+} from "./Context/FirestoreContext";
+import logo from "../Assets/logo-rotate.svg";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
   const { user, logout } = useAuth();
+
   console.log("estamos en el HOME, ", user);
-  getUser().then((res) => console.log("siiiiiiiii", res));
-  // getUser();
+
   const handleLogout = async () => {
     await logout();
   };
+
   useEffect(() => {
-    getProducts().then((p) => setProducts(p));
+    getProducts().then((products) => setProducts(products));
+    getProductsCategories().then((category) => setProductCategories(category));
   }, []);
 
   return (
@@ -25,6 +34,15 @@ export const Home = () => {
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
 
+      <div className="categories-container">
+        {/* {(productCategories.concat(icons)).map((cat) => {
+          return <ButtonFilter items={cat.cat_name} />;
+        })} */}
+        {productCategories.map((cat) => {
+          // const icon = iconComponents.map((item) => item);
+          return <ButtonFilter item={cat.cat_name} icon={iconComponents} />;
+        })}
+      </div>
       <div className="products-container">
         {products.map((p) => {
           return <ProductCart product={p} />;
