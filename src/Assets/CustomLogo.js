@@ -1,32 +1,17 @@
 import React from "react";
+import { ReactComponent as Heart } from "../Assets/icons/heart.svg";
+import { ReactComponent as CupCakes } from "../Assets/icons/cupcake.svg";
+import { ReactComponent as Cakes } from "../Assets/icons/birthcake.svg";
+import { ReactComponent as IceCream } from "../Assets/icons/ice-cream.svg";
+import { ReactComponent as Drinks } from "../Assets/icons/drink.svg";
+import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
 
-const CustomLogo = (props) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      xmlnssvgjs="http://svgjs.com/svgjs"
-      width="35"
-      height="35"
-      x="0"
-      y="0"
-      viewBox="0 0 64 64"
-      //   style="enable-background:new 0 0 512 512"
-      xmlSpace="preserve"
-      className=""
-    >
-      <g>
-        <path
-          xmlns="http://www.w3.org/2000/svg"
-          d="M45.5,4A18.53,18.53,0,0,0,32,9.86,18.5,18.5,0,0,0,0,22.5C0,40.92,29.71,59,31,59.71a2,2,0,0,0,2.06,0C34.29,59,64,40.92,64,22.5A18.52,18.52,0,0,0,45.5,4ZM32,55.64C26.83,52.34,4,36.92,4,22.5a14.5,14.5,0,0,1,26.36-8.33,2,2,0,0,0,3.27,0A14.5,14.5,0,0,1,60,22.5C60,36.91,37.17,52.33,32,55.64Z"
-          fill={props.fill}
-          dataoriginal="#000000"
-          className={props.className}
-        ></path>
-      </g>
-    </svg>
-  );
-};
-
-export default CustomLogo;
+const iconComponents = [
+  <Heart />,
+  <Cakes />,
+  <CupCakes />,
+  <Drinks />,
+  <IceCream />,
+  <Salad />,
+];
+export default iconComponents;
