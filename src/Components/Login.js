@@ -5,7 +5,6 @@ import Error from "./Error";
 import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
-// import { getUser } from "./Context/FirestoreContext";
 import { getUser } from "./Context/FirestoreContext";
 
 export const Login = () => {
@@ -14,66 +13,27 @@ export const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login, user } = useAuth();
-  const [userFirestore, setUserFirestore] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     try {
       console.log("entramos a validar");
-      await login(loginEmail, loginPassword);
+      const user = await login(loginEmail, loginPassword);
       console.log("si se pudo loguear");
-      navigate("/home");
+      debugger;
+      const { user_rol: role } = await getUser(user.user.uid);
+      if (role === "admin") navigate("/home");
+      else if (role === "chef") navigate("/chef");
+      else navigate("/waiter");
     } catch (e) {
       console.log("error ingreso");
       setErrorMessage(e.message);
     }
   };
 
-  // Si el usuario ya está logueado, entonces cambia a la vista de Home
-  // if (user.currentUser && user.user_role) {
-
-  useEffect(() => {
-    async function getUserFirestore() {
-      // const resultado = await getUser(user.currentUser);
-      // console.log("resuuuuuuuuul", resultado);
-      const resultado = await getUser(user.currentUser);
-      console.log("resuuuuuuuuul", resultado);
-
-      setUserFirestore(resultado);
-    }
-    getUserFirestore();
-  }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
-  // }, [user.currentUser, userFirestore]); // Or [] if effect doesn't need props or state
-
-  // //! · · ·
-  // const fetchData = useCallback(async () => {
-  //   const data = await fetch('https://yourapi.com');
-
-  //   setData(data);
-  // }, [])
-
-  // // the useEffect is only there to call `fetchData` at the right time
-  // useEffect(() => {
-  //   fetchData()
-  //     // make sure to catch any error
-  //     .catch(console.error);;
-  // }, [fetchData])
-  //! · · ·
-
   if (user.currentUser) {
-    // if (user.currentUser.uid === "8CdkznA4a6UerRNnUqz7eXOeXpV2") {
-    // console.log("seteadooooooooo", userFirestore);
-    // console.log("ooooooooooo", user.currentUser);
-    // getUser(user.currentUser).then((res) =>
-    // );
-    // if(userFirestore.user_rol ===)
-    console.log("probandooooooo, ", userFirestore);
-    // return <Navigate to="/home" />;
-    setTimeout(() => {
-      window.location = "/home";
-      // return <Navigate to="/home" />;
-    });
+    return <Navigate to="/home" />;
   }
 
   return (

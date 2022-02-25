@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       password
     );
     console.log("credenciallllll, ", userCredential);
+    return userCredential;
   };
 
   // ! PENDIENTE
@@ -40,6 +41,8 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubcribe();
   }, []);
+
+  if (loading) return <h1> Loading....</h1>;
 
   return (
     <authContext.Provider value={{ login, logout, user, loading }}>
