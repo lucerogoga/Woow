@@ -9,7 +9,9 @@ import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
 import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
-import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
+// import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
+// import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
+import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 
 import {
   getProducts,
@@ -41,12 +43,10 @@ export const Home = () => {
   };
   return (
     <>
-      <NavBar>
-        <NavItem icon={<Salad />} path="/sandwich" />
-        <NavItem icon={<Salad />} path="/pancito" />
-        <NavItem icon={<ShoppingCart />} path="/waiter/order-cart" />
-        {/* <NavItem icon={<ShoppingCart />} path="/shopping-cart" /> */}
-        {/* <NavItem icon={<ShoppingCart />} /> */}
+      <NavBar rol="chef">
+        {/* <NavItem icon={<Salad />} path="/pancito" /> */}
+        <NavItem path="/">Take Order</NavItem>
+        <NavItem path="/orders-resume">Orders Resume</NavItem>
       </NavBar>
 
       <h1>{user.uid}</h1>
