@@ -10,6 +10,7 @@ import MenuBurger from "../Assets/icons/MenuBurger";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 
+
 const NavBar = ({ children }) => {
   // const [dropdown, setDropdown] = useState(false);
   const [open, setOpen] = useState(false);
@@ -49,6 +50,8 @@ function DropdownMenu() {
     return <Link className="menu-item">{children}</Link>;
   };
   return (
+
+    
     <div className="dropdown">
       <dropdownItem>My profile</dropdownItem>
       <dropdownItem>My profile2</dropdownItem>
