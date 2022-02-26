@@ -1,5 +1,6 @@
 // import styled from "styled-components";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
@@ -16,22 +17,6 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   //   margin: auto;
 `;
-
-// ! por qué no funciona?
-export const leftContainer = styled.div`
-  height: 100%;
-  display: flex;
-  background: yellow;
-`;
-
-// export const BurgerContainer = styled.div`
-//   margin-left: 0.5rem;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background: aqua;
-//   height: 100%;
-// `;
 
 export const LogoContainer = styled.div`
   margin-left: 0.5rem;
@@ -123,6 +108,7 @@ export const MenuItemLink = styled.a`
   font-weight: 300;
   cursor: pointer;
   transition: 0.5s all ease;
+  font-weight: 700;
 
   &:hover {
     color: #ccc;
@@ -151,17 +137,82 @@ export const BurgerIconContainer = styled.div`
   }
 `;
 
-export const userContainer = styled.div`
-  background-color: blue;
-  /* background-color: #fff; */
-  border-radius: 50%;
-  padding: 5px;
-  margin: 2px;
+export const UserContainer = styled.div`
+  background-color: #ff9aa3;
   display: flex;
+  border-radius: 100%;
   justify-content: center;
   align-items: center;
+  width: 40px;
+  height: 40px;
 
   path {
-    fill: red;
+    fill: #fff;
   }
 `;
+
+export const Block = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const NumberCart = styled.span`
+  position: absolute;
+  left: -6px;
+  bottom: -6px;
+  // left: 0;
+  // bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  background: #ff9aa3;
+
+  // color: #283159;
+  color: #fff;
+  font-weight: 700;
+`;
+
+export const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem 2.5rem;
+  color: #283159;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: 0.5s all ease;
+  text-decoration: none;
+  font-weight: 700;
+
+  &:hover {
+    color: #ccc;
+    background-color: 283159;
+    transition: 0.5 all ease;
+  }
+`;
+
+// export const MenuItemLink = styled.a`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   height: 100%;
+//   padding: 0.5rem 2.5rem;
+//   color: #283159;
+//   font-family: sans-serif;
+//   font-size: 1rem;
+//   font-weight: 300;
+//   cursor: pointer;
+//   transition: 0.5s all ease;
+
+//   &:hover {
+//     color: #ccc;
+//     background-color: 283159;
+//     transition: 0.5 all ease;
+//   }
+// `;

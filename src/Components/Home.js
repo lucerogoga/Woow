@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
 import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
+import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 
 import {
   getProducts,
@@ -49,10 +50,6 @@ export const Home = () => {
       {/* </NavBar> */}
 
       <NavBar2 />
-      {/* <NavBar2 user={'aqui'}/> */}
-
-      {/* <h1>{user.uid}</h1> */}
-      {/* <button onClick={handleLogout}>logout</button> */}
 
       <div className="categories-container">
         {productCategories.map((cat, i) => {

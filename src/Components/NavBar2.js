@@ -6,24 +6,24 @@ import {
   MenuItem,
   MenuItemLink,
   Wrapper,
-  BurgerContainer,
-  leftContainer,
   BurgerIconContainer,
   DropdownContainer,
   DropdownHeader,
   DropdownItem,
   DropdownMenu,
-  // userContainer,
+  UserContainer,
+  Block,
+  NumberCart,
+  StyledLink,
 } from "../Assets/NavBar.elements";
 import LogoWoowRotate from "./LogoWoow";
-// todo lo que englobe iconos podemos darle unos estilos globales
-import { iconContext } from "react-icons";
-// ! ----------
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
-// import MenuBurger from "../Assets/icons/MenuBurger";
-// import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
+import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
+import { ReactComponent as More } from "../Assets/icons/more.svg";
+// !----
+import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 import { useAuth } from "./Context/AuthContext";
 
 import { Link } from "react-router-dom";
@@ -42,22 +42,16 @@ const NavBar2 = () => {
         {/* Con esto podemos hacer que todos los iconos tengan el mismo tamaño */}
         {/* <iconContext.Provider value={{ style: { fontSize: "2em" } }}> */}
 
-        {/* <leftContainer> */}
-        <div style={{ display: "flex" }}>
+        <Block style={{ marginLeft: "1rem" }}>
           <BurgerIconContainer>
-            <MenuBurger onClick={() => setOpen(!open)} />
+            <MenuBurger width={30} onClick={() => setOpen(!open)} />
           </BurgerIconContainer>
 
-          <LogoContainer>
-            {/* <LogoWoow /> */}
-            <LogoWoowRotate
-              className="navBar--logo"
-              fill="#fff"
-              width="80"
-              height="80"
-            />
+          <LogoContainer style={{ marginLeft: "18px" }}>
+            <LogoWoow width="70" height="70" />
+            {/* <LogoWoowRotate width="70" height="70" /> */}
           </LogoContainer>
-        </div>
+        </Block>
 
         {open && (
           <DropdownContainer>
@@ -92,7 +86,8 @@ const NavBar2 = () => {
         <Menu>
           <MenuItem>
             <MenuItemLink>
-              <Link to={"/si"}>Home</Link>
+              <StyledLink to={"/si"}>Home</StyledLink>
+              {/* <Link to={"/si"}>Home</Link> */}
             </MenuItemLink>
           </MenuItem>
           <MenuItem>
@@ -100,25 +95,20 @@ const NavBar2 = () => {
           </MenuItem>
         </Menu>
 
-        {/* Iconos que no son de la lista */}
-
-        <div style={{ display: "flex" }}>
-          <Link className="navBar--link cart" to={"/waiter/order-cart"}>
-            <ShoppingCart />
-            {/* ! acomodar */}
-            <span className="cart--number">3</span>
-          </Link>
-
-          {/* <div className="user-photo"> */}
-
-          <userContainer>
-            <Chef />
-          </userContainer>
-
-          {/* </div> */}
-        </div>
-
-        {/* </iconContext.Provider> */}
+        <Block style={{ marginRight: "1rem" }}>
+          <div style={{ position: "relative" }}>
+            <Link to={"/waiter/order-cart"}>
+              <ShoppingCart fill="#fff" width={30} />
+              <NumberCart>3</NumberCart>
+            </Link>
+          </div>
+          <div style={{ marginLeft: "15px" }}>
+            <UserContainer>
+              <Waiter width={30} />
+              {/* <Chef width={30} /> */}
+            </UserContainer>
+          </div>
+        </Block>
       </Wrapper>
     </Container>
   );
