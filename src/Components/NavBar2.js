@@ -4,7 +4,6 @@ import {
   LogoContainer,
   Menu,
   MenuItem,
-  MenuItemLink,
   Wrapper,
   BurgerIconContainer,
   DropdownContainer,
@@ -15,17 +14,16 @@ import {
   Block,
   NumberCart,
   StyledLink,
+  StyledLinkDropdown,
 } from "../Assets/NavBar.elements";
 import LogoWoowRotate from "./LogoWoow";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
-import { ReactComponent as More } from "../Assets/icons/more.svg";
-// !----
+import { ReactComponent as X } from "../Assets/icons/x.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 import { useAuth } from "./Context/AuthContext";
-
 import { Link } from "react-router-dom";
 
 const NavBar2 = () => {
@@ -49,49 +47,43 @@ const NavBar2 = () => {
 
           <LogoContainer style={{ marginLeft: "18px" }}>
             <LogoWoow width="70" height="70" />
-            {/* <LogoWoowRotate width="70" height="70" /> */}
           </LogoContainer>
         </Block>
 
         {open && (
           <DropdownContainer>
             <DropdownHeader>
-              <span onClick={() => setOpen(false)}>X</span>
+              <span onClick={() => setOpen(false)}>
+                <X width={15} height={15} />
+                {/* <X width={25} rotate="45deg" /> */}
+              </span>
             </DropdownHeader>
 
             <DropdownMenu>
               <DropdownItem>
-                <MenuItemLink>
-                  <Link to={"/"}>Home</Link>
-                </MenuItemLink>
+                <StyledLinkDropdown to={"/"}>Home</StyledLinkDropdown>
               </DropdownItem>
               <DropdownItem>
-                <MenuItemLink>
-                  <Link to={"/"}>Take Order</Link>
-                </MenuItemLink>
+                <StyledLinkDropdown to={"/"}>Take Order</StyledLinkDropdown>
               </DropdownItem>
               <DropdownItem>
-                <MenuItemLink>Order Resume</MenuItemLink>
+                <StyledLinkDropdown to={"/order-resume"}>
+                  Order Resume
+                </StyledLinkDropdown>
               </DropdownItem>
               <DropdownItem>
-                {/* <MenuItemLink>Logout</MenuItemLink> */}
                 <button onClick={handleLogout}>Logout</button>
               </DropdownItem>
             </DropdownMenu>
           </DropdownContainer>
         )}
 
-        {/* </leftContainer> */}
-
         <Menu>
           <MenuItem>
-            <MenuItemLink>
-              <StyledLink to={"/si"}>Home</StyledLink>
-              {/* <Link to={"/si"}>Home</Link> */}
-            </MenuItemLink>
+            <StyledLink to={"/"}>Home</StyledLink>
           </MenuItem>
           <MenuItem>
-            <MenuItemLink>Order Resume</MenuItemLink>
+            <StyledLink to={"/order-resume"}>Order Resume</StyledLink>
           </MenuItem>
         </Menu>
 

@@ -47,33 +47,26 @@ export const Menu = styled.ul`
 export const DropdownContainer = styled.div`
   position: absolute;
   top: 0px;
-  left: 135px;
-  //   left: 0;
-  //   width: 65%;
-  width: 100%;
-  height: 90vh;
+  left: 0;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   transition: 0.5s all ease;
-  width: 300px;
   background: green;
   z-index: 1;
   padding: 1rem;
   background: #ffefc0;
-  transform: translateX(-45%);
+  width: 65%;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 export const DropdownHeader = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-// export const Menu = styled.ul`
-//   height: 100%;
-//   display: flex;
-//   justify-content: space-between;
-//   list-style: none;
-// `;
 
 export const DropdownMenu = styled.div`
   height: 250px;
@@ -93,28 +86,6 @@ export const DropdownItem = styled.div`
 
 export const MenuItem = styled.li`
   height: 100%;
-`;
-
-// ! Revisar en case que desee cambiarlo a LINK de React
-export const MenuItemLink = styled.a`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-  padding: 0.5rem 2.5rem;
-  color: #283159;
-  font-family: sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  cursor: pointer;
-  transition: 0.5s all ease;
-  font-weight: 700;
-
-  &:hover {
-    color: #ccc;
-    background-color: 283159;
-    transition: 0.5 all ease;
-  }
 `;
 
 // @media screen and (max-width: 960px) {
@@ -197,22 +168,24 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-// export const MenuItemLink = styled.a`
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   height: 100%;
-//   padding: 0.5rem 2.5rem;
-//   color: #283159;
-//   font-family: sans-serif;
-//   font-size: 1rem;
-//   font-weight: 300;
-//   cursor: pointer;
-//   transition: 0.5s all ease;
+export const StyledLinkDropdown = styled(Link)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem 2.5rem;
+  color: #283159;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: 0.5s all ease;
+  text-decoration: none;
+  font-weight: 700;
 
-//   &:hover {
-//     color: #ccc;
-//     background-color: 283159;
-//     transition: 0.5 all ease;
-//   }
-// `;
+  &:hover {
+    color: #ccc;
+    background-color: 283159;
+    transition: 0.5 all ease;
+  }
+`;

@@ -27,7 +27,7 @@ export function ProductCard(props) {
             {/* Este es el span */}
             {/* <div className="product-card--buttonIcon">+</div> */}
             <div className="product-card--buttonIcon">
-              {<More width={15} fill="#fff" />}
+              {<More width={15} style={{ marginTop: "4px" }} />}
               {/* {<More width={15} fill={"#fff"} />} */}
             </div>
             {/* <img src={iconMore} className="buttonIcon" alt="buttonIcon" /> */}

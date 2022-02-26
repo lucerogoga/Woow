@@ -43,12 +43,6 @@ export const Home = () => {
   };
   return (
     <>
-      {/* <NavBar rol="chef"> */}
-      {/* <NavItem icon={<Salad />} path="/pancito" /> */}
-      {/* <NavItem path="/">Take Order</NavItem> */}
-      {/* <NavItem path="/orders-resume">Orders Resume</NavItem> */}
-      {/* </NavBar> */}
-
       <NavBar2 />
 
       <div className="categories-container">
