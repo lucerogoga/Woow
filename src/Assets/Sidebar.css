@@ -3,15 +3,30 @@
 .sidebar {
   position: fixed;
   top: 0px;
-  left: 0;
+  /* left: 0; */
+  left: -100%;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  /* transition: 0.5s showSidebar ease; */
   transition: 0.5s all ease;
   z-index: 1;
   padding: 1rem;
   background: #ffefc0;
   height: 100vh;
+  animation: showSidebar 0.3s ease forwards;
+}
+
+@keyframes showSidebar {
+  to {
+    left: 0;
+  }
+}
+
+@keyframes hideSidebar {
+  to {
+    left: -100%;
+  }
 }
 
 .sidebar--header {
@@ -29,6 +44,7 @@
 
 .x-icon {
   transform: rotate(45deg);
+  animation: hideSidebar 0.3s ease forwards;
 }
 
 .sidebar--menu .sidebar--item {
