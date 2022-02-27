@@ -4,9 +4,7 @@ import Home from "./Home";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
-import { ProtectedRouter, RoleProtectedRouter } from "./ProtectedRoutes";
-
-import NavBar from "./NavBar";
+import { RoleComponent } from "./ProtectedRoutes";
 
 function App() {
   return (
@@ -15,9 +13,9 @@ function App() {
         <Route
           path="/home"
           element={
-            <RoleProtectedRouter role="admin">
+            <RoleComponent role="admin">
               <Home />
-            </RoleProtectedRouter>
+            </RoleComponent>
           }
         ></Route>
 
@@ -26,25 +24,33 @@ function App() {
         <Route
           path="/waiter"
           element={
-            <RoleProtectedRouter role="waiter">
+            <RoleComponent role="waiter">
               <h1>Listado de productos</h1>
-            </RoleProtectedRouter>
+            </RoleComponent>
           }
         ></Route>
         <Route
           path="/waiter/product-detail"
           element={
-            <RoleProtectedRouter>
+            <RoleComponent role="waiter">
               <h1>Producto Detallado</h1>
-            </RoleProtectedRouter>
+            </RoleComponent>
           }
         ></Route>
         <Route
           path="/waiter/order-cart"
           element={
-            <RoleProtectedRouter role="waiter">
+            <RoleComponent role="waiter">
               <h1>Carrito</h1>
-            </RoleProtectedRouter>
+            </RoleComponent>
+          }
+        ></Route>
+        <Route
+          path="/waiter/order-info"
+          element={
+            <RoleComponent role="waiter">
+              <h1>Carrito</h1>
+            </RoleComponent>
           }
         ></Route>
         {/* <Route path="/Button" element={<ButtonFilter />}></Route> */}
@@ -53,9 +59,9 @@ function App() {
         <Route
           path="/chef"
           element={
-            <RoleProtectedRouter role="chef">
+            <RoleComponent role="chef">
               <h1>Vista de pedidos enviados por el mesero</h1>
-            </RoleProtectedRouter>
+            </RoleComponent>
           }
         ></Route>
       </Routes>

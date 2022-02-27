@@ -10,9 +10,9 @@ function hasPermission(userRole, routeRole) {
 
 export const RoleComponent = ({ children, role }) => {
   return (
-    <ProtectedRouter role={role}>
+    <ProtectedRouter>
       <RolProvider>
-        <RoleProtectedRouter></RoleProtectedRouter>
+        <RoleProtectedRouter role={role}>{children}</RoleProtectedRouter>
       </RolProvider>
     </ProtectedRouter>
   );
@@ -23,6 +23,7 @@ export const RoleProtectedRouter = ({ children, role }) => {
   console.log(userRole);
   if (!hasPermission(userRole, role)) {
     if (userRole === "chef") {
+      debugger;
       return <Navigate to="/chef" />;
     } else {
       return <Navigate to="/waiter" />;
@@ -31,10 +32,10 @@ export const RoleProtectedRouter = ({ children, role }) => {
   return <>{children}</>;
 };
 
-export const ProtectedRouter = ({ children, role }) => {
+export const ProtectedRouter = ({ children }) => {
   const { user } = useAuth();
-  const userRole = useRol();
-  console.log("estamos en el PROTECTED, ", user.currentUser, userRole);
+  // const userRole = useRol();
+  // console.log("estamos en el PROTECTED, ", user.currentUser, userRole);
   // console.log("estamos en el PROTECTED, ", user.currentUser.uid);
 
   // if (user === null) {
