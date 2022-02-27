@@ -1,29 +1,12 @@
 import React, { useState } from "react";
-import {
-  Container,
-  LogoContainer,
-  Menu,
-  MenuItem,
-  Wrapper,
-  BurgerIconContainer,
-  DropdownContainer,
-  DropdownHeader,
-  DropdownItem,
-  DropdownMenu,
-  UserContainer,
-  Block,
-  NumberCart,
-  StyledLink,
-  StyledLinkDropdown,
-} from "../Assets/ChefView.elements";
-import "../Assets/Home.css";
-// } from "../Assets/NavBar.elements";
+// import "../Assets/Home.css";
+import "../Assets/ChefView.css";
 import LogoWoowRotate from "./LogoWoow";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
-import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
+// import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
-import { ReactComponent as X } from "../Assets/icons/x.svg";
+// import { ReactComponent as X } from "../Assets/icons/x.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 import { useAuth } from "./Context/AuthContext";
 import { Link } from "react-router-dom";
@@ -37,77 +20,83 @@ const NavBarChef = () => {
   };
 
   return (
-    <Container>
-      <Wrapper>
-        <Block style={{ marginLeft: "1rem" }}>
-          <BurgerIconContainer>
+    <div className="navbar">
+      <div className="navbar--container">
+        <div className="navbar--block">
+          <div className="navbar--burger-container">
             <MenuBurger width={30} onClick={() => setOpen(!open)} />
-          </BurgerIconContainer>
+          </div>
 
-          <LogoContainer style={{ marginLeft: "18px" }}>
+          <div className="logo-container">
             <LogoWoow width="70" height="70" />
-          </LogoContainer>
-        </Block>
+          </div>
+        </div>
 
-        <Menu>
-          <MenuItem>
-            <StyledLink to={"/"}>Home</StyledLink>
-          </MenuItem>
-          <MenuItem>
-            <StyledLink to={"/order-resume"}>Order Resume</StyledLink>
-          </MenuItem>
-        </Menu>
+        <ul className="menu">
+          <li className="menu--list">
+            {/* <StyledLink to={"/"}>Home</StyledLink> */}
+            <Link className=" menu--link" to={"/"}>
+              Home
+            </Link>
+          </li>
+          <li className="menu--list">
+            {/* <StyledLink to={"/order-resume"}>Order Resume</StyledLink> */}
+            <Link className=" menu--link" to={"/order-resume"}>
+              Order Resume
+            </Link>
+          </li>
+        </ul>
 
-        <Block style={{ marginRight: "1rem" }}>
-          <div style={{ position: "relative" }}>
-            <Link to={"/waiter/order-cart"}>
+        <div className="navbar--block">
+          <div className="cart--Container">
+            <Link className=" menu--link" to={"/waiter/order-cart"}>
               <ShoppingCart fill="#fff" width={30} />
-              <NumberCart>3</NumberCart>
+              <span className="cart--counter">3</span>
             </Link>
           </div>
           <div style={{ marginLeft: "15px" }}>
-            <UserContainer>
+            <div className="user--container">
               <Waiter width={30} />
               {/* <Chef width={30} /> */}
-            </UserContainer>
+            </div>
           </div>
-        </Block>
-      </Wrapper>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default NavBarChef;
 
-export const SideBar = () => {
-  return (
-    <>
-      <DropdownContainer>
-        <DropdownHeader>
-          {/* <span onClick={() => setOpen(false)}> */}
-          {/* <X width={15} height={15} /> */}
-          {/* <X width={25} rotate="45deg" /> */}
-          {/* </span> */}
-        </DropdownHeader>
+// export const SideBar = () => {
+//   return (
+//     <>
+//       <DropdownContainer>
+//         <DropdownHeader>
+//           {/* <span onClick={() => setOpen(false)}> */}
+//           {/* <X width={15} height={15} /> */}
+//           {/* <X width={25} rotate="45deg" /> */}
+//           {/* </span> */}
+//         </DropdownHeader>
 
-        <DropdownMenu>
-          <DropdownItem>
-            <StyledLinkDropdown to={"/"}>Home</StyledLinkDropdown>
-          </DropdownItem>
-          <DropdownItem>
-            <StyledLinkDropdown to={"/"}>Take Order</StyledLinkDropdown>
-          </DropdownItem>
-          <DropdownItem>
-            <StyledLinkDropdown to={"/order-resume"}>
-              Order Resume
-            </StyledLinkDropdown>
-          </DropdownItem>
-          <DropdownItem>
-            <button>Logout</button>
-            {/* <button onClick={handleLogout}>Logout</button> */}
-          </DropdownItem>
-        </DropdownMenu>
-      </DropdownContainer>
-    </>
-  );
-};
+//         <DropdownMenu>
+//           <DropdownItem>
+//             <StyledLinkDropdown to={"/"}>Home</StyledLinkDropdown>
+//           </DropdownItem>
+//           <DropdownItem>
+//             <StyledLinkDropdown to={"/"}>Take Order</StyledLinkDropdown>
+//           </DropdownItem>
+//           <DropdownItem>
+//             <StyledLinkDropdown to={"/order-resume"}>
+//               Order Resume
+//             </StyledLinkDropdown>
+//           </DropdownItem>
+//           <DropdownItem>
+//             <button>Logout</button>
+//             {/* <button onClick={handleLogout}>Logout</button> */}
+//           </DropdownItem>
+//         </DropdownMenu>
+//       </DropdownContainer>
+//     </>
+//   );
+// };

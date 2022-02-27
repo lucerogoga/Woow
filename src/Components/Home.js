@@ -5,7 +5,6 @@ import iconComponents from "../Assets/CustomLogo";
 import { useEffect, useState } from "react";
 import "../Assets/Home.css";
 import { useAuth } from "./Context/AuthContext";
-import NavBar from "./NavBar";
 import NavBar2 from "./NavBar2";
 import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
