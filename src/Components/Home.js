@@ -1,10 +1,11 @@
-import ProductCart from "./ProductCard";
-import ButtonFilter from "./ButtonFilter";
+import React, { useEffect, useState } from "react";
 import iconComponents from "../Assets/CustomLogo";
-import { useEffect, useState } from "react";
-import "../Assets/Home.css";
 import { useAuth } from "./Context/AuthContext";
 import NavBar from "./NavBar";
+import Search from "./Search";
+import ProductCart from "./ProductCard";
+import ButtonFilter from "./ButtonFilter";
+import "../Assets/Home.css";
 import { Link } from "react-router-dom";
 import {
   getProducts,
@@ -58,7 +59,7 @@ export const Home = () => {
           </Link>
         </li>
       </NavBar>
-
+      <Search></Search>
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
 
