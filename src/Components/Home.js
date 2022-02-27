@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import iconComponents from "../Assets/CustomLogo";
 import { useAuth } from "./Context/AuthContext";
 import NavBar from "./NavBar";
@@ -59,7 +59,7 @@ export const Home = () => {
           </Link>
         </li>
       </NavBar>
-      <Search></Search>
+      <Search onChange="handleSearch"></Search>
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
 

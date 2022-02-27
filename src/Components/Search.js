@@ -6,11 +6,13 @@ const Search = () => {
 
   const searchProduct = async () => {
     const products = await getProducts();
-    return products.includes({ product_name: searchField });
+    const product = products.find({ product_name: searchField });
+    console.log(product);
+    debugger;
+    return product;
   };
 
   const handleChange = (e) => {
-    setSearchField(e.target.value);
     searchProduct();
   };
   return (
@@ -20,8 +22,14 @@ const Search = () => {
           className="search-input"
           type="search"
           placeholder="Search Product"
-          onChange={handleChange}
+          onChange={(ev) => {
+            setSearchField(ev.target.value);
+            handleChange();
+          }}
         />
+        <label id="btn-buscar" className="input-btn" for="">
+          <span className="icon-search-svgrepo-com"></span>
+        </label>
       </div>
     </>
   );
