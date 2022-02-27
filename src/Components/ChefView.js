@@ -16,6 +16,10 @@ import React from "react";
 // import NavBarChef from "./NavBarChef";
 // import NavBarChef, SideBar  from "./NavBarChef";
 import { NavBarChef, SideBar } from "./NavBarChef";
+import { RoleComponent } from "./ProtectedRoutes";
+import { Routes, Route } from "react-router-dom";
+import MainView from "./Pages/MainView";
+// import {MainView}
 // !-----------------------------------
 
 // import {
@@ -28,7 +32,22 @@ export const ChefView = () => {
   return (
     <>
       <NavBarChef />
-      <SideBar />
+      <div>
+        <SideBar />
+        <div className="content">
+          <Routes>
+            <Route
+              path="/chef"
+              element={
+                <RoleComponent role="chef">
+                  <MainView />
+                </RoleComponent>
+              }
+            ></Route>
+          </Routes>
+        </div>
+        {/* <MainView /> */}
+      </div>
     </>
   );
 };

@@ -35,13 +35,11 @@ export const NavBarChef = () => {
 
         <ul className="menu">
           <li className="menu--list">
-            {/* <StyledLink to={"/"}>Home</StyledLink> */}
             <Link className="menu--link" to={"/"}>
               Home
             </Link>
           </li>
           <li className="menu--list">
-            {/* <StyledLink to={"/order-resume"}>Order Resume</StyledLink> */}
             <Link className="menu--link" to={"/order-resume"}>
               Order Resume
             </Link>
