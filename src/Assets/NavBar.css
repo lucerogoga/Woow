@@ -1,3 +1,4 @@
+/* ! ---------------------NAVBAR-------------------- */
 .navbar {
   width: 100%;
   height: 70px;
@@ -18,6 +19,7 @@
   margin-left: "1rem";
 }
 
+/* ! ---------------------BURGER ICON-------------------- */
 .navbar--burger-container {
   display: none;
 }
@@ -27,6 +29,7 @@
   margin-right: 0.5rem;
 }
 
+/* ! ---------------------LOGO-------------------- */
 .logo-container {
   margin-left: 0.5rem;
   display: flex;
@@ -41,6 +44,7 @@
   width: 10;
 }
 
+/* ! ---------------------MENU OF LINKS-------------------- */
 .menu {
   height: 100%;
   display: flex;
@@ -75,6 +79,7 @@
   transition: 0.5 all ease;
 }
 
+/* ! ---------------------CART-------------------- */
 .cart--container {
   position: relative;
   /* background-color: red; */
@@ -96,6 +101,7 @@
   font-size: 1rem;
 }
 
+/* ! ---------------------USER PHOTO-------------------- */
 .user--container {
   background-color: #ff9aa3;
   display: flex;
@@ -111,7 +117,7 @@
   fill: #fff;
 }
 
-/* ! ---------------------QUERIES-------------------- */
+/* ! ---------------------MEDIA QUERIES-------------------- */
 
 @media only screen and (max-width: 768px) {
   .navbar--burger-container {
