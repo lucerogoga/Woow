@@ -90,3 +90,20 @@ body {
 .login--submit:hover {
   background-color: #fecc68;
 }
+
+@media (min-width: 1200px) {
+  .login {
+    background-image: url("./background.png");
+    align-items: end;
+    padding-right: 5%;
+  }
+  .login--logo {
+    width: 25%;
+    margin-right: 10%;
+  }
+  .login--form {
+    width: 50%;
+    justify-content: end;
+    align-items: end;
+  }
+}
