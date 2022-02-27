@@ -3,7 +3,6 @@ import { useAuth } from "./Context/AuthContext";
 import { useRol, RolProvider } from "./Context/RolContex";
 
 function hasPermission(userRole, routeRole) {
-  debugger;
   if (userRole === "admin") return true;
   return userRole === routeRole;
 }
@@ -23,7 +22,6 @@ export const RoleProtectedRouter = ({ children, role }) => {
   console.log(userRole);
   if (!hasPermission(userRole, role)) {
     if (userRole === "chef") {
-      debugger;
       return <Navigate to="/chef" />;
     } else {
       return <Navigate to="/waiter" />;
