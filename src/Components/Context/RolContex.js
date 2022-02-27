@@ -1,7 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import { getUser } from "./FirestoreContext";
-
+import { ReactComponent as Spinner } from "../../Assets/icons/Spinner.svg";
 const rolContext = createContext();
 export const useRol = () => useContext(rolContext);
 
@@ -27,6 +27,6 @@ export const RolProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  if (loading) return <h1> Cargando rol...</h1>;
+  if (loading) return <Spinner />;
   return <rolContext.Provider value={userRole}>{children}</rolContext.Provider>;
 };
