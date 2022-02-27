@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import "../Assets/Home.css";
-import "../Assets/ChefView.css";
+import "../Assets/NavBar.css";
+// import "../Assets/ChefView.css";
 import LogoWoowRotate from "./LogoWoow";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 // import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
@@ -13,11 +14,11 @@ import { Link } from "react-router-dom";
 
 const NavBarChef = () => {
   const [open, setOpen] = useState(false);
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();
 
-  const handleLogout = async () => {
-    await logout();
-  };
+  // const handleLogout = async () => {
+  //   await logout();
+  // };
 
   return (
     <div className="navbar">
@@ -48,11 +49,11 @@ const NavBarChef = () => {
         </ul>
 
         <div className="navbar--block">
-          <div className="cart--Container">
-            <Link className=" menu--link" to={"/waiter/order-cart"}>
-              <ShoppingCart fill="#fff" width={30} />
-              <span className="cart--counter">3</span>
-            </Link>
+          <div className="cart--container">
+            {/* <Link className="menu--link" to={"/waiter/order-cart"}> */}
+            <ShoppingCart fill="#fff" width={30} />
+            <span className="cart--counter">3</span>
+            {/* </Link> */}
           </div>
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">

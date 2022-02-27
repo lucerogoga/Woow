@@ -17,11 +17,11 @@ import NavBarChef from "./NavBarChef";
 // import NavBarChef, { SideBar } from "./NavBarChef";
 // !-----------------------------------
 
-import {
-  getProducts,
-  getProductsCategories,
-  filterProductByCategorie,
-} from "./Context/FirestoreContext";
+// import {
+//   getProducts,
+//   getProductsCategories,
+//   filterProductByCategorie,
+// } from "./Context/FirestoreContext";
 
 export const ChefView = () => {
   return (
