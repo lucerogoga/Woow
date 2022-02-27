@@ -16,6 +16,7 @@ import {
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
+  const [searchField, setSearchField] = useState("");
   const { user, logout } = useAuth();
 
   console.log("estamos en el HOME, ", user);
@@ -34,6 +35,15 @@ export const Home = () => {
     handleCategorie(cat_uid, cat_name).then((items) => {
       setProducts(items);
     });
+  };
+  const handleSearch = async (query) => {
+    const products = await getProducts();
+    const product = products.filter((elem) => {
+      return elem.product_name.toLowerCase().includes(query.toLowerCase());
+    });
+    // console.log(product);
+    setProducts(product);
+    return product;
   };
   return (
     <>
@@ -59,7 +69,7 @@ export const Home = () => {
           </Link>
         </li>
       </NavBar>
-      <Search onChange="handleSearch"></Search>
+      <Search onChange={handleSearch}></Search>
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
 
@@ -83,7 +93,7 @@ export const Home = () => {
       </div>
       <div className="products-container">
         {products.map((p) => {
-          return <ProductCart product={p} />;
+          return <ProductCart key={p.id} product={p} />;
         })}
       </div>
     </>
