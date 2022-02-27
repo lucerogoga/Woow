@@ -35,13 +35,13 @@ export const NavBarChef = () => {
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={"chef/orders-to-do"}>
-              Orders To Do
+            <Link className="menu--link" to={"/"}>
+              Home
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"chef/orders-delivered"}>
-              Orders Delivered
+            <Link className="menu--link" to={"/order-resume"}>
+              Order Resume
             </Link>
           </li>
         </ul>
@@ -80,13 +80,18 @@ export const SideBar = () => {
 
         <div className="sidebar--menu">
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"chef/orders-to-do"}>
-              Orders To Do
+            <Link className="sidebar--link" to={"/"}>
+              Home
             </Link>
           </div>
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"chef/orders-delivered"}>
-              Orders Delivered
+            <Link className="sidebar--link" to={"/"}>
+              Take Order
+            </Link>
+          </div>
+          <div className="sidebar--item">
+            <Link className="sidebar--link" to={"/order-resume"}>
+              Order Resume
             </Link>
           </div>
           <div className="sidebar--item">
