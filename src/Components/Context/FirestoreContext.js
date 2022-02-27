@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+//import React, { useState, createContext, useContext, useEffect } from "react";
 // import { collection, doc , getDoc, getDocs , query, where} from "firebase/firestore";
 import {
   collection,
@@ -10,7 +10,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
-import { useAuth } from "./AuthContext";
+//import { useAuth } from "./AuthContext";
 
 // const { user } = useAuth();
 

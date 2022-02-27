@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       password
     );
     console.log("credenciallllll, ", userCredential);
+    return userCredential;
   };
 
   // ! PENDIENTE
@@ -32,7 +33,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("dentro de onAuthStateCh..., ", currentUser.uid);
-      setUser({ currentUser: currentUser.uid });
+      setUser({ currentUser: currentUser?.uid });
+      // currentUser ? currentUser.uid : null
       // setUser({ currentUser });
       // setUser({ currentUser });
       setLoading(false);
@@ -40,6 +42,8 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubcribe();
   }, []);
+
+  if (loading) return <h1> Loading....</h1>;
 
   return (
     <authContext.Provider value={{ login, logout, user, loading }}>
