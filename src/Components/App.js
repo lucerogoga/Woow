@@ -5,6 +5,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
+import ChefView from "./ChefView";
 
 function App() {
   return (
@@ -60,7 +61,9 @@ function App() {
           path="/chef"
           element={
             <RoleComponent role="chef">
-              <h1>Vista de pedidos enviados por el mesero</h1>
+              <h1>
+                <ChefView />
+              </h1>
             </RoleComponent>
           }
         ></Route>

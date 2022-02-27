@@ -21,7 +21,7 @@ export const Login = () => {
       console.log("entramos a validar");
       const user = await login(loginEmail, loginPassword);
       console.log("si se pudo loguear");
-      debugger;
+      // debugger;
       const { user_rol: role } = await getUser(user.user.uid);
       if (role === "admin") navigate("/home");
       else if (role === "chef") navigate("/chef");
