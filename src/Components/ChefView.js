@@ -13,8 +13,9 @@ import React from "react";
 // import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
 // import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 // import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
-import NavBarChef from "./NavBarChef";
-// import NavBarChef, { SideBar } from "./NavBarChef";
+// import NavBarChef from "./NavBarChef";
+// import NavBarChef, SideBar  from "./NavBarChef";
+import { NavBarChef, SideBar } from "./NavBarChef";
 // !-----------------------------------
 
 // import {
@@ -27,6 +28,7 @@ export const ChefView = () => {
   return (
     <>
       <NavBarChef />
+      <SideBar />
     </>
   );
 };
