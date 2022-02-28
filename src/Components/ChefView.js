@@ -114,7 +114,7 @@ export const ChefView = () => {
     <>
       <NavBarChef />
       <div>
-        <SideBar className={open ? "showSidebar" : null} />
+        <SideBar className={open ? 'showSidebar' : null}/>
         {/* <SideBar className={open ? 'text-strike' : null}/> */}
         {/* {open && <SideBar />} */}
         <div className="content">

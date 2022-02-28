@@ -5,7 +5,7 @@ import { ReactComponent as X } from "../Assets/icons/x.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 
 import { useAuth } from "./Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
@@ -167,12 +167,12 @@ export const WaiterView = () => {
 
           <div className="sidebar--menu">
             <div className="sidebar--item">
-              <Link className="sidebar--link" to={"waiter/take-order"}>
+              <Link className="sidebar--link" to={"take-order"}>
                 Take Order
               </Link>
             </div>
             <div className="sidebar--item">
-              <Link className="sidebar--link" to={"waiter/orders-resume"}>
+              <Link className="sidebar--link" to={"orders-resume"}>
                 Orders Resume
               </Link>
             </div>
@@ -195,14 +195,17 @@ export const WaiterView = () => {
         {/* <SideBar className={open ? "text-strike" : null} /> */}
         {open && <SideBar />}
         <div className="content">
-          {/* <h1>holddda</h1> */}
-          {/* <Routes>
+          {/* <Route>
             <Route
-              path="/chef/orders-delivered"
+              path="waiter/take-order"
               render={() => <div>AAAAAAAAAAAAAAAAA</div>}
             />
-            <Route path="/orders-delivered" render={() => <div>Home</div>} />
+            <Route
+              path="waiter/orders-resume"
+              component={<h1>HOMEEEEEEEEEEEE</h1>}
+            />
           </Routes> */}
+          <Outlet />
           {/* <TakeOrder /> */}
           {/* <Table /> */}
         </div>

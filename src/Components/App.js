@@ -7,6 +7,9 @@ import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
 import ChefView from "./ChefView";
 import WaiterView from "./WaiterView";
+// -----------------------
+import OrdersResumeWaiter from "./Pages/Waiter/OrdersResumeWaiter";
+import TakeOrderWaiter from "./Pages/Waiter/TakeOrderWaiter";
 
 // function App() {
 //   return (
@@ -54,15 +57,25 @@ function App() {
               <WaiterView />
             </RoleComponent>
           }
-        ></Route>
-        <Route
+        >
+          {/* ANIDADO */}
+          <Route
+            path="orders-resume"
+            element={
+              <RoleComponent role="waiter">
+                <OrdersResumeWaiter />
+              </RoleComponent>
+            }
+          ></Route>
+        </Route>
+        {/* <Route
           path="/waiter/product-detail"
           element={
             <RoleComponent role="waiter">
               <h1>Producto Detallado</h1>
             </RoleComponent>
           }
-        ></Route>
+        ></Route> */}
         <Route
           path="/waiter/order-cart"
           element={
@@ -72,7 +85,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/waiter/order-info"
+          path="/waiter/orders-resume"
           element={
             <RoleComponent role="waiter">
               <h1>Carrito</h1>
