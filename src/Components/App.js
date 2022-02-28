@@ -5,7 +5,32 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
+import ChefView from "./ChefView";
+import WaiterView from "./WaiterView";
 
+// function App() {
+//   return (
+//     <AuthProvider>
+//       <Routes>
+//         <Route
+//           path="/home"
+//           element={
+//             <RoleComponent role="admin">
+//               <Home />
+//             </RoleComponent>
+//           }
+//         ></Route>
+
+//         {/* Waiter Views */}
+//         <Route path="/" element={<Login />}></Route>
+//         <Route path="/chef/*" element={<ChefView />}></Route>
+//         {/* <Route path="/chef" element={<ChefView />}></Route> */}
+//       </Routes>
+//     </AuthProvider>
+//   );
+// }
+
+// ! EL QUE FUNCIONA
 function App() {
   return (
     <AuthProvider>
@@ -25,7 +50,8 @@ function App() {
           path="/waiter"
           element={
             <RoleComponent role="waiter">
-              <h1>Listado de productos</h1>
+              {/* <h1>Listado de productos</h1> */}
+              <WaiterView />
             </RoleComponent>
           }
         ></Route>
@@ -60,7 +86,9 @@ function App() {
           path="/chef"
           element={
             <RoleComponent role="chef">
-              <h1>Vista de pedidos enviados por el mesero</h1>
+              <h1>
+                <ChefView />
+              </h1>
             </RoleComponent>
           }
         ></Route>
