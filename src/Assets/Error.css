@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+
+  font-size: 16px;
+  height: 100%;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.err-msg {
+  background-color: #ff4b61;
+  width: 100%;
+  position: absolute;
+  height: 3.5rem;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 10px 10px;
+  transition: all ease 0.5s;
+  /* transition: top ease 0.5s; */
+}
+/* FF4B61 */
+.err-msg--text {
+  color: #fff;
+  font-size: 1em;
+}

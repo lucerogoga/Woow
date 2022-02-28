@@ -1,0 +1,16 @@
+.observation-content {
+  margin: 0 3rem;
+  color: #283159;
+}
+.observation-title {
+  margin-bottom: 0.5rem;
+}
+.text-area-observations {
+  border: 1px solid #fecc68;
+  border-radius: 0.5rem;
+  resize: none;
+  color: #283159;
+  width: 100%;
+  padding: 0.7rem;
+  height: 5rem;
+}
