@@ -195,18 +195,8 @@ export const WaiterView = () => {
         {/* <SideBar className={open ? "text-strike" : null} /> */}
         {open && <SideBar />}
         <div className="content">
-          {/* <Route>
-            <Route
-              path="waiter/take-order"
-              render={() => <div>AAAAAAAAAAAAAAAAA</div>}
-            />
-            <Route
-              path="waiter/orders-resume"
-              component={<h1>HOMEEEEEEEEEEEE</h1>}
-            />
-          </Routes> */}
           <Outlet />
-          {/* <TakeOrder /> */}
+          <TakeOrder />
           {/* <Table /> */}
         </div>
       </div>

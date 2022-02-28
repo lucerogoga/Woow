@@ -67,6 +67,14 @@ function App() {
               </RoleComponent>
             }
           ></Route>
+          <Route
+            path="take-order"
+            element={
+              <RoleComponent role="waiter">
+                <TakeOrderWaiter />
+              </RoleComponent>
+            }
+          ></Route>
         </Route>
         {/* <Route
           path="/waiter/product-detail"

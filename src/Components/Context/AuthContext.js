@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("dentro de onAuthStateCh..., ", currentUser.uid);
       setUser({ currentUser: currentUser?.uid });
+      // setUser({ currentUser: currentUser?.uid });
       // currentUser ? currentUser.uid : null
       // setUser({ currentUser });
       // setUser({ currentUser });
