@@ -43,15 +43,7 @@ export const Home = () => {
       setProducts(items);
     });
   };
-  const handleSearch = async (query) => {
-    const products = await getProducts();
-    const product = products.filter((elem) => {
-      return elem.product_name.toLowerCase().includes(query.toLowerCase());
-    });
-    // console.log(product);
-    setProducts(product);
-    return product;
-  };
+  
   return (
     <>
       {/* <NavBar> */}
@@ -76,7 +68,7 @@ export const Home = () => {
         </Link>
       </li>
       {/* </NavBar> */}
-      <Search onChange={handleSearch}></Search>
+      
       <h1>{user.uid}</h1>
       <button onClick={handleLogout}>logout</button>
 

@@ -36,6 +36,14 @@ function App() {
         >
           {/* ANIDADO */}
           <Route
+            path=""
+            element={
+              <RoleComponent role="waiter">
+                <TakeOrderWaiter />
+              </RoleComponent>
+            }
+          ></Route>
+          <Route
             path="orders-resume"
             element={
               <RoleComponent role="waiter">

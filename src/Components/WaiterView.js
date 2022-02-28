@@ -25,6 +25,7 @@ import {
 import "../Assets/OrderCard.css";
 import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
 import { Table } from "./Tables";
+import Search from "./Search";
 {
   /* <Table /> */
 }
@@ -44,8 +45,18 @@ const TakeOrder = () => {
       setProducts(items);
     });
   };
+
+  const handleSearch = async (query) => {
+    const products = await getProducts();
+    const product = products.filter((elem) => {
+      return elem.product_name.toLowerCase().includes(query.toLowerCase());
+    });
+    setProducts(product);
+  };
+
   return (
     <>
+      <Search onChange={handleSearch}></Search>
       <div className="categories-container">
         {productCategories.map((cat, i) => {
           return (
@@ -65,31 +76,6 @@ const TakeOrder = () => {
         })}
       </div>
       <div className="products-container">
-        <div className="order-card">
-          <div className="order-card--header">
-            <div className="order-card--info-container">
-              <div className="order-card--titles-container">
-                <h3 className="order-card--info-title">Order N°:</h3>
-                <h3 className="order-card--info-title">Client:</h3>
-                <h3 className="order-card--info-title">Chef:</h3>
-                <h3 className="order-card--info-title">Table N°:</h3>
-              </div>
-              <div className="order-card--infos-container">
-                <div className="order-card--info-p">000036</div>
-                <div className="order-card--info-p">Mariana Rodriguez</div>
-                <div className="order-card--info-p">Pancho Hernandez</div>
-                <div className="order-card--info-p">1</div>
-              </div>
-            </div>
-            <div className="order-card--right-container">
-              <div className="order-cart--containertime">
-                {/* <Clock className="order-cart--clock" /> */}
-                <Clock className="order-cart--clock" width={16} height={16} />
-                <h3 className="order-cart--minutes">00:30:00</h3>
-              </div>
-            </div>
-          </div>
-        </div>
         {products.map((p) => {
           return <ProductCart product={p} />;
         })}
@@ -196,7 +182,7 @@ export const WaiterView = () => {
         {open && <SideBar />}
         <div className="content">
           <Outlet />
-          <TakeOrder />
+          {/* <TakeOrder /> */}
           {/* <Table /> */}
         </div>
       </div>
@@ -205,27 +191,3 @@ export const WaiterView = () => {
 };
 
 export default WaiterView;
-
-// export const WaiterView = () => {
-//   return (
-//     <>
-//       // <NavBarChef />
-//       <div>
-//         <SideBar />
-//         <div className="content">
-//           <Routes>
-//             <Route
-//               path="/chef"
-//               element={
-//                 <RoleComponent role="chef">
-//                   <MainView />
-//                 </RoleComponent>
-//               }
-//             ></Route>
-//           </Routes>
-//         </div>
-//         {/* <MainView /> */}
-//       </div>
-//     </>
-//   );
-// };

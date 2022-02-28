@@ -85,7 +85,7 @@
 
 .sidebar--menu .sidebar--item .sidebar--link:hover,
 .sidebar--logout:hover {
-  color: #ccc;
+  color: #ff9aa3;
   background-color: 283159;
   transition: 0.5 all ease;
 }
