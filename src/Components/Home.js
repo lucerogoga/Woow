@@ -12,6 +12,7 @@ import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 
+// import Observation from "./Observations";
 import {
   getProducts,
   getProductsCategories,
@@ -101,6 +102,7 @@ export const Home = () => {
           return <ProductCart key={p.id} product={p} />;
         })}
       </div>
+      {/* <Observation /> */}
     </>
   );
 };
