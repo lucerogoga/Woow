@@ -11,8 +11,8 @@ import "../Assets/Sidebar.css";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import OrdersResumeWaiter from "./Pages/Waiter/OrdersResumeWaiter";
-import TakeOrderWaiter from "./Pages/Waiter/TakeOrderWaiter";
+import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
+import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import ProductCart from "./ProductCard";
 import ButtonFilter from "./ButtonFilter";
 import iconComponents from "../Assets/CustomLogo";
@@ -20,7 +20,7 @@ import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
-} from "./Context/FirestoreContext";
+} from "./Context/FirestoreServices";
 // ! ---------
 import "../Assets/OrderCard.css";
 import { ReactComponent as Clock } from "../Assets/icons/clock.svg";

@@ -18,7 +18,7 @@ import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
-} from "./Context/FirestoreContext";
+} from "./Context/FirestoreServices";
 
 export const Home = () => {
   const [products, setProducts] = useState([]);

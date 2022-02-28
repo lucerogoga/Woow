@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { getUser } from "./FirestoreContext";
+import { getUser } from "./FirestoreServices";
 import { ReactComponent as Spinner } from "../../Assets/icons/Spinner.svg";
 const rolContext = createContext();
 export const useRol = () => useContext(rolContext);

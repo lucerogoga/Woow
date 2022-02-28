@@ -1,5 +1,3 @@
-//import React, { useState, createContext, useContext, useEffect } from "react";
-// import { collection, doc , getDoc, getDocs , query, where} from "firebase/firestore";
 import {
   collection,
   doc,
@@ -10,9 +8,6 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
-//import { useAuth } from "./AuthContext";
-
-// const { user } = useAuth();
 
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
@@ -26,20 +21,6 @@ export const getUser = async (userId) => {
   }
   return {};
 };
-
-// export const getUser = async () => {
-//   const querySnapshot = await getDocs(collection(db, "users"));
-//   //   querySnapshot.docs.map((p) => {
-//   //   querySnapshot.map((p) => {
-//   return querySnapshot.docs.map((p) => {
-//     return {
-//       id: p.id,
-//       ...p.data(),
-//     };
-//   });
-//   //   querySnapshot.forEach((document) => console.log(document));
-//   console.log("AAAAAAAAAAAAAAAAAAAAAAA", querySnapshot);
-// };
 
 export async function getProducts() {
   const productsData = await getDocs(collection(db, "products"));
@@ -59,7 +40,6 @@ export async function getProductsCategories() {
     return {
       cat_uid: category.id,
       cat_name: category.data().cat_name,
-      //  ...category.data(),
     };
   });
 }

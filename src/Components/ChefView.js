@@ -7,11 +7,8 @@ import { useAuth } from "./Context/AuthContext";
 import { Link } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
-import OrdersToDoChef from "./Pages/Chef/OrdersToDoChef";
-import OrdersDeliveredChef from "./Pages/Chef/OrdersDeliveredChef";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 // OrdersToDoChef
 
@@ -114,7 +111,7 @@ export const ChefView = () => {
     <>
       <NavBarChef />
       <div>
-        <SideBar className={open ? 'showSidebar' : null}/>
+        <SideBar className={open ? "showSidebar" : null} />
         {/* <SideBar className={open ? 'text-strike' : null}/> */}
         {/* {open && <SideBar />} */}
         <div className="content">
