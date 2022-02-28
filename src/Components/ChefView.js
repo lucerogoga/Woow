@@ -57,6 +57,12 @@ export const ChefView = () => {
           </ul>
 
           <div className="navbar--block">
+            <div className="cart--container">
+              <Link className="menu--link" to={"/waiter/order-cart"}>
+                <ShoppingCart fill="#fff" width={30} />
+                <span className="cart--counter">3</span>
+              </Link>
+            </div>
             <div style={{ marginLeft: "15px" }}>
               <div className="user--container">
                 <Chef width={30} />
@@ -108,9 +114,9 @@ export const ChefView = () => {
     <>
       <NavBarChef />
       <div>
-        {/* <SideBar className={open ? "showSidebar" : null} /> */}
-        {/* <SideBar className={open ? "text-strike" : null} /> */}
-        {open && <SideBar />}
+        <SideBar className={open ? 'showSidebar' : null}/>
+        {/* <SideBar className={open ? 'text-strike' : null}/> */}
+        {/* {open && <SideBar />} */}
         <div className="content">
           <h1>hola</h1>
           <Routes>
