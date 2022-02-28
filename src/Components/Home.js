@@ -7,6 +7,7 @@ import ProductCart from "./ProductCard";
 import ButtonFilter from "./ButtonFilter";
 import "../Assets/Home.css";
 import { Link } from "react-router-dom";
+import Observation from "./Observations";
 import {
   getProducts,
   getProductsCategories,
@@ -96,6 +97,7 @@ export const Home = () => {
           return <ProductCart key={p.id} product={p} />;
         })}
       </div>
+      <Observation />
     </>
   );
 };
