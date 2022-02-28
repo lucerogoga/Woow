@@ -204,7 +204,7 @@ export const WaiterView = () => {
             <Route path="/orders-delivered" render={() => <div>Home</div>} />
           </Routes> */}
           {/* <TakeOrder /> */}
-          <Table />
+          {/* <Table /> */}
         </div>
       </div>
     </>
