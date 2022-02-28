@@ -1,9 +1,23 @@
-import React from "react";
-
-const Search = () => {
+import React, { useState } from "react";
+import { getProducts } from "./Context/FirestoreContext";
+import { ReactComponent as Look } from "../Assets/icons/magnifying-glass.svg";
+const Search = ({ onChange }) => {
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
   return (
     <>
-      <div>Search</div>
+      <div className="search-content">
+        <Look />
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Search Product"
+          onChange={handleChange}
+        />
+      </div>
     </>
   );
 };
+
+export default Search;

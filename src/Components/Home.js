@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Children, useEffect, useState } from "react";
+import iconComponents from "../Assets/CustomLogo";
+import { useAuth } from "./Context/AuthContext";
+// import NavBar from "./NavBar";
+import Search from "./Search";
 import ProductCart from "./ProductCard";
 import ButtonFilter from "./ButtonFilter";
-import iconComponents from "../Assets/CustomLogo";
-import { useEffect, useState } from "react";
 import "../Assets/Home.css";
-import { useAuth } from "./Context/AuthContext";
-import NavBar2 from "./NavBar2";
 import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
 import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
@@ -21,6 +21,7 @@ import {
 export const Home = () => {
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
+  const [searchField, setSearchField] = useState("");
   const { user, logout } = useAuth();
 
   console.log("estamos en el HOME, ", user);
@@ -40,9 +41,42 @@ export const Home = () => {
       setProducts(items);
     });
   };
+  const handleSearch = async (query) => {
+    const products = await getProducts();
+    const product = products.filter((elem) => {
+      return elem.product_name.toLowerCase().includes(query.toLowerCase());
+    });
+    // console.log(product);
+    setProducts(product);
+    return product;
+  };
   return (
     <>
-      <NavBar2 />
+      {/* <NavBar> */}
+      <li>
+        <Link className="navBar--link" to="/">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link className="navBar--link" to="/waiter/product-detail">
+          Product Detail
+        </Link>
+      </li>
+      <li>
+        <Link className="navBar--link" to="/chef">
+          Chef
+        </Link>
+      </li>
+      <li>
+        <Link className="navBar--link" to="/waiter/order-cart">
+          Order Cart
+        </Link>
+      </li>
+      {/* </NavBar> */}
+      <Search onChange={handleSearch}></Search>
+      <h1>{user.uid}</h1>
+      <button onClick={handleLogout}>logout</button>
 
       <div className="categories-container">
         {productCategories.map((cat, i) => {
@@ -64,7 +98,7 @@ export const Home = () => {
       </div>
       <div className="products-container">
         {products.map((p) => {
-          return <ProductCart product={p} />;
+          return <ProductCart key={p.id} product={p} />;
         })}
       </div>
     </>
