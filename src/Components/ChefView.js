@@ -57,12 +57,6 @@ export const ChefView = () => {
           </ul>
 
           <div className="navbar--block">
-            <div className="cart--container">
-              <Link className="menu--link" to={"/waiter/order-cart"}>
-                <ShoppingCart fill="#fff" width={30} />
-                <span className="cart--counter">3</span>
-              </Link>
-            </div>
             <div style={{ marginLeft: "15px" }}>
               <div className="user--container">
                 <Chef width={30} />
@@ -95,7 +89,7 @@ export const ChefView = () => {
               </Link>
             </div>
             <div className="sidebar--item">
-              <Link className="sidebar--link" to={"chef/orders-delivered"}>
+              <Link className="sidebar--link" to={"orders-delivered"}>
                 Orders Delivered
               </Link>
             </div>
@@ -114,13 +108,17 @@ export const ChefView = () => {
     <>
       <NavBarChef />
       <div>
+        {/* <SideBar className={open ? "showSidebar" : null} /> */}
+        {/* <SideBar className={open ? "text-strike" : null} /> */}
         {open && <SideBar />}
         <div className="content">
+          <h1>hola</h1>
           <Routes>
             <Route
-              path="chef/orders-delivered"
-              render={() => <div>Home</div>}
+              path="/chef/orders-delivered"
+              render={() => <div>AAAAAAAAAAAAAAAAA</div>}
             />
+            {/* <Route path="/orders-delivered" render={() => <div>Home</div>} /> */}
           </Routes>
         </div>
       </div>

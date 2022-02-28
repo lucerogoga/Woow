@@ -22,7 +22,8 @@ function App() {
 
         {/* Waiter Views */}
         <Route path="/" element={<Login />}></Route>
-        <Route path="/chef" element={<ChefView />}></Route>
+        <Route path="/chef/*" element={<ChefView />}></Route>
+        {/* <Route path="/chef" element={<ChefView />}></Route> */}
       </Routes>
     </AuthProvider>
   );

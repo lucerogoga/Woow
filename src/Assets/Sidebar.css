@@ -8,22 +8,33 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  /* transition: 0.5s showSidebar ease; */
   transition: 0.5s all ease;
   z-index: 1;
   padding: 1rem;
   background: #ffefc0;
   height: 100vh;
+  /* animation: showSidebar, hideSidebar 0.3s ease forwards; */
   animation: showSidebar 0.3s ease forwards;
 }
 
+.showSidebar {
+  left: 0;
+  /* animation: showSidebar 0.3s ease forwards; */
+}
+
 @keyframes showSidebar {
+  from {
+    left: -100%;
+  }
   to {
     left: 0;
   }
 }
 
 @keyframes hideSidebar {
+  from {
+    left: 0;
+  }
   to {
     left: -100%;
   }
