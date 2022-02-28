@@ -1,128 +1,4 @@
-// import React from "react";
-// import ProductCart from "./ProductCard";
-// import ButtonFilter from "./ButtonFilter";
-// import iconComponents from "../Assets/CustomLogo";
-// import { useEffect, useState } from "react";
-// import "../Assets/WaiterView.css";
-// import "../Assets/Home.css";
-// import { useAuth } from "./Context/AuthContext";
-// import NavBar from "./NavBar";
-// import NavBar2 from "./NavBar2";
-// import { Link } from "react-router-dom";
-// import NavItem from "./NavItem";
-// import { ReactComponent as Salad } from "../Assets/icons/salad.svg";
-// import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
-// import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
-// import NavBarChef from "./NavBarChef";
-// import NavBarChef, SideBar  from "./NavBarChef";
-// import { NavBarChef, SideBar } from "./NavBarChef";
-// import { RoleComponent } from "./ProtectedRoutes";
-// import { Routes, Route } from "react-router-dom";
-// import MainView from "./Pages/MainView";
-// import {MainView}
-// !-----------------------------------
-
-// import {
-//   getProducts,
-//   getProductsCategories,
-//   filterProductByCategorie,
-// } from "./Context/FirestoreContext";
-
-// export const WaiterView = () => {
-//   return (
-//     <>
-//       <NavBarChef />
-//       <div>
-//         <SideBar />
-//         <div className="content">
-//           <Routes>
-//             <Route
-//               path="/chef"
-//               element={
-//                 <RoleComponent role="chef">
-//                   <MainView />
-//                 </RoleComponent>
-//               }
-//             ></Route>
-//           </Routes>
-//         </div>
-//         {/* <MainView /> */}
-//       </div>
-//     </>
-//   );
-// };
-
-// return (
-//     <>
-//       <NavBarChef />
-//       {/* ----------ASIDE----------- */}
-//       {/* <main> */}
-//       <Main>{/* <SideBar /> */}</Main>
-//       <Main>
-//         <SideBar />
-//       </Main>
-//       {/* </main> */}
-//     </>
-//   );
-
-// !----------------------
-// export const WaiterView = () => {
-//   const [products, setProducts] = useState([]);
-//   const [productCategories, setProductCategories] = useState([]);
-//   const { user, logout } = useAuth();
-
-//   console.log("estamos en el WaiterView, ", user);
-//   const handleLogout = async () => {
-//     await logout();
-//   };
-//   const handleCategorie = async (catUid, catName) =>
-//     await filterProductByCategorie(catUid, catName);
-//   useEffect(() => {
-//     getProducts().then((products) => setProducts(products));
-//     getProductsCategories().then((category) => setProductCategories(category));
-//   }, []);
-
-//   const handleClick = ({ cat_uid, cat_name }) => {
-//     // console.log("consoleateeeeeeeee", e);
-//     handleCategorie(cat_uid, cat_name).then((items) => {
-//       setProducts(items);
-//     });
-//   };
-//   return (
-//     <>
-
-//   <div className="categories-container">
-//     {productCategories.map((cat, i) => {
-//       return (
-//         <ButtonFilter
-//           item={cat.cat_name}
-//           uid={cat.cat_uid}
-//           icon={iconComponents[i]}
-//           key={cat.cat_uid}
-//           // cat = {objeto}
-//           // funcion 1
-//           //funcion 2
-//           onClick={() => {
-//             handleClick(cat);
-//           }}
-//         />
-//       );
-//     })}
-//   </div>
-//   <div className="products-container">
-//     {products.map((p) => {
-//       return <ProductCart product={p} />;
-//     })}
-//   </div>
-//     </>
-//   );
-// };
-
-// export default WaiterView;
-
-// !!!---------------------
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
@@ -136,13 +12,59 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import OrdersResumeWaiter from "./Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "./Pages/Waiter/TakeOrderWaiter";
-// OrdersToDoChef
+import ProductCart from "./ProductCard";
+import ButtonFilter from "./ButtonFilter";
+import iconComponents from "../Assets/CustomLogo";
+import {
+  getProducts,
+  getProductsCategories,
+  filterProductByCategorie,
+} from "./Context/FirestoreContext";
 
-// import {
-//   getProducts,
-//   getProductsCategories,
-//   filterProductByCategorie,
-// } from "./Context/FirestoreContext";
+const TakeOrder = () => {
+  const [products, setProducts] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
+
+  const handleCategorie = async (catUid, catName) =>
+    await filterProductByCategorie(catUid, catName);
+  useEffect(() => {
+    getProducts().then((products) => setProducts(products));
+    getProductsCategories().then((category) => setProductCategories(category));
+  }, []);
+
+  const handleClick = ({ cat_uid, cat_name }) => {
+    handleCategorie(cat_uid, cat_name).then((items) => {
+      setProducts(items);
+    });
+  };
+  return (
+    <>
+      <div className="categories-container">
+        {productCategories.map((cat, i) => {
+          return (
+            <ButtonFilter
+              item={cat.cat_name}
+              uid={cat.cat_uid}
+              icon={iconComponents[i]}
+              key={cat.cat_uid}
+              // cat = {objeto}
+              // funcion 1
+              //funcion 2
+              onClick={() => {
+                handleClick(cat);
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className="products-container">
+        {products.map((p) => {
+          return <ProductCart product={p} />;
+        })}
+      </div>
+    </>
+  );
+};
 
 export const WaiterView = () => {
   const [open, setOpen] = useState(false);
@@ -241,14 +163,15 @@ export const WaiterView = () => {
         {/* <SideBar className={open ? "text-strike" : null} /> */}
         {open && <SideBar />}
         <div className="content">
-          <h1>holddda</h1>
-          <Routes>
+          {/* <h1>holddda</h1> */}
+          {/* <Routes>
             <Route
               path="/chef/orders-delivered"
               render={() => <div>AAAAAAAAAAAAAAAAA</div>}
             />
-            {/* <Route path="/orders-delivered" render={() => <div>Home</div>} /> */}
-          </Routes>
+            <Route path="/orders-delivered" render={() => <div>Home</div>} />
+          </Routes> */}
+          <TakeOrder />
         </div>
       </div>
     </>
@@ -256,3 +179,27 @@ export const WaiterView = () => {
 };
 
 export default WaiterView;
+
+// export const WaiterView = () => {
+//   return (
+//     <>
+//       // <NavBarChef />
+//       <div>
+//         <SideBar />
+//         <div className="content">
+//           <Routes>
+//             <Route
+//               path="/chef"
+//               element={
+//                 <RoleComponent role="chef">
+//                   <MainView />
+//                 </RoleComponent>
+//               }
+//             ></Route>
+//           </Routes>
+//         </div>
+//         {/* <MainView /> */}
+//       </div>
+//     </>
+//   );
+// };
