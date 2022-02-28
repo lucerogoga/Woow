@@ -3,6 +3,7 @@ import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
+
 import { useAuth } from "./Context/AuthContext";
 import { Link } from "react-router-dom";
 import "../Assets/Navbar.css";
@@ -20,7 +21,13 @@ import {
   getProductsCategories,
   filterProductByCategorie,
 } from "./Context/FirestoreContext";
-
+// ! ---------
+import "../Assets/OrderCard.css";
+import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
+import { Table } from "./Tables";
+{
+  /* <Table /> */
+}
 const TakeOrder = () => {
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
@@ -58,6 +65,31 @@ const TakeOrder = () => {
         })}
       </div>
       <div className="products-container">
+        <div className="order-card">
+          <div className="order-card--header">
+            <div className="order-card--info-container">
+              <div className="order-card--titles-container">
+                <h3 className="order-card--info-title">Order N°:</h3>
+                <h3 className="order-card--info-title">Client:</h3>
+                <h3 className="order-card--info-title">Chef:</h3>
+                <h3 className="order-card--info-title">Table N°:</h3>
+              </div>
+              <div className="order-card--infos-container">
+                <div className="order-card--info-p">000036</div>
+                <div className="order-card--info-p">Mariana Rodriguez</div>
+                <div className="order-card--info-p">Pancho Hernandez</div>
+                <div className="order-card--info-p">1</div>
+              </div>
+            </div>
+            <div className="order-card--right-container">
+              <div className="order-cart--containertime">
+                {/* <Clock className="order-cart--clock" /> */}
+                <Clock className="order-cart--clock" width={16} height={16} />
+                <h3 className="order-cart--minutes">00:30:00</h3>
+              </div>
+            </div>
+          </div>
+        </div>
         {products.map((p) => {
           return <ProductCart product={p} />;
         })}
@@ -171,7 +203,8 @@ export const WaiterView = () => {
             />
             <Route path="/orders-delivered" render={() => <div>Home</div>} />
           </Routes> */}
-          <TakeOrder />
+          {/* <TakeOrder /> */}
+          <Table />
         </div>
       </div>
     </>
