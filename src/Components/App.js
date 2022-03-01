@@ -9,6 +9,7 @@ import ChefView from "./ChefView";
 import WaiterView from "./WaiterView";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
+import DetailProduct from "../Pages/Waiter/DetailProduct";
 
 function App() {
   return (
@@ -59,15 +60,23 @@ function App() {
               </RoleComponent>
             }
           ></Route>
+          <Route
+            path="order-cart"
+            element={
+              <RoleComponent role="waiter">
+                <h1>COMPRANDO ANDO CARRITO</h1>
+              </RoleComponent>
+            }
+          ></Route>
         </Route>
-        {/* <Route
-          path="/waiter/product-detail"
+        <Route
+          path="/waiter/detail-product"
           element={
             <RoleComponent role="waiter">
-              <h1>Producto Detallado</h1>
+              <DetailProduct />
             </RoleComponent>
           }
-        ></Route> */}
+        ></Route>
         <Route
           path="/waiter/order-cart"
           element={
