@@ -4,14 +4,35 @@ import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { app } from "../Config/initialize.js";
 // import { getAuth } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 // const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
+  let navigate = useNavigate();
+  const HandleAddToCart = () => {
+    console.log("adding product!!!!");
+    console.log(product.id);
+    console.log(product.product_options);
+
+    if (product.product_options) {
+      console.log("funciona");
+      // <Navigate to="waiter/detail-product" />;
+      // navigate("detail-product", { product });
+      navigate("detail-product", { state: product });
+      // return <Navigate to="waiter/detail-product" />;
+    } else {
+      console.log("no funciona");
+      navigate("order-cart");
+      // <Navigate to="waiter/order-cart" />;
+      // return <Navigate to="waiter/order-cart" />;
+    }
+  };
+
   return (
     <div className="product-card">
       <div className="product-card--photoContainer">
         <img
-          src={product.product_photo}
+          src={product.product_photo[0]}
           className="product-image"
           alt="product.name"
         />
@@ -26,9 +47,9 @@ export function ProductCard(props) {
           <div className="product-card--button">
             {/* Este es el span */}
             {/* <div className="product-card--buttonIcon">+</div> */}
-            <div className="product-card--buttonIcon">
+            <div onClick={HandleAddToCart} className="product-card--buttonIcon">
               {<More width={15} style={{ marginTop: "4px" }} />}
-              {/* {<More width={15} fill={"#fff"} />} */}
+              {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
             </div>
             {/* <img src={iconMore} className="buttonIcon" alt="buttonIcon" /> */}
           </div>

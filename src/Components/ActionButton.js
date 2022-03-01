@@ -1,13 +1,11 @@
 import React from "react";
-import "../Assets/Product-Detail.css";
+import "../Assets/DetailProduct.css";
 
 const LargeButton = (props) => {
   const { title } = props;
   return (
     <>
-      <div className="observation-content">
-        <button className="btn-action">{title}</button>
-      </div>
+      <button className="pink-button">{title}</button>
     </>
   );
 };

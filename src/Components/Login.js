@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "./Context/FirestoreServices";
+// import { useRol } from "./Context/RolContex";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login, user } = useAuth();
+  // const { userRole } = useRol();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,15 @@ export const Login = () => {
       setErrorMessage(e.message);
     }
   };
+
+  // ! INTENTO DE CAMBIO DE VISTAS POR ROL.
+  // if (user.currentUser && userRole === "waiter") {
+  //   return <Navigate to="/waiter" />;
+  // } else if (user.currentUser && userRole === "chef") {
+  //   return <Navigate to="/chef" />;
+  // } else if (user.currentUser && userRole === "admin") {
+  //   return <Navigate to="/admin" />;
+  // }
 
   if (user.currentUser) {
     return <Navigate to="/home" />;
