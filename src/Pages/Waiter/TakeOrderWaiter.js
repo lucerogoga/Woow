@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
+import "../../Assets/WaiterView.css";
 import ProductCart from "../../Components/ProductCard";
 import ButtonFilter from "../../Components/ButtonFilter";
 import iconComponents from "../../Assets/CustomLogo";

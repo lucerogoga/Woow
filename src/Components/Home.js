@@ -5,7 +5,7 @@ import { useAuth } from "./Context/AuthContext";
 import Search from "./Search";
 import ProductCart from "./ProductCard";
 import ButtonFilter from "./ButtonFilter";
-import "../Assets/Home.css";
+// import "../Assets/Home.css";
 import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
 import { ReactComponent as Salad } from "../Assets/icons/salad.svg";

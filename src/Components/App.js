@@ -10,6 +10,7 @@ import WaiterView from "./WaiterView";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
+import MainView from "../Pages/Admin/MainView";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           path="/home"
           element={
             <RoleComponent role="admin">
-              <Home />
+              <MainView />
             </RoleComponent>
           }
         ></Route>
