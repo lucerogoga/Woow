@@ -32,11 +32,11 @@ export const ChefView = () => {
         <div className="navbar--container">
           <div className="navbar--block">
             <div className="navbar--burger-container">
-              <MenuBurger width={30} onClick={() => setOpen(!open)} />
+              <MenuBurger width={30} onClick={() => setOpen(true)} />
             </div>
 
             <div className="logo-container">
-              <LogoWoow width="70" height="70" />
+              <LogoWoow width={70} height={70} />
             </div>
           </div>
 
@@ -114,16 +114,7 @@ export const ChefView = () => {
         <SideBar className={open ? "showSidebar" : null} />
         {/* <SideBar className={open ? 'text-strike' : null}/> */}
         {/* {open && <SideBar />} */}
-        <div className="content">
-          <h1>hola</h1>
-          <Routes>
-            <Route
-              path="/chef/orders-delivered"
-              render={() => <div>AAAAAAAAAAAAAAAAA</div>}
-            />
-            {/* <Route path="/orders-delivered" render={() => <div>Home</div>} /> */}
-          </Routes>
-        </div>
+        <div className="content"></div>
       </div>
     </>
   );
