@@ -22,7 +22,12 @@
 
 /* ! ---------------------BURGER ICON-------------------- */
 .navbar--burger-container {
-  display: none;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  height: 100%;
 }
 
 .navbar--burger-container path {
@@ -48,7 +53,8 @@
 /* ! ---------------------MENU OF LINKS-------------------- */
 .menu {
   height: 100%;
-  display: flex;
+
+  display: none;
   justify-content: space-between;
   list-style: none;
   margin-left: 30px;
@@ -120,7 +126,9 @@
 
 /* ! ---------------------MEDIA QUERIES-------------------- */
 
-@media only screen and (max-width: 768px) {
+/* mobile */
+/* @media only screen and (min-width: 768px) { */
+/* @media (max-width: 768px) {
   .navbar--burger-container {
     align-items: center;
     cursor: pointer;
@@ -132,5 +140,16 @@
 
   .menu {
     display: none;
+  }
+} */
+
+/* ! Desktop */
+@media (min-width: 900px) {
+  .navbar--burger-container {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
   }
 }

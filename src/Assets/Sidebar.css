@@ -109,7 +109,11 @@
 }
 
 /* ! ---------------------MEDIA QUERIES-------------------- */
-@media (min-width: 768px) {
+
+
+
+/* tablet */
+@media (min-width: 900px) {
   .sidebar {
     display: none;
   }
