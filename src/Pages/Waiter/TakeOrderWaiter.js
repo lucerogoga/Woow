@@ -12,8 +12,15 @@ import {
   getOrderStatus,
 } from "../../Components/Context/FirestoreServices";
 import Search from "../../Components/Search";
+// !PRUEBA ----------------
+import { CartState } from "../../Components/Context/OrderContext";
+
+// !PRUEBA ----------------
 
 const TakeOrderWaiter = () => {
+  const { state } = CartState();
+  console.log("mira mis productos, ", state);
+  // !PRUEBA ----------------
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
   const [ordersStatus, setOrderStatus] = useState([]);
@@ -26,6 +33,7 @@ const TakeOrderWaiter = () => {
     getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
   }, []);
 
+  console.log("DESDE TAKE ORDER WAITER , ", products);
   const handleClick = ({ cat_uid, cat_name }) => {
     handleCategorie(cat_uid, cat_name).then((items) => {
       setProducts(items);
