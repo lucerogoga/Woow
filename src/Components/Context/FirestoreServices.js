@@ -9,6 +9,17 @@ import {
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
 
+export const getOrderStatus = async () => {
+  const productsData = await getDocs(collection(db, "order_status"));
+  return productsData.docs.map((p) => {
+    return {
+      id: p.id,
+      ...p.data(),
+    };
+  });
+};
+
+
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
 

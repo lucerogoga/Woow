@@ -9,18 +9,21 @@ import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
+  getOrderStatus,
 } from "../../Components/Context/FirestoreServices";
 import Search from "../../Components/Search";
 
 const TakeOrderWaiter = () => {
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
+  const [ordersStatus, setOrderStatus] = useState([]);
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
   useEffect(() => {
     getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
+    getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {
@@ -60,6 +63,11 @@ const TakeOrderWaiter = () => {
       <div className="products-container">
         {products.map((p) => {
           return <ProductCart product={p} />;
+        })}
+      </div>
+      <div className="products-container">
+        {ordersStatus.map((p) => {
+          return <div>{p.status_name}</div>;
         })}
       </div>
     </>

@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     signOut(auth);
   };
 
+  // ! No entiendo por qué esto funciona bien
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log("dentro de onAuthStateCh..., ", currentUser.uid);
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       // currentUser ? currentUser.uid : null
       // setUser({ currentUser });
       // setUser({ currentUser });
+      // ! ni entiendo el set loading
       setLoading(false);
     });
 
