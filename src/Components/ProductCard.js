@@ -16,22 +16,19 @@ export function ProductCard(props) {
   const { cart, setCart } = useCart();
   let navigate = useNavigate();
   const HandleAddToCart = () => {
-    // console.log("adding product!!!!");
-    // console.log(product.id);
-    // console.log(product.product_options);
-
     if (product.product_options) {
-      console.log("funciona");
-      // <Navigate to="waiter/detail-product" />;
-      // navigate("detail-product", { product });
       navigate("detail-product", { state: product });
-      // return <Navigate to="waiter/detail-product" />;
     } else {
-      console.log("esto eslo que tengo actual en mi carrito ", cart);
-      // setCart([...cart, product]);
-      // setCart(product);
-      // setCart([...cart, product]);
-      setCart((cart) => [...cart, product]);
+      const exist = cart.find((x) => x.id === product.id);
+      if (exist) {
+        setCart(
+          cart.map((x) =>
+            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          )
+        );
+      } else {
+        setCart((cart) => [...cart, { ...product, qty: 1 }]);
+      }
       navigate("order-cart");
       // <Navigate to="waiter/order-cart" />;
       // return <Navigate to="waiter/order-cart" />;
