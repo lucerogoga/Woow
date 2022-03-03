@@ -1,5 +1,9 @@
-import "../Assets/ProductCard.css";
+import React, { useState } from "react";
+import "../Assets/ProductAddedCart.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
+import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
+import { ReactComponent as X } from "../Assets/icons/x.svg";
+
 // import { iconMore } from "../Assets/icons/more.svg";
 import { app } from "../Config/initialize.js";
 // import { getAuth } from "firebase/auth";
@@ -12,6 +16,9 @@ import { useCart } from "../Components/Context/CartContext";
 export function ProductAddedCart(props) {
   const { product } = props;
   // const { setCart } = useCart();
+  const [count, setCount] = useState(1);
+
+  console.log("observaciones? , ", product.product_observation);
   // !PRUEBA ----------------
   const { cart, setCart } = useCart();
   let navigate = useNavigate();
@@ -38,30 +45,50 @@ export function ProductAddedCart(props) {
     }
   };
 
+  // console.log(product.product_observation)
+  console.log("esta es mi observación", product.product_observation);
   return (
-    <div className="product-card">
-      <div className="product-card--photoContainer">
+    <div className="productAdded-card">
+      <div className="productAdded-card--photoContainer">
         <img
           src={product.product_photo[0]}
-          className="product-image"
-          alt="product.name"
+          className="productAdded-image"
+          alt="productAdded.name"
         />
       </div>
-      <div className="product-card--textContainer">
-        <div className="product-card--text">
-          <h2 className="product-card--title"> {product.product_name}</h2>
-          <p className="product-card--descr"> {product.product_description}</p>
-          <h3 className="product-card--cost"> $ {product.product_cost}</h3>
+      <div className="productAdded-card--textContainer">
+        <div className="productAdded-card--text">
+          <h2 className="productAdded-card--title"> {product.product_name}</h2>
+          <p className="productAdded-card--descr">
+            {" "}
+            {product.product_description}
+          </p>
+          <div className="productAdded-card--pinkContainer">
+            <h3 className="productAdded-card--cost-dinamic">
+              {" "}
+              $ {product.product_cost}
+            </h3>
+
+            {/* ! NO FUNCIONA */}
+
+            {product.product_observation && (
+              <Eye fill="#fff" width={30} className="product-card--eye" />
+            )}
+            {/* <Eye fill="#fff" width={30} className="product-card--eye" /> */}
+            {/* <Eye className="product-card--eye"/> */}
+          </div>
         </div>
-        <div className="product-card--buttonContainer">
-          <div className="product-card--button">
-            {/* Este es el span */}
-            {/* <div className="product-card--buttonIcon">+</div> */}
-            {/* <div onClick={HandleAddToCart} className="product-card--buttonIcon"> */}
-            {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
-            {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
+        <div className="productAdded-card--buttonContainer">
+          <div className="productAdded-card--button-counter">
+            {/* <div className="productAdded-cart"> */}
+            <button className="productAdded-card--buttonCounter">+</button>
+            <p>{count}</p>
+            <button className="productAdded-card--buttonCounter">-</button>
             {/* </div> */}
-            {/* <img src={iconMore} className="buttonIcon" alt="buttonIcon" /> */}
+          </div>
+          <div className="productAdded-card--button">
+            {<More width={15} className="productAdded--x-icon" />}
+            {/* {<More width={15} className="productAdded--x-icon" />} */}
           </div>
         </div>
       </div>
