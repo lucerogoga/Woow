@@ -19,14 +19,13 @@ export const getOrderStatus = async () => {
   });
 };
 
-
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
 
   const docSnap = await getDoc(userRef);
 
   const usuario = docSnap.data();
-  console.log("este es el usuarioooo, ", usuario);
+  // console.log("este es el usuarioooo, ", usuario);
   if (docSnap.exists()) {
     return usuario;
   }

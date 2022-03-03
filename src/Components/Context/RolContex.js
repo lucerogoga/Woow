@@ -19,7 +19,7 @@ export const RolProvider = ({ children }) => {
         // const resultado = await getUser(user.currentUser);
         // console.log("resuuuuuuuuul", resultado);
         const { user_rol } = await getUser(currentUser);
-        console.log("resuuuuuuuuul", user_rol);
+        // console.log("resuuuuuuuuul", user_rol);
         setUserRole(user_rol);
       }
       setLoading(true);

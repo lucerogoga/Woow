@@ -18,9 +18,9 @@ import { CartState } from "../../Components/Context/OrderContext";
 // !PRUEBA ----------------
 
 const TakeOrderWaiter = () => {
-  const { state } = CartState();
-  console.log("mira mis productos, ", state);
+  const { state: pro } = CartState();
   // !PRUEBA ----------------
+  console.log("mira mis productos , ", pro);
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
   const [ordersStatus, setOrderStatus] = useState([]);
@@ -33,7 +33,6 @@ const TakeOrderWaiter = () => {
     getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
   }, []);
 
-  console.log("DESDE TAKE ORDER WAITER , ", products);
   const handleClick = ({ cat_uid, cat_name }) => {
     handleCategorie(cat_uid, cat_name).then((items) => {
       setProducts(items);
@@ -47,6 +46,7 @@ const TakeOrderWaiter = () => {
     });
     setProducts(product);
   };
+
   return (
     <>
       <Search onChange={handleSearch}></Search>
@@ -70,14 +70,14 @@ const TakeOrderWaiter = () => {
       </div>
       <div className="products-container">
         {products.map((p) => {
-          return <ProductCart product={p} />;
+          return <ProductCart product={p} key={p.id} />;
         })}
       </div>
-      <div className="products-container">
+      {/* <div className="products-container">
         {ordersStatus.map((p) => {
           return <div>{p.status_name}</div>;
         })}
-      </div>
+      </div> */}
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { getProducts } from "./Context/FirestoreServices";
 import { ReactComponent as Look } from "../Assets/icons/magnifying-glass.svg";
 const Search = ({ onChange }) => {
   const handleChange = (e) => {

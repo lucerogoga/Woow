@@ -5,14 +5,19 @@ import { app } from "../Config/initialize.js";
 // import { getAuth } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+// !PRUEBA ----------------
+import { CartState } from "../Components/Context/OrderContext";
+
 // const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
+  // !PRUEBA ----------------
+  const { dispatch } = CartState();
   let navigate = useNavigate();
   const HandleAddToCart = () => {
-    console.log("adding product!!!!");
-    console.log(product.id);
-    console.log(product.product_options);
+    // console.log("adding product!!!!");
+    // console.log(product.id);
+    // console.log(product.product_options);
 
     if (product.product_options) {
       console.log("funciona");
@@ -21,8 +26,8 @@ export function ProductCard(props) {
       navigate("detail-product", { state: product });
       // return <Navigate to="waiter/detail-product" />;
     } else {
-      console.log("no funciona");
-      navigate("order-cart");
+      //  navigate("order-cart");
+      dispatch({ type: "ADD-TO-CARD", payload: product });
       // <Navigate to="waiter/order-cart" />;
       // return <Navigate to="waiter/order-cart" />;
     }

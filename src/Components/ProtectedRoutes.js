@@ -19,7 +19,7 @@ export const RoleComponent = ({ children, role }) => {
 
 export const RoleProtectedRouter = ({ children, role }) => {
   const userRole = useRol();
-  console.log(userRole);
+  // console.log(userRole);
   if (!hasPermission(userRole, role)) {
     if (userRole === "chef") {
       return <Navigate to="/chef" />;
@@ -38,7 +38,7 @@ export const ProtectedRouter = ({ children }) => {
 
   // if (user === null) {
   if (!user.currentUser) {
-    console.log("que ta pasando");
+    // console.log("que ta pasando");
     return <Navigate to="/" />;
   }
 

@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
-import { Route, Routes } from "react-router-dom";
 
 // OrdersToDoChef
 
@@ -20,7 +19,7 @@ import { Route, Routes } from "react-router-dom";
 
 export const ChefView = () => {
   const [open, setOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
