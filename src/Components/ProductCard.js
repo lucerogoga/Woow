@@ -11,8 +11,6 @@ import { useCart } from "../Components/Context/CartContext";
 // const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
-  // const { setCart } = useCart();
-  // !PRUEBA ----------------
   const { cart, setCart } = useCart();
   let navigate = useNavigate();
   const HandleAddToCart = () => {

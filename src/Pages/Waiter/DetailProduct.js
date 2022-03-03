@@ -1,16 +1,68 @@
-import React from "react";
-import { Routes, Route, useParams, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
 import ButtonFilter from "../../Components/ButtonFilter";
 import { NavBarChef } from "../../Components/NavBarWaiter";
 import LargeButton from "../../Components/ActionButton";
+import { useCart } from "../../Components/Context/CartContext";
+import { useNavigate } from "react-router-dom";
+
 const DetailProduct = () => {
-  //   let { product } = useParams();
+  const { cart, setCart } = useCart();
+  let navigate = useNavigate();
+  const [size, setSize] = useState("");
+  const [observation, setObservation] = useState("");
+  const [count, setCount] = useState(1);
+  console.log(size);
   let location = useLocation();
   console.log(location.state);
   const { state } = location;
-  console.log("aaaaaaa", state.product_photo[1]);
+
+  const handleCart = () => {
+    console.log("entre a handlecart");
+    // const exist = cart.find((x) => x.id === state.id);
+    const exist = cart.find((x) => JSON.stringify(x) === JSON.stringify(state));
+    console.log(exist);
+    if (exist) {
+      setCart(
+        cart.map((x) =>
+          x.id === state.id
+            ? { ...exist, qty: count, size: size, observation: observation }
+            : x
+        )
+      );
+    } else {
+      setCart((cart) => [
+        ...cart,
+        { ...state, qty: count, size: size, observation: observation },
+      ]);
+    }
+    navigate("order-cart");
+  };
+
+  const CounterHorizontal = () => {
+    return (
+      <>
+        <div className="counter-content">
+          <button
+            className="counter-button"
+            onClick={() => setCount(count - 1)}
+          >
+            -
+          </button>
+          <p>{count}</p>
+          <button
+            className="counter-button"
+            onClick={() => setCount(count + 1)}
+          >
+            +
+          </button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <div
@@ -30,31 +82,40 @@ const DetailProduct = () => {
         </div>
         {/* white container */}
         <div className="white-container">
-          <div className="products-detail-container">
-            {state.product_options.map((cat, i) => {
-              return (
-                <ButtonFilter
-                  item={cat}
-                  //   uid={cat.cat_uid}
-                  icon={DetailProductsIcons[i]}
-                  key={cat[i]}
-                  onClick={() => {
-                    // handleClick(cat);
-                  }}
-                />
-              );
-            })}
+          <div>
+            <p className="size-title">Choice Size</p>
+            <div className="products-detail-container">
+              {state.product_options.map((op, i) => {
+                return (
+                  <ButtonFilter
+                    item={op}
+                    //   uid={op.cat_uid}
+                    icon={DetailProductsIcons[i]}
+                    key={op[i]}
+                    onClick={() => {
+                      setSize(op);
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
 
           <div className="observation-content">
             <p className="observation-title">Observations</p>
-            <textarea className="text-area-observations" type="text"></textarea>
+            <textarea
+              className="text-area-observations"
+              type="text"
+              onChange={(ev) => setObservation(ev.target.value)}
+            ></textarea>
           </div>
 
           {/* section buttons */}
-
-          <div >
-            <LargeButton title="Add to Cart" />
+          <div className="buttons-container">
+            <CounterHorizontal />
+            <div className="large-button--content" onClick={handleCart}>
+              <LargeButton title="Add to Cart" />
+            </div>
           </div>
         </div>
       </div>

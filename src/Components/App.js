@@ -54,14 +54,14 @@ function App() {
               </RoleComponent>
             }
           ></Route>
-          {/* <Route
-            path=""
+          <Route
+            path="/waiter/detail-product/order-cart"
             element={
               <RoleComponent role="waiter">
-                <TakeOrderWaiter />
+                <Cart />
               </RoleComponent>
             }
-          ></Route> */}
+          ></Route>
           <Route
             path="order-cart"
             element={
