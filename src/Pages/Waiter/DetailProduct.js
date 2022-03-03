@@ -21,8 +21,9 @@ const DetailProduct = () => {
 
   const handleCart = () => {
     console.log("entre a handlecart");
-    const exist = cart.find((x) => x.id === state.id);
-
+    // const exist = cart.find((x) => x.id === state.id);
+    const exist = cart.find((x) => JSON.stringify(x) === JSON.stringify(state));
+    console.log(exist);
     if (exist) {
       setCart(
         cart.map((x) =>
