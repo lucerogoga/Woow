@@ -7,7 +7,6 @@ const Error = ({ message }) => {
       <div className="err-msg">
         <h1 className="err-msg--text">{message}</h1>
       </div>
-      {/* <h1>Datos inválidos</h1> */}
     </>
   );
 };
