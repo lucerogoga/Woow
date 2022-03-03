@@ -6,13 +6,14 @@ import { app } from "../Config/initialize.js";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 // !PRUEBA ----------------
-import { CartState } from "../Components/Context/OrderContext";
+import { useCart } from "../Components/Context/CartContext";
 
 // const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
+  // const { setCart } = useCart();
   // !PRUEBA ----------------
-  const { dispatch } = CartState();
+  const { cart, setCart } = useCart();
   let navigate = useNavigate();
   const HandleAddToCart = () => {
     // console.log("adding product!!!!");
@@ -26,8 +27,12 @@ export function ProductCard(props) {
       navigate("detail-product", { state: product });
       // return <Navigate to="waiter/detail-product" />;
     } else {
-      //  navigate("order-cart");
-      dispatch({ type: "ADD-TO-CARD", payload: product });
+      console.log("esto eslo que tengo actual en mi carrito ", cart);
+      // setCart([...cart, product]);
+      // setCart(product);
+      // setCart([...cart, product]);
+      setCart((cart) => [...cart, product]);
+      navigate("order-cart");
       // <Navigate to="waiter/order-cart" />;
       // return <Navigate to="waiter/order-cart" />;
     }
