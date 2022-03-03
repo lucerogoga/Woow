@@ -153,7 +153,7 @@ export const WaiterView = () => {
 
           <div className="sidebar--menu">
             <div className="sidebar--item">
-              <Link className="sidebar--link" to={"take-order"}>
+              <Link className="sidebar--link" to={""}>
                 Take Order
               </Link>
             </div>
