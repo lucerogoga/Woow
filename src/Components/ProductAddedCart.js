@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../Components/Context/CartContext";
 
 // const auth = getAuth(app);
-export function ProductCard(props) {
+export function ProductAddedCart(props) {
   const { product } = props;
   // const { setCart } = useCart();
   // !PRUEBA ----------------
@@ -57,10 +57,10 @@ export function ProductCard(props) {
           <div className="product-card--button">
             {/* Este es el span */}
             {/* <div className="product-card--buttonIcon">+</div> */}
-            <div onClick={HandleAddToCart} className="product-card--buttonIcon">
-              {<More width={15} style={{ marginTop: "4px" }} />}
-              {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
-            </div>
+            {/* <div onClick={HandleAddToCart} className="product-card--buttonIcon"> */}
+            {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
+            {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
+            {/* </div> */}
             {/* <img src={iconMore} className="buttonIcon" alt="buttonIcon" /> */}
           </div>
         </div>
@@ -69,4 +69,4 @@ export function ProductCard(props) {
   );
 }
 
-export default ProductCard;
+export default ProductAddedCart;

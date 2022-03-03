@@ -13,14 +13,14 @@ import {
 } from "../../Components/Context/FirestoreServices";
 import Search from "../../Components/Search";
 // !PRUEBA ----------------
-import { CartState } from "../../Components/Context/OrderContext";
+// import { CartState } from "../../Components/Context/OrderContext";
 
 // !PRUEBA ----------------
 
 const TakeOrderWaiter = () => {
-  const { state: pro } = CartState();
+  // const { state: pro } = CartState();
   // !PRUEBA ----------------
-  console.log("mira mis productos , ", pro);
+  // console.log("mira mis productos , ", pro);
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
   const [ordersStatus, setOrderStatus] = useState([]);

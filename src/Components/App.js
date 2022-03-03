@@ -11,6 +11,7 @@ import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
 import MainView from "../Pages/Admin/MainView";
+import Cart from "./Cart";
 
 function App() {
   return (
@@ -65,7 +66,8 @@ function App() {
             path="order-cart"
             element={
               <RoleComponent role="waiter">
-                <h1>COMPRANDO ANDO CARRITO</h1>
+                {/* <h1>COMPRANDO ANDO CARRITO</h1> */}
+                <Cart />
               </RoleComponent>
             }
           ></Route>
