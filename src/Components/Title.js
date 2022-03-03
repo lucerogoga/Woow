@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-
+import "../Assets/Titles.css";
 const Title = (props) => {
-  const { tittle, quantity } = props;
+  const { title, quantity } = props;
   return (
-    <div>
-      <h1>{tittle}</h1>;<h2>{quantity}</h2>
+    <div className="title-container">
+      <h1>{title}</h1>
+      <div className="product-card--button">
+        <div className="product-card--buttonIcon">{quantity}</div>
+      </div>
     </div>
   );
 };
