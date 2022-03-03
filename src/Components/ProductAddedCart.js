@@ -19,27 +19,45 @@ export function ProductAddedCart(props) {
   const [count, setCount] = useState(1);
 
   console.log("observaciones? , ", product.product_observation);
+  console.log("observaciones lucero? , ", product.observation);
+
   // !PRUEBA ----------------
   const { cart, setCart } = useCart();
   let navigate = useNavigate();
-  const HandleAddToCart = () => {
-    // console.log("adding product!!!!");
-    // console.log(product.id);
-    // console.log(product.product_options);
+  const HandleRemoveFromCart = () => {
+    console.log("ahora hayyyy, ", cart);
+
+    const exist = cart.find((x) => x.id === product.id);
+
+    console.log("este existeeeee", exist);
+    console.log("son iguales?", exist.id === product.id);
+    if (exist.qty === 1) {
+      setCart(cart.filter((x) => x.id !== product.id));
+    } else {
+      setCart(
+        cart.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+
+    // setCart((cart) => [...cart, {}])
+    // cart.filter(product => product.id === )
 
     if (product.product_options) {
-      console.log("funciona");
-      // <Navigate to="waiter/detail-product" />;
-      // navigate("detail-product", { product });
-      navigate("detail-product", { state: product });
-      // return <Navigate to="waiter/detail-product" />;
+      // navigate("detail-product", { state: product });
     } else {
-      console.log("esto eslo que tengo actual en mi carrito ", cart);
-      // setCart([...cart, product]);
-      // setCart(product);
-      // setCart([...cart, product]);
-      setCart((cart) => [...cart, product]);
-      navigate("order-cart");
+      const exist = cart.find((x) => x.id === product.id);
+      if (exist) {
+        setCart(
+          cart.map((x) =>
+            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          )
+        );
+      } else {
+        setCart((cart) => [...cart, { ...product, qty: 1 }]);
+      }
+      // navigate("order-cart");
       // <Navigate to="waiter/order-cart" />;
       // return <Navigate to="waiter/order-cart" />;
     }
@@ -66,12 +84,13 @@ export function ProductAddedCart(props) {
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card--cost-dinamic">
               {" "}
-              $ {product.product_cost}
+              $ {product.product_cost * count}
             </h3>
 
             {/* ! NO FUNCIONA */}
 
-            {product.product_observation && (
+            {/* {product.product_observation && ( */}
+            {product.observation && (
               <Eye fill="#fff" width={30} className="product-card--eye" />
             )}
             {/* <Eye fill="#fff" width={30} className="product-card--eye" /> */}
@@ -81,12 +100,25 @@ export function ProductAddedCart(props) {
         <div className="productAdded-card--buttonContainer">
           <div className="productAdded-card--button-counter">
             {/* <div className="productAdded-cart"> */}
-            <button className="productAdded-card--buttonCounter">+</button>
+            <button
+              className="productAdded-card--buttonCounter"
+              onClick={() => setCount(count + 1)}
+            >
+              +
+            </button>
             <p>{count}</p>
-            <button className="productAdded-card--buttonCounter">-</button>
+            <button
+              className="productAdded-card--buttonCounter"
+              onClick={() => setCount(count - 1)}
+            >
+              -
+            </button>
             {/* </div> */}
           </div>
-          <div className="productAdded-card--button">
+          <div
+            className="productAdded-card--button"
+            onClick={HandleRemoveFromCart}
+          >
             {<More width={15} className="productAdded--x-icon" />}
             {/* {<More width={15} className="productAdded--x-icon" />} */}
           </div>
