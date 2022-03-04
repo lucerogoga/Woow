@@ -78,7 +78,7 @@ const DetailProduct = () => {
         <div className="counter-content">
           <button
             className="counter-button"
-            onClick={() => (count <= 1 ? setCount("1") : setCount(count - 1))}
+            onClick={() => (count <= 1 ? setCount(1) : setCount(count - 1))}
           >
             -
           </button>
