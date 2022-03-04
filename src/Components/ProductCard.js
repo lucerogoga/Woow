@@ -23,7 +23,13 @@ export function ProductCard(props) {
       if (exist) {
         setCart(
           cart.map((x) =>
-            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+            x.id === product.id
+              ? {
+                  ...exist,
+                  cost: product.product_cost[0] * (exist.qty + 1),
+                  qty: exist.qty + 1,
+                }
+              : x
           )
         );
       } else {
@@ -31,13 +37,15 @@ export function ProductCard(props) {
         setIdDetail(idDetail + 1);
         setCart((cart) => [
           ...cart,
-          { ...product, qty: 1, idChanges: idDetail },
+          {
+            ...product,
+            cost: product.product_cost[0],
+            qty: 1,
+            idChanges: idDetail,
+          },
         ]);
-        // { ...product, qty: 1, idChanges: `${product.id}-detail${idDetail}` },
       }
       navigate("order-cart");
-      // <Navigate to="waiter/order-cart" />;
-      // return <Navigate to="waiter/order-cart" />;
     }
   };
 
@@ -54,17 +62,13 @@ export function ProductCard(props) {
         <div className="product-card--text">
           <h2 className="product-card--title"> {product.product_name}</h2>
           <p className="product-card--descr"> {product.product_description}</p>
-          <h3 className="product-card--cost"> $ {product.product_cost}</h3>
+          <h3 className="product-card--cost"> $ {product.product_cost[0]}</h3>
         </div>
         <div className="product-card--buttonContainer">
           <div className="product-card--button">
-            {/* Este es el span */}
-            {/* <div className="product-card--buttonIcon">+</div> */}
             <div onClick={HandleAddToCart} className="product-card--buttonIcon">
               {<More width={15} style={{ marginTop: "4px" }} />}
-              {/* {<More width={15} style={{ marginTop: "4px" }} />} */}
             </div>
-            {/* <img src={iconMore} className="buttonIcon" alt="buttonIcon" /> */}
           </div>
         </div>
       </div>

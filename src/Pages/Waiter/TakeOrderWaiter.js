@@ -14,7 +14,6 @@ import {
 import Search from "../../Components/Search";
 // !PRUEBA ----------------
 // import { CartState } from "../../Components/Context/OrderContext";
-
 // !PRUEBA ----------------
 
 const TakeOrderWaiter = () => {
@@ -23,14 +22,14 @@ const TakeOrderWaiter = () => {
   // console.log("mira mis productos , ", pro);
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
-  const [ordersStatus, setOrderStatus] = useState([]);
+  //const [ordersStatus, setOrderStatus] = useState([]);
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
   useEffect(() => {
     getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
-    getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
+    // getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {

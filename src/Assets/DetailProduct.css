@@ -18,7 +18,6 @@
 .observation-content {
   color: #283159;
   font-size: 1.5rem;
-  margin: 0 4rem;
 }
 .observation-title {
   margin-bottom: 1.5rem;
@@ -26,7 +25,6 @@
 .size-title {
   color: #283159;
   font-size: 1.5rem;
-  margin: 0 4rem;
   margin-bottom: 0.5rem;
 }
 .text-area-observations {
@@ -67,7 +65,7 @@
   height: 60%;
   border-radius: 30px 30px 0 0;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 4rem;
   justify-content: space-around;
 }
 
@@ -108,12 +106,10 @@
   padding: 1.5rem;
   border-radius: 1.5rem;
   font-size: 1.5rem;
-  margin-left: 1rem;
 }
 .buttons-container {
   display: flex;
   flex-direction: row;
-  margin: 0 4rem;
 }
 .large-button--content {
   width: 100%;
@@ -129,6 +125,7 @@
   color: #283159;
   font-size: 1.5rem;
   padding: 1rem;
+  margin-right: 1rem;
 }
 .counter-button {
   border: none;
@@ -141,7 +138,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 4rem;
   font-size: 1.5rem;
   border: 1px solid #ffefc0;
   background-color: #ffefc0;
@@ -151,6 +147,7 @@
   padding: 1rem;
   height: 2rem;
   padding: 2rem;
+  margin: 1rem 0;
 }
 .price-total-cost {
   color: #ff9aa3;
