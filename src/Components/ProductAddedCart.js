@@ -28,17 +28,53 @@ export function ProductAddedCart({ cartProduct }) {
   const [count, setCount] = useState(1);
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   // const [state, dispatch] = useReducer(cartReducer, { count: 0 });
+  const { cart, setCart } = useCart();
 
   const increment = () => {
     dispatch({ type: "increment" });
+    const exist = cart.find((x) => x.idChanges);
+    setCart(
+      cart.map((x) =>
+        x.idChanges === cartProduct.idChanges
+          ? {
+              ...exist,
+              qty: state.count + 1,
+            }
+          : x
+      )
+    );
   };
 
   const decrement = () => {
     dispatch({ type: "decrement" });
+    const exist = cart.find((x) => x.idChanges);
+
+    if (state.count < 0) {
+      setCart(
+        cart.map((x) =>
+          x.idChanges === cartProduct.idChanges
+            ? {
+                ...exist,
+                qty: 0,
+              }
+            : x
+        )
+      );
+    }
+    setCart(
+      cart.map((x) =>
+        x.idChanges === cartProduct.idChanges
+          ? {
+              ...exist,
+              qty: state.count - 1,
+            }
+          : x
+      )
+    );
   };
 
   // !PRUEBA ----------------
-  const { cart, setCart } = useCart();
+
   let navigate = useNavigate();
   const HandleRemoveFromCart = () => {
     console.log("ahora hayyyy, ", cart);
@@ -109,23 +145,32 @@ export function ProductAddedCart({ cartProduct }) {
           </div>
         </div>
         <div className="productAdded-card--buttonContainer">
-          <div className="productAdded-card--button-counter">
-            {/* <div className="productAdded-cart"> */}
-            <button
-              className="productAdded-card--buttonCounter"
-              onClick={increment}
-            >
-              +
-            </button>
-            <p>{state.count}</p>
-            <button
-              className="productAdded-card--buttonCounter"
-              onClick={decrement}
-            >
-              -
-            </button>
-            {/* </div> */}
+          <div className="productAdded-card--buttonContainer">
+            <div className="productAdded-card--button-counter">
+              <button
+                className="productAdded-card--buttonCounter"
+                onClick={increment}
+              >
+                +
+              </button>
+              {/* <p>{state.count}</p> */}
+              <input
+                classList="productAdded-card--input-qty"
+                type="number"
+                min="0"
+                value={state.count}
+                // pattern="^[0-9]+"
+              ></input>
+
+              <button
+                className="productAdded-card--buttonCounter"
+                onClick={decrement}
+              >
+                -
+              </button>
+            </div>
           </div>
+
           <div
             className="productAdded-card--button"
             onClick={HandleRemoveFromCart}
@@ -140,3 +185,31 @@ export function ProductAddedCart({ cartProduct }) {
 }
 
 export default ProductAddedCart;
+
+// {
+//   /* <div className="productAdded-card--buttonContainer">
+//           <div className="productAdded-card--button-counter">
+//             <button
+//               className="productAdded-card--buttonCounter"
+//               onClick={increment}
+//             >
+//               +
+//             </button>
+//             <p>{state.count}</p>
+//           <input type="number" min="0"></input>
+
+//             <button
+//               className="productAdded-card--buttonCounter"
+//               onClick={decrement}
+//             >
+//               -
+//             </button>
+//           </div>
+//           <div
+//             className="productAdded-card--button"
+//             onClick={HandleRemoveFromCart}
+//           >
+//             {<More width={15} className="productAdded--x-icon" />}
+//           </div>
+//         </div> */
+// }
