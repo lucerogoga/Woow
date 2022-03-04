@@ -1,5 +1,6 @@
 .cart-content {
   margin: 3rem;
+  height: 85vh;
 }
 .client-info--content {
   display: flex;
@@ -23,7 +24,20 @@
   font-size: 1rem;
   margin-left: 1rem;
 }
-.footer-content {
-  position: absolute;
-  bottom: 0;
+
+.cart-product--content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 40px;
+}
+
+.cart-product--productContainer {
+  padding: 20px;
+  height: inherit;
+  overflow-x: scroll;
 }

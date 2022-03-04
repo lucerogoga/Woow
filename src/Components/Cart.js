@@ -11,7 +11,9 @@ const Cart = () => {
   const [tableNumber, setTableNumber] = useState("");
   const { cart } = useCart();
   console.log(cart);
-
+  const itemsPrice = cart.reduce((a, b) => a + b.totalCost * b.qty, 0);
+  // console.log("TOTAL , ", itemsPrice);
+  console.log("carrito actual", cart);
   const handleOrder = () => {};
   return (
     <>
@@ -36,26 +38,25 @@ const Cart = () => {
             <option value="Table 3">Table 3</option>
           </select>
         </div>
-        <div>
-          {cart.map((cartProduct) => (
-            <ProductAddedCart
-              cartProduct={cartProduct}
-              key={cartProduct.idChanges}
-            />
-          ))}
-        </div>
-        <div className="footer-content">
-          <div className="price-content">
-            <h3>Total Cost</h3>
-            <h3 className="price-total-cost">
-              $
-              {/* {cart.map((elem) => {
-              return (elem.cost += elem.cost);
-            })} */}
-            </h3>
+        <div className="cart-product--content">
+          {/* </div> */}
+          <div className="cart-product--productContainer">
+            <div></div>
+            {cart.map((cartProduct) => (
+              <ProductAddedCart
+                cartProduct={cartProduct}
+                key={cartProduct.idChanges}
+              />
+            ))}
           </div>
-          <div className="large-button--content" onClick={handleOrder}>
-            <ActionButton title="Send to Chef" />
+          <div className="footer-content">
+            <div className="price-content">
+              <h3>Total Cost</h3>
+              <h3 className="price-total-cost">$ {itemsPrice}</h3>
+            </div>
+            <div className="large-button--content" onClick={handleOrder}>
+              <ActionButton title="Send to Chef" />
+            </div>
           </div>
         </div>
       </div>
