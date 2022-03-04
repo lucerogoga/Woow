@@ -4,7 +4,7 @@ import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.sv
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 import { useAuth } from "./Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
@@ -73,6 +73,7 @@ export const ChefView = () => {
   function closeSideBar() {
     setOpen(false);
   }
+
   const SideBar = () => {
     return (
       <>
@@ -110,9 +111,10 @@ export const ChefView = () => {
     <>
       <NavBarChef />
       <div>
-        <SideBar className={open ? "showSidebar" : null} />
-        {/* <SideBar className={open ? 'text-strike' : null}/> */}
-        {/* {open && <SideBar />} */}
+        {open && <SideBar />}
+        <div className="content">
+          <Outlet />
+        </div>
         <div className="content"></div>
       </div>
     </>

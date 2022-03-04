@@ -37,7 +37,7 @@
   color: #283159;
   width: 100%;
   padding: 1rem;
-  height: 10rem;
+  height: 8rem;
 }
 
 .products-detail-container {
@@ -134,5 +134,24 @@
   border: none;
   background-color: #fff;
   font-size: 2rem;
+  color: #ff9aa3;
+}
+.price-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 4rem;
+  font-size: 1.5rem;
+  border: 1px solid #ffefc0;
+  background-color: #ffefc0;
+  border-radius: 0.5rem;
+  resize: none;
+  color: #283159;
+  padding: 1rem;
+  height: 2rem;
+  padding: 2rem;
+}
+.price-total-cost {
   color: #ff9aa3;
 }
