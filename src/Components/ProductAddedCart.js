@@ -135,8 +135,8 @@ export function ProductAddedCart({ cartProduct }) {
           </p>
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card--cost-dinamic">
-              {" "}
-              $ {cartProduct.cost * count}
+              $ {cartProduct.cost * state.count}
+              {/* $ {cartProduct.cost * count} */}
             </h3>
 
             {/* ! NO FUNCIONA */}
