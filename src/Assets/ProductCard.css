@@ -52,8 +52,8 @@ html {
 
 .product-card--button {
   background-color: #ff9aa3;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
   display: flex;
   justify-content: center;

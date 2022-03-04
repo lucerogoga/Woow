@@ -3,6 +3,7 @@ import "../Assets/ProductAddedCart.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
+import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
 
 // import { iconMore } from "../Assets/icons/more.svg";
 import { app } from "../Config/initialize.js";
@@ -29,6 +30,8 @@ export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   // const [state, dispatch] = useReducer(cartReducer, { count: 0 });
   const { cart, setCart } = useCart();
+
+  console.log("mi carro actual", cart);
 
   const increment = () => {
     dispatch({ type: "increment" });
@@ -109,6 +112,7 @@ export function ProductAddedCart({ cartProduct }) {
 
   // console.log(product.product_observation)
   console.log("esta es mi observación", cartProduct.product_observation);
+  console.log("mi producto", cartProduct.product_options);
   return (
     <div className="productAdded-card">
       <div className="productAdded-card--photoContainer">
@@ -120,18 +124,19 @@ export function ProductAddedCart({ cartProduct }) {
       </div>
       <div className="productAdded-card--textContainer">
         <div className="productAdded-card--text">
-          <h2 className="productAdded-card--title">
-            {" "}
-            {cartProduct.product_name}
-          </h2>
+          <div className="productAdded-card--title">
+            <h2 className="productAdded-card--productName">
+              {cartProduct.product_name}
+            </h2>
+            <h3 className="productAdded-card--options">16 pts</h3>
+          </div>
           <p className="productAdded-card--descr">
-            {" "}
             {cartProduct.product_description}
           </p>
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card--cost-dinamic">
-              {" "}
-              $ {cartProduct.cost * count}
+              $ {cartProduct.cost * state.count}
+              {/* $ {cartProduct.cost * count} */}
             </h3>
 
             {/* ! NO FUNCIONA */}
@@ -153,14 +158,13 @@ export function ProductAddedCart({ cartProduct }) {
               >
                 +
               </button>
-              {/* <p>{state.count}</p> */}
-              <input
+              <p>{state.count}</p>
+              {/* <input
                 classList="productAdded-card--input-qty"
                 type="number"
                 min="0"
                 value={state.count}
-                // pattern="^[0-9]+"
-              ></input>
+              ></input> */}
 
               <button
                 className="productAdded-card--buttonCounter"
@@ -171,12 +175,19 @@ export function ProductAddedCart({ cartProduct }) {
             </div>
           </div>
 
-          <div
-            className="productAdded-card--button"
-            onClick={HandleRemoveFromCart}
-          >
-            {<More width={15} className="productAdded--x-icon" />}
-            {/* {<More width={15} className="productAdded--x-icon" />} */}
+          <div className="productAdded-card--buttonsRightContainer">
+            {/* ! aqui */}
+            {/* {cartProduct.cartProduct.product_options} */}
+            <div className="productAdded-card--pencilContainer">
+              <Pencil className="productAdded-card--pencil" />
+            </div>
+            <div
+              className="productAdded-card--button"
+              onClick={HandleRemoveFromCart}
+            >
+              {<More width={15} className="productAdded--x-icon" />}
+              {/* {<More width={15} className="productAdded--x-icon" />} */}
+            </div>
           </div>
         </div>
       </div>
