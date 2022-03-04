@@ -60,7 +60,8 @@ const DetailProduct = () => {
       ...cart,
       {
         ...state,
-        cost: state.product_cost[cost] * count,
+        unitCost: state.product_cost[cost],
+        totalCost: state.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
