@@ -4,7 +4,7 @@ import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
 import ButtonFilter from "../../Components/ButtonFilter";
 import { NavBarChef } from "../../Components/NavBarWaiter";
-import LargeButton from "../../Components/ActionButton";
+import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
@@ -154,7 +154,7 @@ const DetailProduct = () => {
           <div className="buttons-container">
             <CounterHorizontal />
             <div className="large-button--content" onClick={handleCart}>
-              <LargeButton title="Add to Cart" />
+              <ActionButton title="Add to Cart" />
             </div>
           </div>
         </div>
