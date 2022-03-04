@@ -26,7 +26,8 @@ const cartReducer = (state, action) => {
 
 // const auth = getAuth(app);
 export function ProductAddedCart({ cartProduct }) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(cartProduct.qty);
+  // const [count, setCount] = useState(1);
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   // const [state, dispatch] = useReducer(cartReducer, { count: 0 });
   const { cart, setCart } = useCart();
@@ -136,6 +137,7 @@ export function ProductAddedCart({ cartProduct }) {
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card--cost-dinamic">
               $ {cartProduct.cost * state.count}
+              {/* $ {cartProduct.cost * state.count} */}
               {/* $ {cartProduct.cost * count} */}
             </h3>
 
