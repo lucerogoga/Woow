@@ -11,8 +11,11 @@ const Cart = () => {
     <>
       <Title title="Order" quantity={cart.length} />
       <div>
-        {cart.map((p) => (
-          <ProductAddedCart product={p} key={p.id} />
+        {cart.map((cartProduct) => (
+          <ProductAddedCart
+            cartProduct={cartProduct}
+            key={cartProduct.idChanges}
+          />
         ))}
       </div>
     </>

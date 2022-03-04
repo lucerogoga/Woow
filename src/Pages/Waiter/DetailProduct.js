@@ -9,7 +9,7 @@ import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 const DetailProduct = () => {
-  const { cart, setCart } = useCart();
+  const { cart, setCart, idDetail, setIdDetail } = useCart();
   let navigate = useNavigate();
   const [size, setSize] = useState("");
   const [observation, setObservation] = useState("");
@@ -19,25 +19,53 @@ const DetailProduct = () => {
   console.log(location.state);
   const { state } = location;
 
-  const handleCart = () => {
-    console.log("entre a handlecart");
+  // !-----------------------
+
+  // setCart((cart) => [
+  //   ...cart,
+  //   { ...product, qty: 1, idChanges: `${product.id}-detail${idDetail}` },
+  // ]);
+  const exist = cart.find((x) => x.idChanges);
+
+  const updateProduct = () => {
     // const exist = cart.find((x) => x.id === state.id);
-    const exist = cart.find((x) => JSON.stringify(x) === JSON.stringify(state));
+
     console.log(exist);
     if (exist) {
+      console.log("claro que existe este producto por su id");
       setCart(
         cart.map((x) =>
           x.id === state.id
-            ? { ...exist, qty: count, size: size, observation: observation }
+            ? {
+                ...exist,
+                qty: count,
+                size: size,
+                observation: observation,
+                idChanges: idDetail,
+              }
             : x
         )
       );
-    } else {
-      setCart((cart) => [
-        ...cart,
-        { ...state, qty: count, size: size, observation: observation },
-      ]);
     }
+  };
+
+  // !-----------------------
+  const handleCart = () => {
+    console.log("entre a handlecart");
+
+    setIdDetail(idDetail + 1);
+    setCart((cart) => [
+      ...cart,
+      {
+        ...state,
+        qty: count,
+        size: size,
+        observation: observation,
+        idChanges: idDetail,
+      },
+    ]);
+
+    setIdDetail(idDetail + 1);
     navigate("order-cart");
   };
 
