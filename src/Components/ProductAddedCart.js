@@ -31,6 +31,8 @@ export function ProductAddedCart({ cartProduct }) {
   // const [state, dispatch] = useReducer(cartReducer, { count: 0 });
   const { cart, setCart } = useCart();
 
+  console.log("mi carro actual", cart);
+
   const increment = () => {
     dispatch({ type: "increment" });
     const exist = cart.find((x) => x.idChanges);
