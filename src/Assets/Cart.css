@@ -1,0 +1,25 @@
+.cart-content {
+  margin: 3rem;
+}
+.client-info--content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.client--input {
+  padding: 1rem;
+  border: 1px solid #ff9aa3;
+  border-radius: 2rem;
+  font-size: 1rem;
+  width: 60%;
+}
+.table--input {
+  padding: 1rem;
+  border: 1px solid #ff9aa3;
+  border-radius: 2rem;
+  width: 40%;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
