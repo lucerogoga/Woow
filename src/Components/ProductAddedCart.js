@@ -131,7 +131,7 @@ export function ProductAddedCart({ cartProduct }) {
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card--cost-dinamic">
               {" "}
-              $ {cartProduct.product_cost * count}
+              $ {cartProduct.cost * count}
             </h3>
 
             {/* ! NO FUNCIONA */}

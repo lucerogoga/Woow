@@ -11,10 +11,12 @@ import { useNavigate } from "react-router-dom";
 const DetailProduct = () => {
   const { cart, setCart, idDetail, setIdDetail } = useCart();
   let navigate = useNavigate();
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState("12 portions");
+  const [cost, setCost] = useState(0);
   const [observation, setObservation] = useState("");
   const [count, setCount] = useState(1);
   console.log(size);
+  console.log(cost);
   let location = useLocation();
   console.log(location.state);
   const { state } = location;
@@ -58,6 +60,7 @@ const DetailProduct = () => {
       ...cart,
       {
         ...state,
+        cost: state.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
@@ -105,7 +108,9 @@ const DetailProduct = () => {
             <h2 className="product--description">
               {state.product_description}
             </h2>
-            <h2 className="product--cost">$ {state.product_cost}</h2>
+            <h2 className="product--cost">
+              Unit Price: $ {state.product_cost[cost] * count}
+            </h2>
           </div>
         </div>
         {/* white container */}
@@ -122,6 +127,7 @@ const DetailProduct = () => {
                     key={op[i]}
                     onClick={() => {
                       setSize(op);
+                      setCost(i);
                     }}
                   />
                 );
@@ -136,6 +142,12 @@ const DetailProduct = () => {
               type="text"
               onChange={(ev) => setObservation(ev.target.value)}
             ></textarea>
+          </div>
+          <div className="price-content">
+            <h3>Total Cost</h3>
+            <h3 className="price-total-cost">
+              $ {state.product_cost[cost] * count}
+            </h3>
           </div>
 
           {/* section buttons */}
