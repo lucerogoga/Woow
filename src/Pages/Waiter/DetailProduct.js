@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
@@ -43,7 +44,7 @@ const DetailProduct = () => {
                 qty: count,
                 size: size,
                 observation: observation,
-                idChanges: idDetail,
+                idChanges: uuidv4(),
               }
             : x
         )
@@ -65,7 +66,7 @@ const DetailProduct = () => {
         qty: count,
         size: size,
         observation: observation,
-        idChanges: idDetail,
+        idChanges: uuidv4(),
       },
     ]);
 
@@ -125,7 +126,7 @@ const DetailProduct = () => {
                     item={op}
                     //   uid={op.cat_uid}
                     icon={DetailProductsIcons[i]}
-                    key={op[i]}
+                    key={op}
                     onClick={() => {
                       setSize(op);
                       setCost(i);

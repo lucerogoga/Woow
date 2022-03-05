@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "../Assets/ProductCard.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 // import { iconMore } from "../Assets/icons/more.svg";
@@ -34,14 +35,14 @@ export function ProductCard(props) {
         );
       } else {
         // setCart((cart) => [...cart, { ...product, qty: 1 }]);
-        setIdDetail(idDetail + 1);
+        // setIdDetail(idDetail + 1);
         setCart((cart) => [
           ...cart,
           {
             ...product,
             cost: product.product_cost[0],
             qty: 1,
-            idChanges: idDetail,
+            idChanges: uuidv4(),
           },
         ]);
       }

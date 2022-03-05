@@ -22,12 +22,12 @@ export function ProductAddedCart({ cartProduct }) {
 
   const increment = () => {
     dispatch({ type: "increment" });
-    const exist = cart.find((x) => x.idChanges);
+    debugger;
     setCart(
       cart.map((x) =>
         x.idChanges === cartProduct.idChanges
           ? {
-              ...exist,
+              ...x,
               qty: state.count + 1,
               totalCost: cartProduct.unitCost * (state.count + 1),
             }
@@ -38,13 +38,11 @@ export function ProductAddedCart({ cartProduct }) {
 
   const decrement = () => {
     dispatch({ type: "decrement" });
-    const exist = cart.find((x) => x.idChanges);
-
     setCart(
       cart.map((x) =>
         x.idChanges === cartProduct.idChanges
           ? {
-              ...exist,
+              ...x,
               qty: state.count - 1,
               totalCost: cartProduct.unitCost * (state.count - 1),
             }
