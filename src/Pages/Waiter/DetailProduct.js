@@ -21,17 +21,9 @@ const DetailProduct = () => {
   console.log(location.state);
   const { state } = location;
 
-  // !-----------------------
-
-  // setCart((cart) => [
-  //   ...cart,
-  //   { ...product, qty: 1, idChanges: `${product.id}-detail${idDetail}` },
-  // ]);
   const exist = cart.find((x) => x.idChanges);
 
   const updateProduct = () => {
-    // const exist = cart.find((x) => x.id === state.id);
-
     console.log(exist);
     if (exist) {
       console.log("claro que existe este producto por su id");
@@ -51,7 +43,6 @@ const DetailProduct = () => {
     }
   };
 
-  // !-----------------------
   const handleCart = () => {
     console.log("entre a handlecart");
 
@@ -123,7 +114,6 @@ const DetailProduct = () => {
                 return (
                   <ButtonFilter
                     item={op}
-                    //   uid={op.cat_uid}
                     icon={DetailProductsIcons[i]}
                     key={op[i]}
                     onClick={() => {

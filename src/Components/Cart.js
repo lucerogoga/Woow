@@ -9,9 +9,18 @@ import "../Assets/Cart.css";
 const Cart = () => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
+  // const [itemsPrice, setItemsPrice] = useState(
+  //   cart.reduce((a, b) => a + b.totalCost)
+  //   );
   const { cart } = useCart();
-  console.log(cart);
-  const itemsPrice = cart.reduce((a, b) => a + b.totalCost * b.qty, 0);
+  // const [itemsPrice, setItemsPrice] = useState(cart)
+
+  // console.log(cart);
+  const itemsPrice2 = cart.reduce((a, b) => a + b.totalCost);
+  let itemsPrice = cart.reduce(function (prev, current) {
+    return prev + current.totalCost;
+  }, 0);
+  // arr.reduce((a,b) => a + b.a )
   // console.log("TOTAL , ", itemsPrice);
   console.log("carrito actual", cart);
   const handleOrder = () => {};
