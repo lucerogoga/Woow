@@ -96,7 +96,7 @@ const NavBar2 = () => {
           </div>
           <div style={{ marginLeft: "15px" }}>
             <UserContainer>
-              <Waiter width={30} />
+              <Waiter width={30} height={30} />
               {/* <Chef width={30} /> */}
             </UserContainer>
           </div>

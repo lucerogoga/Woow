@@ -109,13 +109,17 @@ export function ProductAddedCart({ cartProduct }) {
 
           <div className="productAdded-card--buttonsRightContainer">
             <div className="productAdded-card--pencilContainer">
-              <Pencil className="productAdded-card--pencil" />
+              <Pencil
+                className="productAdded-card--pencil"
+                width={30}
+                height={30}
+              />
             </div>
             <div
               className="productAdded-card--button"
               onClick={HandleRemoveFromCart}
             >
-              {<More width={15} className="productAdded--x-icon" />}
+              {<More width={15} height={15} className="productAdded--x-icon" />}
             </div>
           </div>
         </div>
