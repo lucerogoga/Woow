@@ -20,6 +20,7 @@ export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   const { cart, setCart } = useCart();
 
+  console.log("MI STATE!! , ", state);
   const increment = () => {
     dispatch({ type: "increment" });
     const exist = cart.find((x) => x.idChanges);
@@ -29,6 +30,7 @@ export function ProductAddedCart({ cartProduct }) {
           ? {
               ...exist,
               qty: state.count + 1,
+              // totalCost: cartProduct.unitCost * state.count,
               totalCost: cartProduct.unitCost * (state.count + 1),
             }
           : x
@@ -46,7 +48,7 @@ export function ProductAddedCart({ cartProduct }) {
           ? {
               ...exist,
               qty: state.count - 1,
-              totalCost: cartProduct.unitCost * (state.count - 1),
+              totalCost: cartProduct.unitCost * state.count,
             }
           : x
       )

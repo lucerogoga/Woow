@@ -86,6 +86,7 @@ const DetailProduct = () => {
     );
   };
 
+  console.log("mi pecado, ", count);
   return (
     <>
       <div
@@ -101,7 +102,7 @@ const DetailProduct = () => {
               {state.product_description}
             </h2>
             <h2 className="product--cost">
-              Unit Price: $ {state.product_cost[cost] * count}
+              Unit Price: $ {state.product_cost[cost]}
             </h2>
           </div>
         </div>
