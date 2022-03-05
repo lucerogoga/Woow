@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import "../Assets/ProductCard.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
-// import { iconMore } from "../Assets/icons/more.svg";
-import { app } from "../Config/initialize.js";
-// import { getAuth } from "firebase/auth";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-// !PRUEBA ----------------
 import { useCart } from "../Components/Context/CartContext";
 
-// const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
   const { cart, setCart, idDetail, setIdDetail } = useCart();
 
   let navigate = useNavigate();
   const HandleAddToCart = () => {
-    if (product.product_options) {
+    console.log("aiuda , ", product);
+    // if (product.product_options) {
+    /* {!cartProduct.product_options.some((option) => option === null) &&
+                "si 16 pts"} */
+    if (!product.product_options.some((option) => option === null)) {
       navigate("detail-product", { state: product });
     } else {
       const exist = cart.find((x) => x.id === product.id);
@@ -33,15 +31,20 @@ export function ProductCard(props) {
           )
         );
       } else {
-        // setCart((cart) => [...cart, { ...product, qty: 1 }]);
+        // ! el verdadero es el de abajo---------------
+        console.log("no existia el producto");
         setIdDetail(idDetail + 1);
         setCart((cart) => [
           ...cart,
           {
             ...product,
-            cost: product.product_cost[0],
+            unitCost: product.product_cost[0],
+            totalCost: product.product_cost[0],
             qty: 1,
+            size: [null],
+            observation: null,
             idChanges: idDetail,
+            // product_options
           },
         ]);
       }

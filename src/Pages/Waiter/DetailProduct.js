@@ -86,7 +86,6 @@ const DetailProduct = () => {
     );
   };
 
-  console.log("mi pecado, ", count);
   return (
     <>
       <div

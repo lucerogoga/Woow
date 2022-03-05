@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import "../Assets/ProductAddedCart.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
@@ -18,9 +18,9 @@ const cartReducer = (state, action) => {
 
 export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
+
   const { cart, setCart } = useCart();
 
-  console.log("MI STATE!! , ", state);
   const increment = () => {
     dispatch({ type: "increment" });
     const exist = cart.find((x) => x.idChanges);
@@ -77,7 +77,11 @@ export function ProductAddedCart({ cartProduct }) {
             <h2 className="productAdded-card--productName">
               {cartProduct.product_name}
             </h2>
-            <h3 className="productAdded-card--options">16 pts</h3>
+            <h3 className="productAdded-card--options">
+              OKAA
+              {/* {!cartProduct.product_options.some((option) => option === null) &&
+                "si 16 pts"} */}
+            </h3>
           </div>
           <p className="productAdded-card--descr">
             {cartProduct.product_description}

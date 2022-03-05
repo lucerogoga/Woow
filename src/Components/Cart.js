@@ -12,7 +12,8 @@ const Cart = () => {
 
   const { cart } = useCart();
 
-  const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
+  // const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
+  const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   console.log("carrito actual", cart);
   const handleOrder = () => {};
   return (
@@ -52,6 +53,7 @@ const Cart = () => {
           <div className="footer-content">
             <div className="price-content">
               <h3>Total Cost</h3>
+              {/* <h3 className="price-total-cost">$ {"prueba"}</h3> */}
               <h3 className="price-total-cost">$ {itemsPrice}</h3>
             </div>
             <div className="large-button--content" onClick={handleOrder}>

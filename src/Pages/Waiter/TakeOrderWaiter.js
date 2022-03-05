@@ -9,27 +9,18 @@ import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
-  getOrderStatus,
 } from "../../Components/Context/FirestoreServices";
 import Search from "../../Components/Search";
-// !PRUEBA ----------------
-// import { CartState } from "../../Components/Context/OrderContext";
-// !PRUEBA ----------------
 
 const TakeOrderWaiter = () => {
-  // const { state: pro } = CartState();
-  // !PRUEBA ----------------
-  // console.log("mira mis productos , ", pro);
   const [products, setProducts] = useState([]);
   const [productCategories, setProductCategories] = useState([]);
-  //const [ordersStatus, setOrderStatus] = useState([]);
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
   useEffect(() => {
     getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
-    // getOrderStatus().then((orderStatus) => setOrderStatus(orderStatus));
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {
@@ -57,9 +48,6 @@ const TakeOrderWaiter = () => {
               uid={cat.cat_uid}
               icon={iconComponents[i]}
               key={cat.cat_uid}
-              // cat = {objeto}
-              // funcion 1
-              //funcion 2
               onClick={() => {
                 handleClick(cat);
               }}
@@ -72,11 +60,6 @@ const TakeOrderWaiter = () => {
           return <ProductCart product={p} key={p.id} />;
         })}
       </div>
-      {/* <div className="products-container">
-        {ordersStatus.map((p) => {
-          return <div>{p.status_name}</div>;
-        })}
-      </div> */}
     </>
   );
 };
