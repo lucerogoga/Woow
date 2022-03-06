@@ -22,7 +22,10 @@ export const WaiterView = () => {
 
   return (
     <>
-      <NavBarWaiter onClickMenu={() => setOpen(!open)} />
+      <NavBarWaiter
+        onClickMenu={() => setOpen(!open)}
+        onClickSideBar={() => setIsSideBarCartOpen(!isSideBarCartOpen)}
+      />
       <div>
         {isSideBarCartOpen && (
           <SideBarCart onClose={(e) => setIsSideBarCartOpen(false)} />
