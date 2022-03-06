@@ -18,32 +18,21 @@ const DetailProduct = () => {
   const [count, setCount] = useState(1);
   let location = useLocation();
   const { state } = location;
-  const [prueba2, setPrueba2] = useState(state.product_cost[cost]);
-  console.log(size);
-  console.log(cost);
-  console.log(location.state);
 
-  const exist = cart.find((x) => x.idChanges);
-
-  const updateProduct = () => {
-    console.log(exist);
-    if (exist) {
-      console.log("claro que existe este producto por su id");
-      setCart(
-        cart.map((x) =>
-          x.id === state.id
-            ? {
-                ...exist,
-                qty: count,
-                size: size,
-                observation: observation,
-                idChanges: uuidv4(),
-              }
-            : x
-        )
-      );
-    }
-  };
+  // const updateProduct = (idCardProduct) => {
+  //   setCart((cart) =>
+  //     cart.map((x) =>
+  //       x.idProductCart === idCardProduct
+  //         ? {
+  //             ...x,
+  //             size: size,
+  //             observation: observation,
+  //             qty: count,
+  //           }
+  //         : x
+  //     )
+  //   );
+  // };
 
   const handleCart = () => {
     console.log("entre a handlecart");
@@ -52,13 +41,12 @@ const DetailProduct = () => {
       ...cart,
       {
         ...state,
-        // unitCost: prueba2,
+        idProductCart: uuidv4(),
         unitCost: state.product_cost[cost],
         totalCost: state.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
-        idChanges: uuidv4(),
       },
     ]);
 

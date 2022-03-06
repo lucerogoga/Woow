@@ -9,11 +9,11 @@ import "../Assets/Cart.css";
 const Cart = () => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
-
   const { cart } = useCart();
 
   // const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
+
   console.log("carrito actual", cart);
   const handleOrder = () => {};
   return (
@@ -46,7 +46,7 @@ const Cart = () => {
             {cart.map((cartProduct) => (
               <ProductAddedCart
                 cartProduct={cartProduct}
-                key={cartProduct.idChanges}
+                key={cartProduct.idProductCart}
               />
             ))}
           </div>

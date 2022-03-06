@@ -1,8 +1,12 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "../Assets/ProductAddedCart.css";
+
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+
 import { useCart } from "../Components/Context/CartContext";
 
 const cartReducer = (state, action) => {
@@ -18,48 +22,40 @@ const cartReducer = (state, action) => {
 
 export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
-  const [prueba, setPrueba] = useState(state);
-
   const { cart, setCart } = useCart();
 
-  console.log("A VER PRUEBA, ", prueba);
+  let navigate = useNavigate();
 
   const increment = () => {
     dispatch({ type: "increment" });
-    // debugger;
-    setCart(
-      cart.map((x) =>
-        x.idChanges === cartProduct.idChanges
-          ? {
-              ...x,
-              qty: state.count + 1,
-              totalCost: cartProduct.unitCost * state.count,
-              // totalCost: cartProduct.unitCost * (state.count + 1),
-            }
-          : x
-      )
-    );
   };
 
   const decrement = () => {
     dispatch({ type: "decrement" });
-    setCart(
-      cart.map((x) =>
-        x.idChanges === cartProduct.idChanges
-          ? {
-              ...x,
-              qty: state.count - 1,
-              totalCost: cartProduct.unitCost * state.count,
-            }
-          : x
-      )
-    );
   };
 
+  const { idProductCart, unitCost } = cartProduct;
+
+  useEffect(() => {
+    setCart((prevCart) => {
+      return prevCart.map((x) =>
+        x.idProductCart === idProductCart
+          ? {
+              ...x,
+              qty: state.count,
+              totalCost: unitCost * state.count,
+            }
+          : x
+      );
+    });
+  }, [state, setCart, idProductCart, unitCost]);
+
   const HandleRemoveFromCart = () => {
-    const exist = cart.find((x) => x.idChanges);
+    const exist = cart.find((x) => x.idProductCart);
     if (exist) {
-      setCart(cart.filter((x) => x.idChanges !== cartProduct.idChanges));
+      setCart(
+        cart.filter((x) => x.idProductCart !== cartProduct.idProductCart)
+      );
     }
   };
 
@@ -118,13 +114,18 @@ export function ProductAddedCart({ cartProduct }) {
           </div>
 
           <div className="productAdded-card--buttonsRightContainer">
-            <div className="productAdded-card--pencilContainer">
+            <button
+              className="productAdded-card--pencilContainer"
+              // onClick={() =>
+              //   navigate("../detail-product", { state: idProductCart })
+              // }
+            >
               <Pencil
                 className="productAdded-card--pencil"
                 width={30}
                 height={30}
               />
-            </div>
+            </button>
             <div
               className="productAdded-card--button"
               onClick={HandleRemoveFromCart}
