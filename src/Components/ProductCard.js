@@ -41,7 +41,6 @@ export function ProductCard(props) {
             idProductCart: uuidv4(),
             unitCost: product.product_cost[0],
             size: null,
-            observation: null,
             qty: 1,
             totalCost: product.product_cost[0],
           },
