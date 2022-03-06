@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import { useAuth } from "./Context/AuthContext";
-
+import { useSideBarCart } from "./Context/SideBarCartContext";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 import "../Assets/OrderCard.css";
 
 import NavBarWaiter from "../Components/NavBarWaiter";
 import SideBarWaiter from "../Components/SideBarWaiter";
+import SideBarCart from "../Components/SideBarWaiter";
 
 export const WaiterView = () => {
   const [open, setOpen] = useState(false);
+  const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
   const { logout } = useAuth();
 
   const handleLogout = async () => {
@@ -28,6 +30,7 @@ export const WaiterView = () => {
             onClickLogout={handleLogout}
           />
         )}
+        {isSideBarCartOpen && <SideBarCart onClose={(e) => setOpen(false)} />}
         <div className="content">
           <Outlet />
         </div>

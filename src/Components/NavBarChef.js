@@ -14,11 +14,6 @@ import { Link } from "react-router-dom";
 
 export const NavBarChef = () => {
   const [open, setOpen] = useState(false);
-  // const { user, logout } = useAuth();
-
-  // const handleLogout = async () => {
-  //   await logout();
-  // };
 
   return (
     <div className="navbar">
@@ -46,7 +41,7 @@ export const NavBarChef = () => {
           </li>
         </ul>
 
-        <div className="navbar--block">
+        {/* <div className="navbar--block">
           <div className="cart--container">
             <Link className="menu--link" to={"/waiter/order-cart"}>
               <ShoppingCart fill="#fff" width={30} height={30} />
@@ -59,7 +54,7 @@ export const NavBarChef = () => {
               {/* <Chef width={30} /> */}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
