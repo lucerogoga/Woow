@@ -24,6 +24,20 @@
   flex-direction: row;
   overflow-x: scroll;
 }
+
+.categories-container::-webkit-scrollbar {
+  width: 1em;
+}
+
+.categories-container::-webkit-scrollbar-thumb {
+  /* background: #ff9aa3; */
+  background: none;
+  border-radius: 100vh;
+}
+
+.categories-container::-webkit-scrollbar-thumb:hover {
+  background: #FECC68;
+}
 .button-card:hover path {
   fill: #fff;
 }

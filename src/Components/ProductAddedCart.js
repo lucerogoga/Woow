@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import "../Assets/ProductAddedCart.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
@@ -18,11 +18,16 @@ const cartReducer = (state, action) => {
 
 export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
-  const [prueba, setPrueba] = useState(state);
-
+  const [obs, setObs] = useState(false);
+  // const [size, setSize] = useState("");
   const { cart, setCart } = useCart();
 
-  console.log("A VER PRUEBA, ", prueba);
+  // console.log("A VER PRUEBA PORTONS, ", cartProduct.size.split(" ")[0]);
+  // console.log("A VER PRUEBA OBSERVACION, ", obs);
+  // if (cartProduct.size) {
+  // if (!cartProduct.size.some((option) => option === null)) {
+  // setSize(cartProduct.size);
+  // }
 
   const increment = () => {
     dispatch({ type: "increment" });
@@ -79,10 +84,9 @@ export function ProductAddedCart({ cartProduct }) {
               {cartProduct.product_name}
             </h2>
             <h3 className="productAdded-card--options">
-              {cartProduct.size && cartProduct.size}
-              {/* OKAA */}
-              {/* {!cartProduct.product_options.some((option) => option === null) &&
-                "si 16 pts"} */}
+              {/* {size && `${cartProduct.size.split(" ")[0]} pts`} */}
+              {cartProduct.size && `${cartProduct.size.split(" ")[0]} pts`}
+              {/* {cartProduct.size && cartProduct.size.split(" ")[0]} pts */}
             </h3>
           </div>
           <p className="productAdded-card--descr">
@@ -92,10 +96,36 @@ export function ProductAddedCart({ cartProduct }) {
             <h3 className="productAdded-card--cost-dinamic">
               $ {cartProduct.unitCost * state.count}
             </h3>
-
             {cartProduct.observation && (
-              <Eye fill="#fff" width={30} className="product-card--eye" />
+              <Eye
+                fill="#fff"
+                width={30}
+                className="product-card--eye"
+                // onMouseEnter={setObs(true)}
+                // onMouseLeave={setObs(false)}
+                onClick={() => setObs(!obs)}
+              />
             )}
+
+            {obs && (
+              <div className="productAdded-card--obsContainer">
+                <p className="productAdded-card--obsText">
+                  {cartProduct.observation}
+                </p>
+              </div>
+              // <div className="productAdded-card--obsContainer">
+              //   <textarea
+              //     className="productAdded-card--obsText"
+              //     value={cartProduct.observation}
+              //   ></textarea>
+              // </div>
+            )}
+            {/* <div className="productAdded-card--obsContainer">
+              <textarea
+                className="productAdded-card--obsText"
+                value={cartProduct.observation}
+              ></textarea>
+            </div> */}
           </div>
         </div>
         <div className="productAdded-card--buttonContainer">
