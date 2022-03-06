@@ -9,7 +9,7 @@ import WaiterView from "./WaiterView";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
-import MainView from "../Pages/Admin/MainView";
+import AdminView from "../Pages/Admin/AdminView";
 import Cart from "./Cart";
 import SideBarCartContext from "./Context/SideBarCartContext";
 
@@ -21,7 +21,7 @@ function App() {
           path="/home"
           element={
             <RoleComponent role="admin">
-              <MainView />
+              <AdminView />
             </RoleComponent>
           }
         />
