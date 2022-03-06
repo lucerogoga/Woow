@@ -36,16 +36,16 @@
 }
 
 .button-card:focus,
-.button-card:active {
+.button-card:active,
+.button-card.active {
   background-color: #ff9aa3;
   color: #fff;
 }
 
-.button-card:focus + path,
-.button-card:active + path {
-  /* background-color: #ff9aa3; */
-  color: red;
-  /* color: #fff; */
+.button-card:focus svg,
+.button-card:active svg,
+.button-card.active svg {
+  color: #fff;
 }
 .button-card--text-content {
   height: 20px;

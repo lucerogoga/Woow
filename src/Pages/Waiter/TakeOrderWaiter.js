@@ -14,6 +14,7 @@ import Search from "../../Components/Search";
 
 const TakeOrderWaiter = () => {
   const [products, setProducts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [productCategories, setProductCategories] = useState([]);
 
   const handleCategorie = async (catUid, catName) =>
@@ -24,6 +25,7 @@ const TakeOrderWaiter = () => {
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {
+    setSelectedCategory(cat_uid);
     handleCategorie(cat_uid, cat_name).then((items) => {
       setProducts(items);
     });
@@ -46,6 +48,7 @@ const TakeOrderWaiter = () => {
             <ButtonFilter
               item={cat.cat_name}
               uid={cat.cat_uid}
+              active={cat.cat_uid === selectedCategory}
               icon={iconComponents[i]}
               key={cat.cat_uid}
               onClick={() => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
@@ -18,38 +18,49 @@ const DetailProduct = () => {
   const [count, setCount] = useState(1);
   let location = useLocation();
   const { state } = location;
+  const { product, action } = state;
+  console.log(state);
 
-  // const updateProduct = (idCardProduct) => {
-  //   setCart((cart) =>
-  //     cart.map((x) =>
-  //       x.idProductCart === idCardProduct
-  //         ? {
-  //             ...x,
-  //             size: size,
-  //             observation: observation,
-  //             qty: count,
-  //           }
-  //         : x
-  //     )
-  //   );
-  // };
+  const updateProductCart = () => {
+    setCart((cart) =>
+      cart.map((x) =>
+        x.idProductCart === product.idProductCart
+          ? {
+              ...x,
+              unitCost: product.product_cost[cost],
+              totalCost: product.product_cost[cost] * count,
+              qty: count,
+              size: size,
+              observation: observation,
+            }
+          : x
+      )
+    );
+  };
 
-  const handleCart = () => {
-    console.log("entre a handlecart");
+  const addProductCart = () => {
+    console.log("creamos un producto en el cart");
 
     setCart((cart) => [
       ...cart,
       {
-        ...state,
+        ...product,
         idProductCart: uuidv4(),
-        unitCost: state.product_cost[cost],
-        totalCost: state.product_cost[cost] * count,
+        unitCost: product.product_cost[cost],
+        totalCost: product.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
       },
     ]);
+  };
 
+  const handleActionClick = () => {
+    if (action === "createProductCart") {
+      addProductCart();
+    } else {
+      updateProductCart();
+    }
     navigate("../waiter/order-cart");
   };
 
@@ -75,22 +86,43 @@ const DetailProduct = () => {
     );
   };
 
+  const productObservation = product.observation;
+  useEffect(() => {
+    if (productObservation) {
+      setObservation(productObservation);
+    }
+  }, [productObservation]);
+
+  const quantity = product.qty;
+  useEffect(() => {
+    if (quantity) {
+      setCount(quantity);
+    }
+  }, [quantity]);
+
+  const initialSize = product.size;
+  useEffect(() => {
+    if (initialSize) {
+      setSize(initialSize);
+    }
+  }, [initialSize]);
+
   return (
     <>
       <div
         className="image-content"
-        style={{ backgroundImage: `url(${state.product_photo[1]})` }}
+        style={{ backgroundImage: `url(${product.product_photo[1]})` }}
       >
         <NavBarWaiter />
 
         <div className="info-product-container">
           <div className="info-product-subcontainer">
-            <h1 className="product--name">{state.product_name}</h1>
+            <h1 className="product--name">{product.product_name}</h1>
             <h2 className="product--description">
-              {state.product_description}
+              {product.product_description}
             </h2>
             <h2 className="product--cost">
-              Unit Price: $ {state.product_cost[cost]}
+              Unit Price: $ {product.product_cost[cost]}
             </h2>
           </div>
         </div>
@@ -99,10 +131,11 @@ const DetailProduct = () => {
           <div>
             <p className="size-title">Choice Size</p>
             <div className="products-detail-container">
-              {state.product_options.map((op, i) => {
+              {product.product_options.map((op, i) => {
                 return (
                   <ButtonFilter
                     item={op}
+                    active={op === size}
                     icon={DetailProductsIcons[i]}
                     key={op}
                     onClick={() => {
@@ -120,21 +153,28 @@ const DetailProduct = () => {
             <textarea
               className="text-area-observations"
               type="text"
+              value={observation}
               onChange={(ev) => setObservation(ev.target.value)}
             ></textarea>
           </div>
           <div className="price-content">
             <h3>Total Cost</h3>
             <h3 className="price-total-cost">
-              $ {state.product_cost[cost] * count}
+              $ {product.product_cost[cost] * count}
             </h3>
           </div>
 
           {/* section buttons */}
           <div className="buttons-container">
             <CounterHorizontal />
-            <div className="large-button--content" onClick={handleCart}>
-              <ActionButton title="Add to Cart" />
+            <div className="large-button--content" onClick={handleActionClick}>
+              <ActionButton
+                title={
+                  action === "createProductCart"
+                    ? "Add to Cart"
+                    : "Edit Product Cart"
+                }
+              />
             </div>
           </div>
         </div>

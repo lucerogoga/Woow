@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "../Assets/ProductCard.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
-import { useNavigate } from "react-router-dom";
+
 import { useCart } from "../Components/Context/CartContext";
+import { useSideBarCart } from "./Context/SideBarCartContext";
 
 export function ProductCard(props) {
   const { product } = props;
   const { cart, setCart } = useCart();
 
+  const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+
   let navigate = useNavigate();
   const HandleAddToCart = () => {
     if (!product.product_options.some((option) => option === null)) {
-      navigate("detail-product", { state: product });
+      navigate("detail-product", {
+        state: { product: product, action: "createProductCart" },
+      });
     } else {
       const exist = cart.find((x) => x.id === product.id);
       if (exist) {
@@ -41,7 +47,8 @@ export function ProductCard(props) {
           },
         ]);
       }
-      navigate("order-cart");
+      setIsSideBarCartOpen(!isSideBarCartOpen);
+      //  navigate("order-cart");
     }
   };
 

@@ -116,9 +116,14 @@ export function ProductAddedCart({ cartProduct }) {
           <div className="productAdded-card--buttonsRightContainer">
             <button
               className="productAdded-card--pencilContainer"
-              // onClick={() =>
-              //   navigate("../detail-product", { state: idProductCart })
-              // }
+              onClick={() =>
+                navigate("../detail-product", {
+                  state: {
+                    product: cartProduct,
+                    action: "updateProductCart",
+                  },
+                })
+              }
             >
               <Pencil
                 className="productAdded-card--pencil"
