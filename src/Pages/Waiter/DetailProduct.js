@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
@@ -15,11 +16,12 @@ const DetailProduct = () => {
   const [cost, setCost] = useState(0);
   const [observation, setObservation] = useState("");
   const [count, setCount] = useState(1);
+  let location = useLocation();
+  const { state } = location;
+  const [prueba2, setPrueba2] = useState(state.product_cost[cost]);
   console.log(size);
   console.log(cost);
-  let location = useLocation();
   console.log(location.state);
-  const { state } = location;
 
   const exist = cart.find((x) => x.idChanges);
 
@@ -35,7 +37,7 @@ const DetailProduct = () => {
                 qty: count,
                 size: size,
                 observation: observation,
-                idChanges: idDetail,
+                idChanges: uuidv4(),
               }
             : x
         )
@@ -51,12 +53,13 @@ const DetailProduct = () => {
       ...cart,
       {
         ...state,
+        // unitCost: prueba2,
         unitCost: state.product_cost[cost],
         totalCost: state.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
-        idChanges: idDetail,
+        idChanges: uuidv4(),
       },
     ]);
 
@@ -115,7 +118,7 @@ const DetailProduct = () => {
                   <ButtonFilter
                     item={op}
                     icon={DetailProductsIcons[i]}
-                    key={op[i]}
+                    key={op}
                     onClick={() => {
                       setSize(op);
                       setCost(i);

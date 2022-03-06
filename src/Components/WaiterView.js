@@ -51,13 +51,13 @@ export const WaiterView = () => {
           <div className="navbar--block">
             <div className="cart--container">
               <Link className="menu--link" to={"/waiter/order-cart"}>
-                <ShoppingCart fill="#fff" width={30} />
+                <ShoppingCart fill="#fff" width={30} height={30} />
                 <span className="cart--counter">3</span>
               </Link>
             </div>
             <div style={{ marginLeft: "15px" }}>
               <div className="user--container">
-                <Waiter width={25} />
+                <Waiter width={25} height={25} />
               </div>
             </div>
           </div>

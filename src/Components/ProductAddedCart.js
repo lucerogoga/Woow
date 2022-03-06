@@ -18,20 +18,23 @@ const cartReducer = (state, action) => {
 
 export function ProductAddedCart({ cartProduct }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
+  const [prueba, setPrueba] = useState(state);
 
   const { cart, setCart } = useCart();
 
+  console.log("A VER PRUEBA, ", prueba);
+
   const increment = () => {
     dispatch({ type: "increment" });
-    const exist = cart.find((x) => x.idChanges);
+    // debugger;
     setCart(
       cart.map((x) =>
         x.idChanges === cartProduct.idChanges
           ? {
-              ...exist,
+              ...x,
               qty: state.count + 1,
-              // totalCost: cartProduct.unitCost * state.count,
-              totalCost: cartProduct.unitCost * (state.count + 1),
+              totalCost: cartProduct.unitCost * state.count,
+              // totalCost: cartProduct.unitCost * (state.count + 1),
             }
           : x
       )
@@ -40,13 +43,11 @@ export function ProductAddedCart({ cartProduct }) {
 
   const decrement = () => {
     dispatch({ type: "decrement" });
-    const exist = cart.find((x) => x.idChanges);
-
     setCart(
       cart.map((x) =>
         x.idChanges === cartProduct.idChanges
           ? {
-              ...exist,
+              ...x,
               qty: state.count - 1,
               totalCost: cartProduct.unitCost * state.count,
             }
@@ -78,7 +79,8 @@ export function ProductAddedCart({ cartProduct }) {
               {cartProduct.product_name}
             </h2>
             <h3 className="productAdded-card--options">
-              OKAA
+              {cartProduct.size && cartProduct.size}
+              {/* OKAA */}
               {/* {!cartProduct.product_options.some((option) => option === null) &&
                 "si 16 pts"} */}
             </h3>
@@ -117,13 +119,17 @@ export function ProductAddedCart({ cartProduct }) {
 
           <div className="productAdded-card--buttonsRightContainer">
             <div className="productAdded-card--pencilContainer">
-              <Pencil className="productAdded-card--pencil" />
+              <Pencil
+                className="productAdded-card--pencil"
+                width={30}
+                height={30}
+              />
             </div>
             <div
               className="productAdded-card--button"
               onClick={HandleRemoveFromCart}
             >
-              {<More width={15} className="productAdded--x-icon" />}
+              {<More width={15} height={15} className="productAdded--x-icon" />}
             </div>
           </div>
         </div>
