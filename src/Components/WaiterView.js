@@ -9,7 +9,7 @@ import "../Assets/OrderCard.css";
 
 import NavBarWaiter from "../Components/NavBarWaiter";
 import SideBarWaiter from "../Components/SideBarWaiter";
-import SideBarCart from "../Components/SideBarWaiter";
+import SideBarCart from "../Components/SideBarCart";
 
 export const WaiterView = () => {
   const [open, setOpen] = useState(false);
@@ -24,13 +24,15 @@ export const WaiterView = () => {
     <>
       <NavBarWaiter onClickMenu={() => setOpen(!open)} />
       <div>
+        {isSideBarCartOpen && (
+          <SideBarCart onClose={(e) => setIsSideBarCartOpen(false)} />
+        )}
         {open && (
           <SideBarWaiter
             onClose={(e) => setOpen(false)}
             onClickLogout={handleLogout}
           />
         )}
-        {isSideBarCartOpen && <SideBarCart onClose={(e) => setOpen(false)} />}
         <div className="content">
           <Outlet />
         </div>
