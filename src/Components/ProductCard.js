@@ -11,7 +11,11 @@ export function ProductCard(props) {
 
   let navigate = useNavigate();
   const HandleAddToCart = () => {
-    if (product.product_options) {
+    console.log("aiuda , ", product);
+    // if (product.product_options) {
+    /* {!cartProduct.product_options.some((option) => option === null) &&
+                "si 16 pts"} */
+    if (!product.product_options.some((option) => option === null)) {
       navigate("detail-product", { state: product });
     } else {
       const exist = cart.find((x) => x.id === product.id);
@@ -28,12 +32,22 @@ export function ProductCard(props) {
           )
         );
       } else {
+        // ! el verdadero es el de abajo---------------
+        // console.log("no existia el producto");
+        // setIdDetail(idDetail + 1);
+        // setCart((cart) => [...cart, { ...product, qty: 1 }]);
+        // setIdDetail(idDetail + 1);
         setCart((cart) => [
           ...cart,
           {
             ...product,
-            cost: product.product_cost[0],
+            unitCost: product.product_cost[0],
+            totalCost: product.product_cost[0],
             qty: 1,
+            size: null,
+            observation: null,
+            // idChanges: idDetail,
+            // product_options
             idChanges: uuidv4(),
           },
         ]);

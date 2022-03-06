@@ -16,40 +16,34 @@ const DetailProduct = () => {
   const [cost, setCost] = useState(0);
   const [observation, setObservation] = useState("");
   const [count, setCount] = useState(1);
+  let location = useLocation();
+  const { state } = location;
+  const [prueba2, setPrueba2] = useState(state.product_cost[cost]);
   console.log(size);
   console.log(cost);
-  let location = useLocation();
   console.log(location.state);
-  const { state } = location;
 
-  // setCart((cart) => [
-  //   ...cart,
-  //   { ...product, qty: 1, idChanges: `${product.id}-detail${idDetail}` },
-  // ]);
   const exist = cart.find((x) => x.idChanges);
 
-  // !-----------------------
-  // const updateProduct = () => {
-  //   // const exist = cart.find((x) => x.id === state.id);
-
-  //   console.log(exist);
-  //   if (exist) {
-  //     console.log("claro que existe este producto por su id");
-  //     setCart(
-  //       cart.map((x) =>
-  //         x.id === state.id
-  //           ? {
-  //               ...exist,
-  //               qty: count,
-  //               size: size,
-  //               observation: observation,
-  //               idChanges: uuidv4(),
-  //             }
-  //           : x
-  //       )
-  //     );
-  //   }
-  // };
+  const updateProduct = () => {
+    console.log(exist);
+    if (exist) {
+      console.log("claro que existe este producto por su id");
+      setCart(
+        cart.map((x) =>
+          x.id === state.id
+            ? {
+                ...exist,
+                qty: count,
+                size: size,
+                observation: observation,
+                idChanges: uuidv4(),
+              }
+            : x
+        )
+      );
+    }
+  };
 
   const handleCart = () => {
     console.log("entre a handlecart");
@@ -58,6 +52,7 @@ const DetailProduct = () => {
       ...cart,
       {
         ...state,
+        // unitCost: prueba2,
         unitCost: state.product_cost[cost],
         totalCost: state.product_cost[cost] * count,
         qty: count,
@@ -107,7 +102,7 @@ const DetailProduct = () => {
               {state.product_description}
             </h2>
             <h2 className="product--cost">
-              Unit Price: $ {state.product_cost[cost] * count}
+              Unit Price: $ {state.product_cost[cost]}
             </h2>
           </div>
         </div>
@@ -120,7 +115,6 @@ const DetailProduct = () => {
                 return (
                   <ButtonFilter
                     item={op}
-                    //   uid={op.cat_uid}
                     icon={DetailProductsIcons[i]}
                     key={op}
                     onClick={() => {
