@@ -19,7 +19,9 @@ body {
   overflow-x: hidden;
   height: 100%;
 }
-
+.content {
+  margin: 1rem;
+}
 .products-container {
   /* background-color: blue; */
   display: grid;

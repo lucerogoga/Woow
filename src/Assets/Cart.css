@@ -1,6 +1,8 @@
 .cart-content {
-  margin: 3rem;
   height: 85vh;
+}
+.cart-content sideBarCart {
+  margin: 0;
 }
 .client-info--content {
   display: flex;
@@ -37,7 +39,6 @@
 }
 
 .cart-product--productContainer {
-  padding: 20px;
   height: inherit;
   overflow-x: scroll;
 }
