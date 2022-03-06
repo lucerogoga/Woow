@@ -25,7 +25,6 @@ export const getUser = async (userId) => {
   const docSnap = await getDoc(userRef);
 
   const usuario = docSnap.data();
-  // console.log("este es el usuarioooo, ", usuario);
   if (docSnap.exists()) {
     return usuario;
   }
@@ -66,7 +65,6 @@ export async function filterProductByCategorie(catId, catName) {
     const querySnapshotProduct = await getDocs(q1);
     const productFilterDocs = querySnapshotProduct.docs;
     return productFilterDocs.map((p) => {
-      console.log("productos de esta categoriiiiiiia", p);
       return {
         id: p.id,
         ...p.data(),

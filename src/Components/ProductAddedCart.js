@@ -31,9 +31,6 @@ const Edit = ({ onClick }) => {
 export function ProductAddedCart({ cartProduct, cantEdit }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   const { cart, setCart } = useCart();
-  debugger;
-  console.log(cantEdit);
-  console.log(cartProduct.observation);
   let navigate = useNavigate();
 
   const increment = () => {

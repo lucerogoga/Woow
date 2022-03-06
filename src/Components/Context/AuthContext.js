@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
       email,
       password
     );
-    console.log("credenciallllll, ", userCredential);
     return userCredential;
   };
 
@@ -33,20 +32,14 @@ export const AuthProvider = ({ children }) => {
   // ! No entiendo por qué esto funciona bien
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log("dentro de onAuthStateCh..., ", currentUser.uid);
       setUser({ currentUser: currentUser?.uid });
-      // setUser({ currentUser: currentUser?.uid });
-      // currentUser ? currentUser.uid : null
-      // setUser({ currentUser });
-      // setUser({ currentUser });
       // ! ni entiendo el set loading
+      //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR*/
       setLoading(false);
     });
 
     return () => unsubcribe();
   }, []);
-
-  if (loading) return <h1> Loading....</h1>;
 
   return (
     <authContext.Provider value={{ login, logout, user, loading }}>

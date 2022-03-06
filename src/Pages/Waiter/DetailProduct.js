@@ -19,7 +19,6 @@ const DetailProduct = () => {
   let location = useLocation();
   const { state } = location;
   const { product, action } = state;
-  console.log(state);
 
   const updateProductCart = () => {
     setCart((cart) =>
@@ -39,8 +38,6 @@ const DetailProduct = () => {
   };
 
   const addProductCart = () => {
-    console.log("creamos un producto en el cart");
-
     setCart((cart) => [
       ...cart,
       {
@@ -174,6 +171,7 @@ const DetailProduct = () => {
                     ? "Add to Cart"
                     : "Edit Product Cart"
                 }
+                className={"pink-button"}
               />
             </div>
           </div>

@@ -10,7 +10,6 @@ const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const { cart } = useCart();
-  console.log(cantEdit);
   // const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
 
@@ -58,7 +57,7 @@ const Cart = ({ cantEdit }) => {
               <h3 className="price-total-cost">$ {itemsPrice}</h3>
             </div>
             <div className="large-button--content" onClick={handleOrder}>
-              <ActionButton title="Send to Chef" />
+              <ActionButton title="Send to Chef" className={"pink-button"} />
             </div>
           </div>
         </div>

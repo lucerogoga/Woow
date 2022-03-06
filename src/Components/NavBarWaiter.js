@@ -10,9 +10,12 @@ import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.sv
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 
 import { useCart } from "../Components/Context/CartContext";
+// import { useSideBarCart } from "./Context/SideBarCartContext";
 
 const NavBarWaiter = ({ onClickMenu }) => {
   const { cart } = useCart();
+  // const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -40,7 +43,11 @@ const NavBarWaiter = ({ onClickMenu }) => {
 
         <div className="navbar--block">
           <div className="cart--container">
-            <Link className="menu--link" to={"/waiter/order-cart"}>
+            <Link
+              className="menu--link"
+              to={""}
+              // onClick={setIsSideBarCartOpen(!isSideBarCartOpen)}
+            >
               <ShoppingCart fill="#fff" width={30} height={30} />
               <span className="cart--counter">{cart.length}</span>
             </Link>
