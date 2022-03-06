@@ -13,6 +13,7 @@
 }
 
 .order-card--infos-container {
+  color: #283159;
   display: grid;
   grid-row-gap: 2rem;
   row-gap: 0.2rem;

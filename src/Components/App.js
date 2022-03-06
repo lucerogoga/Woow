@@ -12,11 +12,12 @@ import DetailProduct from "../Pages/Waiter/DetailProduct";
 import AdminView from "../Pages/Admin/AdminView";
 import Cart from "./Cart";
 import SideBarCartContext from "./Context/SideBarCartContext";
-
+import Employes from "./Employes";
 function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route
           path="/home"
           element={
@@ -24,10 +25,12 @@ function App() {
               <AdminView />
             </RoleComponent>
           }
-        />
+        >
+          {/* ANIDADO */}
+          <Route path="" element={<Employes />} />
+        </Route>
 
         {/* Waiter Views */}
-        <Route path="/" element={<Login />} />
         <Route
           path="/waiter"
           element={

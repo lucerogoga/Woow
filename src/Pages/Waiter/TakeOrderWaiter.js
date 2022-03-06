@@ -41,7 +41,7 @@ const TakeOrderWaiter = () => {
 
   return (
     <>
-      <Search onChange={handleSearch}></Search>
+      <Search onChange={handleSearch} placeholder={"Search product"}></Search>
       <div className="categories-container">
         {productCategories.map((cat, i) => {
           return (

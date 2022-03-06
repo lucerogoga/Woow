@@ -10,7 +10,7 @@ import "../../Assets/OrderCard.css";
 import NavBarAdmin from "../../Components/NavBarAdmin";
 import SideBarAdmin from "../../Components/SideBarAdmin";
 
-export const AdminView = () => {
+const AdminView = () => {
   const [open, setOpen] = useState(false);
   const { logout } = useAuth();
   let location = useLocation();
