@@ -2,18 +2,12 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "../Assets/ProductCard.css";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
-// import { iconMore } from "../Assets/icons/more.svg";
-import { app } from "../Config/initialize.js";
-// import { getAuth } from "firebase/auth";
-import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-// !PRUEBA ----------------
 import { useCart } from "../Components/Context/CartContext";
 
-// const auth = getAuth(app);
 export function ProductCard(props) {
   const { product } = props;
-  const { cart, setCart, idDetail, setIdDetail } = useCart();
+  const { cart, setCart } = useCart();
 
   let navigate = useNavigate();
   const HandleAddToCart = () => {
@@ -34,8 +28,6 @@ export function ProductCard(props) {
           )
         );
       } else {
-        // setCart((cart) => [...cart, { ...product, qty: 1 }]);
-        // setIdDetail(idDetail + 1);
         setCart((cart) => [
           ...cart,
           {

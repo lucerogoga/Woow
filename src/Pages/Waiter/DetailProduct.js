@@ -4,13 +4,13 @@ import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
 import ButtonFilter from "../../Components/ButtonFilter";
-import { NavBarChef } from "../../Components/NavBarWaiter";
+import NavBarWaiter from "../../Components/NavBarWaiter";
 import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 const DetailProduct = () => {
-  const { cart, setCart, idDetail, setIdDetail } = useCart();
+  const { cart, setCart } = useCart();
   let navigate = useNavigate();
   const [size, setSize] = useState("12 portions");
   const [cost, setCost] = useState(0);
@@ -22,41 +22,38 @@ const DetailProduct = () => {
   console.log(location.state);
   const { state } = location;
 
-  // !-----------------------
-
   // setCart((cart) => [
   //   ...cart,
   //   { ...product, qty: 1, idChanges: `${product.id}-detail${idDetail}` },
   // ]);
   const exist = cart.find((x) => x.idChanges);
 
-  const updateProduct = () => {
-    // const exist = cart.find((x) => x.id === state.id);
-
-    console.log(exist);
-    if (exist) {
-      console.log("claro que existe este producto por su id");
-      setCart(
-        cart.map((x) =>
-          x.id === state.id
-            ? {
-                ...exist,
-                qty: count,
-                size: size,
-                observation: observation,
-                idChanges: uuidv4(),
-              }
-            : x
-        )
-      );
-    }
-  };
-
   // !-----------------------
+  // const updateProduct = () => {
+  //   // const exist = cart.find((x) => x.id === state.id);
+
+  //   console.log(exist);
+  //   if (exist) {
+  //     console.log("claro que existe este producto por su id");
+  //     setCart(
+  //       cart.map((x) =>
+  //         x.id === state.id
+  //           ? {
+  //               ...exist,
+  //               qty: count,
+  //               size: size,
+  //               observation: observation,
+  //               idChanges: uuidv4(),
+  //             }
+  //           : x
+  //       )
+  //     );
+  //   }
+  // };
+
   const handleCart = () => {
     console.log("entre a handlecart");
 
-    setIdDetail(idDetail + 1);
     setCart((cart) => [
       ...cart,
       {
@@ -70,8 +67,7 @@ const DetailProduct = () => {
       },
     ]);
 
-    setIdDetail(idDetail + 1);
-    navigate("order-cart");
+    navigate("../waiter/order-cart");
   };
 
   const CounterHorizontal = () => {
@@ -102,7 +98,7 @@ const DetailProduct = () => {
         className="image-content"
         style={{ backgroundImage: `url(${state.product_photo[1]})` }}
       >
-        <NavBarChef />
+        <NavBarWaiter />
 
         <div className="info-product-container">
           <div className="info-product-subcontainer">
