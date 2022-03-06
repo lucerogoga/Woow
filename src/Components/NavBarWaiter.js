@@ -7,11 +7,12 @@ import "../Assets/Sidebar.css";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
+import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 
 import { useCart } from "../Components/Context/CartContext";
 
-const NavBarWaiter = ({ onClickMenu, onClickSideBar }) => {
+const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
   const { cart } = useCart();
 
   return (
@@ -40,16 +41,16 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar }) => {
         </ul>
 
         <div className="navbar--block">
-          <div className="cart--container" onClick={onClickSideBar}>
-            {/* <Link
-              className="menu--link"
-              to={""}
-              // onClick={setIsSideBarCartOpen(!isSideBarCartOpen)}
-            > */}
-            <ShoppingCart fill="#fff" width={30} height={30} />
-            <span className="cart--counter">{cart.length}</span>
-            {/* </Link> */}
-          </div>
+          {currentPath === "/waiter/order-cart" ? (
+            <Link className="menu--link" to={""}>
+              <FoodMenu width={35} height={35} />
+            </Link>
+          ) : (
+            <div className="cart--container" onClick={onClickSideBar}>
+              <ShoppingCart fill="#fff" width={50} height={35} />
+              <span className="cart--counter">{cart.length}</span>
+            </div>
+          )}
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">
               <Waiter width={25} height={25} />
