@@ -6,11 +6,11 @@ import Title from "./Title";
 import ActionButton from "../Components/ActionButton";
 
 import "../Assets/Cart.css";
-const Cart = () => {
+const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const { cart } = useCart();
-
+  console.log(cantEdit);
   // const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
 
@@ -45,6 +45,7 @@ const Cart = () => {
             <div></div>
             {cart.map((cartProduct) => (
               <ProductAddedCart
+                cantEdit={cantEdit}
                 cartProduct={cartProduct}
                 key={cartProduct.idProductCart}
               />

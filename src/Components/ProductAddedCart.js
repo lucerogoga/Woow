@@ -20,10 +20,11 @@ const cartReducer = (state, action) => {
   }
 };
 
-export function ProductAddedCart({ cartProduct }) {
+export function ProductAddedCart({ cartProduct, cantEdit }) {
   const [state, dispatch] = useReducer(cartReducer, { count: cartProduct.qty });
   const { cart, setCart } = useCart();
 
+  console.log(cantEdit);
   let navigate = useNavigate();
 
   const increment = () => {
@@ -57,6 +58,24 @@ export function ProductAddedCart({ cartProduct }) {
         cart.filter((x) => x.idProductCart !== cartProduct.idProductCart)
       );
     }
+  };
+
+  const Edit = () => {
+    return (
+      <button
+        className="productAdded-card--pencilContainer"
+        onClick={() =>
+          navigate("../detail-product", {
+            state: {
+              product: cartProduct,
+              action: "updateProductCart",
+            },
+          })
+        }
+      >
+        <Pencil className="productAdded-card--pencil" width={30} height={30} />
+      </button>
+    );
   };
 
   return (
@@ -112,25 +131,8 @@ export function ProductAddedCart({ cartProduct }) {
               </button>
             </div>
           </div>
-
           <div className="productAdded-card--buttonsRightContainer">
-            <button
-              className="productAdded-card--pencilContainer"
-              onClick={() =>
-                navigate("../detail-product", {
-                  state: {
-                    product: cartProduct,
-                    action: "updateProductCart",
-                  },
-                })
-              }
-            >
-              <Pencil
-                className="productAdded-card--pencil"
-                width={30}
-                height={30}
-              />
-            </button>
+            {cantEdit ? console.log("no te muestres") : <Edit />}
             <div
               className="productAdded-card--button"
               onClick={HandleRemoveFromCart}
