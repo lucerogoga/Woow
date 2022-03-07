@@ -2,10 +2,10 @@ import React from "react";
 import "../Assets/DetailProduct.css";
 
 const LargeButton = (props) => {
-  const { title } = props;
+  const { title, className } = props;
   return (
     <>
-      <button className="pink-button">{title}</button>
+      <button className={className}>{title}</button>
     </>
   );
 };

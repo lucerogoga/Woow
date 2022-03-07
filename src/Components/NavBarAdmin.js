@@ -12,7 +12,7 @@ import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 
 import { useCart } from "../Components/Context/CartContext";
 
-const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
+const NavBarAdmin = ({ onClickMenu, onClickSideBar, currentPath }) => {
   const { cart } = useCart();
 
   return (
@@ -29,13 +29,18 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/take-order"}>
-              Take Order
+            <Link className="menu--link" to={"admin/employes"}>
+              Employes
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/orders-resume"}>
-              Orders Resume
+            <Link className="menu--link" to={"admin/orders"}>
+              Orders
+            </Link>
+          </li>
+          <li className="menu--list">
+            <Link className="menu--link" to={"admin/orders"}>
+              Create Cayegories
             </Link>
           </li>
         </ul>
@@ -62,4 +67,4 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
   );
 };
 
-export default NavBarWaiter;
+export default NavBarAdmin;

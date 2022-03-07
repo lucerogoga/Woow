@@ -15,11 +15,12 @@ html {
   padding: 1em;
   margin: 0 auto;
   width: 100%;
-  /* overflow: hidden; */
+  height: 20%;
+  overflow: hidden;
+  justify-content: center;
 }
 
 .productAdded-card--photoContainer {
-  width: 15%;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -28,11 +29,12 @@ html {
   margin-left: 15px;
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
+  justify-content: space-between;
 }
 
 .productAdded-card--text {
-  width: 70%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -63,7 +65,8 @@ html {
 .productAdded-card--button-counter {
   /* background-color: blue; */
   width: 50px;
-  height: 110px;
+  padding: 0.5rem;
+  /* height: 110px; */
   border-radius: 100px;
   display: flex;
   justify-content: center;
@@ -130,17 +133,20 @@ input[type="number"]::-webkit-inner-spin-button {
 } */
 
 .productAdded-card--buttonsRightContainer {
-  position: relative;
-  height: 110px;
+  /* background-color: red; */
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   cursor: pointer;
+  justify-content: space-evenly;
 }
 
 .productAdded-card--pencilContainer {
-  position: absolute;
   right: 8px;
   top: -6px;
+  border: none;
+  background-color: #fff;
 }
 
 .productAdded-card--pencil {

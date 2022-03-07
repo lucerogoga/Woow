@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { useCart } from "../Components/Context/CartContext";
 import ProductAddedCart from "./ProductAddedCart";
 import Title from "./Title";
-
 import ActionButton from "../Components/ActionButton";
 
 import "../Assets/Cart.css";
-const Cart = () => {
+const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
-
   const { cart } = useCart();
 
   // const itemsPrice = cart.reduce((a, b) => a + b.totalCost, 0);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
+
   console.log("carrito actual", cart);
   const handleOrder = () => {};
   return (
@@ -45,8 +44,9 @@ const Cart = () => {
             <div></div>
             {cart.map((cartProduct) => (
               <ProductAddedCart
+                cantEdit={cantEdit}
                 cartProduct={cartProduct}
-                key={cartProduct.idChanges}
+                key={cartProduct.idProductCart}
               />
             ))}
           </div>
@@ -57,7 +57,7 @@ const Cart = () => {
               <h3 className="price-total-cost">$ {itemsPrice}</h3>
             </div>
             <div className="large-button--content" onClick={handleOrder}>
-              <ActionButton title="Send to Chef" />
+              <ActionButton title="Send to Chef" className={"pink-button"} />
             </div>
           </div>
         </div>

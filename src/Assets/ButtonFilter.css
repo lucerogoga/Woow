@@ -13,6 +13,7 @@
   min-width: 22%;
   min-height: 200px;
 }
+
 .button-card--content {
   display: flex;
   flex-direction: column;
@@ -52,15 +53,16 @@
 }
 
 .button-card:focus,
-.button-card:active {
+.button-card:active,
+.button-card.active {
   background-color: #ff9aa3;
   color: #fff;
 }
 
-.button-card:focus + path,
-.button-card:active + path {
-  /* background-color: #ff9aa3; */
-  color: red;
+.button-card:focus svg,
+.button-card:active svg,
+.button-card.active svg {
+  color: currentColor;
   /* color: #fff; */
 }
 .button-card--text-content {

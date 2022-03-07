@@ -1,7 +1,6 @@
+import React from "react";
 import "../Assets/App.css";
 import Login from "./Login";
-import Home from "./Home";
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
@@ -10,8 +9,9 @@ import WaiterView from "./WaiterView";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
-import MainView from "../Pages/Admin/MainView";
+import AdminView from "../Pages/Admin/AdminView";
 import Cart from "./Cart";
+import SideBarCartContext from "./Context/SideBarCartContext";
 
 function App() {
   return (
@@ -21,78 +21,35 @@ function App() {
           path="/home"
           element={
             <RoleComponent role="admin">
-              <MainView />
+              <AdminView />
             </RoleComponent>
           }
-        ></Route>
+        />
 
         {/* Waiter Views */}
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={<Login />} />
         <Route
           path="/waiter"
           element={
             <RoleComponent role="waiter">
-              {/* <h1>Listado de productos</h1> */}
-              <WaiterView />
+              <SideBarCartContext>
+                <WaiterView />
+              </SideBarCartContext>
             </RoleComponent>
           }
         >
           {/* ANIDADO */}
-          <Route
-            path=""
-            element={
-              <RoleComponent role="waiter">
-                <TakeOrderWaiter />
-              </RoleComponent>
-            }
-          ></Route>
-          <Route
-            path="orders-resume"
-            element={
-              <RoleComponent role="waiter">
-                <OrdersResumeWaiter />
-              </RoleComponent>
-            }
-          ></Route>
-          <Route
-            path="/waiter/detail-product/order-cart"
-            element={
-              <RoleComponent role="waiter">
-                <Cart />
-              </RoleComponent>
-            }
-          ></Route>
-          <Route
-            path="order-cart"
-            element={
-              <RoleComponent role="waiter">
-                {/* <h1>COMPRANDO ANDO CARRITO</h1> */}
-                <Cart />
-              </RoleComponent>
-            }
-          ></Route>
+          <Route path="" element={<TakeOrderWaiter />} />
+          <Route path="orders-resume" element={<OrdersResumeWaiter />} />
+          {/* <Route path="detail-product/order-cart" element={<Cart />} /> */}
+          <Route path="order-cart" element={<Cart />} />
         </Route>
+
         <Route
           path="/waiter/detail-product"
           element={
             <RoleComponent role="waiter">
               <DetailProduct />
-            </RoleComponent>
-          }
-        ></Route>
-        <Route
-          path="/waiter/order-cart"
-          element={
-            <RoleComponent role="waiter">
-              <h1>Carrito</h1>
-            </RoleComponent>
-          }
-        ></Route>
-        <Route
-          path="/waiter/orders-resume"
-          element={
-            <RoleComponent role="waiter">
-              <h1>Carrito</h1>
             </RoleComponent>
           }
         ></Route>

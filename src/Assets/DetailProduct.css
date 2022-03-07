@@ -107,6 +107,22 @@
   border-radius: 1.5rem;
   font-size: 1.5rem;
 }
+
+.pink-button-sidebarcart {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  background-color: #fff;
+  color: #ff9aa3;
+  border: 1px solid #ff9aa3;
+  margin-top: 1rem;
+}
+.pink-button-sidebarcart:hover {
+  background-color: #fff;
+  color: #fecc68;
+  border: 1px solid #fecc68;
+}
 .buttons-container {
   display: flex;
   flex-direction: row;

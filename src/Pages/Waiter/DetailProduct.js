@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
 import ButtonFilter from "../../Components/ButtonFilter";
-import { NavBarChef } from "../../Components/NavBarWaiter";
+import NavBarWaiter from "../../Components/NavBarWaiter";
 import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 const DetailProduct = () => {
-  const { cart, setCart, idDetail, setIdDetail } = useCart();
+  const { cart, setCart } = useCart();
   let navigate = useNavigate();
   const [size, setSize] = useState("12 portions");
   const [cost, setCost] = useState(0);
@@ -18,53 +18,47 @@ const DetailProduct = () => {
   const [count, setCount] = useState(1);
   let location = useLocation();
   const { state } = location;
-  const [prueba2, setPrueba2] = useState(state.product_cost[cost]);
-  console.log(size);
-  console.log(cost);
-  console.log(location.state);
+  const { product, action } = state;
 
-  const exist = cart.find((x) => x.idChanges);
-
-  const updateProduct = () => {
-    console.log(exist);
-    if (exist) {
-      console.log("claro que existe este producto por su id");
-      setCart(
-        cart.map((x) =>
-          x.id === state.id
-            ? {
-                ...exist,
-                qty: count,
-                size: size,
-                observation: observation,
-                idChanges: uuidv4(),
-              }
-            : x
-        )
-      );
-    }
+  const updateProductCart = () => {
+    setCart((cart) =>
+      cart.map((x) =>
+        x.idProductCart === product.idProductCart
+          ? {
+              ...x,
+              unitCost: product.product_cost[cost],
+              totalCost: product.product_cost[cost] * count,
+              qty: count,
+              size: size,
+              observation: observation,
+            }
+          : x
+      )
+    );
   };
 
-  const handleCart = () => {
-    console.log("entre a handlecart");
-
-    setIdDetail(idDetail + 1);
+  const addProductCart = () => {
     setCart((cart) => [
       ...cart,
       {
-        ...state,
-        // unitCost: prueba2,
-        unitCost: state.product_cost[cost],
-        totalCost: state.product_cost[cost] * count,
+        ...product,
+        idProductCart: uuidv4(),
+        unitCost: product.product_cost[cost],
+        totalCost: product.product_cost[cost] * count,
         qty: count,
         size: size,
         observation: observation,
-        idChanges: uuidv4(),
       },
     ]);
+  };
 
-    setIdDetail(idDetail + 1);
-    navigate("order-cart");
+  const handleActionClick = () => {
+    if (action === "createProductCart") {
+      addProductCart();
+    } else {
+      updateProductCart();
+    }
+    navigate("../waiter/order-cart");
   };
 
   const CounterHorizontal = () => {
@@ -89,22 +83,43 @@ const DetailProduct = () => {
     );
   };
 
+  const productObservation = product.observation;
+  useEffect(() => {
+    if (productObservation) {
+      setObservation(productObservation);
+    }
+  }, [productObservation]);
+
+  const quantity = product.qty;
+  useEffect(() => {
+    if (quantity) {
+      setCount(quantity);
+    }
+  }, [quantity]);
+
+  const initialSize = product.size;
+  useEffect(() => {
+    if (initialSize) {
+      setSize(initialSize);
+    }
+  }, [initialSize]);
+
   return (
     <>
       <div
         className="image-content"
-        style={{ backgroundImage: `url(${state.product_photo[1]})` }}
+        style={{ backgroundImage: `url(${product.product_photo[1]})` }}
       >
-        <NavBarChef />
+        <NavBarWaiter />
 
         <div className="info-product-container">
           <div className="info-product-subcontainer">
-            <h1 className="product--name">{state.product_name}</h1>
+            <h1 className="product--name">{product.product_name}</h1>
             <h2 className="product--description">
-              {state.product_description}
+              {product.product_description}
             </h2>
             <h2 className="product--cost">
-              Unit Price: $ {state.product_cost[cost]}
+              Unit Price: $ {product.product_cost[cost]}
             </h2>
           </div>
         </div>
@@ -113,10 +128,11 @@ const DetailProduct = () => {
           <div>
             <p className="size-title">Choice Size</p>
             <div className="products-detail-container">
-              {state.product_options.map((op, i) => {
+              {product.product_options.map((op, i) => {
                 return (
                   <ButtonFilter
                     item={op}
+                    active={op === size}
                     icon={DetailProductsIcons[i]}
                     key={op}
                     onClick={() => {
@@ -134,21 +150,29 @@ const DetailProduct = () => {
             <textarea
               className="text-area-observations"
               type="text"
+              value={observation}
               onChange={(ev) => setObservation(ev.target.value)}
             ></textarea>
           </div>
           <div className="price-content">
             <h3>Total Cost</h3>
             <h3 className="price-total-cost">
-              $ {state.product_cost[cost] * count}
+              $ {product.product_cost[cost] * count}
             </h3>
           </div>
 
           {/* section buttons */}
           <div className="buttons-container">
             <CounterHorizontal />
-            <div className="large-button--content" onClick={handleCart}>
-              <ActionButton title="Add to Cart" />
+            <div className="large-button--content" onClick={handleActionClick}>
+              <ActionButton
+                title={
+                  action === "createProductCart"
+                    ? "Add to Cart"
+                    : "Edit Product Cart"
+                }
+                className={"pink-button"}
+              />
             </div>
           </div>
         </div>

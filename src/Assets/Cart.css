@@ -1,6 +1,8 @@
 .cart-content {
-  margin: 3rem;
   height: 85vh;
+}
+.cart-content sideBarCart {
+  margin: 0;
 }
 .client-info--content {
   display: flex;
@@ -19,6 +21,7 @@
 .table--input {
   padding: 1rem;
   border: 1px solid #ff9aa3;
+  background: #fff;
   border-radius: 2rem;
   width: 40%;
   font-size: 1rem;
@@ -37,7 +40,6 @@
 }
 
 .cart-product--productContainer {
-  padding: 20px;
   height: inherit;
   overflow-x: scroll;
 }

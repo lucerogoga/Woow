@@ -1,10 +1,13 @@
 import React from "react";
 import "../Assets/ButtonFilter.css";
 export function ButtonFilter(props) {
-  const { item, icon, onClick } = props;
+  const { item, icon, onClick, active } = props;
   return (
     <>
-      <button className="button-card" onClick={onClick}>
+      <button
+        className={`button-card ${active ? "active" : ""}`}
+        onClick={onClick}
+      >
         {/* renderiamos el icono por props */}
         <div className="button-card--content">
           {icon}
