@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 
 // PARA MI BOTON
 function MouseOverPopover({ obs }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
