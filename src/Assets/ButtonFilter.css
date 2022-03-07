@@ -36,11 +36,13 @@
 }
 
 .categories-container::-webkit-scrollbar-thumb:hover {
-  background: #FECC68;
+  background: #fecc68;
 }
+
 .button-card:hover path {
   fill: #fff;
 }
+
 .button-card:hover circle {
   fill: #fff;
 }
