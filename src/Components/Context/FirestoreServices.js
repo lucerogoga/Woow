@@ -72,3 +72,14 @@ export async function filterProductByCategorie(catId, catName) {
     });
   }
 }
+
+//---------------- Admin Functions
+export async function getEmployers() {
+  const usersData = await getDocs(collection(db, "users"));
+  return usersData.docs.map((e) => {
+    return {
+      id: e.id,
+      ...e.data(),
+    };
+  });
+}
