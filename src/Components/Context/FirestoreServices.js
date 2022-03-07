@@ -6,30 +6,24 @@ import {
   query,
   orderBy,
   where,
+  addDoc,
   setDoc,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
 
-
-export const createOrder = (waiterId, chefId) => {
-  const ordersRef = collection(db, 'orders');
-  const user = auth.currentUser;
+//---------------- Order Functions
+export const createOrder = (waiterId, chefId, client_name, tableNumber) => {
+  const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
     waiter_id: waiterId,
-    order_status: "Waiting"
-    user_name: user.displayName,
-    user_photo: user.photoURL,
-    message,
-    date: Date.now(),
-    likes: [],
+    order_status: "Waiting",
+    client_name: client_name,
+    table: tableNumber,
+    order_timstamp: Date.now(),
   });
-}
-
-// ------
-
-
-
+};
+//----------------
 export const getOrderStatus = async () => {
   const productsData = await getDocs(collection(db, "order_status"));
   return productsData.docs.map((p) => {
@@ -40,6 +34,7 @@ export const getOrderStatus = async () => {
   });
 };
 
+//---------------- User Functions
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
 
@@ -52,6 +47,7 @@ export const getUser = async (userId) => {
   return {};
 };
 
+//---------------- Product Functions
 export async function getProducts() {
   const productsData = await getDocs(collection(db, "products"));
   return productsData.docs.map((p) => {

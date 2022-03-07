@@ -19,15 +19,14 @@
   width: 60%;
 }
 .table--input {
-  padding: 1rem;
-  border: 1px solid #ff9aa3;
+  border-color: #ff9aa3;
   background: #fff;
-  border-radius: 2rem;
-  width: 40%;
   font-size: 1rem;
-  margin-left: 1rem;
+  color: #ff9aa3;
 }
-
+.labelTable {
+  color: #ff9aa3;
+}
 .cart-product--content {
   padding: 10px;
   display: flex;

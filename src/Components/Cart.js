@@ -3,8 +3,10 @@ import { useCart } from "../Components/Context/CartContext";
 import ProductAddedCart from "./ProductAddedCart";
 import Title from "./Title";
 import ActionButton from "../Components/ActionButton";
+import ControlledOpenSelect from "./SelectTable";
 
 import "../Assets/Cart.css";
+
 const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
@@ -27,16 +29,7 @@ const Cart = ({ cantEdit }) => {
             placeholder="Client Name"
             onChange={(ev) => setClientName(ev.target.value)}
           ></input>
-          <select
-            className="table--input"
-            placeholder="Nº Table"
-            name="Nº Table"
-            id="table"
-          >
-            <option value="Table 1">Table 1</option>
-            <option value="Table 2">Table 2</option>
-            <option value="Table 3">Table 3</option>
-          </select>
+          <ControlledOpenSelect />
         </div>
         <div className="cart-product--content">
           {/* </div> */}
