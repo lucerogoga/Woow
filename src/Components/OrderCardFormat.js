@@ -12,6 +12,56 @@ import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
 import "../Assets/OrderCard.css";
 import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+
+// PARA MI BOTON
+function MouseOverPopover({ obs }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
+  return (
+    <div>
+      <Typography
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
+      >
+        <Eye />
+      </Typography>
+      <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: "none",
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography sx={{ p: 1 }}>{obs}</Typography>
+      </Popover>
+    </div>
+  );
+}
 
 const theme = createTheme({
   status: {
@@ -44,25 +94,25 @@ function createData(name, observation, qty, unitPrice) {
   return { name, observation, qty, unitPrice, sum };
 }
 
-// function createRow(desc, qty, unit) {
-//   return { desc, qty, unit, price };
-// }
-
 function total(items) {
   return items.map(({ sum }) => sum).reduce((sum, i) => sum + i, 0);
 }
 
 const rows = [
-  // createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Frozen yoghurt", <Eye />, 6, 24.0),
+  createData(
+    "Frozen yoghurt",
+    <MouseOverPopover obs="Alergic Straberries" />,
+    6,
+    24.0
+  ),
   createData("Ice cream sandwich", "", 9.0, 37),
   createData("Eclair", "", 2, 24),
-  createData("Cupcake", <Eye />, 4, 67),
-  createData("Gingerbread", <Eye />, 1, 49),
+  createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
+  createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
 ];
 
+// Total of all products
 const invoiceTotal = total(rows);
-console.log("PROBANDOOO, ", invoiceTotal);
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -138,7 +188,6 @@ const OrderCardFormat = () => {
                       {ccyFormat(row.unitPrice)}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {/* {row.qty * row.unitPrice} */}
                       {ccyFormat(row.sum)}
                     </StyledTableCell>
                   </TableRow>
@@ -148,12 +197,10 @@ const OrderCardFormat = () => {
               {/* Total */}
               <TableRow>
                 <TableHead>
-                  {/* <StyledTableCell colSpan={4}>Total</StyledTableCell> */}
                   <StyledTableCell>Total</StyledTableCell>
                 </TableHead>
                 <StyledTableCell align="right" colSpan={4}>
                   {ccyFormat(invoiceTotal)}
-                  {/* {"TLDFJKSDLKJ"} */}
                 </StyledTableCell>
               </TableRow>
             </Table>
