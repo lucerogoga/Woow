@@ -6,8 +6,29 @@ import {
   query,
   orderBy,
   where,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
+
+
+export const createOrder = (waiterId, chefId) => {
+  const ordersRef = collection(db, 'orders');
+  const user = auth.currentUser;
+  return addDoc(ordersRef, {
+    chef_id: null,
+    waiter_id: waiterId,
+    order_status: "Waiting"
+    user_name: user.displayName,
+    user_photo: user.photoURL,
+    message,
+    date: Date.now(),
+    likes: [],
+  });
+}
+
+// ------
+
+
 
 export const getOrderStatus = async () => {
   const productsData = await getDocs(collection(db, "order_status"));
