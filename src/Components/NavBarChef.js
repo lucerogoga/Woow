@@ -10,10 +10,10 @@ import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.sv
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
 
-import { useCart } from "../Components/Context/CartContext";
+// import { useCart } from "../Components/Context/CartContext";
 
 const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
-  const { cart } = useCart();
+  // const { cart } = useCart();
 
   return (
     <div className="navbar">
@@ -29,28 +29,18 @@ const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/take-order"}>
+            <Link className="menu--link" to={"chef/take-order"}>
               Take Order
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/orders-resume"}>
+            <Link className="menu--link" to={"chef/orders-resume"}>
               Orders Resume
             </Link>
           </li>
         </ul>
 
         <div className="navbar--block">
-          {currentPath === "/chef/orders-to-do" ? (
-            <Link className="menu--link" to={""}>
-              <FoodMenu width={35} height={35} />
-            </Link>
-          ) : (
-            <div className="cart--container" onClick={onClickSideBar}>
-              <ShoppingCart fill="#fff" width={50} height={35} />
-              <span className="cart--counter">{cart.length}</span>
-            </div>
-          )}
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">
               <Chef width={25} height={25} />

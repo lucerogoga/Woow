@@ -19,6 +19,7 @@ const TakeOrderWaiter = () => {
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
+    
   useEffect(() => {
     getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));

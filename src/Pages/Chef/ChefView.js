@@ -10,7 +10,7 @@ import "../../Assets/OrderCard.css";
 import NavBarChef from "../../Components/NavBarChef";
 import SideBarChef from "../../Components/SideBarChef";
 
-const AdminView = () => {
+export const ChefView = () => {
   const [open, setOpen] = useState(false);
   const { logout } = useAuth();
   let location = useLocation();
@@ -37,4 +37,4 @@ const AdminView = () => {
   );
 };
 
-export default AdminView;
+export default ChefView;

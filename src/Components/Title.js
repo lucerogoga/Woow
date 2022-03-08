@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../Assets/Titles.css";
 const Title = (props) => {
   const { title, quantity } = props;

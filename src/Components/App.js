@@ -13,6 +13,7 @@ import ChefView from "../Pages/Chef/ChefView";
 import Cart from "./Cart";
 import SideBarCartContext from "./Context/SideBarCartContext";
 import Employes from "./Employes";
+import OrdersToDoChef from "../Pages/Chef/OrdersToDoChef";
 
 function App() {
   return (
@@ -62,16 +63,13 @@ function App() {
           path="/chef"
           element={
             <RoleComponent role="chef">
-              <h1>
-                <ChefView />
-              </h1>
+              <ChefView />
             </RoleComponent>
           }
         >
           {/* ANIDADO */}
-          {/* <Route path="orders-to-do" element={<OrdersResumeWaiter />} /> */}
-          <Route path="" element={<TakeOrderWaiter />} />
-          <Route path="orders-to-do" element={<h1>ORDERS TO DO</h1>} />
+          <Route path="" element={<OrdersToDoChef />} />
+          {/* <Route path="orders-to-do" element={<OrdersToDoChef />} /> */}
           <Route path="orders-delivered" element={<h1>ORDERS DELIVERED</h1>} />
         </Route>
       </Routes>
