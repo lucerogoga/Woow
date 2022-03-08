@@ -4,15 +4,16 @@ import Login from "./Login";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
-import ChefView from "./ChefView";
 import WaiterView from "./WaiterView";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
 import AdminView from "../Pages/Admin/AdminView";
+import ChefView from "../Pages/Chef/ChefView";
 import Cart from "./Cart";
 import SideBarCartContext from "./Context/SideBarCartContext";
 import Employes from "./Employes";
+
 function App() {
   return (
     <AuthProvider>
@@ -44,7 +45,6 @@ function App() {
           {/* ANIDADO */}
           <Route path="" element={<TakeOrderWaiter />} />
           <Route path="orders-resume" element={<OrdersResumeWaiter />} />
-          {/* <Route path="detail-product/order-cart" element={<Cart />} /> */}
           <Route path="order-cart" element={<Cart />} />
         </Route>
 
@@ -67,7 +67,13 @@ function App() {
               </h1>
             </RoleComponent>
           }
-        ></Route>
+        >
+          {/* ANIDADO */}
+          {/* <Route path="orders-to-do" element={<OrdersResumeWaiter />} /> */}
+          <Route path="" element={<TakeOrderWaiter />} />
+          <Route path="orders-to-do" element={<h1>ORDERS TO DO</h1>} />
+          <Route path="orders-delivered" element={<h1>ORDERS DELIVERED</h1>} />
+        </Route>
       </Routes>
     </AuthProvider>
   );

@@ -5,7 +5,7 @@ import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
-import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
+import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
@@ -41,7 +41,7 @@ const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
         </ul>
 
         <div className="navbar--block">
-          {currentPath === "/waiter/order-cart" ? (
+          {currentPath === "/chef/orders-to-do" ? (
             <Link className="menu--link" to={""}>
               <FoodMenu width={35} height={35} />
             </Link>
@@ -53,7 +53,7 @@ const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
           )}
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">
-              <Waiter width={25} height={25} />
+              <Chef width={25} height={25} />
             </div>
           </div>
         </div>
