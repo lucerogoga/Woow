@@ -8,60 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
-import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
 import "../Assets/OrderCard.css";
 import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-
-// PARA MI BOTON
-function MouseOverPopover({ obs }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handlePopoverOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-
-  return (
-    <div>
-      <Typography
-        aria-owns={open ? "mouse-over-popover" : undefined}
-        aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
-      >
-        <Eye />
-      </Typography>
-      <Popover
-        id="mouse-over-popover"
-        sx={{
-          pointerEvents: "none",
-        }}
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
-      >
-        <Typography sx={{ p: 1 }}>{obs}</Typography>
-      </Popover>
-    </div>
-  );
-}
+import { ccyFormat, createData, total } from "../helpers/mathFunctions";
+import { MouseOverPopover } from "./EyePopover";
 
 const theme = createTheme({
   status: {
@@ -81,36 +32,6 @@ const theme = createTheme({
   },
 });
 
-function ccyFormat(num) {
-  return `$ ${num.toFixed(2)}`;
-}
-
-function priceRow(qty, unit) {
-  return qty * unit;
-}
-
-function createData(name, observation, qty, unitPrice) {
-  const sum = priceRow(qty, unitPrice);
-  return { name, observation, qty, unitPrice, sum };
-}
-
-function total(items) {
-  return items.map(({ sum }) => sum).reduce((sum, i) => sum + i, 0);
-}
-
-// const rows = [
-//   createData(
-//     "Frozen yoghurt",
-//     <MouseOverPopover obs="Alergic Straberries" />,
-//     6,
-//     24.0
-//   ),
-//   createData("Ice cream sandwich", "", 9.0, 37),
-//   createData("Eclair", "", 2, 24),
-//   createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
-//   createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
-// ];
-
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.primary.white,
@@ -123,38 +44,16 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
-// const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//   "&:nth-of-type(odd)": {
-//     // backgroundColor: theme.palette.action.hover,
-//   },
-//   // hide last border
-//   "&:last-child td, &:last-child th": {
-//     border: 0,
-//   },
-// }));
-// ! ----------------------------------
-// chef_id: null,
-//     waiter_id: waiterId,
-//     order_status: orderStatus,
-//     client_name: client_name,
-//     table: tableNumber,
-//     order_timestamp: serverTimestamp(),
-//     order_products: cartProducts,
-// ! ----------------------------------
 const OrderCardFormat = ({ orderData }) => {
-  // console.log("LA ORDEN! ", orderData);
-
-  // console.log("mis productos , ", orderData.order_products);
-  // orderData.order_products.forEach((el) => console.log(el));
   const rows = orderData.order_products.map((product) => {
     let observation = "";
     let size = "";
-    // if (product.product)
-    if ("observation" in product) {
+
+    if ("observation" in product || product.observation !== "") {
       observation = <MouseOverPopover obs={product.observation} />;
     }
     if (size) {
-      size = product.size
+      size = product.size;
     }
     return createData(
       product.product_name,
@@ -166,25 +65,11 @@ const OrderCardFormat = ({ orderData }) => {
 
   // Total of all products
   const invoiceTotal = total(rows);
-  // product_name
-  // function createData(name, observation, qty, unitPrice) {
-  //   const sum = priceRow(qty, unitPrice);
-  //   return { name, observation, qty, unitPrice, sum };
-  // }
 
-  // const rows = [
-  //   createData(
-  //     "Frozen yoghurt",
-  //     <MouseOverPopover obs="Alergic Straberries" />,
-  //     6,
-  //     24.0
-  //   ),
-  //   createData("Ice cream sandwich", "", 9.0, 37),
-  //   createData("Eclair", "", 2, 24),
-  //   createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
-  //   createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
-  // ];
-  //! --------------------
+  let chefId;
+
+  !orderData.ched_if ? (chefId = "Not assigned") : (chefId = orderData.ched_if);
+
   return (
     <div className="products-container">
       <div className="order-card">
@@ -199,7 +84,7 @@ const OrderCardFormat = ({ orderData }) => {
             <div className="order-card--infos-container">
               <div className="order-card--info-p">000036</div>
               <div className="order-card--info-p">{orderData.client_name}</div>
-              <div className="order-card--info-p">Pancho Hernandez</div>
+              <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">{orderData.table}</div>
             </div>
           </div>
