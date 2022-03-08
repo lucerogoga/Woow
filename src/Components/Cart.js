@@ -70,12 +70,15 @@ const Cart = ({ cantEdit }) => {
         </div>
         {/* <div className="client-err-container"> */}
         {isInfoEmpty && (
-          <Error message={"Fields must be filled"} onClose={setCloseX(false)} />
+          <Error
+            message={"Fields must be filled"}
+            onClose={(e) => setIsInfoEmpty(false)}
+          />
         )}
         {isCartEmpty && (
           <Error
             message={"The cart must not be empty"}
-            onClose={setCloseX(false)}
+            onClose={(e) => setIsCartEmpty(false)}
           />
         )}
         {/* </div> */}

@@ -11,8 +11,11 @@ const Error = ({ message, onClose }) => {
     <>
       <div className="err-msg">
         <div className="err-msg-header">
-          <X className="err-msg-x" onClick={onClose} />
+          <span onClick={onClose}>
+            <X className="err-msg-x" />
+          </span>
         </div>
+
         <h1 className="err-msg--text">{message}</h1>
       </div>
     </>
