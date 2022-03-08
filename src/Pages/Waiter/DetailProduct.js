@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
-import ButtonFilter from "../../Components/ButtonFilter";
+// import ButtonFilter from "../../Components/ButtonFilter";
 import NavBarWaiter from "../../Components/NavBarWaiter";
 import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
+import ButtonFilter from "../../Components/ButtonFilter";
 
 const DetailProduct = () => {
   const { cart, setCart } = useCart();

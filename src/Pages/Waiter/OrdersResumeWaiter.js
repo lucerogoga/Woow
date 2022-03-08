@@ -3,20 +3,32 @@ import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
 import ButtonFilter from "../../Components/ButtonFilter";
 import iconComponents from "../../Assets/CustomLogo";
+import { v4 as uuidv4 } from "uuid";
 import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
+  getOrderStatus,
+  getOrders,
 } from "../../Components/Context/FirestoreServices";
 import OrderCardFormat from "../../Components/OrderCardFormat";
+import iconOrderComponents from "../../Assets/CustomLogoOrders";
 
 const OrdersResumeWaiter = () => {
-  const [productCategories, setProductCategories] = useState([]);
+  const [productOrderCategories, setProductOrderCategories] = useState([
+    "Waiting",
+    "Cooking",
+    "Ready to Serve",
+    "Delivered",
+    "Canceled",
+  ]);
+  const [orders, setOrders] = useState([]);
+  
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
   useEffect(() => {
     // getProducts().then((products) => setProducts(products));
-    getProductsCategories().then((category) => setProductCategories(category));
+    getOrders().then((order) => setOrders(order));
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {
@@ -28,13 +40,12 @@ const OrdersResumeWaiter = () => {
   return (
     <>
       <div className="categories-container">
-        {productCategories.map((cat, i) => {
+        {productOrderCategories.map((cat, i) => {
           return (
             <ButtonFilter
-              item={cat.cat_name}
-              uid={cat.cat_uid}
-              icon={iconComponents[i]}
-              key={cat.cat_uid}
+              item={cat}
+              icon={iconOrderComponents[i]}
+              key={uuidv4()}
               // cat = {objeto}
               // funcion 1
               //funcion 2
@@ -45,9 +56,15 @@ const OrdersResumeWaiter = () => {
           );
         })}
       </div>
-      <OrderCardFormat />
+
+      <div>
+        {orders.map((order) => (
+          <OrderCardFormat orderData = {order}/>
+        ))}
+      </div>
     </>
   );
 };
+
 
 export default OrdersResumeWaiter;

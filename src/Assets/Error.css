@@ -32,7 +32,24 @@ body {
   justify-content: center;
   border-radius: 0 0 10px 10px;
   transition: all ease 0.5s;
-  /* transition: top ease 0.5s; */
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.err-msg-header {
+  /* background-color: aqua; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.err-msg-x {
+  transform: rotate(45deg);
+}
+
+.err-msg-x path {
+  /* transform: rotate(45deg); */
+  fill: #fff;
 }
 /* FF4B61 */
 .err-msg--text {

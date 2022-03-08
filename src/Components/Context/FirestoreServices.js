@@ -7,20 +7,28 @@ import {
   orderBy,
   where,
   addDoc,
-  setDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
 
 //---------------- Order Functions
-export const createOrder = (waiterId, chefId, client_name, tableNumber) => {
+export const createOrder = (
+  waiterId,
+  client_name,
+  tableNumber,
+  orderStatus,
+  cartProducts
+) => {
+  console.log("creando orden!");
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
     waiter_id: waiterId,
-    order_status: "Waiting",
+    order_status: orderStatus,
     client_name: client_name,
     table: tableNumber,
-    order_timstamp: Date.now(),
+    order_timestamp: serverTimestamp(),
+    order_products: cartProducts,
   });
 };
 //----------------
@@ -33,6 +41,16 @@ export const getOrderStatus = async () => {
     };
   });
 };
+//----------------
+export async function getOrders() {
+  const productsData = await getDocs(collection(db, "orders"));
+  return productsData.docs.map((p) => {
+    return {
+      id: p.id,
+      ...p.data(),
+    };
+  });
+}
 
 //---------------- User Functions
 export const getUser = async (userId) => {

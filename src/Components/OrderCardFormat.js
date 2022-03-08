@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -98,21 +98,18 @@ function total(items) {
   return items.map(({ sum }) => sum).reduce((sum, i) => sum + i, 0);
 }
 
-const rows = [
-  createData(
-    "Frozen yoghurt",
-    <MouseOverPopover obs="Alergic Straberries" />,
-    6,
-    24.0
-  ),
-  createData("Ice cream sandwich", "", 9.0, 37),
-  createData("Eclair", "", 2, 24),
-  createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
-  createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
-];
-
-// Total of all products
-const invoiceTotal = total(rows);
+// const rows = [
+//   createData(
+//     "Frozen yoghurt",
+//     <MouseOverPopover obs="Alergic Straberries" />,
+//     6,
+//     24.0
+//   ),
+//   createData("Ice cream sandwich", "", 9.0, 37),
+//   createData("Eclair", "", 2, 24),
+//   createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
+//   createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
+// ];
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -135,8 +132,59 @@ const StyledTableCell = styled(TableCell)(() => ({
 //     border: 0,
 //   },
 // }));
+// ! ----------------------------------
+// chef_id: null,
+//     waiter_id: waiterId,
+//     order_status: orderStatus,
+//     client_name: client_name,
+//     table: tableNumber,
+//     order_timestamp: serverTimestamp(),
+//     order_products: cartProducts,
+// ! ----------------------------------
+const OrderCardFormat = ({ orderData }) => {
+  // console.log("LA ORDEN! ", orderData);
 
-const OrderCardFormat = () => {
+  // console.log("mis productos , ", orderData.order_products);
+  // orderData.order_products.forEach((el) => console.log(el));
+  const rows = orderData.order_products.map((product) => {
+    let observation = "";
+    let size = "";
+    // if (product.product)
+    if ("observation" in product) {
+      observation = <MouseOverPopover obs={product.observation} />;
+    }
+    if (size) {
+      size = product.size
+    }
+    return createData(
+      product.product_name,
+      observation,
+      product.qty,
+      +product.unitCost
+    );
+  });
+
+  // Total of all products
+  const invoiceTotal = total(rows);
+  // product_name
+  // function createData(name, observation, qty, unitPrice) {
+  //   const sum = priceRow(qty, unitPrice);
+  //   return { name, observation, qty, unitPrice, sum };
+  // }
+
+  // const rows = [
+  //   createData(
+  //     "Frozen yoghurt",
+  //     <MouseOverPopover obs="Alergic Straberries" />,
+  //     6,
+  //     24.0
+  //   ),
+  //   createData("Ice cream sandwich", "", 9.0, 37),
+  //   createData("Eclair", "", 2, 24),
+  //   createData("Cupcake", <MouseOverPopover obs="Happy Birthday" />, 4, 67),
+  //   createData("Gingerbread", <MouseOverPopover obs="Extra ginger" />, 1, 49),
+  // ];
+  //! --------------------
   return (
     <div className="products-container">
       <div className="order-card">
@@ -150,9 +198,9 @@ const OrderCardFormat = () => {
             </div>
             <div className="order-card--infos-container">
               <div className="order-card--info-p">000036</div>
-              <div className="order-card--info-p">Mariana Rodriguez</div>
+              <div className="order-card--info-p">{orderData.client_name}</div>
               <div className="order-card--info-p">Pancho Hernandez</div>
-              <div className="order-card--info-p">1</div>
+              <div className="order-card--info-p">{orderData.table}</div>
             </div>
           </div>
           <div className="order-card--right-container">
