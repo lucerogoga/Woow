@@ -4,12 +4,12 @@ import "../../Assets/Sidebar.css";
 import "../../Assets/WaiterView.css";
 import ProductCart from "../../Components/ProductCard";
 import ButtonFilter from "../../Components/ButtonFilter";
-import iconComponents from "../../Assets/CustomLogo";
+import iconComponents from "../../Assets/iconComponent/CustomLogo";
 import {
   getProducts,
   getProductsCategories,
   filterProductByCategorie,
-} from "../../Components/Context/FirestoreServices";
+} from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
 const TakeOrderWaiter = () => {
@@ -19,7 +19,7 @@ const TakeOrderWaiter = () => {
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
-    
+
   useEffect(() => {
     getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));

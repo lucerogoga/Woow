@@ -2,17 +2,13 @@ import React, { useState, useEffect } from "react";
 import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
 import ButtonFilter from "../../Components/ButtonFilter";
-import iconComponents from "../../Assets/CustomLogo";
 import { v4 as uuidv4 } from "uuid";
 import {
-  getProducts,
-  getProductsCategories,
   filterProductByCategorie,
-  getOrderStatus,
   getOrders,
-} from "../../Components/Context/FirestoreServices";
+} from "../../Services/FirestoreServices";
 import OrderCardFormat from "../../Components/OrderCardFormat";
-import iconOrderComponents from "../../Assets/CustomLogoOrders";
+import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
 
 const OrdersResumeWaiter = () => {
   const [productOrderCategories, setProductOrderCategories] = useState([
@@ -23,7 +19,7 @@ const OrdersResumeWaiter = () => {
     "Canceled",
   ]);
   const [orders, setOrders] = useState([]);
-  
+
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
   useEffect(() => {
@@ -46,9 +42,6 @@ const OrdersResumeWaiter = () => {
               item={cat}
               icon={iconOrderComponents[i]}
               key={uuidv4()}
-              // cat = {objeto}
-              // funcion 1
-              //funcion 2
               onClick={() => {
                 handleClick(cat);
               }}
@@ -59,12 +52,11 @@ const OrdersResumeWaiter = () => {
 
       <div>
         {orders.map((order) => (
-          <OrderCardFormat orderData = {order}/>
+          <OrderCardFormat orderData={order} />
         ))}
       </div>
     </>
   );
 };
-
 
 export default OrdersResumeWaiter;

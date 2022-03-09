@@ -1,19 +1,22 @@
 import React from "react";
-import "../Assets/App.css";
-import Login from "./Login";
 import { Routes, Route } from "react-router-dom";
+
 import { AuthProvider } from "./Context/AuthContext";
 import { RoleComponent } from "./ProtectedRoutes";
-import WaiterView from "./WaiterView";
-import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
-import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
-import DetailProduct from "../Pages/Waiter/DetailProduct";
-import AdminView from "../Pages/Admin/AdminView";
-import ChefView from "../Pages/Chef/ChefView";
-import Cart from "./Cart";
 import SideBarCartContext from "./Context/SideBarCartContext";
-import Employes from "./Employes";
+
+import Login from "./Login";
+import WaiterView from "../Pages/Waiter/WaiterView";
+import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
+import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
+import DetailProduct from "../Pages/Waiter/DetailProduct";
+import Cart from "./Cart";
+
+import ChefView from "../Pages/Chef/ChefView";
 import OrdersToDoChef from "../Pages/Chef/OrdersToDoChef";
+
+import AdminView from "../Pages/Admin/AdminView";
+import Employes from "./Employes";
 
 function App() {
   return (
@@ -69,7 +72,6 @@ function App() {
         >
           {/* ANIDADO */}
           <Route path="" element={<OrdersToDoChef />} />
-          {/* <Route path="orders-to-do" element={<OrdersToDoChef />} /> */}
           <Route path="orders-delivered" element={<h1>ORDERS DELIVERED</h1>} />
         </Route>
       </Routes>

@@ -1,11 +1,11 @@
 // Login component
 import "../Assets/Login.css";
-import logo from "../Assets/logo-rotate.svg";
+import logo from "../Assets/icons/logo-rotate.svg";
 import Error from "./Error";
 import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
-import { getUser } from "./Context/FirestoreServices";
+import { getUser } from "../Services/FirestoreServices";
 // import { useRol } from "./Context/RolContex";
 
 export const Login = () => {

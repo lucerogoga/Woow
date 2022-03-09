@@ -14,7 +14,7 @@ import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import { ccyFormat, createData, total } from "../helpers/mathFunctions";
 import { MouseOverPopover } from "./EyePopover";
-import { updateOrder } from "./Context/FirestoreServices";
+import { updateOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
 const theme = createTheme({
   status: {

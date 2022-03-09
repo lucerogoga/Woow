@@ -10,7 +10,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../Config/initialize";
+import { db } from "../Config/initialize";
 //---------------- Order Functions
 
 export const updateOrder = async (chefId, idOrder, status) => {
