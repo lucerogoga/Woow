@@ -49,6 +49,7 @@ const StyledTableCell = styled(TableCell)(() => ({
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
+  const [startOrder, setStartOrder] = useState(false);
   const {
     user: { currentUser },
   } = useAuth();
@@ -81,18 +82,37 @@ const OrderCardFormat = ({ orderData }) => {
   let location = useLocation();
   const { pathname } = location;
 
-  console.log("VIENDO", orderData.chef_name);
+  // console.log("VIENDO", orderData.chef_name);
   // ! --------------------
 
   const handleStatus = (orderStatus) => {
-    updateOrder(currentUser, orderData.id, orderStatus, userName);
+    console.log("mi estado actual", orderData.order_status);
+    console.log("el que quiero colocar", orderStatus);
+
+    if (orderData.order_status === "Waiting" && startOrder){
+      setStartOrder(true)
+      // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
+      updateOrder(currentUser, orderData.id, "Preparing", userName);
+      // updateOrder(currentUser, orderData.id, orderStatus, userName);
+    }
+    if (orderData.order_status === "Preparing" && startOrder){
+      updateOrder(currentUser, orderData.id, "Ready", userName);
+      // ! FINALIZA EL CRONOMETRO
+      setStartOrder(false)
+
+    }
+    // setStartOrder(true)
+    // if (orderStatus === "Waiting"){
+    // } else if (orderStatus === "Ready"){
+
+    // }
 
     // console.log("chefId", chefId);
     // console.log("orderId", orderData.id);
     // console.log("orderId", orderData.order_status);
   };
 
-  console.log("USARE ESTE", userName);
+  // console.log("USARE ESTE", userName);
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(currentUser);
