@@ -1,6 +1,6 @@
 // Login component
 import "../Assets/Login.css";
-import logo from "../Assets/logo-rotate.svg";
+import logo from "../Assets/icons/logo-rotate.svg";
 import Error from "./Error";
 import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";

@@ -4,7 +4,7 @@ import "../../Assets/Sidebar.css";
 import "../../Assets/WaiterView.css";
 import ProductCart from "../../Components/ProductCard";
 import ButtonFilter from "../../Components/ButtonFilter";
-import iconOrderChefComponents from "../../Assets/CustomOrdersChef";
+import iconOrderChefComponents from "../../Assets/iconComponent/CustomOrdersChef";
 import Title from "../../Components/Title";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 

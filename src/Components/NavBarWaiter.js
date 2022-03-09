@@ -8,7 +8,7 @@ import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
-import { ReactComponent as LogoWoow } from "../Assets/logo-woow.svg";
+import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 
 import { useCart } from "../Components/Context/CartContext";
 

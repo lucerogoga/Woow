@@ -21,7 +21,7 @@ body {
 }
 
 .login {
-  background-image: url("./login-bg.jpg");
+  background-image: url("./login-bg-movil.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,7 +93,7 @@ body {
 
 @media (min-width: 1200px) {
   .login {
-    background-image: url("./background.png");
+    background-image: url("./login-bg-desktop.png");
     align-items: end;
     padding-right: 5%;
   }

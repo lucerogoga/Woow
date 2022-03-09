@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
-import DetailProductsIcons from "../../Assets/DetailsProductsIcons";
+import DetailProductsIcons from "../../Assets/iconComponent/DetailsProductsIcons";
 // import ButtonFilter from "../../Components/ButtonFilter";
 import NavBarWaiter from "../../Components/NavBarWaiter";
 import ActionButton from "../../Components/ActionButton";
