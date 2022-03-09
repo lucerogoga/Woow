@@ -7,6 +7,8 @@ import ButtonFilter from "../../Components/ButtonFilter";
 import iconOrderChefComponents from "../../Assets/iconComponent/CustomOrdersChef";
 import Title from "../../Components/Title";
 import OrderCardFormat from "../../Components/OrderCardFormat";
+import { onSnapshot, collection } from "firebase/firestore";
+import { db } from "../../Config/initialize";
 
 import {
   getProducts,
@@ -14,21 +16,37 @@ import {
   filterProductByCategorie,
   getOrderStatus,
   getOrders,
+  ordersListener,
+  getUser,
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
+import { useAuth } from "../../Components/Context/AuthContext";
 
 export const OrdersToDoChef = () => {
   const [orders, setOrders] = useState([]);
+  const [userName, setUserName] = useState("");
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
-  const [ordersStatus, setOrdersStatus] = useState(["Todo", "Delivered"]);
+  const [ordersStatus, setOrdersStatus] = useState([
+    "Todo",
+    "Cooking",
+    "Delivered",
+  ]);
+
+  const {
+    user: { currentUser },
+  } = useAuth();
 
   useEffect(() => {
-    // getProducts().then((products) => setProducts(products));
-    getOrders().then((order) => setOrders(order));
-    // console.log(orders)
+    // async function getUserFirestore() {
+    //   const { user_name } = await getUser(currentUser);
+    //   setUserName(user_name);
+    // }
+
+    onSnapshot(collection(db, "orders"), (snapshot) => {
+      setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
   }, []);
 
-  
   return (
     <>
       <Search onChange={"algo"} placeholder={"Search N° Order"}></Search>

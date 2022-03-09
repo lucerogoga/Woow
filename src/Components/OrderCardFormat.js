@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -16,6 +16,7 @@ import { ccyFormat, createData, total } from "../helpers/mathFunctions";
 import { MouseOverPopover } from "./EyePopover";
 import { updateOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
+import { getUser } from "../Services/FirestoreServices";
 const theme = createTheme({
   status: {
     danger: "#e53e3e",
@@ -47,7 +48,10 @@ const StyledTableCell = styled(TableCell)(() => ({
 }));
 
 const OrderCardFormat = ({ orderData }) => {
-  const { user } = useAuth();
+  const [userName, setUserName] = useState("");
+  const {
+    user: { currentUser },
+  } = useAuth();
   const rows = orderData.order_products.map((product) => {
     let observation = "";
     let size = "";
@@ -71,19 +75,32 @@ const OrderCardFormat = ({ orderData }) => {
 
   let chefId;
 
-  !orderData.chef_id ? (chefId = "Not assigned") : (chefId = orderData.ched_if);
+  !orderData.chef_name
+    ? (chefId = "Not assigned")
+    : (chefId = orderData.chef_name);
   let location = useLocation();
   const { pathname } = location;
 
+  console.log("VIENDO", orderData.chef_name);
   // ! --------------------
 
   const handleStatus = (orderStatus) => {
-    updateOrder(user.currentUser, orderData.id, orderStatus);
+    updateOrder(currentUser, orderData.id, orderStatus, userName);
 
     // console.log("chefId", chefId);
     // console.log("orderId", orderData.id);
     // console.log("orderId", orderData.order_status);
   };
+
+  console.log("USARE ESTE", userName);
+  useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(currentUser);
+      setUserName(user_name);
+    }
+
+    settingUserName();
+  }, []);
   // ! --------------------
 
   return (
@@ -156,20 +173,22 @@ const OrderCardFormat = ({ orderData }) => {
           </TableContainer>
         </div>
 
-        <div className="order-card--buttonsContainer">
-          <button
-            onClick={() => handleStatus("Preparing")}
-            className="order-card--button--preparing"
-          >
-            Preparing
-          </button>
-          <button
-            onClick={() => handleStatus("Ready")}
-            className="order-card--button--ready"
-          >
-            Ready
-          </button>
-        </div>
+        {pathname === "/chef" && (
+          <div className="order-card--buttonsContainer">
+            <button
+              onClick={() => handleStatus("Preparing")}
+              className="order-card--button--preparing"
+            >
+              Preparing
+            </button>
+            <button
+              onClick={() => handleStatus("Ready")}
+              className="order-card--button--ready"
+            >
+              Ready
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

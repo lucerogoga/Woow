@@ -9,21 +9,45 @@ import {
   addDoc,
   serverTimestamp,
   updateDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../Config/initialize";
+
+//---------------- User Functions
+export const getUser = async (userId) => {
+  const userRef = doc(db, "users", userId);
+
+  const docSnap = await getDoc(userRef);
+
+  const usuario = docSnap.data();
+  if (docSnap.exists()) {
+    return usuario;
+  }
+  return {};
+};
+
 //---------------- Order Functions
 
-export const updateOrder = async (chefId, idOrder, status) => {
+export const ordersListener = () => {
+  const q = query(collection(db, "orders"));
+  return onSnapshot(q, (snapshot) => {
+    console.log(snapshot.docs.map((doc) => doc.data()));
+    // console.log(snapshot.docs.map((doc) => doc.data()));
+  });
+};
+
+export const updateOrder = async (chefId, idOrder, status, chefName) => {
   // debugger;
   const orderRef = doc(db, "orders", idOrder);
 
   await updateDoc(orderRef, {
     order_status: status,
     chef_id: chefId,
+    chef_name: chefName,
   });
 };
 
-export const createOrder = (
+export const createOrder = async (
   waiterId,
   client_name,
   tableNumber,
@@ -34,6 +58,7 @@ export const createOrder = (
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
+    chef_name: null,
     waiter_id: waiterId,
     order_status: orderStatus,
     client_name: client_name,
@@ -62,19 +87,6 @@ export async function getOrders() {
     };
   });
 }
-
-//---------------- User Functions
-export const getUser = async (userId) => {
-  const userRef = doc(db, "users", userId);
-
-  const docSnap = await getDoc(userRef);
-
-  const usuario = docSnap.data();
-  if (docSnap.exists()) {
-    return usuario;
-  }
-  return {};
-};
 
 //---------------- Product Functions
 export async function getProducts() {

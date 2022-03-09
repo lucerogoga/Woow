@@ -22,6 +22,8 @@ const Cart = ({ cantEdit }) => {
   const { cart, setCart } = useCart();
   const { user } = useAuth();
 
+
+
   console.log("MI MESA ES , ", tableNumber);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
