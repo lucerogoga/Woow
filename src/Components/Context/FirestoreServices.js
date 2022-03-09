@@ -8,10 +8,21 @@ import {
   where,
   addDoc,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
-
 //---------------- Order Functions
+
+export const updateOrder = async (chefId, idOrder, status) => {
+  // debugger;
+  const orderRef = doc(db, "orders", idOrder);
+
+  await updateDoc(orderRef, {
+    order_status: status,
+    chef_id: chefId,
+  });
+};
+
 export const createOrder = (
   waiterId,
   client_name,

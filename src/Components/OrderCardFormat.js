@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,7 +14,8 @@ import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import { ccyFormat, createData, total } from "../helpers/mathFunctions";
 import { MouseOverPopover } from "./EyePopover";
-
+import { updateOrder } from "./Context/FirestoreServices";
+import { useAuth } from "./Context/AuthContext";
 const theme = createTheme({
   status: {
     danger: "#e53e3e",
@@ -45,6 +47,7 @@ const StyledTableCell = styled(TableCell)(() => ({
 }));
 
 const OrderCardFormat = ({ orderData }) => {
+  const { user } = useAuth();
   const rows = orderData.order_products.map((product) => {
     let observation = "";
     let size = "";
@@ -68,7 +71,20 @@ const OrderCardFormat = ({ orderData }) => {
 
   let chefId;
 
-  !orderData.ched_if ? (chefId = "Not assigned") : (chefId = orderData.ched_if);
+  !orderData.chef_id ? (chefId = "Not assigned") : (chefId = orderData.ched_if);
+  let location = useLocation();
+  const { pathname } = location;
+
+  // ! --------------------
+
+  const handleStatus = (orderStatus) => {
+    updateOrder(user.currentUser, orderData.id, orderStatus);
+
+    // console.log("chefId", chefId);
+    // console.log("orderId", orderData.id);
+    // console.log("orderId", orderData.order_status);
+  };
+  // ! --------------------
 
   return (
     <div className="products-container">
@@ -138,6 +154,21 @@ const OrderCardFormat = ({ orderData }) => {
               </TableRow>
             </Table>
           </TableContainer>
+        </div>
+
+        <div className="order-card--buttonsContainer">
+          <button
+            onClick={() => handleStatus("Preparing")}
+            className="order-card--button--preparing"
+          >
+            Preparing
+          </button>
+          <button
+            onClick={() => handleStatus("Ready")}
+            className="order-card--button--ready"
+          >
+            Ready
+          </button>
         </div>
       </div>
     </div>

@@ -25,6 +25,7 @@ export const OrdersToDoChef = () => {
   useEffect(() => {
     // getProducts().then((products) => setProducts(products));
     getOrders().then((order) => setOrders(order));
+    // console.log(orders)
   }, []);
 
   return (

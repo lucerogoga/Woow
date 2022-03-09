@@ -79,3 +79,42 @@
 .order-card--table-container {
   margin-top: 1rem;
 }
+
+.order-card--buttonsContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.order-card--button--preparing {
+  background-color: #ff9aa3;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.order-card--button--ready {
+  background-color: #c4c4c4;
+  border: none;
+  color: #fff;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  cursor: pointer;
+}
