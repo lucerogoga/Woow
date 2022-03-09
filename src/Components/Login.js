@@ -5,7 +5,7 @@ import Error from "./Error";
 import React, { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
-import { getUser } from "./Context/FirestoreServices";
+import { getUser } from "../Services/FirestoreServices";
 // import { useRol } from "./Context/RolContex";
 
 export const Login = () => {

@@ -14,7 +14,7 @@ import {
   filterProductByCategorie,
   getOrderStatus,
   getOrders,
-} from "../../Components/Context/FirestoreServices";
+} from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
 export const OrdersToDoChef = () => {

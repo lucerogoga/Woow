@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   filterProductByCategorie,
   getOrders,
-} from "../../Components/Context/FirestoreServices";
+} from "../../Services/FirestoreServices";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
 

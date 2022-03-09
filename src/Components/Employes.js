@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ActionButton from "./ActionButton";
 import Title from "./Title";
 import Search from "./Search";
-import { getEmployers } from "./Context/FirestoreServices";
+import { getEmployers } from "../Services/FirestoreServices";
 import EmployersCard from "./EmployersCard";
 const Employes = () => {
   const [employers, setEmployers] = useState([]);
