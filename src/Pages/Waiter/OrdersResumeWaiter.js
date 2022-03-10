@@ -9,6 +9,15 @@ import {
 } from "../../Services/FirestoreServices";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
+import {
+  onSnapshot,
+  collection,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
+import { useAuth } from "../../Components/Context/AuthContext";
+import { db } from "../../Config/initialize";
 
 const OrdersResumeWaiter = () => {
   const [productOrderCategories, setProductOrderCategories] = useState([
@@ -19,18 +28,34 @@ const OrdersResumeWaiter = () => {
     "Canceled",
   ]);
   const [orders, setOrders] = useState([]);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
 
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
-  useEffect(() => {
-    // getProducts().then((products) => setProducts(products));
-    getOrders().then((order) => setOrders(order));
-  }, []);
 
-  const handleClick = ({ cat_uid, cat_name }) => {
-    handleCategorie(cat_uid, cat_name).then((items) => {
-      // setProducts(items);
+  const {
+    user: { currentUser },
+  } = useAuth();
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "orders"),
+      where("order_status", "==", selectedOrderStatus),
+      where("waiter_id", "==", currentUser),
+      orderBy("order_timestamp", "desc")
+    );
+
+    onSnapshot(q, (snapshot) => {
+      setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
+  }, [selectedOrderStatus, currentUser]);
+
+  const handleClick = (cat) => {
+    // handleCategorie(cat_uid, cat_name).then((items) => {
+    // setProducts(items);
+
+    // });
+    setSelectedOrderStatus(cat);
   };
 
   return (
@@ -42,6 +67,7 @@ const OrdersResumeWaiter = () => {
               item={cat}
               icon={iconOrderComponents[i]}
               key={uuidv4()}
+              active={cat === selectedOrderStatus}
               onClick={() => {
                 handleClick(cat);
               }}

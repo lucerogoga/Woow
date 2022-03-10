@@ -47,20 +47,28 @@ export const OrdersToDoChef = () => {
   };
 
   useEffect(() => {
-    // async function getUserFirestore() {
-    //   const { user_name } = await getUser(currentUser);
-    //   setUserName(user_name);
-    // }
-    const q = query(
-      collection(db, "orders"),
-      where("order_status", "==", selectedOrderStatus)
-      // where("order_status", "==", "Pending")
-      // orderBy("order_timestamp", "desc")
-    );
+    let q;
+    if (selectedOrderStatus === "Cooking") {
+      q = query(
+        collection(db, "orders"),
+        where("order_status", "==", selectedOrderStatus),
+        where("chef_id", "==", currentUser),
+        orderBy("order_timestamp", "desc")
+      );
+    }
+
+    if (selectedOrderStatus === "Pending") {
+      q = query(
+        collection(db, "orders"),
+        where("order_status", "==", selectedOrderStatus),
+        orderBy("order_timestamp", "desc")
+      );
+    }
+
     onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-  }, [selectedOrderStatus]);
+  }, [selectedOrderStatus, currentUser]);
 
   console.log("quién está seleccionado?, ", selectedOrderStatus);
   console.log("orderStatus Array, ", ordersStatus);

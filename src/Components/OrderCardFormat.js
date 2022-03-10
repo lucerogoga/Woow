@@ -49,7 +49,9 @@ const StyledTableCell = styled(TableCell)(() => ({
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
-  const [startOrder, setStartOrder] = useState(false);
+  // const [startOrder, setStartOrder] = useState(false);
+
+  console.log("STATUS ACTUAL", orderData.order_status);
   const {
     user: { currentUser },
   } = useAuth();
@@ -90,9 +92,11 @@ const OrderCardFormat = ({ orderData }) => {
 
     if (orderData.order_status === "Pending") {
       // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
+      // Si el estado está en pendiente, lo cambia a cooking
       updateOrder(currentUser, orderData.id, "Cooking", userName);
     }
-    if (orderData.order_status === "Cooking" && startOrder) {
+    // if (orderData.order_status === "Cooking" && startOrder) {
+    if (orderData.order_status === "Cooking") {
       updateOrder(currentUser, orderData.id, "Ready to Serve", userName);
       // ! FINALIZA EL CRONOMETRO
     }
@@ -106,6 +110,8 @@ const OrderCardFormat = ({ orderData }) => {
 
     settingUserName();
   }, []);
+
+  console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
   // ! --------------------
 
   return (
@@ -181,11 +187,33 @@ const OrderCardFormat = ({ orderData }) => {
         {pathname === "/chef" && (
           <div className="order-card--buttonsContainer">
             <button
-              onClick={() => handleStatus("Cooking")}
+              onClick={() => handleStatus()}
               className="order-card--button--cooking"
             >
-              Start Cooking
+              {orderData.order_status === "Pending"
+                ? "Start Cooking"
+                : "Order Ready"}
             </button>
+          </div>
+        )}
+
+        {pathname === "/waiter/orders-resume" && (
+          <div className="order-card--buttonsContainer">
+            {orderData.order_status === "Pending" ? (
+              <button
+                onClick={() => handleStatus()}
+                className="order-card--button--cooking"
+              >
+                Cancel Order{" "}
+              </button>
+            ) : orderData.order_status === "Ready to Serve" ? (
+              <button
+                onClick={() => handleStatus()}
+                className="order-card--button--cooking"
+              >
+                Cancel Order{" "}
+              </button>
+            ) : null}
           </div>
         )}
       </div>
