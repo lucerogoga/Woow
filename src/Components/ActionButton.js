@@ -1,7 +1,7 @@
 import React from "react";
 import "../Assets/DetailProduct.css";
 
-const LargeButton = (props) => {
+const ActionButton = (props) => {
   const { title, className } = props;
   return (
     <>
@@ -10,4 +10,4 @@ const LargeButton = (props) => {
   );
 };
 
-export default LargeButton;
+export default ActionButton;
