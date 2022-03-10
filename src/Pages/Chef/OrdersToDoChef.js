@@ -7,7 +7,13 @@ import ButtonFilter from "../../Components/ButtonFilter";
 import iconOrderChefComponents from "../../Assets/iconComponent/CustomOrdersChef";
 import Title from "../../Components/Title";
 import OrderCardFormat from "../../Components/OrderCardFormat";
-import { onSnapshot, collection } from "firebase/firestore";
+import {
+  onSnapshot,
+  collection,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
 import { db } from "../../Config/initialize";
 
 import {
@@ -25,9 +31,9 @@ import { useAuth } from "../../Components/Context/AuthContext";
 export const OrdersToDoChef = () => {
   const [orders, setOrders] = useState([]);
   const [userName, setUserName] = useState("");
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
   const [ordersStatus, setOrdersStatus] = useState([
-    "Todo",
+    "Pending",
     "Cooking",
     "Delivered",
   ]);
@@ -36,17 +42,28 @@ export const OrdersToDoChef = () => {
     user: { currentUser },
   } = useAuth();
 
+  const handleClick = (statusOrder) => {
+    setSelectedOrderStatus(statusOrder);
+  };
+
   useEffect(() => {
     // async function getUserFirestore() {
     //   const { user_name } = await getUser(currentUser);
     //   setUserName(user_name);
     // }
-
-    onSnapshot(collection(db, "orders"), (snapshot) => {
+    const q = query(
+      collection(db, "orders"),
+      where("order_status", "==", selectedOrderStatus)
+      // where("order_status", "==", "Pending")
+      // orderBy("order_timestamp", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
-  }, []);
+  }, [selectedOrderStatus]);
 
+  console.log("quién está seleccionado?, ", selectedOrderStatus);
+  console.log("orderStatus Array, ", ordersStatus);
   return (
     <>
       <Search onChange={"algo"} placeholder={"Search N° Order"}></Search>
@@ -56,11 +73,11 @@ export const OrdersToDoChef = () => {
             <ButtonFilter
               item={cat}
               uid={cat.cat_uid}
-              //   active={cat.cat_uid === selectedCategory}
+              active={cat === selectedOrderStatus}
               icon={iconOrderChefComponents[i]}
               key={cat.cat_uid}
               onClick={() => {
-                // handleClick(cat);
+                handleClick(cat);
               }}
             />
           );

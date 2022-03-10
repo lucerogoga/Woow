@@ -82,39 +82,22 @@ const OrderCardFormat = ({ orderData }) => {
   let location = useLocation();
   const { pathname } = location;
 
-  // console.log("VIENDO", orderData.chef_name);
   // ! --------------------
 
   const handleStatus = (orderStatus) => {
     console.log("mi estado actual", orderData.order_status);
     console.log("el que quiero colocar", orderStatus);
 
-    // if (orderData.order_status === "Waiting" && startOrder) {
-    if (orderData.order_status === "Waiting" && !startOrder) {
-      setStartOrder(true);
-      // startOrder
-      // disabled
+    if (orderData.order_status === "Pending") {
       // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
-      updateOrder(currentUser, orderData.id, "Preparing", userName);
-      // updateOrder(currentUser, orderData.id, orderStatus, userName);
+      updateOrder(currentUser, orderData.id, "Cooking", userName);
     }
-    if (orderData.order_status === "Preparing" && startOrder) {
+    if (orderData.order_status === "Cooking" && startOrder) {
       updateOrder(currentUser, orderData.id, "Ready to Serve", userName);
       // ! FINALIZA EL CRONOMETRO
-      setStartOrder(false);
     }
-    // setStartOrder(true)
-    // if (orderStatus === "Waiting"){
-    // } else if (orderStatus === "Ready"){
-
-    // }
-
-    // console.log("chefId", chefId);
-    // console.log("orderId", orderData.id);
-    // console.log("orderId", orderData.order_status);
   };
 
-  // console.log("USARE ESTE", userName);
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(currentUser);
@@ -198,18 +181,10 @@ const OrderCardFormat = ({ orderData }) => {
         {pathname === "/chef" && (
           <div className="order-card--buttonsContainer">
             <button
-              onClick={() => handleStatus("Preparing")}
-              className="order-card--button--preparing"
+              onClick={() => handleStatus("Cooking")}
+              className="order-card--button--cooking"
             >
-              Preparing
-            </button>
-            <button
-              onClick={() => handleStatus("Ready")}
-              className={`order-card--button--ready  ${
-                startOrder ? "active" : ""
-              }`}
-            >
-              Ready
+              Start Cooking
             </button>
           </div>
         )}

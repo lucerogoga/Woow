@@ -12,7 +12,7 @@ import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
 
 const OrdersResumeWaiter = () => {
   const [productOrderCategories, setProductOrderCategories] = useState([
-    "Waiting",
+    "Pending",
     "Cooking",
     "Ready to Serve",
     "Delivered",

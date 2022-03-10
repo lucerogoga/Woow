@@ -37,7 +37,7 @@ const Cart = ({ cantEdit }) => {
       return setIsInfoEmpty(true);
     } else {
       setOrderNumber(orderNumber + 1);
-      createOrder(user.currentUser, clientName, tableNumber, "Waiting", cart);
+      createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
       setCart([]);
     }
   };

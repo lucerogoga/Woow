@@ -2,6 +2,8 @@ import React from "react";
 import "../Assets/ButtonFilter.css";
 export function ButtonFilter(props) {
   const { item, icon, onClick, active } = props;
+
+  console.log("Está activo el botón?, ", active);
   return (
     <>
       <button

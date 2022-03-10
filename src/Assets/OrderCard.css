@@ -86,7 +86,7 @@
   margin-top: 1rem;
 }
 
-.order-card--button--preparing {
+.order-card--button--cooking {
   background-color: #ff9aa3;
   border: none;
   color: #fff;
@@ -94,12 +94,12 @@
   padding: 1.5rem;
   border-radius: 10px;
   font-size: 1rem;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 1rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   cursor: pointer;
 }
 

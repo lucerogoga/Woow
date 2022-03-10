@@ -111,6 +111,25 @@ export async function getProductsCategories() {
   });
 }
 
+export async function filterOrderPending(chefId, catName) {
+  if (catName === "All") {
+    return getProducts();
+  } else {
+    const q1 = query(
+      collection(db, "orders"),
+      where("order_status", "==", "Pending"),
+      orderBy("product_name", "desc")
+    );
+    const querySnapshotProduct = await getDocs(q1);
+    const productFilterDocs = querySnapshotProduct.docs;
+    return productFilterDocs.map((p) => {
+      return {
+        id: p.id,
+        ...p.data(),
+      };
+    });
+  }
+}
 export async function filterProductByCategorie(catId, catName) {
   if (catName === "All") {
     return getProducts();
