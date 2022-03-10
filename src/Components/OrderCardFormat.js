@@ -89,17 +89,19 @@ const OrderCardFormat = ({ orderData }) => {
     console.log("mi estado actual", orderData.order_status);
     console.log("el que quiero colocar", orderStatus);
 
-    if (orderData.order_status === "Waiting" && startOrder){
-      setStartOrder(true)
+    // if (orderData.order_status === "Waiting" && startOrder) {
+    if (orderData.order_status === "Waiting" && !startOrder) {
+      setStartOrder(true);
+      // startOrder
+      // disabled
       // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
       updateOrder(currentUser, orderData.id, "Preparing", userName);
       // updateOrder(currentUser, orderData.id, orderStatus, userName);
     }
-    if (orderData.order_status === "Preparing" && startOrder){
-      updateOrder(currentUser, orderData.id, "Ready", userName);
+    if (orderData.order_status === "Preparing" && startOrder) {
+      updateOrder(currentUser, orderData.id, "Ready to Serve", userName);
       // ! FINALIZA EL CRONOMETRO
-      setStartOrder(false)
-
+      setStartOrder(false);
     }
     // setStartOrder(true)
     // if (orderStatus === "Waiting"){
@@ -203,7 +205,9 @@ const OrderCardFormat = ({ orderData }) => {
             </button>
             <button
               onClick={() => handleStatus("Ready")}
-              className="order-card--button--ready"
+              className={`order-card--button--ready  ${
+                startOrder ? "active" : ""
+              }`}
             >
               Ready
             </button>

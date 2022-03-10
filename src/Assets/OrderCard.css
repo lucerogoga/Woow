@@ -104,6 +104,7 @@
 }
 
 .order-card--button--ready {
+  /* background-color: #ff9aa3; */
   background-color: #c4c4c4;
   border: none;
   color: #fff;
@@ -119,3 +120,6 @@
   cursor: pointer;
 }
 
+.order-card--button--ready.active {
+  background-color: green;
+}
