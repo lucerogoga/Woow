@@ -48,7 +48,10 @@ export const OrdersToDoChef = () => {
 
   useEffect(() => {
     let q;
-    if (selectedOrderStatus === "Cooking") {
+    if (
+      selectedOrderStatus === "Cooking" ||
+      selectedOrderStatus === "Delivered"
+    ) {
       q = query(
         collection(db, "orders"),
         where("order_status", "==", selectedOrderStatus),
@@ -64,6 +67,7 @@ export const OrdersToDoChef = () => {
         orderBy("order_timestamp", "desc")
       );
     }
+    // }
 
     onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
