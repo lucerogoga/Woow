@@ -52,12 +52,12 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
             <Link className="menu--link" to={""}>
               <FoodMenu width={35} height={35} />
             </Link>
-          ) : <div className="cart--container" onClick={onClickSideBar}>
+          ) : currentPath === "/waiter/detail-product" ? null : (
+            <div className="cart--container" onClick={onClickSideBar}>
               <ShoppingCart fill="#fff" width={50} height={35} />
               <span className="cart--counter">{cart.length}</span>
-            </div> ? (
-            currentPath === "waiter/detail-product"
-          ) : null}
+            </div>
+          )}
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">
               <Waiter width={25} height={25} />
