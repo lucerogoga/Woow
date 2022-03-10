@@ -118,7 +118,8 @@ export async function filterOrderPending(chefId, catName) {
     const q1 = query(
       collection(db, "orders"),
       where("order_status", "==", "Pending"),
-      orderBy("product_name", "desc")
+      orderBy("product_name", "asc")
+      // orderBy("product_name", "desc")
     );
     const querySnapshotProduct = await getDocs(q1);
     const productFilterDocs = querySnapshotProduct.docs;

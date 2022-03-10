@@ -91,7 +91,7 @@ const OrderCardFormat = ({ orderData }) => {
   // ! --------------------
 
   const handleStatus = (orderStatus) => {
-    debugger;
+    // debugger;
     console.log("mi estado actual", orderData.order_status);
     console.log("el que quiero colocar", orderStatus);
 
