@@ -70,9 +70,6 @@ function App() {
             </RoleComponent>
           }
         >
-          {/* ANIDADO */}
-          <Route path="" element={<OrdersToDoChef />} />
-          <Route path="orders-delivered" element={<h1>ORDERS DELIVERED</h1>} />
         </Route>
       </Routes>
     </AuthProvider>

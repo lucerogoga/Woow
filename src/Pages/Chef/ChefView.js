@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
 import { useAuth } from "../../Components/Context/AuthContext";
 import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
@@ -9,6 +8,7 @@ import "../../Assets/OrderCard.css";
 
 import NavBarChef from "../../Components/NavBarChef";
 import SideBarChef from "../../Components/SideBarChef";
+import OrdersToDoChef from "./OrdersToDoChef";
 
 export const ChefView = () => {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ export const ChefView = () => {
           />
         )}
         <div className="content">
-          <Outlet />
+          <OrdersToDoChef />
         </div>
       </div>
     </>
