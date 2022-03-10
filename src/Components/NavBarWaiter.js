@@ -5,6 +5,7 @@ import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
 
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
+import { ReactComponent as Back } from "../Assets/icons/back.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
@@ -20,7 +21,13 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
       <div className="navbar--container">
         <div className="navbar--block">
           <div className="navbar--burger-container">
-            <MenuBurger width={30} onClick={onClickMenu} />
+            {currentPath === "/waiter/detail-product" ? (
+              <Link className="menu--link" to={"/waiter"}>
+                <Back width={35} height={35} />
+              </Link>
+            ) : (
+              <MenuBurger width={30} onClick={onClickMenu} />
+            )}
           </div>
           <div className="logo-container">
             <LogoWoow width="70" height="70" />
@@ -45,12 +52,12 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
             <Link className="menu--link" to={""}>
               <FoodMenu width={35} height={35} />
             </Link>
-          ) : (
-            <div className="cart--container" onClick={onClickSideBar}>
+          ) : <div className="cart--container" onClick={onClickSideBar}>
               <ShoppingCart fill="#fff" width={50} height={35} />
               <span className="cart--counter">{cart.length}</span>
-            </div>
-          )}
+            </div> ? (
+            currentPath === "waiter/detail-product"
+          ) : null}
           <div style={{ marginLeft: "15px" }}>
             <div className="user--container">
               <Waiter width={25} height={25} />
