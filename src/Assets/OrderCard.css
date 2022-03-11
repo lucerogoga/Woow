@@ -51,7 +51,7 @@
   align-items: flex-start;
 }
 
-.order-cart--containertime {
+/* .order-cart--containertime {
   display: flex;
   align-items: center;
 }
@@ -74,7 +74,7 @@
   font-size: 1rem;
   font-weight: 700;
   margin-left: 0.2rem;
-}
+} */
 
 .order-card--table-container {
   margin-top: 1rem;

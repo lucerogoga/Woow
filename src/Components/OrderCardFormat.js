@@ -8,7 +8,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
 import "../Assets/OrderCard.css";
 import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
@@ -19,6 +18,8 @@ import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
+import Time from "./Time";
+
 
 const theme = createTheme({
   status: {
@@ -151,10 +152,11 @@ const OrderCardFormat = ({ orderData }) => {
             </div>
           </div>
           <div className="order-card--right-container">
-            <div className="order-cart--containertime">
+            {/* <div className="order-cart--containertime">
               <Clock className="order-cart--clock" width={16} height={16} />
               <h3 className="order-cart--minutes">00:30:00</h3>
-            </div>
+            </div> */}
+            <Time/>
           </div>
         </div>
         <div className="order-card--table-container">
