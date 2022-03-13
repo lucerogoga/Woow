@@ -51,4 +51,3 @@ const EyePopover = ({ obs }) => {
 };
 
 export default EyePopover;
-

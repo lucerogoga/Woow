@@ -19,13 +19,13 @@ const Time = ({ start, end }) => {
   // console.log("salvame diferencia formato, ", duration);
   console.log("salvame diferencia json, ", diferenciaa);
   // !-----
-  var d = moment.duration(diferenciaa);
-  var s = d.format("hh:mm:ss");
+  // var d = moment.duration(diferenciaa);
+  // var s = d.format("hh:mm:ss");
 
-  console.log("y dónde está?, ", s);
+  // console.log("y dónde está?, ", s);
 
-  const myDate = moment().format("hh:mm:ss");
-  console.log("formateando moment, ", myDate);
+  // const myDate = moment().format("hh:mm:ss");
+  // console.log("formateando moment, ", myDate);
 
   return (
     <div className="order-cart--containertime">
