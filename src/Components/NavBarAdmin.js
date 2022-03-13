@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "../Assets/Navbar.css";
@@ -11,10 +11,24 @@ import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 
 import { useCart } from "../Components/Context/CartContext";
+import { useAuth } from "./Context/AuthContext";
 
+import { getUser } from "../Services/FirestoreServices";
 const NavBarAdmin = ({ onClickMenu, onClickSideBar, currentPath }) => {
   const { cart } = useCart();
+  const {
+    user: { currentUser },
+  } = useAuth();
 
+  const [userName, setUserName] = useState("");
+  //GETTING NAME OF CHEF FOR THE ORDER
+  useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(currentUser);
+      setUserName(user_name);
+    }
+    settingUserName();
+  }, []);
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -61,6 +75,7 @@ const NavBarAdmin = ({ onClickMenu, onClickSideBar, currentPath }) => {
               <Waiter width={25} height={25} />
             </div>
           </div>
+          <p className="user-name--content">{userName}</p>
         </div>
       </div>
     </div>
