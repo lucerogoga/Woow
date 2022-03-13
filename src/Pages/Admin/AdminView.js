@@ -21,7 +21,11 @@ const AdminView = () => {
 
   return (
     <>
-      <NavBarAdmin onClickMenu={() => setOpen(!open)} currentPath={pathname} />
+      <NavBarAdmin
+        onClickMenu={() => setOpen(!open)}
+        currentPath={pathname}
+        onClickLogout={handleLogout}
+      />
       <div>
         {open && (
           <SideBarAdmin

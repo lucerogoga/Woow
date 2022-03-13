@@ -13,11 +13,11 @@ import DetailProduct from "../Pages/Waiter/DetailProduct";
 import Cart from "./Cart";
 
 import ChefView from "../Pages/Chef/ChefView";
-import OrdersToDoChef from "../Pages/Chef/OrdersToDoChef";
 
 import AdminView from "../Pages/Admin/AdminView";
 import Employes from "./Employes";
-
+import OrdersResumeAdmin from "../Pages/Admin/OrdersResume";
+import AdminProducts from "../Pages/Admin/AdminProducts";
 function App() {
   return (
     <AuthProvider>
@@ -27,12 +27,16 @@ function App() {
           path="/home"
           element={
             <RoleComponent role="admin">
-              <AdminView />
+              <SideBarCartContext>
+                <AdminView />
+              </SideBarCartContext>
             </RoleComponent>
           }
         >
           {/* ANIDADO */}
           <Route path="" element={<Employes />} />
+          <Route path="orders" element={<OrdersResumeAdmin />} />
+          <Route path="addProducts" element={<AdminProducts />} />
         </Route>
 
         {/* Waiter Views */}
@@ -69,8 +73,7 @@ function App() {
               <ChefView />
             </RoleComponent>
           }
-        >
-        </Route>
+        ></Route>
       </Routes>
     </AuthProvider>
   );

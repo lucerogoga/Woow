@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../../Assets/Navbar.css";
-import "../../Assets/Sidebar.css";
-import "../../Assets/WaiterView.css";
-import ProductCard from "../../Components/ProductCard";
 import ButtonFilter from "../../Components/ButtonFilter";
+import ProductCard from "../../Components/ProductCard";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
 import {
   getProducts,
@@ -12,7 +9,7 @@ import {
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
-const TakeOrderWaiter = () => {
+const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [productCategories, setProductCategories] = useState([]);
@@ -42,6 +39,7 @@ const TakeOrderWaiter = () => {
 
   return (
     <>
+      <h1>administro mis productos</h1>
       <Search onChange={handleSearch} placeholder={"Search product"}></Search>
       <div className="categories-container">
         {productCategories.map((cat, i) => {
@@ -67,5 +65,4 @@ const TakeOrderWaiter = () => {
     </>
   );
 };
-
-export default TakeOrderWaiter;
+export default AdminProducts;

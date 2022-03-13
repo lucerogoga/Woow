@@ -13,7 +13,7 @@ const SideBarAdmin = ({ onClose, onClickLogout }) => {
 
         <div className="sidebar--menu">
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"employes"}>
+            <Link className="sidebar--link" to={""}>
               Employes
             </Link>
           </div>
@@ -23,8 +23,8 @@ const SideBarAdmin = ({ onClose, onClickLogout }) => {
             </Link>
           </div>
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"create-categories"}>
-              Create Cayegories
+            <Link className="sidebar--link" to={"addProducts"}>
+              Products
             </Link>
           </div>
           <div className="sidebar--item">
