@@ -48,6 +48,7 @@ export const OrdersToDoChef = () => {
 
   useEffect(() => {
     let q;
+    debugger;
     if (
       selectedOrderStatus === "Cooking" ||
       selectedOrderStatus === "Delivered"
@@ -69,7 +70,7 @@ export const OrdersToDoChef = () => {
     }
     // }
 
-    onSnapshot(q, (snapshot) => {
+    return onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, [selectedOrderStatus, currentUser]);

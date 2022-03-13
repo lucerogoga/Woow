@@ -3,10 +3,6 @@ import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
 import ButtonFilter from "../../Components/ButtonFilter";
 import { v4 as uuidv4 } from "uuid";
-import {
-  filterProductByCategorie,
-  getOrders,
-} from "../../Services/FirestoreServices";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
 import {
@@ -29,10 +25,6 @@ const OrdersResumeWaiter = () => {
   ]);
   const [orders, setOrders] = useState([]);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
-
-  const handleCategorie = async (catUid, catName) =>
-    await filterProductByCategorie(catUid, catName);
-
   const {
     user: { currentUser },
   } = useAuth();
@@ -45,16 +37,12 @@ const OrdersResumeWaiter = () => {
       orderBy("order_timestamp", "desc")
     );
 
-    onSnapshot(q, (snapshot) => {
+    return onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, [selectedOrderStatus, currentUser]);
 
   const handleClick = (cat) => {
-    // handleCategorie(cat_uid, cat_name).then((items) => {
-    // setProducts(items);
-
-    // });
     setSelectedOrderStatus(cat);
   };
 

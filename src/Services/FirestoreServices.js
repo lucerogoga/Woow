@@ -37,13 +37,20 @@ export const ordersListener = () => {
 };
 
 export const updateOrder = async (chefId, idOrder, status, chefName) => {
-  // debugger;
   const orderRef = doc(db, "orders", idOrder);
 
   await updateDoc(orderRef, {
     order_status: status,
     chef_id: chefId,
     chef_name: chefName,
+  });
+};
+
+export const updateStatusOrder = async (idOrder, status) => {
+  const orderRef = doc(db, "orders", idOrder);
+
+  await updateDoc(orderRef, {
+    order_status: status,
   });
 };
 

@@ -8,7 +8,7 @@ import { createOrder } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
 // import {makeStyles} from ""
-
+import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
 
 const Cart = ({ cantEdit }) => {
@@ -22,12 +22,11 @@ const Cart = ({ cantEdit }) => {
   const { cart, setCart } = useCart();
   const { user } = useAuth();
 
-
-
+  console.log("MI CLIENTE ES , ", clientName);
   console.log("MI MESA ES , ", tableNumber);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
-  console.log("carrito actual", cart);
+
   const handleOrder = () => {
     setIsCartEmpty(false);
     setIsInfoEmpty(false);
@@ -41,34 +40,22 @@ const Cart = ({ cantEdit }) => {
       setCart([]);
     }
   };
+  const handleChange = (name) => {
+    setClientName(name);
+  };
 
+  const handleChangeTable = (table) => {
+    setTableNumber(table);
+  };
   return (
     <>
       <div className="cart-content">
         <Title title="Order" quantity={qtyItems} />
         <div className="client-info--content">
-          <input
-            type="text"
-            id="client"
-            className="client--input"
-            placeholder="Client Name"
-            onChange={(ev) => setClientName(ev.target.value)}
-          ></input>
-          <select
-            className="table--input"
-            placeholder="Nº Table"
-            name="Nº Table"
-            id="table"
-            onChange={(ev) => setTableNumber(ev.target.value)}
-          >
-            <option value="Table 1">Table 1</option>
-            <option value="Table 2">Table 2</option>
-            <option value="Table 3">Table 3</option>
-          </select>
-
-          {/* <ControlledOpenSelect
-            getTable={(tableNumber) => setTableNumber(tableNumber)}
-          /> */}
+          <InputInfoClient
+            onChange={handleChange}
+            setTable={handleChangeTable}
+          />
         </div>
         {/* <div className="client-err-container"> */}
         {isInfoEmpty && (
