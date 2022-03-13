@@ -3,7 +3,10 @@ import { useLocation } from "react-router-dom";
 
 import ButtonFilter from "../../Components/ButtonFilter";
 import ProductCard from "../../Components/ProductCard";
+import ActionButton from "../../Components/ActionButton";
+import ModalProducts from "../../Components/ModalProducts";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
+
 import {
   getProducts,
   getProductsCategories,
@@ -34,6 +37,15 @@ const AdminProducts = () => {
     });
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+  const onClose = () => {
+    setOpenModal(false);
+  };
+
   const handleSearch = async (query) => {
     const products = await getProducts();
     const product = products.filter((elem) => {
@@ -41,10 +53,12 @@ const AdminProducts = () => {
     });
     setProducts(product);
   };
+  const handleAddProduct = () => {
+    console.log("hola agregare un productoaqui");
+  };
 
   return (
     <>
-      <h1>administro mis productos</h1>
       <Search onChange={handleSearch} placeholder={"Search product"}></Search>
       <div className="categories-container">
         {productCategories.map((cat, i) => {
@@ -61,6 +75,14 @@ const AdminProducts = () => {
             />
           );
         })}
+      </div>
+      <ModalProducts isOpen={openModal} onClose={onClose} />
+      <div className="large-button--content" onClick={handleOpen}>
+        <ActionButton
+          title={"Add Product"}
+          className={"pink-button"}
+          //   onClick={openModal}
+        />
       </div>
       <div className="products-container">
         {products.map((p) => {
