@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import ButtonFilter from "../../Components/ButtonFilter";
 import ProductCard from "../../Components/ProductCard";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
@@ -14,6 +16,9 @@ const AdminProducts = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [productCategories, setProductCategories] = useState([]);
 
+  const location = useLocation();
+  const { pathname } = location;
+  console.log(pathname);
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
 
@@ -59,7 +64,7 @@ const AdminProducts = () => {
       </div>
       <div className="products-container">
         {products.map((p) => {
-          return <ProductCard product={p} key={p.id} />;
+          return <ProductCard path={pathname} product={p} key={p.id} />;
         })}
       </div>
     </>

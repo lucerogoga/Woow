@@ -22,7 +22,7 @@ export const Login = () => {
     try {
       const user = await login(loginEmail, loginPassword);
       const { user_rol: role } = await getUser(user.user.uid);
-      if (role === "admin") navigate("/home");
+      if (role === "admin") navigate("/admin");
       else if (role === "chef") navigate("/chef");
       else navigate("/waiter");
     } catch (e) {
@@ -40,7 +40,7 @@ export const Login = () => {
   // }
 
   if (user.currentUser) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/admin" />;
   }
 
   return (

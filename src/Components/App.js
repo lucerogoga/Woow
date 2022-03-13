@@ -24,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
-          path="/home"
+          path="/admin"
           element={
             <RoleComponent role="admin">
               <SideBarCartContext>
