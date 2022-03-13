@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "../Assets/ProductAddedCart.css";
 
 import { ReactComponent as More } from "../Assets/icons/more.svg";
-import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
+// import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
 
 import { useCart } from "../Components/Context/CartContext";
+import EyePopover from "./EyePopover";
 // import TableRow from "@mui/material/TableRow";
 
 const cartReducer = (state, action) => {
@@ -20,7 +21,7 @@ const cartReducer = (state, action) => {
       return state;
   }
 };
-  
+
 const Edit = ({ onClick }) => {
   return (
     <button className="productAdded-card--pencilContainer" onClick={onClick}>
@@ -42,6 +43,14 @@ export function ProductAddedCart({ cartProduct, cantEdit }) {
   const decrement = () => {
     dispatch({ type: "decrement" });
   };
+
+  let observationExist = "";
+
+  if (cartProduct.observation) {
+    cartProduct.observation.trim() !== ""
+      ? (observationExist = <EyePopover obs={cartProduct.observation} />)
+      : (observationExist = "");
+  }
 
   const { idProductCart, unitCost } = cartProduct;
 
@@ -96,16 +105,23 @@ export function ProductAddedCart({ cartProduct, cantEdit }) {
             <h3 className="productAdded-card--cost-dinamic">
               $ {cartProduct.unitCost * state.count}
             </h3>
-            {cartProduct.observation && (
-              <Eye
-                fill="#fff"
-                width={30}
-                className="product-card--eye"
-                // onMouseEnter={setObs(true)}
-                // onMouseLeave={setObs(false)}
-                onClick={() => setObs(!obs)}
-              />
-            )}
+            {/* {cartProduct.observation && (
+              // <Eye
+              //   fill="#fff"
+              //   width={30}
+              //   className="product-card--eye"
+              //   onClick={() => setObs(!obs)}
+              // />
+              <EyePopover />
+            )} */}
+            {cartProduct.observation &&
+              // <Eye
+              //   fill="#fff"
+              //   width={30}
+              //   className="product-card--eye"
+              //   onClick={() => setObs(!obs)}
+              // />
+              observationExist}
 
             {obs && (
               <div className="productAdded-card--obsContainer">

@@ -31,7 +31,7 @@ const DetailProduct = () => {
               totalCost: product.product_cost[cost] * count,
               qty: count,
               size: size,
-              observation: observation,
+              observation: observation.trim(),
             }
           : x
       )
@@ -48,7 +48,7 @@ const DetailProduct = () => {
         totalCost: product.product_cost[cost] * count,
         qty: count,
         size: size,
-        observation: observation,
+        observation: observation.trim(),
       },
     ]);
   };

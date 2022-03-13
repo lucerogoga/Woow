@@ -12,14 +12,13 @@ import "../Assets/OrderCard.css";
 import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import { ccyFormat, createData, total } from "../helpers/mathFunctions";
-import { MouseOverPopover } from "./EyePopover";
+import EyePopover from "./EyePopover";
 import { updateOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
+import { getUser, serverTimestamp } from "../Services/FirestoreServices";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
 import Time from "./Time";
-
 
 const theme = createTheme({
   status: {
@@ -64,8 +63,16 @@ const OrderCardFormat = ({ orderData }) => {
     let observation = "";
     let size = "";
 
+    // let observationExist = "";
+
+    // if (cartProduct.observation) {
+    //   cartProduct.observation.trim() !== ""
+    //     ? (observationExist = <EyePopover obs={cartProduct.observation} />)
+    //     : (observationExist = "");
+    // }
+
     if ("observation" in product || product.observation !== "") {
-      observation = <MouseOverPopover obs={product.observation} />;
+      observation = <EyePopover obs={product.observation} />;
     }
     if (size) {
       size = product.size;
@@ -131,6 +138,8 @@ const OrderCardFormat = ({ orderData }) => {
   }, []);
 
   console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
+  console.log("ORDER TIME START", orderData.order_timestamp);
+  console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
   // ! --------------------
 
   return (
@@ -156,7 +165,7 @@ const OrderCardFormat = ({ orderData }) => {
               <Clock className="order-cart--clock" width={16} height={16} />
               <h3 className="order-cart--minutes">00:30:00</h3>
             </div> */}
-            <Time/>
+            <Time start={orderData.order_timestamp} />
           </div>
         </div>
         <div className="order-card--table-container">
