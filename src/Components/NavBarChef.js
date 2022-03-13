@@ -7,12 +7,18 @@ import "../Assets/Sidebar.css";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
+import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
 
 import { useAuth } from "./Context/AuthContext";
 
 import { getUser } from "../Services/FirestoreServices";
 
-const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
+const NavBarChef = ({
+  onClickMenu,
+  onClickSideBar,
+  currentPath,
+  onClickLogout,
+}) => {
   const {
     user: { currentUser },
   } = useAuth();
@@ -38,7 +44,7 @@ const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
           </div>
         </div>
 
-        <ul className="menu">
+        {/* <ul className="menu">
           <li className="menu--list">
             <Link className="menu--link" to={"chef/take-order"}>
               Take Order
@@ -49,15 +55,20 @@ const NavBarChef = ({ onClickMenu, onClickSideBar, currentPath }) => {
               Orders Resume
             </Link>
           </li>
-        </ul>
+        </ul> */}
 
         <div className="navbar--block">
+          <p className="user-name--content">{userName}</p>
           <div style={{ marginLeft: "15px" }}>
-            <div className="user--container">
-              <Chef width={25} height={25} />
+            <div>
+              <Chef width={35} height={35} />
             </div>
           </div>
-          <p className="user-name--content">{userName}</p>
+          <div style={{ marginLeft: "15px" }}>
+            <div className="user--container" onClick={onClickLogout}>
+              <Logout width={25} height={25} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

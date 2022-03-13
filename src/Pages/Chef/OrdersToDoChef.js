@@ -37,7 +37,6 @@ export const OrdersToDoChef = () => {
 
   useEffect(() => {
     let q;
-    debugger;
     if (
       selectedOrderStatus === "Cooking" ||
       selectedOrderStatus === "Delivered"

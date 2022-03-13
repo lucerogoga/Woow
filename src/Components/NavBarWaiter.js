@@ -10,13 +10,19 @@ import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
 import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
+import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
 
 import { useCart } from "../Components/Context/CartContext";
 import { useAuth } from "./Context/AuthContext";
 
 import { getUser } from "../Services/FirestoreServices";
 
-const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
+const NavBarWaiter = ({
+  onClickMenu,
+  onClickSideBar,
+  currentPath,
+  onClickLogout,
+}) => {
   const { cart } = useCart();
   const {
     user: { currentUser },
@@ -51,12 +57,12 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/take-order"}>
+            <Link className="menu--link" to={""}>
               Take Order
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"waiter/orders-resume"}>
+            <Link className="menu--link" to={"orders-resume"}>
               Orders Resume
             </Link>
           </li>
@@ -73,12 +79,17 @@ const NavBarWaiter = ({ onClickMenu, onClickSideBar, currentPath }) => {
               <span className="cart--counter">{cart.length}</span>
             </div>
           )}
+          <p className="user-name--content">{userName}</p>
           <div style={{ marginLeft: "15px" }}>
-            <div className="user--container">
-              <Waiter width={25} height={25} />
+            <div>
+              <Waiter width={35} height={35} />
             </div>
           </div>
-          <p className="user-name--content">{userName}</p>
+          <div style={{ marginLeft: "15px" }}>
+            <div className="user--container" onClick={onClickLogout}>
+              <Logout width={25} height={25} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

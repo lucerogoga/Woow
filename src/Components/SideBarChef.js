@@ -14,12 +14,7 @@ const SideBarChef = ({ onClose, onClickLogout }) => {
         <div className="sidebar--menu">
           <div className="sidebar--item">
             <Link className="sidebar--link" to={""}>
-              Orders To Do
-            </Link>
-          </div>
-          <div className="sidebar--item">
-            <Link className="sidebar--link" to={"orders-delivered"}>
-              Orders Delivered
+              Orders
             </Link>
           </div>
           <div className="sidebar--item">
