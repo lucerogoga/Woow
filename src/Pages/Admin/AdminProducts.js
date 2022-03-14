@@ -53,9 +53,6 @@ const AdminProducts = () => {
     });
     setProducts(product);
   };
-  const handleAddProduct = () => {
-    console.log("hola agregare un productoaqui");
-  };
 
   return (
     <>

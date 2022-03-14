@@ -11,7 +11,8 @@ import {
   updateDoc,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../Config/initialize";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../Config/initialize";
 
 //---------------- User Functions
 export const getUser = async (userId) => {
@@ -61,7 +62,6 @@ export const createOrder = async (
   orderStatus,
   cartProducts
 ) => {
-  console.log("creando orden!");
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
@@ -166,5 +166,37 @@ export async function getEmployers() {
       id: e.id,
       ...e.data(),
     };
+  });
+}
+//-------------uploadimage
+// ------------Subir imagen en post  -------------
+
+export function uploadImage(file, catName) {
+  const postPath = "products";
+  const fileName = file.name;
+  const imageRef = ref(storage, `${postPath}/${catName}/${fileName}`);
+  return uploadBytes(imageRef, file).then((snapshot) =>
+    getDownloadURL(snapshot.ref)
+  );
+}
+//--------------CreateProduct
+export async function createProductFirebase(
+  catId,
+  productName,
+  productDescription,
+  productCost,
+  productOption,
+  productPhoto,
+  productStock
+) {
+  const ordersRef = collection(db, "products");
+  return addDoc(ordersRef, {
+    cat_id: catId,
+    product_name: productName,
+    description: productDescription,
+    product_cost: productCost, //array
+    product_option: productOption, //array
+    product_photo: productPhoto, //array
+    product_stock: productStock, //array
   });
 }
