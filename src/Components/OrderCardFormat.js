@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
 import { updateOrder } from "../Services/FirestoreServices";
+import { createTheme } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import { ccyFormat, createData, total } from "../helpers/mathFunctions";
+import { MouseOverPopover } from "./EyePopover";
+import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
 // import { getUser, serverTimestamp } from "../Services/FirestoreServices";
@@ -13,6 +18,9 @@ import TableCard from "./TableCard";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
+  // const [startOrder, setStartOrder] = useState(false);
+  let location = useLocation();
+  const { pathname } = location;
 
   const userRole = useRol();
   const {
@@ -21,13 +29,11 @@ const OrderCardFormat = ({ orderData }) => {
 
   const rows = createRows(orderData);
 
+  // Getting chef_id
   let chefId;
-
   !orderData.chef_name
     ? (chefId = "Not assigned")
     : (chefId = orderData.chef_name);
-  let location = useLocation();
-  const { pathname } = location;
 
   // ! --------------------
 
@@ -35,37 +41,35 @@ const OrderCardFormat = ({ orderData }) => {
     console.log("mi estado actual", orderData.order_status);
     console.log("el que quiero colocar", orderStatus);
 
+    //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
-      // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
-      console.log("Pending && waiter");
-      // Si el estado está en pendiente, lo cambia a cooking
-      updateOrder(currentUser, orderData.id, "Canceled", userName);
+      // Si el estado está en pendiente siendo waiter , puede cancelar la orden
+      updateStatusOrder(orderData.id, "Canceled");
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
-      // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
       console.log("Ready to Serve && waiter");
-      // Si el estado está en pendiente, lo cambia a cooking
-      updateOrder(currentUser, orderData.id, "Delivered", userName);
+      // Si el estado está en ready to Serve, el waiter puede marcar la ordern como Delivered
+      updateStatusOrder(orderData.id, "Delivered");
     }
+    //CONDITIONS CHEF
     if (orderData.order_status === "Pending" && userRole === "chef") {
-      console.log("Pending && chef");
       // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
-      // Si el estado está en pendiente, lo cambia a cooking
+      // Si el estado está en pendiente, el chef puede tomar el pedido y cambia su estado Cooking
       updateOrder(currentUser, orderData.id, "Cooking", userName);
     }
     if (orderData.order_status === "Cooking" && userRole === "chef") {
-      console.log("Cooking && chef");
-      updateOrder(currentUser, orderData.id, "Ready to Serve", userName);
+      // Si el estado está en Cooking, el chef cambia su estado a Ready to Serve
+      updateStatusOrder(orderData.id, "Ready to Serve");
       // ! FINALIZA EL CRONOMETRO
     }
   };
 
+  //GETTING NAME OF CHEF FOR THE ORDER
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(currentUser);
       setUserName(user_name);
     }
-
     settingUserName();
   }, []);
 
@@ -74,7 +78,7 @@ const OrderCardFormat = ({ orderData }) => {
   // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
   console.log("funcionan los rows?? , ", rows);
   console.log("AQUI");
-  // ! --------------------
+  // ! ------------------------------------------------------------
 
   return (
     <div className="products-container">

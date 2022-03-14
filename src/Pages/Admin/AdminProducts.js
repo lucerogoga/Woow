@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "../../Assets/Navbar.css";
-import "../../Assets/Sidebar.css";
-import "../../Assets/WaiterView.css";
-import ProductCard from "../../Components/ProductCard";
+import { useLocation } from "react-router-dom";
+
 import ButtonFilter from "../../Components/ButtonFilter";
+import ProductCard from "../../Components/ProductCard";
+import ActionButton from "../../Components/ActionButton";
+import ModalProducts from "../../Components/ModalProducts";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
+
 import {
   getProducts,
   getProductsCategories,
@@ -12,11 +14,14 @@ import {
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
-const TakeOrderWaiter = () => {
+const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [productCategories, setProductCategories] = useState([]);
 
+  const location = useLocation();
+  const { pathname } = location;
+  console.log(pathname);
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
 
@@ -30,6 +35,15 @@ const TakeOrderWaiter = () => {
     handleCategorie(cat_uid, cat_name).then((items) => {
       setProducts(items);
     });
+  };
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+  const onClose = () => {
+    setOpenModal(false);
   };
 
   const handleSearch = async (query) => {
@@ -59,13 +73,20 @@ const TakeOrderWaiter = () => {
           );
         })}
       </div>
+      <ModalProducts isOpen={openModal} onClose={onClose} />
+      <div className="large-button--content" onClick={handleOpen}>
+        <ActionButton
+          title={"Add Product"}
+          className={"pink-button"}
+          //   onClick={openModal}
+        />
+      </div>
       <div className="products-container">
         {products.map((p) => {
-          return <ProductCard product={p} key={p.id} />;
+          return <ProductCard path={pathname} product={p} key={p.id} />;
         })}
       </div>
     </>
   );
 };
-
-export default TakeOrderWaiter;
+export default AdminProducts;

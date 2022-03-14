@@ -1,19 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+
 import "../Assets/ProductCard.css";
+
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 
 import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
 
 export function ProductCard(props) {
-  const { product } = props;
+  const { product, path } = props;
   const { cart, setCart } = useCart();
-
   const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
 
   let navigate = useNavigate();
+
   const HandleAddToCart = () => {
     if (!product.product_options.some((option) => option === null)) {
       navigate("detail-product", {
@@ -47,10 +50,19 @@ export function ProductCard(props) {
         ]);
       }
       setIsSideBarCartOpen(!isSideBarCartOpen);
-      //  navigate("order-cart");
     }
   };
 
+  const Edit = ({ onClick }) => {
+    return (
+      <button className="productAdded-card--pencilContainer" onClick={onClick}>
+        <Pencil className="productAdded-card--pencil" width={30} height={30} />
+      </button>
+    );
+  };
+
+  const HandleEditProduct = () => {};
+  const HandleRemoveProduct = () => {};
   return (
     <div className="product-card">
       <div className="product-card--photoContainer">
@@ -67,11 +79,32 @@ export function ProductCard(props) {
           <h3 className="product-card--cost"> $ {product.product_cost[0]}</h3>
         </div>
         <div className="product-card--buttonContainer">
-          <div className="product-card--button">
-            <div onClick={HandleAddToCart} className="product-card--buttonIcon">
-              {<More width={15} style={{ marginTop: "4px" }} />}
+          {path === "/admin/addProducts" ? (
+            <div>
+              {<Edit />}
+              <div
+                className="productAdded-card--button"
+                onClick={HandleRemoveProduct}
+              >
+                {
+                  <More
+                    width={15}
+                    height={15}
+                    className="productAdded--x-icon"
+                  />
+                }
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="product-card--button">
+              <div
+                onClick={HandleAddToCart}
+                className="product-card--buttonIcon"
+              >
+                {<More width={15} style={{ marginTop: "4px" }} />}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

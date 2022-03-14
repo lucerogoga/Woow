@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../../Assets/Navbar.css";
 import "../../Assets/Sidebar.css";
 import "../../Assets/WaiterView.css";
-import ProductCart from "../../Components/ProductCard";
 import ButtonFilter from "../../Components/ButtonFilter";
 import iconOrderChefComponents from "../../Assets/iconComponent/CustomOrdersChef";
 import Title from "../../Components/Title";
@@ -15,16 +14,6 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../../Config/initialize";
-
-import {
-  getProducts,
-  getProductsCategories,
-  filterProductByCategorie,
-  getOrderStatus,
-  getOrders,
-  ordersListener,
-  getUser,
-} from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 import { useAuth } from "../../Components/Context/AuthContext";
 
@@ -69,7 +58,7 @@ export const OrdersToDoChef = () => {
     }
     // }
 
-    onSnapshot(q, (snapshot) => {
+    return onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
   }, [selectedOrderStatus, currentUser]);

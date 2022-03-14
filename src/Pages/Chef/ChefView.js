@@ -21,7 +21,11 @@ export const ChefView = () => {
 
   return (
     <>
-      <NavBarChef onClickMenu={() => setOpen(!open)} currentPath={pathname} />
+      <NavBarChef
+        onClickMenu={() => setOpen(!open)}
+        currentPath={pathname}
+        onClickLogout={handleLogout}
+      />
       <div>
         {open && (
           <SideBarChef

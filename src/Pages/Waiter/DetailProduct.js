@@ -23,7 +23,7 @@ const DetailProduct = () => {
   const [count, setCount] = useState(1);
   
   let location = useLocation();
-  const { state } = location;
+  const { state, pathname } = location;
   const { product, action } = state;
 
   const updateProductCart = () => {
@@ -127,7 +127,7 @@ const DetailProduct = () => {
         className="image-content"
         style={{ backgroundImage: `url(${product.product_photo[1]})` }}
       >
-        <NavBarWaiter />
+        <NavBarWaiter currentPath={pathname} />
 
         <div className="info-product-container">
           <div className="info-product-subcontainer">

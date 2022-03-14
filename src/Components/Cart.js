@@ -10,6 +10,8 @@ import {
 } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
+// import {makeStyles} from ""
+import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
 // ! ----
 // creo que siempre debe escuchar las ordenes que se realizan, sino capaz se repiten los números
@@ -56,69 +58,19 @@ const Cart = ({ cantEdit }) => {
     const orderRef = collection(db, "orders");
 
     onSnapshot(orderRef, (snapshot) => {
-      // console.log("el size dará? ", snapshot.size);
 
-      // if the collection "orders" is empty, then number correlative will start at 0
-      // if (snapshot.size === 0) {
-      //   console.log("no existe ningún documento");
       setOrderCorrelative(snapshot.size + 1);
-      // return 0;
-      // } else {
-      //   // if there are documents in the collection then it will get the last one created to get the following order
-      //   console.log("si existen documentos!");
-      // const lastVisible = snapshot.docs[snapshot.docs.length - 1];
-      //   console.log("nº de la ultima orden!", lastVisible.data().order_number);
-      // setOrderCorrelative(lastVisible.data().order_number + 1);
-      // }
       console.log("ESTA SERÁ MI ACTUAL: ", pad(orderCorrelative, 6));
     });
   }, [orderCorrelative]);
 
   // ! -------------------------------
-  // useEffect(() => {
-  //   const orderRef = collection(db, "orders");
 
-  //   onSnapshot(orderRef, (snapshot) => {
-  //     console.log("el size dará? ", snapshot.size);
-
-  //     // if the collection "orders" is empty, then number correlative will start at 0
-  //     if (snapshot.size === 0) {
-  //       console.log("no existe ningún documento");
-  //       setOrderCorrelative(0);
-  //       // return 0;
-  //     } else {
-  //       // if there are documents in the collection then it will get the last one created to get the following order
-  //       console.log("si existen documentos!");
-  //       const lastVisible = snapshot.docs[snapshot.docs.length - 1];
-  //       console.log("nº de la ultima orden!", lastVisible.data().order_number);
-  //       setOrderCorrelative(lastVisible.data().order_number + 1);
-  //     }
-  //     console.log("ESTA SERÁ MI ACTUAL: ", pad(orderCorrelative, 6));
-  //   });
-  // }, [orderCorrelative]);
-
-  // ! -------------------------------
-  // useEffect(() => {
-  //   // CREO QUE ES MEJOR QUE LA FUNCION CORRELATIVA
-  //   const orderRef = collection(db, "orders");
-
-  //   onSnapshot(orderRef, (snapshot) => {
-  //     getOrderNumberCorrelative().then((correlative) => {
-  //       // console.log("aqui CORRELATIVO", pad(orderCorrelative, 6))
-  //       // (correlative) => console.log("aqui CORRELATIVO", correlative)
-  //       // setOrderCorrelative(snapshot);
-  //       setOrderCorrelative(correlative);
-  //       console.log("esta será mi orden n°umer: ", pad(orderCorrelative, 6));
-  //     });
-  //   });
-  // }, [orderCorrelative]);
-
-  // ! -------------------------------
-
+  console.log("MI CLIENTE ES , ", clientName);
   console.log("MI MESA ES , ", tableNumber);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
-  console.log("carrito actual", cart);
+
   const handleOrder = () => {
     setIsCartEmpty(false);
     setIsInfoEmpty(false);
@@ -140,34 +92,22 @@ const Cart = ({ cantEdit }) => {
       setCart([]);
     }
   };
+  const handleChange = (name) => {
+    setClientName(name);
+  };
 
+  const handleChangeTable = (table) => {
+    setTableNumber(table);
+  };
   return (
     <>
       <div className="cart-content">
         <Title title="Order" quantity={qtyItems} />
         <div className="client-info--content">
-          <input
-            type="text"
-            id="client"
-            className="client--input"
-            placeholder="Client Name"
-            onChange={(ev) => setClientName(ev.target.value)}
-          ></input>
-          <select
-            className="table--input"
-            placeholder="Nº Table"
-            name="Nº Table"
-            id="table"
-            onChange={(ev) => setTableNumber(ev.target.value)}
-          >
-            <option value="Table 1">Table 1</option>
-            <option value="Table 2">Table 2</option>
-            <option value="Table 3">Table 3</option>
-          </select>
-
-          {/* <ControlledOpenSelect
-            getTable={(tableNumber) => setTableNumber(tableNumber)}
-          /> */}
+          <InputInfoClient
+            onChange={handleChange}
+            setTable={handleChangeTable}
+          />
         </div>
         {/* <div className="client-err-container"> */}
         {isInfoEmpty && (

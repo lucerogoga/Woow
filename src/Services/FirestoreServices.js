@@ -12,7 +12,8 @@ import {
   onSnapshot,
   limit,
 } from "firebase/firestore";
-import { db } from "../Config/initialize";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../Config/initialize";
 
 //---------------- User Functions
 export const getUser = async (userId) => {
@@ -33,10 +34,7 @@ export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
   const snapshot = await getDocs(orderRef);
 
-  // return onSnapshot(orderRef, (snapshot) => {
-  // return onSnapshot(orderRef, (snapshot) => {
   console.log("el size dará? ", snapshot.size);
-  // console.log("hay? ", documentSnapshots);
 
   // if the collection "orders" is empty, then number correlative will start at 0
   if (snapshot.size === 0) {
@@ -60,13 +58,20 @@ export const ordersListener = () => {
 };
 
 export const updateOrder = async (chefId, idOrder, status, chefName) => {
-  // debugger;
   const orderRef = doc(db, "orders", idOrder);
 
   await updateDoc(orderRef, {
     order_status: status,
     chef_id: chefId,
     chef_name: chefName,
+  });
+};
+
+export const updateStatusOrder = async (idOrder, status) => {
+  const orderRef = doc(db, "orders", idOrder);
+
+  await updateDoc(orderRef, {
+    order_status: status,
   });
 };
 
@@ -78,7 +83,6 @@ export const createOrder = async (
   cartProducts,
   orderNumber
 ) => {
-  console.log("creando orden!");
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
@@ -184,5 +188,38 @@ export async function getEmployers() {
       id: e.id,
       ...e.data(),
     };
+  });
+}
+//-------------uploadimage
+// ------------Subir imagen en post  -------------
+export function uploadImage(file, catName) {
+  const productPath = "Products";
+  const fileName = file.name;
+  const imageRef = ref(storage, `${productPath}/${catName}/${fileName}`);
+  return uploadBytes(imageRef, file)
+    .then((snapshot) => {
+      return getDownloadURL(snapshot.ref);
+    })
+    .catch((err) => console.log(err));
+}
+//--------------CreateProduct
+export async function createProductFirebase(
+  catId,
+  productName,
+  productDescription,
+  productCost,
+  productOption,
+  productPhoto,
+  productStock
+) {
+  const ordersRef = collection(db, "products");
+  return addDoc(ordersRef, {
+    cat_id: catId,
+    product_name: productName,
+    product_description: productDescription,
+    product_cost: [productCost], //array
+    product_option: [productOption], //array
+    product_photo: [productPhoto], //array
+    product_stock: [productStock], //array
   });
 }
