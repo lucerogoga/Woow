@@ -9,6 +9,10 @@ import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import ButtonFilter from "../../Components/ButtonFilter";
+import {
+  // existOrderInCollection,
+  getOrderNumberCorrelative,
+} from "../../Services/FirestoreServices";
 
 const DetailProduct = () => {
   const { cart, setCart } = useCart();
@@ -17,6 +21,7 @@ const DetailProduct = () => {
   const [cost, setCost] = useState(0);
   const [observation, setObservation] = useState("");
   const [count, setCount] = useState(1);
+  
   let location = useLocation();
   const { state } = location;
   const { product, action } = state;
@@ -104,6 +109,17 @@ const DetailProduct = () => {
       setSize(initialSize);
     }
   }, [initialSize]);
+
+  // ! prueba
+
+  // // const initialOrderCorrelative = orderCorrelative;
+  // useEffect(() => {
+  //   const [orderCorrelative, setOrderCorrelative] = useState(0);
+  //   getOrderNumberCorrelative().then(
+  //     (correlative) => console.log("aqui CORRELATIVO", correlative)
+  //     // setOrderCorrelative(correlative)
+  //   );
+  // }, []);
 
   return (
     <>

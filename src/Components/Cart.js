@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../Components/Context/CartContext";
 import ProductAddedCart from "./ProductAddedCart";
 import Title from "./Title";
 import ActionButton from "../Components/ActionButton";
 import ControlledOpenSelect from "./SelectTable";
-import { createOrder } from "../Services/FirestoreServices";
+import {
+  createOrder,
+  getOrderNumberCorrelative,
+} from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
-// import {makeStyles} from ""
-
 import "../Assets/Cart.css";
+// ! ----
+// creo que siempre debe escuchar las ordenes que se realizan, sino capaz se repiten los números
+import {
+  onSnapshot,
+  collection,
+  query,
+  where,
+  orderBy,
+  orderRef,
+  documentSnapshots,
+} from "firebase/firestore";
+import { db } from "../Config/initialize";
+// const orderRef = collection(db, "orders");
+// const documentSnapshots = await getDocs(orderRef);
 
 const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
@@ -22,7 +37,37 @@ const Cart = ({ cantEdit }) => {
   const { cart, setCart } = useCart();
   const { user } = useAuth();
 
+  // ! --------
+  // FUNCIONAL PERO INCOMPLETO
+  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
+  // const initialOrderCorrelative = orderCorrelative;
+  // useEffect(() => {
+  //   getOrderNumberCorrelative().then(
+  //     (correlative) => {
+  //       console.log('el viejo fiel , ', correlative)
+  //     }
+  //     // (correlative) => console.log("aqui CORRELATIVO desde cart", correlative)
+  //     // setOrderCorrelative(correlative)
+  //   );
+  // }, [orderCorrelative]);
+
+  // console.log("actualmente es mi correlativo, ", orderCorrelative);
+
+  // ! -------------------------------
+
+  useEffect(() => {
+    // CREO QUE ES MEJOR QUE LA FUNCION CORRELATIVA
+    const orderRef = collection(db, "orders");
+
+    onSnapshot(orderRef, (snapshot) => {
+      setOrderCorrelative(snapshot.size + 1);
+    });
+
+    console.log("esta será mi orden n°: ", orderCorrelative);
+  }, [orderCorrelative]);
+
+  // ! -------------------------------
 
   console.log("MI MESA ES , ", tableNumber);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
@@ -37,7 +82,15 @@ const Cart = ({ cantEdit }) => {
       return setIsInfoEmpty(true);
     } else {
       setOrderNumber(orderNumber + 1);
-      createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
+      createOrder(
+        user.currentUser,
+        clientName,
+        tableNumber,
+        "Pending",
+        cart,
+        orderCorrelative
+      );
+      // createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
       setCart([]);
     }
   };
@@ -113,3 +166,17 @@ const Cart = ({ cantEdit }) => {
 };
 
 export default Cart;
+
+// const handleOrder = () => {
+//   setIsCartEmpty(false);
+//   setIsInfoEmpty(false);
+//   if (cart.length === 0) {
+//     return setIsCartEmpty(true);
+//   } else if (clientName === "" || tableNumber === "") {
+//     return setIsInfoEmpty(true);
+//   } else {
+//     setOrderNumber(orderNumber + 1);
+//     createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
+//     setCart([]);
+//   }
+// };

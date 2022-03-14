@@ -10,6 +10,7 @@ import {
   serverTimestamp,
   updateDoc,
   onSnapshot,
+  limit,
 } from "firebase/firestore";
 import { db } from "../Config/initialize";
 
@@ -28,11 +29,72 @@ export const getUser = async (userId) => {
 
 //---------------- Order Functions
 
+export const getOrderNumberCorrelative = async () => {
+  const orderRef = collection(db, "orders");
+  const documentSnapshots = await getDocs(orderRef);
+
+  console.log("el size dará? ", documentSnapshots.size);
+  // console.log("hay? ", documentSnapshots);
+
+  // if the collection "orders" is empty, then number correlative will start at 0
+  if (documentSnapshots.size === 0) {
+    console.log("no existe ningún documento");
+    return 0;
+  }
+
+  // if there are documents in the collection then it will get the last one created to get the following order
+  const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+  return lastVisible.data();
+  // -------
+};
+
+// ! respaldo correlativo
+// export const getOrderNumberCorrelative = async () => {
+//   const orderRef = collection(db, "orders");
+//   const documentSnapshots = await getDocs(orderRef);
+
+//   console.log("el size dará? ", documentSnapshots.size);
+//   // console.log("hay? ", documentSnapshots);
+
+//   // if the collection "orders" is empty, then number correlative will start at 0
+//   if (documentSnapshots.size === 0) {
+//     console.log("no existe ningún documento");
+//     return 0;
+//   }
+
+//   // if there are documents in the collection then it will get the last one created to get the following order
+//   const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+//   return lastVisible.data();
+
+// };
+
+export const existOrderInCollection = async () => {
+  const orderExist = doc(db, "orders");
+
+  const docSnap = await getDoc(orderExist);
+
+  const order = docSnap.data();
+  if (order.exists()) {
+    return true;
+  }
+  return false;
+
+  // ! -----
+  // const orderExist = doc(db, "orders");
+
+  // const docSnap = await getDoc(orderExist);
+
+  // const order = docSnap.data();
+  // if (order.exists()) {
+  //   return true;
+  // }
+  // return false;
+};
+
 export const ordersListener = () => {
   const q = query(collection(db, "orders"));
   return onSnapshot(q, (snapshot) => {
     console.log(snapshot.docs.map((doc) => doc.data()));
-    // console.log(snapshot.docs.map((doc) => doc.data()));
   });
 };
 
@@ -52,7 +114,8 @@ export const createOrder = async (
   client_name,
   tableNumber,
   orderStatus,
-  cartProducts
+  cartProducts,
+  orderNumber
 ) => {
   console.log("creando orden!");
   const ordersRef = collection(db, "orders");
@@ -65,6 +128,7 @@ export const createOrder = async (
     table: tableNumber,
     order_timestamp: serverTimestamp(),
     order_products: cartProducts,
+    order_number: orderNumber,
   });
 };
 //----------------
