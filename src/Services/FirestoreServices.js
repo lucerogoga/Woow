@@ -170,14 +170,15 @@ export async function getEmployers() {
 }
 //-------------uploadimage
 // ------------Subir imagen en post  -------------
-
 export function uploadImage(file, catName) {
-  const postPath = "products";
+  const productPath = "Products";
   const fileName = file.name;
-  const imageRef = ref(storage, `${postPath}/${catName}/${fileName}`);
-  return uploadBytes(imageRef, file).then((snapshot) =>
-    getDownloadURL(snapshot.ref)
-  );
+  const imageRef = ref(storage, `${productPath}/${catName}/${fileName}`);
+  return uploadBytes(imageRef, file)
+    .then((snapshot) => {
+      return getDownloadURL(snapshot.ref);
+    })
+    .catch((err) => console.log(err));
 }
 //--------------CreateProduct
 export async function createProductFirebase(
@@ -193,10 +194,10 @@ export async function createProductFirebase(
   return addDoc(ordersRef, {
     cat_id: catId,
     product_name: productName,
-    description: productDescription,
-    product_cost: productCost, //array
-    product_option: productOption, //array
-    product_photo: productPhoto, //array
-    product_stock: productStock, //array
+    product_description: productDescription,
+    product_cost: [productCost], //array
+    product_option: [productOption], //array
+    product_photo: [productPhoto], //array
+    product_stock: [productStock], //array
   });
 }

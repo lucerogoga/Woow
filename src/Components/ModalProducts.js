@@ -5,12 +5,12 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import label from "@mui/material/FormLabel";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import InputLabel, { inputLabelClasses } from "@mui/material/InputLabel";
+import InputLabel from "@mui/material/InputLabel";
+
+import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
 import {
   getProductsCategories,
@@ -48,10 +48,12 @@ export default function ModalProducts({ isOpen, onClose }) {
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productCost, setProductCost] = useState([]);
-  const [productOption, setProductOption] = useState([null]);
-  const [productPhoto, setProductPhoto] = useState([]);
-  const [productStock, setProductStock] = useState([]);
+  const [productCost, setProductCost] = useState("");
+  const [productOption, setProductOption] = useState(null);
+  const [productPhoto, setProductPhoto] = useState("");
+  const [productStock, setProductStock] = useState("");
+
+  const [loading, setLoading] = useState(true);
 
   const createProduct = async () => {
     //aqui obtenemos todos los datos del modal
@@ -59,7 +61,9 @@ export default function ModalProducts({ isOpen, onClose }) {
     console.log("firestore llamando");
 
     const downloadUrl = await uploadImage(productPhoto, categoryId);
-    const postDocRef = await createProductFirebase(
+    // if (loading) return <Spinner />;
+    debugger;
+    createProductFirebase(
       categoryId,
       productName,
       productDescription,
@@ -67,8 +71,12 @@ export default function ModalProducts({ isOpen, onClose }) {
       productOption,
       downloadUrl,
       productStock
-    );
+    ).then((res) => {
+      //   setLoading(false);
+      console.log("producto subido");
+    });
   };
+
   const onChange = (e) => {
     setProductPhoto(e.target.files[0]);
   };
@@ -95,6 +103,7 @@ export default function ModalProducts({ isOpen, onClose }) {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              // id={handleNameCategory}
               value={categoryId}
               label="Category Product"
               onChange={handleChangeCategory}
