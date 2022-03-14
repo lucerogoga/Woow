@@ -30,24 +30,15 @@ export const getUser = async (userId) => {
 
 //---------------- Order Functions
 
+
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
-  const snapshot = await getDocs(orderRef);
 
-  console.log("el size dará? ", snapshot.size);
-
-  // if the collection "orders" is empty, then number correlative will start at 0
-  if (snapshot.size === 0) {
-    console.log("no existe ningún documento");
-    return 0;
-  }
-
-  // if there are documents in the collection then it will get the last one created to get the following order
-  console.log("si existen documentos!");
-  const lastVisible = snapshot.docs[snapshot.docs.length - 1];
-  console.log("nº de la ultima orden!", lastVisible.data().order_number);
-  return lastVisible.data().order_number + 1;
-  // });
+  return onSnapshot(orderRef, (snapshot) => {
+    // setOrderCorrelative(snapshot.size + 1);
+    
+  });
+  
 };
 
 export const ordersListener = () => {
@@ -77,7 +68,8 @@ export const updateStatusOrder = async (idOrder, status) => {
 
 export const createOrder = async (
   waiterId,
-  client_name,
+  waiterName,
+  clientName,
   tableNumber,
   orderStatus,
   cartProducts,
@@ -88,8 +80,9 @@ export const createOrder = async (
     chef_id: null,
     chef_name: null,
     waiter_id: waiterId,
+    waiter_name: waiterName,
     order_status: orderStatus,
-    client_name: client_name,
+    client_name: clientName,
     table: tableNumber,
     order_timestamp: serverTimestamp(),
     order_products: cartProducts,

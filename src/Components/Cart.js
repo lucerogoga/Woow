@@ -7,6 +7,7 @@ import ControlledOpenSelect from "./SelectTable";
 import {
   createOrder,
   getOrderNumberCorrelative,
+  getUser,
 } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
@@ -30,6 +31,7 @@ const Cart = ({ cantEdit }) => {
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
+  const [userName, setUserName] = useState("");
   const [closeX, setCloseX] = useState(false);
 
   const { cart, setCart } = useCart();
@@ -39,10 +41,17 @@ const Cart = ({ cantEdit }) => {
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(user.currentUser);
+      setUserName(user_name);
+    }
+    settingUserName();
+  }, []);
+
+  useEffect(() => {
     const orderRef = collection(db, "orders");
 
     onSnapshot(orderRef, (snapshot) => {
-
       setOrderCorrelative(snapshot.size + 1);
     });
   }, [orderCorrelative]);
@@ -51,6 +60,7 @@ const Cart = ({ cantEdit }) => {
 
   console.log("MI CLIENTE ES , ", clientName);
   console.log("MI MESA ES , ", tableNumber);
+  console.log("EL WAITER ES, ", userName);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
@@ -65,6 +75,7 @@ const Cart = ({ cantEdit }) => {
       setOrderNumber(orderNumber + 1);
       createOrder(
         user.currentUser,
+        userName,
         clientName,
         tableNumber,
         "Pending",

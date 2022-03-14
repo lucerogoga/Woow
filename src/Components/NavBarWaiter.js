@@ -24,15 +24,35 @@ const NavBarWaiter = ({
   onClickLogout,
 }) => {
   const { cart } = useCart();
+  const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
   const {
     user: { currentUser },
   } = useAuth();
+
+
+  const abbrev_name = (name) => {
+    var split_names = name.trim().split(" ");
+    if (split_names.length > 1) {
+      return split_names[0] + " " + split_names[1].charAt(0) + ".";
+    }
+    // return split_names[0];
+    split_names.map((name))
+  };
+  // const abbrev_name = (name) => {
+  //   var split_names = name.trim().split(" ");
+  //   if (split_names.length > 1) {
+  //     return split_names[0] + " " + split_names[1].charAt(0) + ".";
+  //   }
+  //   return split_names[0];
+  // };
 
   const [userName, setUserName] = useState("");
   //GETTING NAME OF CHEF FOR THE ORDER
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(currentUser);
+      console.log("user name: ", user_name);
+      console.log("user name formatted: ", abbrev_name(user_name));
       setUserName(user_name);
     }
     settingUserName();
@@ -76,7 +96,9 @@ const NavBarWaiter = ({
           ) : currentPath === "/waiter/detail-product" ? null : (
             <div className="cart--container" onClick={onClickSideBar}>
               <ShoppingCart fill="#fff" width={50} height={35} />
-              <span className="cart--counter">{cart.length}</span>
+              {/* ! aqui */}
+              <span className="cart--counter">{qtyItems}</span>
+              {/* <span className="cart--counter">{cart.length}</span> */}
             </div>
           )}
           <p className="user-name--content">{userName}</p>
