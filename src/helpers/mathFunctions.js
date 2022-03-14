@@ -43,3 +43,14 @@ export function total(items) {
   return items.map(({ sum }) => sum).reduce((sum, i) => sum + i, 0);
 }
 
+// get format 1 to 0001 for card order number
+export const pad = (number, length) => {
+  var str = "" + number;
+  while (str.length < length) {
+    str = "0" + str;
+  }
+
+  console.log("PAD");
+  return str;
+};
+

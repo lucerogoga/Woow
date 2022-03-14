@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-import { updateOrder } from "../Services/FirestoreServices";
+// import { updateOrder } from "../Services/FirestoreServices";
 import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import { ccyFormat, createData, total } from "../helpers/mathFunctions";
+import { ccyFormat, createData, pad, total } from "../helpers/mathFunctions";
 import { MouseOverPopover } from "./EyePopover";
 import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
@@ -21,7 +21,7 @@ const OrderCardFormat = ({ orderData }) => {
   // const [startOrder, setStartOrder] = useState(false);
   let location = useLocation();
   const { pathname } = location;
-
+  // console.log("miiii ordeeeeen", pad(orderData.order_number, 6));
   const userRole = useRol();
   const {
     user: { currentUser },
@@ -92,7 +92,10 @@ const OrderCardFormat = ({ orderData }) => {
               <h3 className="order-card--info-title">Table N°:</h3>
             </div>
             <div className="order-card--infos-container">
-              <div className="order-card--info-p">000036</div>
+              <div className="order-card--info-p">
+                {pad(orderData.order_number, 6)}
+              </div>
+              {/* <div className="order-card--info-p">000036</div> */}
               <div className="order-card--info-p">{orderData.client_name}</div>
               <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">{orderData.table}</div>

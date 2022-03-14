@@ -10,11 +10,9 @@ import {
 } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
-// import {makeStyles} from ""
 import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
 // ! ----
-// creo que siempre debe escuchar las ordenes que se realizan, sino capaz se repiten los números
 import {
   onSnapshot,
   collection,
@@ -25,8 +23,6 @@ import {
   documentSnapshots,
 } from "firebase/firestore";
 import { db } from "../Config/initialize";
-// const orderRef = collection(db, "orders");
-// const documentSnapshots = await getDocs(orderRef);
 
 const Cart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
@@ -40,19 +36,7 @@ const Cart = ({ cantEdit }) => {
   const { user } = useAuth();
 
   // ! --------
-  // FUNCIONAL PERO INCOMPLETO
   const [orderCorrelative, setOrderCorrelative] = useState(0);
-
-  // ! -------------------------------
-  const pad = (number, length) => {
-    var str = "" + number;
-    while (str.length < length) {
-      str = "0" + str;
-    }
-
-    console.log("PAD");
-    return str;
-  };
 
   useEffect(() => {
     const orderRef = collection(db, "orders");
@@ -60,7 +44,6 @@ const Cart = ({ cantEdit }) => {
     onSnapshot(orderRef, (snapshot) => {
 
       setOrderCorrelative(snapshot.size + 1);
-      console.log("ESTA SERÁ MI ACTUAL: ", pad(orderCorrelative, 6));
     });
   }, [orderCorrelative]);
 

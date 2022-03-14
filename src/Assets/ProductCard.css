@@ -27,7 +27,8 @@ html {
 }
 
 .product-card--photoContainer {
-  width: 15%;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -70,7 +71,7 @@ html {
 
 .product-image {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .product-card--title {
@@ -110,7 +111,7 @@ html {
   }
   .product-card--photoContainer {
     width: 100%;
-    height: 70%;
+    height: 250px;
   }
   .product-image {
     width: 100%;
