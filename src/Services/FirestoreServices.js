@@ -31,64 +31,25 @@ export const getUser = async (userId) => {
 
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
-  const documentSnapshots = await getDocs(orderRef);
+  const snapshot = await getDocs(orderRef);
 
-  console.log("el size dará? ", documentSnapshots.size);
+  // return onSnapshot(orderRef, (snapshot) => {
+  // return onSnapshot(orderRef, (snapshot) => {
+  console.log("el size dará? ", snapshot.size);
   // console.log("hay? ", documentSnapshots);
 
   // if the collection "orders" is empty, then number correlative will start at 0
-  if (documentSnapshots.size === 0) {
+  if (snapshot.size === 0) {
     console.log("no existe ningún documento");
     return 0;
   }
 
   // if there are documents in the collection then it will get the last one created to get the following order
-  const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-  return lastVisible.data();
-  // -------
-};
-
-// ! respaldo correlativo
-// export const getOrderNumberCorrelative = async () => {
-//   const orderRef = collection(db, "orders");
-//   const documentSnapshots = await getDocs(orderRef);
-
-//   console.log("el size dará? ", documentSnapshots.size);
-//   // console.log("hay? ", documentSnapshots);
-
-//   // if the collection "orders" is empty, then number correlative will start at 0
-//   if (documentSnapshots.size === 0) {
-//     console.log("no existe ningún documento");
-//     return 0;
-//   }
-
-//   // if there are documents in the collection then it will get the last one created to get the following order
-//   const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-//   return lastVisible.data();
-
-// };
-
-export const existOrderInCollection = async () => {
-  const orderExist = doc(db, "orders");
-
-  const docSnap = await getDoc(orderExist);
-
-  const order = docSnap.data();
-  if (order.exists()) {
-    return true;
-  }
-  return false;
-
-  // ! -----
-  // const orderExist = doc(db, "orders");
-
-  // const docSnap = await getDoc(orderExist);
-
-  // const order = docSnap.data();
-  // if (order.exists()) {
-  //   return true;
-  // }
-  // return false;
+  console.log("si existen documentos!");
+  const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+  console.log("nº de la ultima orden!", lastVisible.data().order_number);
+  return lastVisible.data().order_number + 1;
+  // });
 };
 
 export const ordersListener = () => {

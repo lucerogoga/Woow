@@ -41,30 +41,31 @@ const Cart = ({ cantEdit }) => {
   // FUNCIONAL PERO INCOMPLETO
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
-  // const initialOrderCorrelative = orderCorrelative;
-  // useEffect(() => {
-  //   getOrderNumberCorrelative().then(
-  //     (correlative) => {
-  //       console.log('el viejo fiel , ', correlative)
-  //     }
-  //     // (correlative) => console.log("aqui CORRELATIVO desde cart", correlative)
-  //     // setOrderCorrelative(correlative)
-  //   );
-  // }, [orderCorrelative]);
-
-  // console.log("actualmente es mi correlativo, ", orderCorrelative);
-
   // ! -------------------------------
+  const pad = (number, length) => {
+    var str = "" + number;
+    while (str.length < length) {
+      str = "0" + str;
+    }
 
+    console.log("PAD");
+    return str;
+  };
+
+ 
   useEffect(() => {
     // CREO QUE ES MEJOR QUE LA FUNCION CORRELATIVA
     const orderRef = collection(db, "orders");
 
     onSnapshot(orderRef, (snapshot) => {
-      setOrderCorrelative(snapshot.size + 1);
+      getOrderNumberCorrelative().then((correlative) => {
+        // console.log("aqui CORRELATIVO", pad(orderCorrelative, 6))
+        // (correlative) => console.log("aqui CORRELATIVO", correlative)
+        // setOrderCorrelative(snapshot);
+        setOrderCorrelative(correlative);
+        console.log("esta será mi orden n°umer: ", pad(orderCorrelative, 6));
+      });
     });
-
-    console.log("esta será mi orden n°: ", orderCorrelative);
   }, [orderCorrelative]);
 
   // ! -------------------------------
