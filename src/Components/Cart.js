@@ -52,21 +52,66 @@ const Cart = ({ cantEdit }) => {
     return str;
   };
 
- 
   useEffect(() => {
-    // CREO QUE ES MEJOR QUE LA FUNCION CORRELATIVA
     const orderRef = collection(db, "orders");
 
     onSnapshot(orderRef, (snapshot) => {
-      getOrderNumberCorrelative().then((correlative) => {
-        // console.log("aqui CORRELATIVO", pad(orderCorrelative, 6))
-        // (correlative) => console.log("aqui CORRELATIVO", correlative)
-        // setOrderCorrelative(snapshot);
-        setOrderCorrelative(correlative);
-        console.log("esta será mi orden n°umer: ", pad(orderCorrelative, 6));
-      });
+      // console.log("el size dará? ", snapshot.size);
+
+      // if the collection "orders" is empty, then number correlative will start at 0
+      // if (snapshot.size === 0) {
+      //   console.log("no existe ningún documento");
+      setOrderCorrelative(snapshot.size + 1);
+      // return 0;
+      // } else {
+      //   // if there are documents in the collection then it will get the last one created to get the following order
+      //   console.log("si existen documentos!");
+      // const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+      //   console.log("nº de la ultima orden!", lastVisible.data().order_number);
+      // setOrderCorrelative(lastVisible.data().order_number + 1);
+      // }
+      console.log("ESTA SERÁ MI ACTUAL: ", pad(orderCorrelative, 6));
     });
   }, [orderCorrelative]);
+
+  // ! -------------------------------
+  // useEffect(() => {
+  //   const orderRef = collection(db, "orders");
+
+  //   onSnapshot(orderRef, (snapshot) => {
+  //     console.log("el size dará? ", snapshot.size);
+
+  //     // if the collection "orders" is empty, then number correlative will start at 0
+  //     if (snapshot.size === 0) {
+  //       console.log("no existe ningún documento");
+  //       setOrderCorrelative(0);
+  //       // return 0;
+  //     } else {
+  //       // if there are documents in the collection then it will get the last one created to get the following order
+  //       console.log("si existen documentos!");
+  //       const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+  //       console.log("nº de la ultima orden!", lastVisible.data().order_number);
+  //       setOrderCorrelative(lastVisible.data().order_number + 1);
+  //     }
+  //     console.log("ESTA SERÁ MI ACTUAL: ", pad(orderCorrelative, 6));
+  //   });
+  // }, [orderCorrelative]);
+
+  // ! -------------------------------
+  // useEffect(() => {
+  //   // CREO QUE ES MEJOR QUE LA FUNCION CORRELATIVA
+  //   const orderRef = collection(db, "orders");
+
+  //   onSnapshot(orderRef, (snapshot) => {
+  //     getOrderNumberCorrelative().then((correlative) => {
+  //       // console.log("aqui CORRELATIVO", pad(orderCorrelative, 6))
+  //       // (correlative) => console.log("aqui CORRELATIVO", correlative)
+  //       // setOrderCorrelative(snapshot);
+  //       setOrderCorrelative(correlative);
+  //       console.log("esta será mi orden n°umer: ", pad(orderCorrelative, 6));
+  //     });
+  //   });
+  // }, [orderCorrelative]);
 
   // ! -------------------------------
 
