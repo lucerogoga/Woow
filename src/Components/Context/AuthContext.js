@@ -23,14 +23,20 @@ export const AuthProvider = ({ children }) => {
     //     return user;
     //   }
     // );
-    return createUserWithEmailAndPassword(auth2, email, password).then(
-      (firebaseUser) => {
+
+    //   secondaryApp.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+    //     console.log(userCredential.user.uid);
+    // }).then(secondaryApp.auth().signOut()
+    // )
+    // .then(secondaryApp.delete()
+    // )
+    return createUserWithEmailAndPassword(auth2, email, password)
+      .then((firebaseUser) => {
         console.log("User " + firebaseUser.user.uid + " created successfully!");
         return firebaseUser.user.uid;
         //I don't know if the next statement is necessary
-        // signOut(auth2);
-      }
-    );
+      })
+      .then(signOut(auth2));
   };
 
   const login = async (email, password) => {
