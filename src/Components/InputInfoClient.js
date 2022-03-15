@@ -23,7 +23,7 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
       handleChangeTable("");
       handleChange("");
     }
-  }, []);
+  }, [cleanInfo]);
 
   return (
     <>
