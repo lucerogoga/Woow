@@ -74,7 +74,7 @@ const AdminProducts = () => {
         })}
       </div>
       <ModalProducts isOpen={openModal} onClose={onClose} />
-      <div className="products-container">
+      <div className="products-container" style={{ height: "55vh" }}>
         {products.map((p) => {
           return <ProductCard path={pathname} product={p} key={p.id} />;
         })}
