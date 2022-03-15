@@ -72,6 +72,7 @@ export const createOrder = async (
   cartProducts,
   orderNumber
 ) => {
+  console.log("EL WAITER QUE CREO LA ORDEN SE LLAMA, ", waiterName);
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,

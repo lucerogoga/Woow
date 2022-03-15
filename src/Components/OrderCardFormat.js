@@ -15,6 +15,7 @@ import { useRol } from "./Context/RolContex";
 import Time from "./Time";
 import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
+import { abbrevName , UpperCaseName} from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
@@ -37,7 +38,7 @@ const OrderCardFormat = ({ orderData }) => {
 
   // ! --------------------
 
-  console.log("LA LUZ", orderData);
+  console.log("LA LUZ", orderData.waiter_name);
   const handleStatus = (orderStatus) => {
     console.log("el que quiero colocar", orderStatus);
 
@@ -97,9 +98,11 @@ const OrderCardFormat = ({ orderData }) => {
                 {pad(orderData.order_number, 6)}
               </div>
               {/* <div className="order-card--info-p">000036</div> */}
-              <div className="order-card--info-p">{orderData.client_name}</div>
+              <div className="order-card--info-p">{UpperCaseName(orderData.client_name)}</div>
               <div className="order-card--info-p">{chefId}</div>
-              <div className="order-card--info-p">{chefId}</div>
+              <div className="order-card--info-p">
+                {abbrevName(orderData.waiter_name)}
+              </div>
               <div className="order-card--info-p">{orderData.table}</div>
             </div>
           </div>
