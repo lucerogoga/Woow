@@ -216,3 +216,20 @@ export async function createProductFirebase(
     product_stock: [productStock], //array
   });
 }
+//--------------CreateUser
+export async function createUserFirebase(
+  userRole,
+  userStatus,
+  userName,
+  userEmail,
+  userPwd,
+) {
+  const ordersRef = collection(db, "products");
+  return addDoc(ordersRef, {
+    user_role: userRole,
+    user_status: userStatus,
+    product_description: userName,
+    product_cost: userEmail, //array
+    product_option: userPwd, //array
+  });
+}

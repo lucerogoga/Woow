@@ -4,8 +4,18 @@ import Title from "./Title";
 import Search from "./Search";
 import { getEmployers } from "../Services/FirestoreServices";
 import EmployersCard from "./EmployersCard";
+import ModalEmployes from "./ModalEmployes";
+
 const Employes = () => {
   const [employers, setEmployers] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+  const onClose = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     getEmployers().then((employers) => setEmployers(employers));
@@ -31,10 +41,14 @@ const Employes = () => {
           <EmployersCard employee={employe} key={employe.id} />
         ))}
       </div>
-      <ActionButton
-        title="Add Employes"
-        className={"pink-button"}
-      ></ActionButton>
+      <div className="large-button--content" onClick={handleOpen}>
+        <ActionButton
+          title={"Add Product"}
+          className={"pink-button"}
+          //   onClick={openModal}
+        />
+      </div>
+       <ModalEmployes isOpen={openModal} onClose={onClose} />
     </>
   );
 };

@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
+import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
@@ -16,11 +17,13 @@ import {
   getProductsCategories,
   createProductFirebase,
   uploadImage,
+  createUserFirebase,
 } from "../Services/FirestoreServices";
 
 import ActionButton from "./ActionButton";
 
 import { Grid, InputAdornment } from "@mui/material";
+import { useAuth } from "./Context/AuthContext";
 
 const Input = styled("input")({
   display: "none",
@@ -39,49 +42,49 @@ const style = {
   p: 5,
 };
 
-export default function ModalProducts({ isOpen, onClose }) {
-  const [productCategories, setProductCategories] = useState([]);
-  useEffect(() => {
-    getProductsCategories().then((category) => setProductCategories(category));
-  }, []);
-
-  const [categoryId, setCategoryId] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [productCost, setProductCost] = useState("");
-  const [productOption, setProductOption] = useState(null);
-  const [productPhoto, setProductPhoto] = useState("");
-  const [productStock, setProductStock] = useState("");
-
-  const [loading, setLoading] = useState(true);
-
-  const createProduct = async () => {
+export default function ModalEmployes({ isOpen, onClose }) {
+  const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
+  // const [productCategories, setProductCategories] = useState([]);
+  // useEffect(() => {
+  // getProductsCategories().then((category) => setProductCategories(category));
+  // }, []);
+  const { createUser } = useAuth();
+  const [userRole, setUserRole] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userStatus, setUserStatus] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userPwd, setUserPwd] = useState("");
+  // const [loading, setLoading] = useState(true);
+  
+  
+  const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
     console.log("firestore llamando");
 
-    const downloadUrl = await uploadImage(productPhoto, categoryId);
+    const user = await createUser(userEmail, userPwd);
+    console.log("este es un user, ", user);
+    // const downloadUrl = await uploadImage(productPhoto, categoryId);
     // if (loading) return <Spinner />;
-    debugger;
-    createProductFirebase(
-      categoryId,
-      productName,
-      productDescription,
-      productCost,
-      productOption,
-      downloadUrl,
-      productStock
-    ).then((res) => {
-      //   setLoading(false);
-      console.log("producto subido");
-    });
+    // debugger;
+    // createUserFirebase(
+    //   userRole,
+    //   userStatus,
+    //   userName,
+    //   userEmail,
+    //   userPwd,
+    // ).then((res) => {
+    //   //   setLoading(false);
+    //   console.log("usuario subido");
+    // });
   };
 
-  const onChange = (e) => {
-    setProductPhoto(e.target.files[0]);
-  };
-  const handleChangeCategory = (e) => {
-    setCategoryId(e.target.value);
+  // const onChange = (e) => {
+  //   setProductPhoto(e.target.files[0]);
+  // };
+  const handleChangeRole = (e) => {
+    setUserRole(e.target.value);
+    // userRole(e.target.value);
   };
 
   return (
@@ -97,83 +100,54 @@ export default function ModalProducts({ isOpen, onClose }) {
             fullWidth
             //sx={{ minWidth: 200, maxWidth: 400, marginLeft: "1rem" }}
           >
-            <InputLabel id="demo-simple-select-label">
-              Category Product
-            </InputLabel>
+            <InputLabel id="demo-simple-select-label">Category Rol</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               // id={handleNameCategory}
-              value={categoryId}
-              label="Category Product"
-              onChange={handleChangeCategory}
+              value={userRole}
+              label="Category Rol"
+              onChange={handleChangeRole}
             >
-              {productCategories.map((cat, i) => {
+              {userRoles.map((cat, i) => {
                 return (
-                  <MenuItem value={cat.cat_uid} key={cat.cat_uid}>
-                    {cat.cat_name}
+                  <MenuItem value={cat} key={uuidv4()}>
+                    {cat}
                   </MenuItem>
                 );
               })}
             </Select>
           </FormControl>
           <TextField
-         TextField   fullWidth
-            label="Product Name"
+            TextField
+            fullWidth
+            label="User Name"
             variant="outlined"
             autoComplete="off"
-            onChange={(e) => setProductName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
           />
-          <
-            fullWidth
+          <fullWidth
             label="Description"
             variant="outlined"
             autoComplete="off"
-            onChange={(e) => setProductDescription(e.target.value)}
+            onChange={(e) => setUserStatus(e.target.value)}
           />
           <TextField
             fullWidth
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            label="Price"
+            label="Email"
             variant="outlined"
             autoComplete="off"
-            onChange={(e) => setProductCost(e.target.value)}
+            onChange={(e) => setUserEmail(e.target.value)}
           />
           <TextField
             fullWidth
-            label="Stock"
+            label="Password"
             variant="outlined"
             autoComplete="off"
-            onChange={(e) => setProductStock(e.target.value)}
+            onChange={(e) => setUserPwd(e.target.value)}
           />
 
-          <TextField
-            fullWidth
-            disabled
-            //label="Proto"
-            label={productPhoto.name}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <label htmlFor="icon-button-file">
-                    <Input
-                      accept="image/*"
-                      id="icon-button-file"
-                      type="file"
-                      required
-                      onChange={onChange}
-                    />
-                    <IconButton aria-label="upload picture" component="span">
-                      <PhotoCamera />
-                    </IconButton>
-                  </label>
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
-            autoComplete="off"
-            onChange={(e) => setProductPhoto(e.target.value)}
-          />
           {/* <label htmlFor="icon-button-file">
             <Input
               accept="image/*"
@@ -192,7 +166,7 @@ export default function ModalProducts({ isOpen, onClose }) {
               label="Details"
               labelPlacement="options"
             /> */}
-          <div className="large-button--content" onClick={createProduct}>
+          <div className="large-button--content" onClick={handleCreateUser}>
             <ActionButton title={"Create Product"} className={"pink-button"} />
           </div>
         </Grid>
