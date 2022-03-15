@@ -30,15 +30,12 @@ export const getUser = async (userId) => {
 
 //---------------- Order Functions
 
-
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
 
   return onSnapshot(orderRef, (snapshot) => {
     // setOrderCorrelative(snapshot.size + 1);
-    
   });
-  
 };
 
 export const ordersListener = () => {
@@ -211,7 +208,7 @@ export async function createProductFirebase(
     product_name: productName,
     product_description: productDescription,
     product_cost: [productCost], //array
-    product_option: [productOption], //array
+    product_options: [productOption], //array
     product_photo: [productPhoto], //array
     product_stock: [productStock], //array
   });
@@ -222,7 +219,7 @@ export async function createUserFirebase(
   userStatus,
   userName,
   userEmail,
-  userPwd,
+  userPwd
 ) {
   const ordersRef = collection(db, "products");
   return addDoc(ordersRef, {
