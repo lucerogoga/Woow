@@ -10,7 +10,7 @@ import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.sv
 import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
-
+import { abbrevName } from "../helpers/nameFormatted";
 import { useCart } from "../Components/Context/CartContext";
 import { useAuth } from "./Context/AuthContext";
 
@@ -76,7 +76,7 @@ const NavBarAdmin = ({
               <span className="cart--counter">{cart.length}</span>
             </div>
           )} */}
-          <p className="user-name--content">{userName}</p>
+          <p className="user-name--content">{abbrevName(userName)}</p>
           <div style={{ marginLeft: "15px" }}>
             <div>
               <Admin width={35} height={35} />

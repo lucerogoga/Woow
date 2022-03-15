@@ -37,8 +37,8 @@ const OrderCardFormat = ({ orderData }) => {
 
   // ! --------------------
 
+  console.log("LA LUZ", orderData);
   const handleStatus = (orderStatus) => {
-    console.log("mi estado actual", orderData.order_status);
     console.log("el que quiero colocar", orderStatus);
 
     //CONDITIONS WAITER
@@ -89,6 +89,7 @@ const OrderCardFormat = ({ orderData }) => {
               <h3 className="order-card--info-title">Order N°:</h3>
               <h3 className="order-card--info-title">Client:</h3>
               <h3 className="order-card--info-title">Chef:</h3>
+              <h3 className="order-card--info-title">Waiter:</h3>
               <h3 className="order-card--info-title">Table N°:</h3>
             </div>
             <div className="order-card--infos-container">
@@ -97,6 +98,7 @@ const OrderCardFormat = ({ orderData }) => {
               </div>
               {/* <div className="order-card--info-p">000036</div> */}
               <div className="order-card--info-p">{orderData.client_name}</div>
+              <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">{orderData.table}</div>
             </div>

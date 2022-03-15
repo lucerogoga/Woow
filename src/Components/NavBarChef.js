@@ -8,6 +8,7 @@ import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Chef } from "../Assets/icons/chef-hat.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
+import { abbrevName } from "../helpers/nameFormatted";
 
 import { useAuth } from "./Context/AuthContext";
 
@@ -32,6 +33,8 @@ const NavBarChef = ({
     }
     settingUserName();
   }, []);
+
+  console.log("pintame", abbrevName(userName));
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -58,7 +61,7 @@ const NavBarChef = ({
         </ul> */}
 
         <div className="navbar--block">
-          <p className="user-name--content">{userName}</p>
+          <p className="user-name--content">{abbrevName(userName)}</p>
           <div style={{ marginLeft: "15px" }}>
             <div>
               <Chef width={35} height={35} />
