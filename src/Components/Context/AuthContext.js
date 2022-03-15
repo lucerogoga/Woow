@@ -5,7 +5,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../Config/initialize.js";
+import { auth, auth2 } from "../../Config/initialize.js";
 
 const authContext = createContext();
 
@@ -17,10 +17,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        const user = userCredential.user.uid;
-        return user;
+    // return createUserWithEmailAndPassword(auth, email, password).then(
+    //   (userCredential) => {
+    //     const user = userCredential.user.uid;
+    //     return user;
+    //   }
+    // );
+    return createUserWithEmailAndPassword(auth2, email, password).then(
+      (firebaseUser) => {
+        console.log("User " + firebaseUser.user.uid + " created successfully!");
+        return firebaseUser.user.uid;
+        //I don't know if the next statement is necessary
+        // signOut(auth2);
       }
     );
   };
