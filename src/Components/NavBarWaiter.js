@@ -7,8 +7,8 @@ import "../Assets/Sidebar.css";
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Back } from "../Assets/icons/back.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
-import { ReactComponent as ShoppingCart } from "../Assets/icons/shopping-cart.svg";
-import { ReactComponent as FoodMenu } from "../Assets/icons/food-menu.svg";
+import { ReactComponent as ShoppingCart } from "../Assets/icons/basket.svg";
+import { ReactComponent as FoodMenu } from "../Assets/icons/menu-cart.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
 import { abbrevName } from "../helpers/nameFormatted";
@@ -72,14 +72,12 @@ const NavBarWaiter = ({
         <div className="navbar--block">
           {currentPath === "/waiter/order-cart" ? (
             <Link className="menu--link" to={""}>
-              <FoodMenu width={35} height={35} />
+              <FoodMenu width={40} height={40} />
             </Link>
           ) : currentPath === "/waiter/detail-product" ? null : (
             <div className="cart--container" onClick={onClickSideBar}>
               <ShoppingCart fill="#fff" width={50} height={35} />
-              {/* ! aqui */}
               <span className="cart--counter">{qtyItems}</span>
-              {/* <span className="cart--counter">{cart.length}</span> */}
             </div>
           )}
           <p className="user-name--content">{abbrevName(userName)}</p>
