@@ -81,7 +81,7 @@ const OrderCardFormat = ({ orderData }) => {
   // ! ------------------------------------------------------------
 
   return (
-    <div className="products-container">
+    <div className="order-container">
       <div className="order-card">
         <div className="order-card--header">
           <div className="order-card--info-container">
