@@ -65,6 +65,7 @@ const OrdersResumeWaiter = () => {
               onClick={() => {
                 handleClick(cat);
               }}
+              orders = {orders}
             />
           );
         })}
