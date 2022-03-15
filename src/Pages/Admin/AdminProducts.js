@@ -74,17 +74,17 @@ const AdminProducts = () => {
         })}
       </div>
       <ModalProducts isOpen={openModal} onClose={onClose} />
+      <div className="products-container">
+        {products.map((p) => {
+          return <ProductCard path={pathname} product={p} key={p.id} />;
+        })}
+      </div>
       <div className="large-button--content" onClick={handleOpen}>
         <ActionButton
           title={"Add Product"}
           className={"pink-button"}
           //   onClick={openModal}
         />
-      </div>
-      <div className="products-container">
-        {products.map((p) => {
-          return <ProductCard path={pathname} product={p} key={p.id} />;
-        })}
       </div>
     </>
   );
