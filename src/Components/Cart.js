@@ -32,6 +32,8 @@ const Cart = ({ cantEdit }) => {
   const [orderNumber, setOrderNumber] = useState(0);
   const [closeX, setCloseX] = useState(false);
 
+  const [isClean, setIsClean] = useState(false);
+
   const { cart, setCart } = useCart();
   const { user } = useAuth();
 
@@ -42,7 +44,6 @@ const Cart = ({ cantEdit }) => {
     const orderRef = collection(db, "orders");
 
     onSnapshot(orderRef, (snapshot) => {
-
       setOrderCorrelative(snapshot.size + 1);
     });
   }, [orderCorrelative]);
@@ -73,10 +74,11 @@ const Cart = ({ cantEdit }) => {
       );
       // createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
       setCart([]);
+      setIsClean(true);
     }
   };
-  const handleChange = (name) => {
-    setClientName(name);
+  const handleChange = (nameClient) => {
+    setClientName(nameClient);
   };
 
   const handleChangeTable = (table) => {
@@ -90,6 +92,7 @@ const Cart = ({ cantEdit }) => {
           <InputInfoClient
             onChange={handleChange}
             setTable={handleChangeTable}
+            cleanInfo={isClean} //empieza en false
           />
         </div>
         {/* <div className="client-err-container"> */}
@@ -135,17 +138,3 @@ const Cart = ({ cantEdit }) => {
 };
 
 export default Cart;
-
-// const handleOrder = () => {
-//   setIsCartEmpty(false);
-//   setIsInfoEmpty(false);
-//   if (cart.length === 0) {
-//     return setIsCartEmpty(true);
-//   } else if (clientName === "" || tableNumber === "") {
-//     return setIsInfoEmpty(true);
-//   } else {
-//     setOrderNumber(orderNumber + 1);
-//     createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
-//     setCart([]);
-//   }
-// };

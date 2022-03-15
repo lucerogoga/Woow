@@ -1,20 +1,30 @@
-import React, { useState } from "react";
-import InputLabel, { inputLabelClasses } from "@mui/material/InputLabel";
+import React, { useState, useEffect } from "react";
+import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
-export default function InputInfoClient({ onChange, setTable }) {
+export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
   const [tableNumber, setTableNumber] = useState("");
+  const [clientName, setClientName] = useState("");
 
-  const handleChange = (e) => {
-    onChange(e.target.value);
+  const handleChange = (nameClient) => {
+    onChange(nameClient);
+    setClientName(nameClient);
   };
-  const handleChangeTable = (e) => {
-    setTable(e.target.value);
-    setTableNumber(e.target.value);
+  const handleChangeTable = (tabla) => {
+    setTable(tabla);
+    setTableNumber(tabla);
   };
+
+  useEffect(() => {
+    if (cleanInfo) {
+      handleChangeTable("");
+      handleChange("");
+    }
+  }, []);
+
   return (
     <>
       <TextField
@@ -22,7 +32,9 @@ export default function InputInfoClient({ onChange, setTable }) {
         label="Client Name"
         variant="outlined"
         autoComplete="off"
-        onChange={handleChange}
+        value={clientName}
+        required
+        onChange={(e) => handleChange(e.target.value)}
         sx={{ minWidth: 200, maxWidth: 300, marginLeft: "1rem" }}
       />
       <FormControl sx={{ minWidth: 200, maxWidth: 400, marginLeft: "1rem" }}>
@@ -32,7 +44,8 @@ export default function InputInfoClient({ onChange, setTable }) {
           id="demo-simple-select"
           value={tableNumber}
           label="Nº Table"
-          onChange={handleChangeTable}
+          required
+          onChange={(e) => handleChangeTable(e.target.value)}
         >
           <MenuItem value={"Tabla 1"}>Tabla 1</MenuItem>
           <MenuItem value={"Tabla 2"}>Tabla 2</MenuItem>
