@@ -49,6 +49,15 @@ const Cart = ({ cantEdit }) => {
     }
     settingUserName();
   }, []);
+  
+  // ! aqui
+  // useEffect(() => {
+  //   async function settingUserName() {
+  //     const { user_name } = await getUser(user.currentUser);
+  //     setUserName(user_name);
+  //   }
+  //   settingUserName();
+  // }, []);
 
   useEffect(() => {
     const orderRef = collection(db, "orders");

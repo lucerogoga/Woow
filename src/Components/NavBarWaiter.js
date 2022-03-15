@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
@@ -38,6 +38,8 @@ const NavBarWaiter = ({
     }
     settingUserName();
   }, []);
+  let location = useLocation();
+  console.log("MIRssAME, ", location.pathname);
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -58,14 +60,38 @@ const NavBarWaiter = ({
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={""}>
+            {/* <NavLink
+              className="menu--link"
+              to={""}
+              activeClassName="menu--link--active"
+            >
+              Take Order
+            </NavLink> */}
+            {/* <Link className="menu--link" to={""}>
+              Take Order
+            </Link> */}
+            {/* <Link className="menu--link" to={""} className={location.pathname==="waiter" ? "menu--link--active" : ""}> */}
+            <Link
+              to={""}
+              className={
+                "menu--link " +
+                (location.pathname === "/waiter" ? "menu--link--active" : "")
+              }
+            >
               Take Order
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"orders-resume"}>
+            <NavLink
+              className="menu--link"
+              to={"orders-resume"}
+              activeClassName="menu--link--active"
+            >
               Orders Resume
-            </Link>
+            </NavLink>
+            {/* <Link className="menu--link" to={"orders-resume"}>
+              Orders Resume
+            </Link> */}
           </li>
         </ul>
 

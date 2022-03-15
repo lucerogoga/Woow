@@ -22,4 +22,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-export { app, auth, db, storage };
+
+
+// var config = {apiKey: "apiKey",
+//     authDomain: "projectId.firebaseapp.com",
+//     databaseURL: "https://databaseName.firebaseio.com"};
+// const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
+
+
+
+
+export { app, auth, db, storage};
+// export { app, auth, db, storage, secondaryApp};

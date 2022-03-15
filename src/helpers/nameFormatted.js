@@ -8,3 +8,10 @@ export const abbrevName = (names) => {
   return `${split_names[0].charAt(0).toUpperCase() + split_names[0].slice(1)}`;
 };
 
+export const UpperCaseName = (name) => {
+  return name
+    .toLowerCase()
+    .split(" ")
+    .map((el) => `${el.charAt(0).toUpperCase()}${el.slice(1)}`)
+    .join(" ");
+};

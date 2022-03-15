@@ -29,6 +29,7 @@ export const WaiterView = () => {
         onClickSideBar={() => setIsSideBarCartOpen(!isSideBarCartOpen)}
         currentPath={pathname}
         onClickLogout={handleLogout}
+        // isActive={}
       />
       <div>
         {isSideBarCartOpen && (

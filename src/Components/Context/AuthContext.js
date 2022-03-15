@@ -9,6 +9,11 @@ import { auth } from "../../Config/initialize.js";
 
 const authContext = createContext();
 
+// !----------------------
+// !prueba
+
+// !----------------------
+
 // useContext
 export const useAuth = () => useContext(authContext);
 
@@ -17,12 +22,20 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        const user = userCredential.user.uid;
-        return user;
-      }
-    );
+    // return createUserWithEmailAndPassword(auth, email, password).then(
+    //   (userCredential) => {
+    //     const user = userCredential.user.uid;
+    //     return user;
+    //   }
+    // );
+    // return secondaryApp
+    //   .auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then(function (firebaseUser) {
+    //     console.log("User " + firebaseUser.uid + " created successfully!");
+    //     //I don't know if the next statement is necessary
+    //     secondaryApp.auth().signOut();
+    //   });
   };
 
   const login = async (email, password) => {

@@ -30,15 +30,12 @@ export const getUser = async (userId) => {
 
 //---------------- Order Functions
 
-
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
 
   return onSnapshot(orderRef, (snapshot) => {
     // setOrderCorrelative(snapshot.size + 1);
-    
   });
-  
 };
 
 export const ordersListener = () => {
@@ -75,6 +72,7 @@ export const createOrder = async (
   cartProducts,
   orderNumber
 ) => {
+  console.log("EL WAITER QUE CREO LA ORDEN SE LLAMA, ", waiterName);
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,
@@ -222,7 +220,7 @@ export async function createUserFirebase(
   userStatus,
   userName,
   userEmail,
-  userPwd,
+  userPwd
 ) {
   const ordersRef = collection(db, "products");
   return addDoc(ordersRef, {
