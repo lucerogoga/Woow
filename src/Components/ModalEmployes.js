@@ -71,16 +71,17 @@ export default function ModalEmployes({ isOpen, onClose }) {
     // const downloadUrl = await uploadImage(productPhoto, categoryId);
     // if (loading) return <Spinner />;
     // debugger;
-    // createUserFirebase(
-    //   userRole,
-    //   userStatus,
-    //   userName,
-    //   userEmail,
-    //   userPwd,
-    // ).then((res) => {
-    //   //   setLoading(false);
-    //   console.log("usuario subido");
-    // });
+    createUserFirebase(
+      userID,
+      userRole,
+      userStatus,
+      userName,
+      userEmail,
+      userPwd
+    ).then((res) => {
+      //   setLoading(false);
+      console.log("usuario subido");
+    });
   };
 
   // const onChange = (e) => {
