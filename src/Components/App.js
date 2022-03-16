@@ -108,7 +108,7 @@ function App() {
             {/* ANIDADO */}
             <Route path="" element={<Employes />} />
             <Route path="orders" element={<OrdersResumeAdmin />} />
-            <Route path="addProducts" element={<AdminProducts />} />
+            <Route path="add-products" element={<AdminProducts />} />
           </Route>
 
           {/* Waiter Views */}

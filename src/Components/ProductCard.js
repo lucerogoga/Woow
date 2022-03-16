@@ -79,7 +79,7 @@ export function ProductCard(props) {
           <h3 className="product-card--cost"> $ {product.product_cost[0]}</h3>
         </div>
         <div className="product-card--buttonContainer">
-          {path === "/admin/addProducts" ? (
+          {path === "/admin/add-products" ? (
             <div>
               {<Edit />}
               <div

@@ -125,6 +125,7 @@
 /* ! ---------------------CART-------------------- */
 .cart--container {
   position: relative;
+  cursor: pointer;
 }
 
 .cart--counter {
@@ -141,6 +142,8 @@
   color: #fff;
   font-weight: 700;
   font-size: 1rem;
+  padding-right: 1px;
+  padding-top: 2px;
 }
 
 /* ! ---------------------USER PHOTO-------------------- */
@@ -154,6 +157,11 @@
   height: 40px;
   margin-left: "15px";
   padding-right: 4px;
+  cursor: pointer;
+}
+.user--container:hover {
+  background-color: #ffa4ac;
+  transition: .3s;
 }
 
 .user--container path {
