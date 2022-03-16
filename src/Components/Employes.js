@@ -28,7 +28,6 @@ const Employes = () => {
     });
     setEmployers(employe);
   };
-  console.log(employers);
   return (
     <>
       <Search
@@ -43,12 +42,12 @@ const Employes = () => {
       </div>
       <div className="large-button--content" onClick={handleOpen}>
         <ActionButton
-          title={"Add Product"}
+          title={"Add Employee"}
           className={"pink-button"}
           //   onClick={openModal}
         />
       </div>
-       <ModalEmployes isOpen={openModal} onClose={onClose} />
+      <ModalEmployes isOpen={openModal} onClose={onClose} />
     </>
   );
 };

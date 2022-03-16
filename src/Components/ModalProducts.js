@@ -53,16 +53,16 @@ export default function ModalProducts({ isOpen, onClose }) {
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const createProduct = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
     console.log("firestore llamando");
+    //setLoading(true);
+    //if (loading) return <Spinner />;
 
     const downloadUrl = await uploadImage(productPhoto, categoryId);
-    // if (loading) return <Spinner />;
-    debugger;
     createProductFirebase(
       categoryId,
       productName,
@@ -75,6 +75,7 @@ export default function ModalProducts({ isOpen, onClose }) {
       //   setLoading(false);
       console.log("producto subido");
     });
+    clear();
   };
 
   const onChange = (e) => {
@@ -83,7 +84,15 @@ export default function ModalProducts({ isOpen, onClose }) {
   const handleChangeCategory = (e) => {
     setCategoryId(e.target.value);
   };
-
+  const clear = () => {
+    // return the initial state
+    setProductName("");
+    setProductDescription("");
+    setProductCost("");
+    setProductOption(null);
+    setProductPhoto("");
+    setProductStock("");
+  };
   return (
     <Modal
       open={isOpen}
@@ -118,14 +127,16 @@ export default function ModalProducts({ isOpen, onClose }) {
             </Select>
           </FormControl>
           <TextField
-         TextField   fullWidth
+            fullWidth
             label="Product Name"
+            value={productName}
             variant="outlined"
             autoComplete="off"
             onChange={(e) => setProductName(e.target.value)}
           />
-          <
+          <TextField
             fullWidth
+            value={productDescription}
             label="Description"
             variant="outlined"
             autoComplete="off"
@@ -133,6 +144,7 @@ export default function ModalProducts({ isOpen, onClose }) {
           />
           <TextField
             fullWidth
+            value={productCost}
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             label="Price"
             variant="outlined"
@@ -141,6 +153,7 @@ export default function ModalProducts({ isOpen, onClose }) {
           />
           <TextField
             fullWidth
+            value={productStock}
             label="Stock"
             variant="outlined"
             autoComplete="off"
@@ -174,24 +187,6 @@ export default function ModalProducts({ isOpen, onClose }) {
             autoComplete="off"
             onChange={(e) => setProductPhoto(e.target.value)}
           />
-          {/* <label htmlFor="icon-button-file">
-            <Input
-              accept="image/*"
-              id="icon-button-file"
-              type="file"
-              required
-              onChange={onChange}
-            />
-            <IconButton aria-label="upload picture" component="span">
-              <PhotoCamera />
-            </IconButton>
-          </label> */}
-          {/* <FormControlLabel
-              value="options"
-              control={<Switch color="default" />}
-              label="Details"
-              labelPlacement="options"
-            /> */}
           <div className="large-button--content" onClick={createProduct}>
             <ActionButton title={"Create Product"} className={"pink-button"} />
           </div>

@@ -10,8 +10,6 @@ const Edit = ({ onClick }) => {
 };
 
 const EmployersCard = ({ employee }) => {
-  console.log("soyyy", employee);
-
   return (
     <div className="products-container">
       <div className="order-card">
