@@ -5,7 +5,6 @@ export function ButtonFilter(props) {
   const { item, icon, onClick, active } = props;
   let location = useLocation();
   const { pathname } = location;
-  console.log("aqui toy", pathname);
   return (
     <>
       <button

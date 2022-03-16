@@ -28,7 +28,6 @@ const Employes = () => {
     });
     setEmployers(employe);
   };
-  console.log(employers);
   return (
     <>
       <Search
@@ -48,7 +47,7 @@ const Employes = () => {
           //   onClick={openModal}
         />
       </div>
-       <ModalEmployes isOpen={openModal} onClose={onClose} />
+      <ModalEmployes isOpen={openModal} onClose={onClose} />
     </>
   );
 };
