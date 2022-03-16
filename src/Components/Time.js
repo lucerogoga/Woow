@@ -11,21 +11,22 @@ const Time = ({ start, end }) => {
   // console.log("time component , ", start.toDate());
   // const diff = () => {
   const a = moment("2022-03-10 13:31:12");
-  const b = moment("2022-03-11 15:31:12");
-  //   // diff = moment.preciseDiff(a, b, true);
+  const b = moment("2022-03-11 15:31:15");
+
+  // ! el actual!
+  // const current = moment();
+
   const diferenciaa = moment.preciseDiff(a, b, true);
   // const diferencia = JSON.stringify(moment.preciseDiff(a, b, true));
   // var duration = diferenciaa(diferenciaa, "HH:mm:ss a");
   // console.log("salvame diferencia formato, ", duration);
   console.log("salvame diferencia json, ", diferenciaa);
+
+  const {hours} = diferenciaa;
+  // const {hours, minutes, seconds} = diferenciaa;
+  // console.log('horas: ', hours, ' - minutos: ', minutes, ' - segundos: ' , seconds)
+  console.log('horas: ', hours)
   // !-----
-  // var d = moment.duration(diferenciaa);
-  // var s = d.format("hh:mm:ss");
-
-  // console.log("y dónde está?, ", s);
-
-  // const myDate = moment().format("hh:mm:ss");
-  // console.log("formateando moment, ", myDate);
 
   return (
     <div className="order-cart--containertime">

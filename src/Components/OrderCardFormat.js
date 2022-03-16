@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-// import { updateOrder } from "../Services/FirestoreServices";
-import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import { ccyFormat, createData, pad, total } from "../helpers/mathFunctions";
-import { MouseOverPopover } from "./EyePopover";
+import { pad} from "../helpers/mathFunctions";
 import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
-// import { getUser, serverTimestamp } from "../Services/FirestoreServices";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
 import Time from "./Time";
@@ -19,10 +15,8 @@ import { abbrevName , UpperCaseName} from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
-  // const [startOrder, setStartOrder] = useState(false);
   let location = useLocation();
   const { pathname } = location;
-  // console.log("miiii ordeeeeen", pad(orderData.order_number, 6));
   const userRole = useRol();
   const {
     user: { currentUser },
@@ -38,9 +32,7 @@ const OrderCardFormat = ({ orderData }) => {
 
   // ! --------------------
 
-  console.log("LA LUZ", orderData.waiter_name);
   const handleStatus = (orderStatus) => {
-    console.log("el que quiero colocar", orderStatus);
 
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
@@ -77,10 +69,7 @@ const OrderCardFormat = ({ orderData }) => {
   // console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
   // console.log("ORDER TIME START", orderData.order_timestamp);
   // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
-  console.log("funcionan los rows?? , ", rows);
-  console.log("AQUI");
   // ! ------------------------------------------------------------
-
   return (
     <div className="order-container">
       <div className="order-card">
@@ -109,9 +98,9 @@ const OrderCardFormat = ({ orderData }) => {
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
               {/* <Clock className="order-cart--clock" width={16} height={16} /> */}
-              <h3 className="order-cart--minutes">00:30:00</h3>
+              {/* <h3 className="order-cart--minutes">00:30:00</h3> */}
+            <Time start={orderData.order_timestamp} />
             </div>
-            {/* <Time start={orderData.order_timestamp} /> */}
           </div>
         </div>
         <div className="order-card--table-container">
