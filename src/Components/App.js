@@ -21,7 +21,7 @@ import AdminProducts from "../Pages/Admin/AdminProducts";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import InputLabel, { inputLabelClasses } from "@mui/material/InputLabel";
+import { inputLabelClasses } from "@mui/material/InputLabel";
 
 const pink = "#ff9aa3";
 const yellow = "#fecc68";
