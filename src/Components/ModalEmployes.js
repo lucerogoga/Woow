@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
+import Switch from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
@@ -152,27 +153,10 @@ export default function ModalEmployes({ isOpen, onClose }) {
             autoComplete="off"
             onChange={(e) => setUserPwd(e.target.value)}
           />
-
-          {/* <label htmlFor="icon-button-file">
-            <Input
-              accept="image/*"
-              id="icon-button-file"
-              type="file"
-              required
-              onChange={onChange}
-            />
-            <IconButton aria-label="upload picture" component="span">
-              <PhotoCamera />
-            </IconButton>
-          </label> */}
-          {/* <FormControlLabel
-              value="options"
-              control={<Switch color="default" />}
-              label="Details"
-              labelPlacement="options"
-            /> */}
+          <label>Activo</label>
+          <Switch />
           <div className="large-button--content" onClick={handleCreateUser}>
-            <ActionButton title={"Create Product"} className={"pink-button"} />
+            <ActionButton title={"Create Employee"} className={"pink-button"} />
           </div>
         </Grid>
       </Box>
