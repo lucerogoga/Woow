@@ -58,7 +58,6 @@ export default function ModalProducts({ isOpen, onClose }) {
   const createProduct = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
-    console.log("firestore llamando");
     //setLoading(true);
     //if (loading) return <Spinner />;
 
@@ -73,7 +72,6 @@ export default function ModalProducts({ isOpen, onClose }) {
       productStock
     ).then((res) => {
       //   setLoading(false);
-      console.log("producto subido");
     });
     clear();
   };

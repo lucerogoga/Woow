@@ -30,7 +30,6 @@ const NavBarChef = ({
     settingUserName();
   }, []);
 
-  console.log("pintame", abbrevName(userName));
   return (
     <div className="navbar">
       <div className="navbar--container">

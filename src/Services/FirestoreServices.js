@@ -42,7 +42,6 @@ export const getOrderNumberCorrelative = async () => {
 export const ordersListener = () => {
   const q = query(collection(db, "orders"));
   return onSnapshot(q, (snapshot) => {
-    console.log(snapshot.docs.map((doc) => doc.data()));
   });
 };
 
@@ -73,7 +72,6 @@ export const createOrder = async (
   cartProducts,
   orderNumber
 ) => {
-  console.log("EL WAITER QUE CREO LA ORDEN SE LLAMA, ", waiterName);
   const ordersRef = collection(db, "orders");
   return addDoc(ordersRef, {
     chef_id: null,

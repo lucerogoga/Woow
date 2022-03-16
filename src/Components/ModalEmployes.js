@@ -65,10 +65,8 @@ export default function ModalEmployes({ isOpen, onClose }) {
   const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
-    console.log("firestore llamando");
     const userID = await createUser(userEmail, userPwd);
 
-    console.log("este es un user devuelto del second app, ", userID);
     // const downloadUrl = await uploadImage(productPhoto, categoryId);
     // if (loading) return <Spinner />;
     // debugger;
@@ -81,7 +79,6 @@ export default function ModalEmployes({ isOpen, onClose }) {
       userPwd
     ).then((res) => {
       //   setLoading(false);
-      console.log("usuario subido");
     });
   };
 
