@@ -118,13 +118,13 @@ export default function ModalProducts({ isOpen, onClose }) {
             </Select>
           </FormControl>
           <TextField
-         TextField   fullWidth
+            fullWidth
             label="Product Name"
             variant="outlined"
             autoComplete="off"
             onChange={(e) => setProductName(e.target.value)}
           />
-          <
+          <TextField
             fullWidth
             label="Description"
             variant="outlined"

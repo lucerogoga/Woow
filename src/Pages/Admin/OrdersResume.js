@@ -25,6 +25,7 @@ const OrdersResumeAdmin = () => {
   ]);
   const [orders, setOrders] = useState([]);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
+  const [orderStatusQuantity, setOrderStatusQuantity] = useState([]);
   const {
     user: { currentUser },
   } = useAuth();

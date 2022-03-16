@@ -124,14 +124,14 @@ export default function ModalEmployes({ isOpen, onClose }) {
             </Select>
           </FormControl>
           <TextField
-            TextField
             fullWidth
             label="User Name"
             variant="outlined"
             autoComplete="off"
             onChange={(e) => setUserName(e.target.value)}
           />
-          <fullWidth
+          <TextField
+            fullWidth
             label="Description"
             variant="outlined"
             autoComplete="off"
