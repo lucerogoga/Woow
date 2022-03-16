@@ -55,28 +55,33 @@ export default function ModalEmployes({ isOpen, onClose }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
   // const [loading, setLoading] = useState(true);
-  
-  
+  //const [userId, setUserId] = useState("");
+
+  // useEffect(async () => {
+  //   setUserId(userID);
+  // }, []);
+
   const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
     console.log("firestore llamando");
+    const userID = await createUser(userEmail, userPwd);
 
-    const user = await createUser(userEmail, userPwd);
-    console.log("este es un user, ", user);
+    console.log("este es un user devuelto del second app, ", userID);
     // const downloadUrl = await uploadImage(productPhoto, categoryId);
     // if (loading) return <Spinner />;
     // debugger;
-    // createUserFirebase(
-    //   userRole,
-    //   userStatus,
-    //   userName,
-    //   userEmail,
-    //   userPwd,
-    // ).then((res) => {
-    //   //   setLoading(false);
-    //   console.log("usuario subido");
-    // });
+    createUserFirebase(
+      userID,
+      userRole,
+      userStatus,
+      userName,
+      userEmail,
+      userPwd
+    ).then((res) => {
+      //   setLoading(false);
+      console.log("usuario subido");
+    });
   };
 
   // const onChange = (e) => {

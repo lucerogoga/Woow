@@ -11,6 +11,7 @@ import {
   updateDoc,
   onSnapshot,
   limit,
+  setDoc,
 } from "firebase/firestore";
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../Config/initialize";
@@ -215,19 +216,19 @@ export async function createProductFirebase(
   });
 }
 //--------------CreateUser
-export async function createUserFirebase(
+export function createUserFirebase(
+  userID,
   userRole,
   userStatus,
   userName,
-  userEmail,
-  userPwd
+  userEmail
 ) {
-  const ordersRef = collection(db, "products");
-  return addDoc(ordersRef, {
-    user_role: userRole,
+  const userdoc = doc(db, "users", userID);
+  return setDoc(userdoc, {
+    user_id: userID,
+    user_rol: userRole,
     user_status: userStatus,
-    product_description: userName,
-    product_cost: userEmail, //array
-    product_option: userPwd, //array
+    user_name: userName,
+    user_email: userEmail,
   });
 }

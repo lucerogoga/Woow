@@ -5,7 +5,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../Config/initialize.js";
+import { auth, auth2 } from "../../Config/initialize.js";
 
 const authContext = createContext();
 
@@ -22,20 +22,11 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const createUser = (email, password) => {
-    // return createUserWithEmailAndPassword(auth, email, password).then(
-    //   (userCredential) => {
-    //     const user = userCredential.user.uid;
-    //     return user;
-    //   }
-    // );
-    // return secondaryApp
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then(function (firebaseUser) {
-    //     console.log("User " + firebaseUser.uid + " created successfully!");
-    //     //I don't know if the next statement is necessary
-    //     secondaryApp.auth().signOut();
-    //   });
+    return createUserWithEmailAndPassword(auth2, email, password)
+      .then((firebaseUser) => {
+        return firebaseUser.user.uid;
+      })
+      .then(signOut(auth2));
   };
 
   const login = async (email, password) => {
@@ -52,12 +43,10 @@ export const AuthProvider = ({ children }) => {
     signOut(auth);
   };
 
-  // ! No entiendo por qué esto funciona bien
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser({ currentUser: currentUser?.uid });
-      // ! ni entiendo el set loading
-      //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR*/
+      //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
       setLoading(false);
     });
 
