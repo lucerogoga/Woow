@@ -82,16 +82,17 @@ const NavBarWaiter = ({
             </Link>
           </li>
           <li className="menu--list">
-            <NavLink
-              className="menu--link"
+            <Link
               to={"orders-resume"}
-              activeClassName="menu--link--active"
+              className={
+                "menu--link " +
+                (location.pathname === "/waiter/orders-resume"
+                  ? "menu--link--active"
+                  : "")
+              }
             >
               Orders Resume
-            </NavLink>
-            {/* <Link className="menu--link" to={"orders-resume"}>
-              Orders Resume
-            </Link> */}
+            </Link>
           </li>
         </ul>
 

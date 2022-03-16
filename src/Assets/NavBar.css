@@ -106,7 +106,8 @@
   height: 100%;
   margin: 0.5rem 2.5rem;
   /* color: red; */
-  color: #365262 !important;
+  color: #ff9aa3 !important;
+  /* color: #365262 !important; */
   font-family: sans-serif;
   font-size: 1rem;
   font-weight: 300;
@@ -115,7 +116,7 @@
   text-decoration: none;
   font-weight: 700;
   position: relative;
-  background-color: blue;
+  /* background-color: blue; */
 }
 /* .menu--link:hover {
   color: #ccc;
