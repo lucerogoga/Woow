@@ -210,7 +210,7 @@ export async function createProductFirebase(
     product_name: productName,
     product_description: productDescription,
     product_cost: [productCost], //array
-    product_option: [productOption], //array
+    product_options: [productOption], //array
     product_photo: [productPhoto], //array
     product_stock: [productStock], //array
   });
