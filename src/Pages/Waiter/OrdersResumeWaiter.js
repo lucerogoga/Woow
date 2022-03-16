@@ -15,7 +15,6 @@ import {
 import { useAuth } from "../../Components/Context/AuthContext";
 import { db } from "../../Config/initialize";
 
-
 const OrdersResumeWaiter = () => {
   const [productOrderCategories, setProductOrderCategories] = useState([
     "Pending",
@@ -26,7 +25,6 @@ const OrdersResumeWaiter = () => {
   ]);
   const [orders, setOrders] = useState([]);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
- 
 
   // const handleCategorie = async (catUid, catName) =>
   //   await filterProductByCategorie(catUid, catName);
@@ -65,7 +63,7 @@ const OrdersResumeWaiter = () => {
               onClick={() => {
                 handleClick(cat);
               }}
-              orders = {orders}
+              orders={orders}
             />
           );
         })}
