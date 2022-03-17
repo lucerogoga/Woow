@@ -43,15 +43,15 @@ describe("Login", () => {
     expect(screen.getByDisplayValue("123456")).toBeInTheDocument();
   });
 
-  //   test("render button Login from Login Component", () => {
-  //     const { getByText } = render(<Login />);
+  test("render button Login from Login Component", () => {
+    const { getByText } = render(<Login />);
 
-  //     const button = screen.getByText("Login");
+    const button = screen.getByText("Login");
 
-  //     fireEvent.click(button);
+    fireEvent.click(button);
 
-  //     //  expect(button).toBeCalled('login');
-  //   });
+    // expect(button).toBeCalled('handleSubmit');
+  });
 });
 
 // test('component handles button click', () => {
