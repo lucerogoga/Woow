@@ -7,8 +7,20 @@ test("render content from Title Component", () => {
   const title = "Title";
   const qty = 3;
 
-  const { getByTestId } = render(<Title title={title} quantity={qty} />);
+  const view = render(<Title title={title} quantity={qty} />);
 
-  const text = screen.getByTestId("title-text");
-  expect(text).toHaveTextContent(title);
+  screen.getByText(title);
+  // const text = screen.getByTestId("title-text");
+  expect(view.container).toHaveTextContent(title);
+  expect(view.container).toHaveTextContent(qty);
 });
+
+// test("render content from Title Component", () => {
+//   const title = "Title";
+//   const qty = 3;
+
+//   const { getByTestId } = render(<Title title={title} quantity={qty} />);
+
+//   const text = screen.getByTestId("title-text");
+//   expect(text).toHaveTextContent(title);
+// });
