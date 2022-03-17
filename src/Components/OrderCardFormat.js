@@ -70,6 +70,9 @@ const OrderCardFormat = ({ orderData }) => {
   // console.log("ORDER TIME START", orderData.order_timestamp);
   // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
   // ! ------------------------------------------------------------
+  const [ayudaTime, setAyudaTime] = useState({ms:0, s:0, m:0, h:0})
+
+  // ! ------------------------------------------------------------
   return (
     <div className="order-container">
       <div className="order-card">
@@ -99,7 +102,8 @@ const OrderCardFormat = ({ orderData }) => {
             <div className="order-cart--containertime">
               {/* <Clock className="order-cart--clock" width={16} height={16} /> */}
               {/* <h3 className="order-cart--minutes">00:30:00</h3> */}
-            <Time start={orderData.order_timestamp} />
+            <Time start={orderData.order_timestamp} timeX={ayudaTime}/>
+            {/* <Time start={orderData.order_timestamp} /> */}
             </div>
           </div>
         </div>

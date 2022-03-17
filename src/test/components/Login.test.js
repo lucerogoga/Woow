@@ -2,20 +2,12 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "../../Components/Login";
-// import { authContext, AuthProvider, useAuth} from "../../Components/Context/AuthContext";
-
 import {
   AuthProvider,
   AuthContext,
   useAuth,
 } from "../../Components/Context/AuthContext";
 
-// jest.mock("../../Components/Context/AuthContext");
-// import mount from "enzyme";
-// import { useAuth } from "../../Components/Context/AuthContext";
-// import AuthProvider from "../../Components/Context/AuthContext";
-// import { authContext } from "../../Components/Context/AuthContext";
-// import { AuthProvider } from "../Comp/Context/AuthContext";
 // pay attention to write it at the top level of your file
 const mockedUsedNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
