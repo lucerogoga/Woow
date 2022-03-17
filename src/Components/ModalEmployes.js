@@ -133,13 +133,6 @@ export default function ModalEmployes({ isOpen, onClose }) {
           />
           <TextField
             fullWidth
-            label="Description"
-            variant="outlined"
-            autoComplete="off"
-            onChange={(e) => setUserStatus(e.target.value)}
-          />
-          <TextField
-            fullWidth
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             label="Email"
             variant="outlined"
