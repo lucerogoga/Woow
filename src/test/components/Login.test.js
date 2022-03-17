@@ -21,13 +21,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
-// jest.mock("../../Components/Context/AuthContext", () => ({
-//   ...jest.requireActual("../../Components/Context/AuthContext"),
-//   useAuth: jest.fn(() => ({
-//     login: () => true,
-//   })),
-// }));
-
+// !--------Solicitar explicacion de este mock si esta bien o no?
 jest.mock("../../Components/Context/AuthContext", () => ({
   useAuth: () => ({
     login: () => true,
@@ -48,6 +42,16 @@ describe("Login", () => {
     expect(screen.getByDisplayValue("waiter@gamail.com")).toBeInTheDocument();
     expect(screen.getByDisplayValue("123456")).toBeInTheDocument();
   });
+
+  //   test("render button Login from Login Component", () => {
+  //     const { getByText } = render(<Login />);
+
+  //     const button = screen.getByText("Login");
+
+  //     fireEvent.click(button);
+
+  //     //  expect(button).toBeCalled('login');
+  //   });
 });
 
 // test('component handles button click', () => {
