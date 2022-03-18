@@ -89,7 +89,6 @@ const OrderCardFormat = ({ orderData }) => {
               <div className="order-card--info-p">
                 {pad(orderData.order_number, 6)}
               </div>
-              {/* <div className="order-card--info-p">000036</div> */}
               <div className="order-card--info-p">{UpperCaseName(orderData.client_name)}</div>
               <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">
@@ -100,10 +99,7 @@ const OrderCardFormat = ({ orderData }) => {
           </div>
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
-              {/* <Clock className="order-cart--clock" width={16} height={16} /> */}
-              {/* <h3 className="order-cart--minutes">00:30:00</h3> */}
             <Time start={orderData.order_timestamp} timeX={ayudaTime}/>
-            {/* <Time start={orderData.order_timestamp} /> */}
             </div>
           </div>
         </div>
