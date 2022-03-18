@@ -12,6 +12,9 @@ import Time from "./Time";
 import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
 import { abbrevName , UpperCaseName} from "../helpers/nameFormatted";
+import {
+  serverTimestamp,
+} from "firebase/firestore";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
@@ -33,15 +36,17 @@ const OrderCardFormat = ({ orderData }) => {
   // ! --------------------
 
   const handleStatus = (orderStatus) => {
-
+    console.log('click!!')
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
       // Si el estado está en pendiente siendo waiter , puede cancelar la orden
-      updateStatusOrder(orderData.id, "Canceled");
+      // updateStatusOrder(orderData.id, "Canceled");
+      console.log('deberia poder cancelar')
+      updateStatusOrder(orderData.id, "Canceled", userRole);
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
       console.log("Ready to Serve && waiter");
-      // Si el estado está en ready to Serve, el waiter puede marcar la ordern como Delivered
+      // Si el estado está en ready to Serve, el waiter puede marcar la orden como Delivered
       updateStatusOrder(orderData.id, "Delivered");
     }
     //CONDITIONS CHEF
@@ -99,7 +104,7 @@ const OrderCardFormat = ({ orderData }) => {
           </div>
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
-            <Time start={orderData.order_timestamp} timeX={ayudaTime}/>
+            <Time start={orderData.order_timestamp} end={orderData.order_timestamp_end}/>
             </div>
           </div>
         </div>

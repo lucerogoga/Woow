@@ -6,7 +6,7 @@ import "moment-precise-range-plugin";
 import { MarkEmailUnreadTwoTone } from "@mui/icons-material";
 
 const Time = ({ start, end}) => {
-  
+  // console.log('tiempo finaliza?', end)
   // const [time, setTime] = useState('')
   const [hoursDiff, setHoursDiff] = useState('00')
   const [minutesDiff, setMinutesDiff] = useState('00')

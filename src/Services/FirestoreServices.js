@@ -45,22 +45,28 @@ export const ordersListener = () => {
   });
 };
 
-export const updateOrder = async (chefId, idOrder, status, chefName) => {
+export const updateOrder = async (chefId, idOrder, status, chefName, TimeStampEnd) => {
   const orderRef = doc(db, "orders", idOrder);
 
   await updateDoc(orderRef, {
     order_status: status,
     chef_id: chefId,
     chef_name: chefName,
+    order_timestamp_end: TimeStampEnd,
   });
 };
 
-export const updateStatusOrder = async (idOrder, status) => {
+export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
-
-  await updateDoc(orderRef, {
-    order_status: status,
-  });
+console.log('STATUS: ', status, 'Y ROLE: ', userRole )
+  if (status === "Canceled" && userRole === "waiter"){
+    console.log('deberia funcionar')
+    await updateDoc(orderRef, {
+      order_status: status,
+      order_timestamp_end: serverTimestamp(),
+    });
+  }
+  // "Pending" && userRole === "waiter"
 };
 
 export const createOrder = async (
@@ -84,6 +90,7 @@ export const createOrder = async (
     order_timestamp: serverTimestamp(),
     order_products: cartProducts,
     order_number: orderNumber,
+    order_timestamp_end: null,
   });
 };
 //----------------
