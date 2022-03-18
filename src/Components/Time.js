@@ -23,8 +23,8 @@ const Time = ({ start, end}) => {
 
     interval = setInterval(() => {
       const now = moment();
-      const ayudita = moment.preciseDiff(startTime, now, true);
-      let {seconds, minutes, hours} =  ayudita
+      const timeDifference = moment.preciseDiff(startTime, now, true);
+      let {seconds, minutes, hours} =  timeDifference
       // let {seconds, minutes, hours} = moment.preciseDiff(startTime, now, true);
 
       // const {seconds, minutes, hours} = moment.preciseDiff(startTime, now, true);
@@ -36,13 +36,7 @@ const Time = ({ start, end}) => {
         seconds = seconds < 10 ? "0" + seconds : seconds
         minutes = minutes < 10 ? "0" + minutes : minutes
         hours = hours < 10 ? "0" + hours : hours
-        
-        // const prueba = moment(hours+' '+minutes+' '+hours, "hh:mm:ss")
-        // console.log('FORMATEANDO', prueba)
 
-    // setHoursDiff(hoursFormat)
-    // setMinutesDiff(minutesFormat)
-    // setSecondsDiff(secondsFormat)
     setHoursDiff(hours)
     setMinutesDiff(minutes)
     setSecondsDiff(seconds)
