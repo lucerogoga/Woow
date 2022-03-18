@@ -14,6 +14,13 @@
   
 
   .order-cart--minutes {
+    color:#ff9aa3;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 0.2rem;
+  }
+
+  .order-cart--minutes.exceeds {
     color:#ff4b61;
     font-size: 1rem;
     font-weight: 700;

@@ -33,12 +33,6 @@ const Time = ({ start, end}) => {
         // clearInterval(interval.current)
         // }
 
-        // const ayuda = moment(ayudita).format("hh:mm:ss")
-        // const ayuda = moment(ayudita).format("HH:mm")
-        // moment.fn.format
-        // const ayuda = moment(ayudita, "hh:mm:ss")
-        // console.log('LOOK, ', ayuda)
-        
         seconds = seconds < 10 ? "0" + seconds : seconds
         minutes = minutes < 10 ? "0" + minutes : minutes
         hours = hours < 10 ? "0" + hours : hours
@@ -62,21 +56,14 @@ const Time = ({ start, end}) => {
       startTimer()
     })
     
-    // let timeDiff;
-    // let timeDiff = hoursDiff +':' + minutesDiff + ':' + secondsDiff
     const timeDiff = hoursDiff +':' + minutesDiff + ':' + secondsDiff
-    // ( !hoursDiff || !minutesDiff || !secondsDiff ) ? timeDiff = '00:00:00' : timeDiff = hoursDiff +':' + minutesDiff + ':' + secondsDiff;
    
-   
-  // !-----
 
   return (
     <div className="order-cart--containertime">
-      <Clock className="order-cart--clock shake" width={16} height={16} />
-      {/* <Clock className="order-cart--clock" width={16} height={16} /> */}
-      <h3 className="order-cart--minutes">{timeDiff}</h3>
+      <Clock className={"order-cart--clock " + (hoursDiff >= 1 || minutesDiff>=1 ? "shake" : "")}  width={16} height={16} />
+      <h3  className={"order-cart--minutes " + (hoursDiff >= 1 || minutesDiff>=1 ? "exceeds" : "")}>{timeDiff}</h3>
     </div>
   );
 };
-
 export default Time;
