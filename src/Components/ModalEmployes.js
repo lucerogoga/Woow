@@ -45,31 +45,20 @@ const style = {
 
 export default function ModalEmployes({ isOpen, onClose }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
-  // const [productCategories, setProductCategories] = useState([]);
-  // useEffect(() => {
-  // getProductsCategories().then((category) => setProductCategories(category));
-  // }, []);
   const { createUser } = useAuth();
   const [userRole, setUserRole] = useState("");
   const [userName, setUserName] = useState("");
   const [userStatus, setUserStatus] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
-  // const [loading, setLoading] = useState(true);
-  //const [userId, setUserId] = useState("");
-
-  // useEffect(async () => {
-  //   setUserId(userID);
-  // }, []);
+  const [loading, setLoading] = useState(false);
 
   const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
-    const userID = await createUser(userEmail, userPwd);
+    setLoading(true);
 
-    // const downloadUrl = await uploadImage(productPhoto, categoryId);
-    // if (loading) return <Spinner />;
-    // debugger;
+    const userID = await createUser(userEmail, userPwd);
     createUserFirebase(
       userID,
       userRole,
@@ -77,17 +66,17 @@ export default function ModalEmployes({ isOpen, onClose }) {
       userName,
       userEmail,
       userPwd
-    ).then((res) => {
-      //   setLoading(false);
-    });
+    )
+      .then((res) => {
+        onClose();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
-  // const onChange = (e) => {
-  //   setProductPhoto(e.target.files[0]);
-  // };
   const handleChangeRole = (e) => {
     setUserRole(e.target.value);
-    // userRole(e.target.value);
   };
 
   return (
@@ -98,56 +87,63 @@ export default function ModalEmployes({ isOpen, onClose }) {
       aria-describedby="parent-modal-description"
     >
       <Box sx={{ ...style, width: "70%" }}>
-        <Grid container gap="1rem">
-          <FormControl
-            fullWidth
-            //sx={{ minWidth: 200, maxWidth: 400, marginLeft: "1rem" }}
-          >
-            <InputLabel id="demo-simple-select-label">Category Rol</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              // id={handleNameCategory}
-              value={userRole}
-              label="Category Rol"
-              onChange={handleChangeRole}
-            >
-              {userRoles.map((cat, i) => {
-                return (
-                  <MenuItem value={cat} key={uuidv4()}>
-                    {cat}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <TextField
-            fullWidth
-            label="User Name"
-            variant="outlined"
-            autoComplete="off"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            label="Email"
-            variant="outlined"
-            autoComplete="off"
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="Password"
-            variant="outlined"
-            autoComplete="off"
-            onChange={(e) => setUserPwd(e.target.value)}
-          />
-          <label>Activo</label>
-          <Switch />
-          <div className="large-button--content" onClick={handleCreateUser}>
-            <ActionButton title={"Create Employee"} className={"pink-button"} />
-          </div>
+        <Grid container gap="1rem" sx={{ minHeight: "425px" }}>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Category Rol
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={userRole}
+                  label="Category Rol"
+                  onChange={handleChangeRole}
+                >
+                  {userRoles.map((cat, i) => {
+                    return (
+                      <MenuItem value={cat} key={uuidv4()}>
+                        {cat}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <TextField
+                fullWidth
+                label="User Name"
+                variant="outlined"
+                autoComplete="off"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                label="Email"
+                variant="outlined"
+                autoComplete="off"
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                variant="outlined"
+                autoComplete="off"
+                onChange={(e) => setUserPwd(e.target.value)}
+              />
+              <label>Activo</label>
+              <Switch />
+              <div className="large-button--content" onClick={handleCreateUser}>
+                <ActionButton
+                  title={"Create Employee"}
+                  className={"pink-button"}
+                />
+              </div>
+            </>
+          )}
         </Grid>
       </Box>
     </Modal>
