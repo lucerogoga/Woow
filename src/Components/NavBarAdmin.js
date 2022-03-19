@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
@@ -35,6 +35,8 @@ const NavBarAdmin = ({
     }
     settingUserName();
   }, []);
+
+  let location = useLocation();
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -42,24 +44,33 @@ const NavBarAdmin = ({
           <div className="navbar--burger-container">
             <MenuBurger width={30} onClick={onClickMenu} />
           </div>
-          <div className="logo-container">
+          <Link to={""} className="logo-container">
             <LogoWoow width="70" height="70" />
-          </div>
+          </Link>
         </div>
 
         <ul className="menu">
           <li className="menu--list">
-            <Link className="menu--link" to={""}>
+            <Link to={""}  className={
+                "menu--link " +
+                (location.pathname === "/admin" ? "menu--link--active" : "")
+              }>
               Employes
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"orders"}>
+            <Link to={"orders"} className={
+                "menu--link " +
+                (location.pathname === "/admin/orders" ? "menu--link--active" : "")
+              }>
               Orders
             </Link>
           </li>
           <li className="menu--list">
-            <Link className="menu--link" to={"addProducts"}>
+            <Link to={"add-products"} className={
+                "menu--link " +
+                (location.pathname === "/admin/add-products" ? "menu--link--active" : "")
+              }>
               Add Products
             </Link>
           </li>

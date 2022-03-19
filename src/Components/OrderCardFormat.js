@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-// import { updateOrder } from "../Services/FirestoreServices";
-import { createTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import { ccyFormat, createData, pad, total } from "../helpers/mathFunctions";
-import { MouseOverPopover } from "./EyePopover";
+import { pad} from "../helpers/mathFunctions";
 import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
-// import { getUser, serverTimestamp } from "../Services/FirestoreServices";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
 import Time from "./Time";
 import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
 import { abbrevName , UpperCaseName} from "../helpers/nameFormatted";
+import {
+  serverTimestamp,
+} from "firebase/firestore";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
-  // const [startOrder, setStartOrder] = useState(false);
   let location = useLocation();
   const { pathname } = location;
-  // console.log("miiii ordeeeeen", pad(orderData.order_number, 6));
   const userRole = useRol();
   const {
     user: { currentUser },
@@ -38,18 +35,18 @@ const OrderCardFormat = ({ orderData }) => {
 
   // ! --------------------
 
-  console.log("LA LUZ", orderData.waiter_name);
   const handleStatus = (orderStatus) => {
-    console.log("el que quiero colocar", orderStatus);
-
+    console.log('click!!')
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
       // Si el estado está en pendiente siendo waiter , puede cancelar la orden
-      updateStatusOrder(orderData.id, "Canceled");
+      // updateStatusOrder(orderData.id, "Canceled");
+      console.log('deberia poder cancelar')
+      updateStatusOrder(orderData.id, "Canceled", userRole);
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
       console.log("Ready to Serve && waiter");
-      // Si el estado está en ready to Serve, el waiter puede marcar la ordern como Delivered
+      // Si el estado está en ready to Serve, el waiter puede marcar la orden como Delivered
       updateStatusOrder(orderData.id, "Delivered");
     }
     //CONDITIONS CHEF
@@ -77,10 +74,10 @@ const OrderCardFormat = ({ orderData }) => {
   // console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
   // console.log("ORDER TIME START", orderData.order_timestamp);
   // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
-  console.log("funcionan los rows?? , ", rows);
-  console.log("AQUI");
   // ! ------------------------------------------------------------
+  const [ayudaTime, setAyudaTime] = useState({ms:0, s:0, m:0, h:0})
 
+  // ! ------------------------------------------------------------
   return (
     <div className="order-container">
       <div className="order-card">
@@ -97,7 +94,6 @@ const OrderCardFormat = ({ orderData }) => {
               <div className="order-card--info-p">
                 {pad(orderData.order_number, 6)}
               </div>
-              {/* <div className="order-card--info-p">000036</div> */}
               <div className="order-card--info-p">{UpperCaseName(orderData.client_name)}</div>
               <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">
@@ -108,10 +104,8 @@ const OrderCardFormat = ({ orderData }) => {
           </div>
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
-              {/* <Clock className="order-cart--clock" width={16} height={16} /> */}
-              <h3 className="order-cart--minutes">00:30:00</h3>
+            <Time start={orderData.order_timestamp} end={orderData.order_timestamp_end}/>
             </div>
-            {/* <Time start={orderData.order_timestamp} /> */}
           </div>
         </div>
         <div className="order-card--table-container">

@@ -49,8 +49,6 @@ export const pad = (number, length) => {
   while (str.length < length) {
     str = "0" + str;
   }
-
-  console.log("PAD");
   return str;
 };
 

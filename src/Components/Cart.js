@@ -69,9 +69,6 @@ const Cart = ({ cantEdit }) => {
 
   // ! -------------------------------
 
-  console.log("MI CLIENTE ES , ", clientName);
-  console.log("MI MESA ES , ", tableNumber);
-  console.log("EL WAITER ES, ", userName);
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 

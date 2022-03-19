@@ -13,6 +13,8 @@ export const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // !aqui
   const { login, user } = useAuth();
   // const { userRole } = useRol();
 

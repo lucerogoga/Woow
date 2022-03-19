@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
@@ -39,7 +39,6 @@ const NavBarWaiter = ({
     settingUserName();
   }, []);
   let location = useLocation();
-  console.log("MIRssAME, ", location.pathname);
   return (
     <div className="navbar">
       <div className="navbar--container">
@@ -53,24 +52,13 @@ const NavBarWaiter = ({
               <MenuBurger width={30} onClick={onClickMenu} />
             )}
           </div>
-          <div className="logo-container">
+          <Link to={""} className="logo-container">
             <LogoWoow width="70" height="70" />
-          </div>
+          </Link>
         </div>
 
         <ul className="menu">
           <li className="menu--list">
-            {/* <NavLink
-              className="menu--link"
-              to={""}
-              activeClassName="menu--link--active"
-            >
-              Take Order
-            </NavLink> */}
-            {/* <Link className="menu--link" to={""}>
-              Take Order
-            </Link> */}
-            {/* <Link className="menu--link" to={""} className={location.pathname==="waiter" ? "menu--link--active" : ""}> */}
             <Link
               to={""}
               className={
@@ -82,15 +70,10 @@ const NavBarWaiter = ({
             </Link>
           </li>
           <li className="menu--list">
-            <Link
-              to={"orders-resume"}
-              className={
+            <Link to={"orders-resume"} className={
                 "menu--link " +
-                (location.pathname === "/waiter/orders-resume"
-                  ? "menu--link--active"
-                  : "")
-              }
-            >
+                (location.pathname === "/waiter/orders-resume" ? "menu--link--active" : "")
+              }>
               Orders Resume
             </Link>
           </li>

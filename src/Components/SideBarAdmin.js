@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 
 const SideBarAdmin = ({ onClose, onClickLogout }) => {
+  let location = useLocation();
   return (
     <>
       <div className="sidebar">
@@ -13,17 +14,26 @@ const SideBarAdmin = ({ onClose, onClickLogout }) => {
 
         <div className="sidebar--menu">
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={""}>
+            <Link to={""} className={
+                "sidebar--link " +
+                (location.pathname === "/admin" ? "sidebar--link--active" : "")
+              }>
               Employes
             </Link>
           </div>
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"orders"}>
+            <Link to={"orders"} className={
+                "sidebar--link " +
+                (location.pathname === "/admin/orders" ? "sidebar--link--active" : "")
+              }>
               Orders
             </Link>
           </div>
           <div className="sidebar--item">
-            <Link className="sidebar--link" to={"addProducts"}>
+            <Link to={"add-products"} className={
+                "sidebar--link " +
+                (location.pathname === "/admin/add-products" ? "sidebar--link--active" : "")
+              }>
               Products
             </Link>
           </div>

@@ -63,8 +63,6 @@ export const OrdersToDoChef = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
-  console.log("quién está seleccionado?, ", selectedOrderStatus);
-  console.log("orderStatus Array, ", ordersStatus);
   return (
     <>
       <Search onChange={"algo"} placeholder={"Search N° Order"}></Search>

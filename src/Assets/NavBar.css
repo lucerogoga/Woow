@@ -107,7 +107,6 @@
   margin: 0.5rem 2.5rem;
   /* color: red; */
   color: #ff9aa3 !important;
-  /* color: #365262 !important; */
   font-family: sans-serif;
   font-size: 1rem;
   font-weight: 300;
@@ -126,6 +125,7 @@
 /* ! ---------------------CART-------------------- */
 .cart--container {
   position: relative;
+  cursor: pointer;
 }
 
 .cart--counter {
@@ -142,6 +142,8 @@
   color: #fff;
   font-weight: 700;
   font-size: 1rem;
+  padding-right: 1px;
+  padding-top: 2px;
 }
 
 /* ! ---------------------USER PHOTO-------------------- */
@@ -155,6 +157,11 @@
   height: 40px;
   margin-left: "15px";
   padding-right: 4px;
+  cursor: pointer;
+}
+.user--container:hover {
+  background-color: #ffa4ac;
+  transition: 0.3s;
 }
 
 .user--container path {

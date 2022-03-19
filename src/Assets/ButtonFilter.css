@@ -12,6 +12,7 @@
   align-items: center;
   min-width: 22%;
   min-height: 200px;
+  cursor: pointer;
 }
 
 .button-card--content {
@@ -91,12 +92,6 @@
 .button-card.active h2 {
   color: #ff9aa3;
 }
-/* .button-icon:hover {
-  fill: #fff;
-} */
-/* .button-image {
-  width: 1rem;
-} */
 
 @media (min-width: 1200px) {
   .button-card {
@@ -113,6 +108,7 @@
     align-items: center;
     min-width: 23%;
     min-height: 00px;
+    cursor: pointer;
   }
   .button-card--content {
     display: flex;

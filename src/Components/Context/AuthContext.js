@@ -7,12 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, auth2 } from "../../Config/initialize.js";
 
-const authContext = createContext();
-
-// !----------------------
-// !prueba
-
-// !----------------------
+export const authContext = createContext();
 
 // useContext
 export const useAuth = () => useContext(authContext);
