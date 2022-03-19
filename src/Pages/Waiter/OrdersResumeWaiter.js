@@ -15,8 +15,8 @@ import {
 import { useAuth } from "../../Components/Context/AuthContext";
 import { db } from "../../Config/initialize";
 
-
 const OrdersResumeWaiter = () => {
+  const [allOrders, setAllOrders] = useState([]);
   const [productOrderCategories, setProductOrderCategories] = useState([
     "Pending",
     "Cooking",
@@ -26,7 +26,6 @@ const OrdersResumeWaiter = () => {
   ]);
   const [orders, setOrders] = useState([]);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
- 
 
   // const handleCategorie = async (catUid, catName) =>
   //   await filterProductByCategorie(catUid, catName);
@@ -48,10 +47,27 @@ const OrdersResumeWaiter = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
+  //!---------------------traer canticadad de cada orden ----
+  useEffect(() => {
+    const q = query(collection(db, "orders"));
+    return onSnapshot(q, (snapshot) => {
+      setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const filterOrders = () => {
+    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+      allOrders.filter((doc) => doc.order_status === elem)
+    );
+    return arrayOfOrdersByStatus.map((elem) => elem.length);
+  };
+
+  const filteredOrdersQuantity = filterOrders();
+
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
-
+  console.log("all orders ", allOrders);
   return (
     <>
       <div className="categories-container">
@@ -65,7 +81,8 @@ const OrdersResumeWaiter = () => {
               onClick={() => {
                 handleClick(cat);
               }}
-              orders = {orders}
+              orders={orders}
+              filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
           );
         })}
