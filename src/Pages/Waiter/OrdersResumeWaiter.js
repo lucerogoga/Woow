@@ -5,6 +5,7 @@ import ButtonFilter from "../../Components/ButtonFilter";
 import { v4 as uuidv4 } from "uuid";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
+import Title from "../../Components/Title";
 import {
   onSnapshot,
   collection,
@@ -17,6 +18,7 @@ import { db } from "../../Config/initialize";
 
 const OrdersResumeWaiter = () => {
   const [allOrders, setAllOrders] = useState([]);
+  const [quantityByStatus, setQuantityByStatus] = useState("");
   const [productOrderCategories, setProductOrderCategories] = useState([
     "Pending",
     "Cooking",
@@ -61,13 +63,19 @@ const OrdersResumeWaiter = () => {
     );
     return arrayOfOrdersByStatus.map((elem) => elem.length);
   };
-
+  const QuantityForTtitle = (elem) => {
+    const arrayOfOrdersByStatus = allOrders.filter(
+      (doc) => doc.order_status === elem
+    );
+    // setQuantityByStatus(arrayOfOrdersByStatus.length);
+    return arrayOfOrdersByStatus.length;
+  };
   const filteredOrdersQuantity = filterOrders();
-
+  const QuantifiedForTtitle = QuantityForTtitle(selectedOrderStatus);
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
-  console.log("all orders ", allOrders);
+
   return (
     <>
       <div className="categories-container">
@@ -87,6 +95,10 @@ const OrdersResumeWaiter = () => {
           );
         })}
       </div>
+      <Title
+        title={`Orders ${selectedOrderStatus}`}
+        quantity={QuantifiedForTtitle}
+      />
 
       <div>
         {orders.map((order) => (
