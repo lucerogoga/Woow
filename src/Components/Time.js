@@ -18,11 +18,14 @@ const Time = ({ start, end }) => {
 
   let interval;
 
-  const startTimer = () => {
+  useEffect(() => {
+    // const timer = setTimeout(() => {
+    //   setIsVisible(false);
+    // });
     // TimeStamp
-    const startTime = start.toDate();
 
-    interval = setInterval(() => {
+    const interval = setInterval(() => {
+      const startTime = start.toDate();
       const now = moment();
 
       let timeDifference;
@@ -44,7 +47,38 @@ const Time = ({ start, end }) => {
       setMinutesDiff(minutes);
       setSecondsDiff(seconds);
     }, 1000);
-  };
+
+    return () => {
+      clearTimeout(interval);
+    };
+  }, []);
+  // const startTimer = () => {
+  //   // TimeStamp
+  //   const startTime = start.toDate();
+
+  //   interval = setInterval(() => {
+  //     const now = moment();
+
+  //     let timeDifference;
+
+  //     if (end) {
+  //       const endTime = end.toDate();
+  //       timeDifference = moment.preciseDiff(startTime, endTime, true);
+  //     } else {
+  //       timeDifference = moment.preciseDiff(startTime, now, true);
+  //     }
+
+  //     let { seconds, minutes, hours } = timeDifference;
+
+  //     seconds = seconds < 10 ? "0" + seconds : seconds;
+  //     minutes = minutes < 10 ? "0" + minutes : minutes;
+  //     hours = hours < 10 ? "0" + hours : hours;
+
+  //     setHoursDiff(hours);
+  //     setMinutesDiff(minutes);
+  //     setSecondsDiff(seconds);
+  //   }, 1000);
+  // };
 
   // useEffect(() => {
   //   let isMounted = true;
@@ -56,13 +90,14 @@ const Time = ({ start, end }) => {
   //       };
   //   }, []);
 
-  useEffect(() => {
-    if (start) {
-      return startTimer();
-    }
-    // startTimer()
-    // }, [end, start]);
-  }, [end, start]);
+  // ! este de abajo funcionaba!
+  // useEffect(() => {
+  //   if (start) {
+  //     return startTimer();
+  //   }
+  //   // startTimer()
+  //   // }, [end, start]);
+  // }, [end, start]);
 
   let timeDiff = "00:00:00";
   if (start) {

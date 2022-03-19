@@ -5,6 +5,7 @@ import ButtonFilter from "../../Components/ButtonFilter";
 import { v4 as uuidv4 } from "uuid";
 import OrderCardFormat from "../../Components/OrderCardFormat";
 import iconOrderComponents from "../../Assets/iconComponent/CustomLogoOrders";
+import Title from "../../Components/Title";
 import {
   onSnapshot,
   collection,
@@ -16,6 +17,8 @@ import { useAuth } from "../../Components/Context/AuthContext";
 import { db } from "../../Config/initialize";
 
 const OrdersResumeWaiter = () => {
+  const [allOrders, setAllOrders] = useState([]);
+  const [quantityByStatus, setQuantityByStatus] = useState("");
   const [productOrderCategories, setProductOrderCategories] = useState([
     "Pending",
     "Cooking",
@@ -46,6 +49,29 @@ const OrdersResumeWaiter = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
+  //!---------------------traer canticadad de cada orden ----
+  useEffect(() => {
+    const q = query(collection(db, "orders"));
+    return onSnapshot(q, (snapshot) => {
+      setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const filterOrders = () => {
+    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+      allOrders.filter((doc) => doc.order_status === elem)
+    );
+    return arrayOfOrdersByStatus.map((elem) => elem.length);
+  };
+  const QuantityForTtitle = (elem) => {
+    const arrayOfOrdersByStatus = allOrders.filter(
+      (doc) => doc.order_status === elem
+    );
+    // setQuantityByStatus(arrayOfOrdersByStatus.length);
+    return arrayOfOrdersByStatus.length;
+  };
+  const filteredOrdersQuantity = filterOrders();
+  const QuantifiedForTtitle = QuantityForTtitle(selectedOrderStatus);
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
@@ -64,10 +90,15 @@ const OrdersResumeWaiter = () => {
                 handleClick(cat);
               }}
               orders={orders}
+              filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
           );
         })}
       </div>
+      <Title
+        title={`Orders ${selectedOrderStatus}`}
+        quantity={QuantifiedForTtitle}
+      />
 
       <div>
         {orders.map((order) => (

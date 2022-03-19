@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/ButtonFilter.css";
 export function ButtonFilter(props) {
-  const { item, icon, onClick, active } = props;
+  const { item, icon, onClick, active, filteredOrdersQuantity } = props;
   let location = useLocation();
   const { pathname } = location;
   return (
@@ -13,7 +13,7 @@ export function ButtonFilter(props) {
       >
         {pathname === "/waiter/orders-resume" ? (
           <div className="button-order--quatity">
-            <h2>2</h2>
+            <h2>{filteredOrdersQuantity}</h2>
           </div>
         ) : null}
         {/* renderiamos el icono por props */}
