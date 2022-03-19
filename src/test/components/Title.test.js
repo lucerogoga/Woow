@@ -36,5 +36,8 @@ test("render content", () => {
   const view = render(<Title title={title} quantity={qty} />);
   //   const componentito = render(<Title  title={title} quantity={qty}/>);
   //   const componentito = render(<Title  title={valores.title} quantity={valores.quantity}/>);
-  console.log(view);
+  // console.log(view);
+  expect(view.container).toHaveTextContent(title);
+  // expect(view.container).toHaveTextContent(3 + "hola");
+  expect(view.container).toHaveTextContent(title + "qqqq" + qty);
 });
