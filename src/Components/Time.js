@@ -6,7 +6,8 @@ import "moment-precise-range-plugin";
 import { MarkEmailUnreadTwoTone } from "@mui/icons-material";
 
 const Time = ({ start, end }) => {
-  // console.log('tiempo finaliza?', end)
+  console.log("tiempo inicia?", start);
+  console.log("tiempo finaliza?", end);
   // const [time, setTime] = useState('')
   const [hoursDiff, setHoursDiff] = useState("00");
   const [minutesDiff, setMinutesDiff] = useState("00");
@@ -22,11 +23,17 @@ const Time = ({ start, end }) => {
     // const timer = setTimeout(() => {
     //   setIsVisible(false);
     // });
-    // TimeStamp
 
     const interval = setInterval(() => {
-      const startTime = start.toDate();
+      let startTime;
       const now = moment();
+      if (start) {
+        startTime = start.toDate();
+      } else {
+        startTime = moment();
+      }
+      // const startTime = start.toDate();
+      // const now = moment();
 
       let timeDifference;
 
@@ -52,6 +59,7 @@ const Time = ({ start, end }) => {
       clearTimeout(interval);
     };
   }, []);
+
   // const startTimer = () => {
   //   // TimeStamp
   //   const startTime = start.toDate();
