@@ -41,33 +41,33 @@ export const getOrderNumberCorrelative = async () => {
 
 export const ordersListener = () => {
   const q = query(collection(db, "orders"));
-  return onSnapshot(q, (snapshot) => {
-  });
+  return onSnapshot(q, (snapshot) => {});
 };
 
-export const updateOrder = async (chefId, idOrder, status, chefName, TimeStampEnd) => {
+export const updateOrder = async (chefId, idOrder, status, chefName) => {
   const orderRef = doc(db, "orders", idOrder);
 
   await updateDoc(orderRef, {
     order_status: status,
     chef_id: chefId,
     chef_name: chefName,
-    order_timestamp_end: TimeStampEnd,
+    order_timestamp_start: serverTimestamp(),
+    // order_timestamp_end: serverTimestamp(),
   });
 };
 
 export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
-console.log('STATUS: ', status, 'Y ROLE: ', userRole )
+  console.log("STATUS: ", status, "Y ROLE: ", userRole);
   // if (status === "Canceled" && userRole === "waiter"){
-  if (userRole === "waiter"){
-    console.log('deberia funcionar')
-    await updateDoc(orderRef, {
+  if (userRole === "waiter" || status === "Ready to Serve") {
+    console.log("deberia funcionar");
+    return await updateDoc(orderRef, {
       order_status: status,
       order_timestamp_end: serverTimestamp(),
     });
   } else {
-    await updateDoc(orderRef, {
+    return await updateDoc(orderRef, {
       order_status: status,
       // order_timestamp_end: serverTimestamp(),
     });
@@ -93,9 +93,11 @@ export const createOrder = async (
     order_status: orderStatus,
     client_name: clientName,
     table: tableNumber,
+    // order_timestamp: null,
     order_timestamp: serverTimestamp(),
     order_products: cartProducts,
     order_number: orderNumber,
+    order_timestamp_start: null,
     order_timestamp_end: null,
   });
 };
