@@ -11,6 +11,8 @@ const Time = ({ start, end}) => {
   const [hoursDiff, setHoursDiff] = useState('00')
   const [minutesDiff, setMinutesDiff] = useState('00')
   const [secondsDiff, setSecondsDiff] = useState('00')
+  
+  // if(end) { console.log('Ahora si tiene valor final! , ', end)}
 
   // const b = moment("2022-03-11 15:31:15");
   
@@ -20,18 +22,22 @@ const Time = ({ start, end}) => {
     
     // TimeStamp
     const startTime = start.toDate();
-
+    
     interval = setInterval(() => {
       const now = moment();
-      const timeDifference = moment.preciseDiff(startTime, now, true);
-      let {seconds, minutes, hours} =  timeDifference
-      // let {seconds, minutes, hours} = moment.preciseDiff(startTime, now, true);
-
-      // const {seconds, minutes, hours} = moment.preciseDiff(startTime, now, true);
       
-      // if(tiempoFinalExiste) // Para el contador{
-        // clearInterval(interval.current)
-        // }
+      let timeDifference;
+      
+      if (end){
+        const endTime = end.toDate();
+        timeDifference = moment.preciseDiff(startTime, endTime, true);
+
+      } else {
+        timeDifference = moment.preciseDiff(startTime, now, true);
+      }
+
+      let {seconds, minutes, hours} =  timeDifference
+   
 
         seconds = seconds < 10 ? "0" + seconds : seconds
         minutes = minutes < 10 ? "0" + minutes : minutes
@@ -46,11 +52,21 @@ const Time = ({ start, end}) => {
     }
 
     useEffect(() => {
+      let isMounted = true;
+            if(isMounted ){
+              startTimer(); // no more error
+            } 
+         return () => {
+          isMounted = false;
+          };
+      }, []);
     
-      startTimer()
-    })
+    useEffect(() => {
+      return startTimer()
+      // startTimer()
+    },[end])
     
-    const timeDiff = hoursDiff +':' + minutesDiff + ':' + secondsDiff
+  const timeDiff = hoursDiff +':' + minutesDiff + ':' + secondsDiff
    
 
   return (

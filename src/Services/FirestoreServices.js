@@ -59,11 +59,17 @@ export const updateOrder = async (chefId, idOrder, status, chefName, TimeStampEn
 export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
 console.log('STATUS: ', status, 'Y ROLE: ', userRole )
-  if (status === "Canceled" && userRole === "waiter"){
+  // if (status === "Canceled" && userRole === "waiter"){
+  if (userRole === "waiter"){
     console.log('deberia funcionar')
     await updateDoc(orderRef, {
       order_status: status,
       order_timestamp_end: serverTimestamp(),
+    });
+  } else {
+    await updateDoc(orderRef, {
+      order_status: status,
+      // order_timestamp_end: serverTimestamp(),
     });
   }
   // "Pending" && userRole === "waiter"
