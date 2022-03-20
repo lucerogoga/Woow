@@ -56,7 +56,14 @@ const SideBar = ({ isOpen, onClose, onClickLogout }) => {
     <div>
       <React.Fragment>
         <Drawer anchor={"left"} open={isOpen} onClose={onClose}>
-          <Box sx={{ width: 250, bgcolor: "#ffefc0", height: "100vh" }}>
+          <Box
+            sx={{
+              width: 250,
+              bgcolor: "#ffefc0",
+              height: "100vh",
+              padding: "1rem",
+            }}
+          >
             <SidebarWaiterContainer
               onClose={onClose}
               onClickLogout={onClickLogout}

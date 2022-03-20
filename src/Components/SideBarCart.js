@@ -33,18 +33,14 @@ const Caja = ({ onClose }) => {
   );
 };
 
-const list = (onClose) => (
-  <Box sx={{ width: 500, height: "100vh" }}>
-    <Caja onClose={onClose} />
-  </Box>
-);
-
 const SideBarCart = ({ isOpen, onClose }) => {
   return (
     <div>
       <React.Fragment>
         <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
-          {list(onClose)}
+          <Box sx={{ width: 500, height: "100vh", padding: "1rem" }}>
+            <Caja onClose={onClose} />
+          </Box>
         </Drawer>
       </React.Fragment>
     </div>
