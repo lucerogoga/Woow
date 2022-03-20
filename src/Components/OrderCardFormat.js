@@ -106,8 +106,8 @@ const OrderCardFormat = ({ orderData }) => {
             <div className="order-cart--containertime">
               <Time
                 // start={orderData.order_timestamp}
-                startOrderTime={orderData.order_timestamp_start}
-                endOrderTime={orderData.order_timestamp_end}
+                start={orderData.order_timestamp_start}
+                end={orderData.order_timestamp_end}
               />
               {/* <Time start={new Date()} end={null} /> */}
             </div>
