@@ -11,6 +11,10 @@ import {
   filterProductByCategorie,
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
+import Time from "../../Components/Time";
+// ! -----
+
+// ! -----
 
 const TakeOrderWaiter = () => {
   const [products, setProducts] = useState([]);
@@ -60,6 +64,8 @@ const TakeOrderWaiter = () => {
         })}
       </div>
       <div className="products-container">
+        {/* <Time start={new Date()} end={null} /> */}
+        {/* <Time startOrderTime={new Date()} endOrderTime={null} /> */}
         {products.map((p) => {
           return <ProductCard product={p} key={p.id} />;
         })}

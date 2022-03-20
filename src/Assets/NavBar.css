@@ -161,7 +161,7 @@
 }
 .user--container:hover {
   background-color: #ffa4ac;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .user--container path {
