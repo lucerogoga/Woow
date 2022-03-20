@@ -49,7 +49,7 @@ const Cart = ({ cantEdit }) => {
     }
     settingUserName();
   }, []);
-  
+
   // ! aqui
   // useEffect(() => {
   //   async function settingUserName() {

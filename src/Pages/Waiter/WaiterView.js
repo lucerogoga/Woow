@@ -23,7 +23,7 @@ export const WaiterView = () => {
 
   // const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
 
-  const [openCart, setOpenCart] = useState(false);
+  const { openCart, setOpenCart } = useSideBarCart();
 
   const handleSidebarCartOpen = () => {
     setOpenCart(true);
@@ -36,6 +36,7 @@ export const WaiterView = () => {
   let location = useLocation();
   const { pathname } = location;
   const handleLogout = async () => {
+    console.log("ejecutado logout");
     await logout();
   };
 
@@ -52,7 +53,11 @@ export const WaiterView = () => {
         {/* <SideBarCart onClose={(e) => setIsSideBarCartOpen(false)} /> */}
 
         <SideBarCart isOpen={openCart} onClose={handleSidebarCartClose} />
-        <SideBarWaiter isOpen={open} onClose={handleSidebarClose} />
+        <SideBarWaiter
+          isOpen={open}
+          onClose={handleSidebarClose}
+          onClickLogout={handleLogout}
+        />
         <div className="content">
           <Outlet />
         </div>

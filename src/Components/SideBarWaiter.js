@@ -6,7 +6,7 @@ import * as React from "react";
 
 //const SideBar = ({ isOpen, onClose, onClickLogout }) => {
 
-const Caja = ({ onClose }) => {
+const SidebarWaiterContainer = ({ onClose, onClickLogout }) => {
   let location = useLocation();
 
   return (
@@ -43,26 +43,27 @@ const Caja = ({ onClose }) => {
           </Link>
         </div>
         <div className="sidebar--item">
-          <button className="sidebar--logout">Logout</button>
+          <button className="sidebar--logout" onClick={onClickLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-const list = (onClose) => (
-  <Box sx={{ width: 250, bgcolor: "#ffefc0", height: "100vh" }}>
-    <Caja onClose={onClose} />
-  </Box>
-);
-
-const SideBar = ({ isOpen, onClose }) => {
+const SideBar = ({ isOpen, onClose, onClickLogout }) => {
   console.log(isOpen);
   return (
     <div>
       <React.Fragment>
         <Drawer anchor={"left"} open={isOpen} onClose={onClose}>
-          {list(onClose)}
+          <Box sx={{ width: 250, bgcolor: "#ffefc0", height: "100vh" }}>
+            <SidebarWaiterContainer
+              onClose={onClose}
+              onClickLogout={onClickLogout}
+            />
+          </Box>
         </Drawer>
       </React.Fragment>
     </div>

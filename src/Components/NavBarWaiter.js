@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
@@ -70,10 +70,15 @@ const NavBarWaiter = ({
             </Link>
           </li>
           <li className="menu--list">
-            <Link to={"orders-resume"} className={
+            <Link
+              to={"orders-resume"}
+              className={
                 "menu--link " +
-                (location.pathname === "/waiter/orders-resume" ? "menu--link--active" : "")
-              }>
+                (location.pathname === "/waiter/orders-resume"
+                  ? "menu--link--active"
+                  : "")
+              }
+            >
               Orders Resume
             </Link>
           </li>

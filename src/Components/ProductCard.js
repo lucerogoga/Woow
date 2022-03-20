@@ -13,7 +13,7 @@ import { useSideBarCart } from "./Context/SideBarCartContext";
 export function ProductCard(props) {
   const { product, path } = props;
   const { cart, setCart } = useCart();
-  const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+  const { openCart, setOpenCart } = useSideBarCart();
 
   let navigate = useNavigate();
 
@@ -49,7 +49,7 @@ export function ProductCard(props) {
           },
         ]);
       }
-      setIsSideBarCartOpen(!isSideBarCartOpen);
+      setOpenCart(true);
     }
   };
 
@@ -96,11 +96,8 @@ export function ProductCard(props) {
               </div>
             </div>
           ) : (
-            <div className="product-card--button">
-              <div
-                onClick={HandleAddToCart}
-                className="product-card--buttonIcon"
-              >
+            <div onClick={HandleAddToCart} className="product-card--button">
+              <div className="product-card--buttonIcon">
                 {<More width={15} style={{ marginTop: "4px" }} />}
               </div>
             </div>
