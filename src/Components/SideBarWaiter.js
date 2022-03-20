@@ -4,8 +4,6 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import * as React from "react";
 
-//const SideBar = ({ isOpen, onClose, onClickLogout }) => {
-
 const SidebarWaiterContainer = ({ onClose, onClickLogout }) => {
   let location = useLocation();
 
