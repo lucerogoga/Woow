@@ -1,12 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import * as React from "react";
 
 const SidebarChefContainer = ({ onClose, onClickLogout }) => {
-  let location = useLocation();
-
   return (
     <div className="sidebar">
       <div className="sidebar--header">
