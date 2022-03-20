@@ -6,34 +6,81 @@ import "moment-precise-range-plugin";
 import { MarkEmailUnreadTwoTone } from "@mui/icons-material";
 
 const Time = ({ start, end }) => {
-  console.log("tiempo inicia?", start);
-  console.log("tiempo finaliza?", end);
-  // const [time, setTime] = useState('')
-  const [hoursDiff, setHoursDiff] = useState("00");
-  const [minutesDiff, setMinutesDiff] = useState("00");
-  const [secondsDiff, setSecondsDiff] = useState("00");
+  let startTime;
+  let finishTime;
 
-  // if(end) { console.log('Ahora si tiene valor final! , ', end)}
+  if (start) {
+    startTime = moment(start);
+  } else {
+    startTime = moment();
+  }
 
-  // const b = moment("2022-03-11 15:31:15");
+  if (end) {
+    finishTime = end.toDate();
+  } else {
+    finishTime = moment();
+  }
 
+  const format = (number) => (number < 10 ? "0" + number : number);
+  let hindiTimeDiff = moment.preciseDiff(startTime, finishTime, true);
+
+  let horaFormato = {
+    seconds: format(hindiTimeDiff.seconds),
+    minutes: format(hindiTimeDiff.minutes),
+    hours: format(hindiTimeDiff.hours),
+  };
+  const [hindiCTime, setHindiCTime] = useState(horaFormato);
+
+  const UpdateTime = setInterval(() => {
+    // console.log("se disparó");
+
+    if (start) {
+      startTime = moment(start);
+    } else {
+      startTime = moment();
+    }
+
+    if (end) {
+      finishTime = end.toDate();
+    } else {
+      finishTime = moment();
+    }
+
+    hindiTimeDiff = moment.preciseDiff(startTime, finishTime, true);
+
+    horaFormato = {
+      seconds: format(hindiTimeDiff.seconds),
+      minutes: format(hindiTimeDiff.minutes),
+      hours: format(hindiTimeDiff.hours),
+    };
+    setHindiCTime(horaFormato);
+  }, 6000); // se dispara cada minuto :s
+
+  // UpdateTime
+  // clearInterval(UpdateTime);
+
+  // setInterval(UpdateTime, 60000); //por minuto
+  // ! ----------------------
+  // ! EL FIEL
   let interval;
+  const startTimer = () => {
+    // TimeStamp
+    let startTime;
+    if (start) {
+      startTime = moment(start);
+    } else {
+      startTime = moment();
+    }
 
-  useEffect(() => {
-    // const timer = setTimeout(() => {
-    //   setIsVisible(false);
-    // });
+    if (end) {
+      finishTime = end.toDate();
+    } else {
+      finishTime = moment();
+    }
+    // const startTime = start.toDate();
 
-    const interval = setInterval(() => {
-      let startTime;
+    interval = setInterval(() => {
       const now = moment();
-      if (start) {
-        startTime = start.toDate();
-      } else {
-        startTime = moment();
-      }
-      // const startTime = start.toDate();
-      // const now = moment();
 
       let timeDifference;
 
@@ -50,75 +97,49 @@ const Time = ({ start, end }) => {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       hours = hours < 10 ? "0" + hours : hours;
 
-      setHoursDiff(hours);
-      setMinutesDiff(minutes);
-      setSecondsDiff(seconds);
+      // setHoursDiff(hours);
+      // setMinutesDiff(minutes);
+      // setSecondsDiff(seconds);
+
+      // let hindiTimeDiff = moment.preciseDiff(startTime, finishTime, true);
+
+      let horaFormato = {
+        seconds,
+        minutes,
+        hours,
+      };
+
+      setHindiCTime(horaFormato);
+      // const [hindiCTime, setHindiCTime] = useState(horaFormato);
     }, 1000);
-
-    return () => {
-      clearTimeout(interval);
-    };
-  }, []);
-
-  // const startTimer = () => {
-  //   // TimeStamp
-  //   const startTime = start.toDate();
-
-  //   interval = setInterval(() => {
-  //     const now = moment();
-
-  //     let timeDifference;
-
-  //     if (end) {
-  //       const endTime = end.toDate();
-  //       timeDifference = moment.preciseDiff(startTime, endTime, true);
-  //     } else {
-  //       timeDifference = moment.preciseDiff(startTime, now, true);
-  //     }
-
-  //     let { seconds, minutes, hours } = timeDifference;
-
-  //     seconds = seconds < 10 ? "0" + seconds : seconds;
-  //     minutes = minutes < 10 ? "0" + minutes : minutes;
-  //     hours = hours < 10 ? "0" + hours : hours;
-
-  //     setHoursDiff(hours);
-  //     setMinutesDiff(minutes);
-  //     setSecondsDiff(seconds);
-  //   }, 1000);
-  // };
-
-  // useEffect(() => {
-  //   let isMounted = true;
-  //         if(isMounted ){
-  //           startTimer(); // no more error
-  //         }
-  //      return () => {
-  //       isMounted = false;
-  //       };
-  //   }, []);
+  };
 
   // ! este de abajo funcionaba!
-  // useEffect(() => {
-  //   if (start) {
-  //     return startTimer();
-  //   }
-  //   // startTimer()
-  //   // }, [end, start]);
+  useEffect(() => {
+    // if (start) {
+    //   return startTimer();
+    //   // return UpdateTime();
+    // }
+    startTimer();
+
+    // }, [end, start]);
+  }, []);
   // }, [end, start]);
 
-  let timeDiff = "00:00:00";
-  if (start) {
-    timeDiff = hoursDiff + ":" + minutesDiff + ":" + secondsDiff;
-  }
-  // const timeDiff = hoursDiff + ":" + minutesDiff + ":" + secondsDiff;
+  // ! ----------------------es el del hindú el de abajo
+  // hindiCTime
+  const { seconds, minutes, hours } = hindiCTime;
+  const timeDiffHindi = hours + ":" + minutes + ":" + seconds;
+
+  // ! ----------------------el de abajo sirve pero es el viejo, arriba es el del hindú
 
   return (
     <div className="order-cart--containertime">
       <Clock
         className={
           "order-cart--clock " +
-          (hoursDiff >= 1 || minutesDiff >= 1 ? "shake" : "")
+          // (hoursDiff >= 1 || minutesDiff >= 1 ? "shake" : "")
+          (hindiCTime.hours >= 1 || hindiCTime.minutes >= 1 ? "shake" : "")
         }
         width={16}
         height={16}
@@ -126,10 +147,10 @@ const Time = ({ start, end }) => {
       <h3
         className={
           "order-cart--minutes " +
-          (hoursDiff >= 1 || minutesDiff >= 1 ? "exceeds" : "")
+          (hindiCTime.hours >= 1 || hindiCTime.minutes >= 1 ? "exceeds" : "")
         }
       >
-        {timeDiff}
+        {timeDiffHindi}
       </h3>
     </div>
   );

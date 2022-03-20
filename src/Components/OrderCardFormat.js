@@ -61,13 +61,13 @@ const OrderCardFormat = ({ orderData }) => {
   };
 
   //GETTING NAME OF CHEF FOR THE ORDER
-  useEffect(() => {
-    async function settingUserName() {
-      const { user_name } = await getUser(currentUser);
-      setUserName(user_name);
-    }
-    settingUserName();
-  }, []);
+  // useEffect(() => {
+  //   async function settingUserName() {
+  //     const { user_name } = await getUser(currentUser);
+  //     setUserName(user_name);
+  //   }
+  //   settingUserName();
+  // }, []);
 
   // console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
   // console.log("ORDER TIME START", orderData.order_timestamp);
@@ -106,9 +106,10 @@ const OrderCardFormat = ({ orderData }) => {
             <div className="order-cart--containertime">
               <Time
                 // start={orderData.order_timestamp}
-                start={orderData.order_timestamp_start}
-                end={orderData.order_timestamp_end}
+                startOrderTime={orderData.order_timestamp_start}
+                endOrderTime={orderData.order_timestamp_end}
               />
+              {/* <Time start={new Date()} end={null} /> */}
             </div>
           </div>
         </div>
