@@ -180,9 +180,8 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 17rem;
   height: 6.5rem;
 }
-
+/* 
 /* .productAdded-card--obsText::-webkit-scrollbar { */
-/* body::-webkit-scrollbar { */
 ::-webkit-scrollbar {
   width: 1em;
 }
@@ -195,6 +194,7 @@ input[type="number"]::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb:hover {
   background: #fecc68;
 }
+
 /* .product-card--eye:hover ~ .productAdded-card--obsContainer {
   display: block;
 } */

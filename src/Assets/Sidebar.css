@@ -1,5 +1,5 @@
 /* ! -------------------SIDEBAR---------------------- */
-
+/* 
 .sidebar {
   position: fixed;
   top: 0px;
@@ -14,7 +14,7 @@
   height: 100vh;
   animation: showSidebar 0.3s ease forwards;
   min-width: 300px;
-}
+} */
 
 .showSidebar {
   left: 0;
@@ -78,7 +78,6 @@
   cursor: pointer;
   text-decoration: none;
   font-weight: 700;
-  
 }
 
 .sidebar--link--active {
@@ -122,8 +121,6 @@
 }
 
 /* ! ---------------------MEDIA QUERIES-------------------- */
-
-
 
 /* tablet */
 @media (min-width: 900px) {

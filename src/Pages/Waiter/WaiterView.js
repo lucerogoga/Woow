@@ -14,7 +14,24 @@ import SideBarCart from "../../Components/SideBarCart";
 
 export const WaiterView = () => {
   const [open, setOpen] = useState(false);
-  const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+  const handleSidebarOpen = () => {
+    setOpen(true);
+  };
+  const handleSidebarClose = () => {
+    setOpen(false);
+  };
+
+  // const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+
+  const [openCart, setOpenCart] = useState(false);
+
+  const handleSidebarCartOpen = () => {
+    setOpenCart(true);
+  };
+  const handleSidebarCartClose = () => {
+    setOpenCart(false);
+  };
+
   const { logout } = useAuth();
   let location = useLocation();
   const { pathname } = location;
@@ -25,22 +42,17 @@ export const WaiterView = () => {
   return (
     <>
       <NavBarWaiter
-        onClickMenu={() => setOpen(!open)}
-        onClickSideBar={() => setIsSideBarCartOpen(!isSideBarCartOpen)}
+        onClickMenu={handleSidebarOpen}
+        onClickSideBar={handleSidebarCartOpen}
         currentPath={pathname}
         onClickLogout={handleLogout}
         // isActive={}
       />
       <div>
-        {isSideBarCartOpen && (
-          <SideBarCart onClose={(e) => setIsSideBarCartOpen(false)} />
-        )}
-        {open && (
-          <SideBarWaiter
-            onClose={(e) => setOpen(false)}
-            onClickLogout={handleLogout}
-          />
-        )}
+        {/* <SideBarCart onClose={(e) => setIsSideBarCartOpen(false)} /> */}
+
+        <SideBarCart isOpen={openCart} onClose={handleSidebarCartClose} />
+        <SideBarWaiter isOpen={open} onClose={handleSidebarClose} />
         <div className="content">
           <Outlet />
         </div>
