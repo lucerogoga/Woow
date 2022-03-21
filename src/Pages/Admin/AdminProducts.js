@@ -14,6 +14,16 @@ import {
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
+import {
+  onSnapshot,
+  collection,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
+import { useAuth } from "../../Components/Context/AuthContext";
+import { db } from "../../Config/initialize";
+
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -26,8 +36,15 @@ const AdminProducts = () => {
     await filterProductByCategorie(catUid, catName);
 
   useEffect(() => {
-    getProducts().then((products) => setProducts(products));
+    // getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
+  }, []);
+
+  useEffect(() => {
+    const q = query(collection(db, "products"));
+    return onSnapshot(q, (snapshot) => {
+      setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {
@@ -38,9 +55,10 @@ const AdminProducts = () => {
   };
 
   const [openModal, setOpenModal] = useState(false);
-
-  const handleOpen = () => {
+  const [productToEdit, setProductToEdit] = useState("");
+  const handleOpen = (product) => {
     setOpenModal(true);
+    setProductToEdit(product);
   };
   const onClose = () => {
     setOpenModal(false);
@@ -53,7 +71,7 @@ const AdminProducts = () => {
     });
     setProducts(product);
   };
-
+  console.log("producto seleccionado", productToEdit);
   return (
     <>
       <Search onChange={handleSearch} placeholder={"Search product"}></Search>
@@ -73,10 +91,22 @@ const AdminProducts = () => {
           );
         })}
       </div>
-      <ModalProducts isOpen={openModal} onClose={onClose} />
+      <ModalProducts
+        isOpen={openModal}
+        onClose={onClose}
+        productToEdit={productToEdit}
+      />
       <div className="products-container" style={{ height: "55vh" }}>
-        {products.map((p) => {
-          return <ProductCard path={pathname} product={p} key={p.id} />;
+        {products.map((product) => {
+          return (
+            <ProductCard
+              path={pathname}
+              product={product}
+              key={product.id}
+              isOpen={() => handleOpen(product)}
+              //productSelectedToEdit={() => setProduct(product)}
+            />
+          );
         })}
       </div>
       <div className="large-button--content" onClick={handleOpen}>

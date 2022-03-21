@@ -11,13 +11,15 @@ import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
 
+import { deleteProductFirebase } from "../Services/FirestoreServices";
+
 export function ProductCard(props) {
-  const { product, path } = props;
+  const { product, path, isOpen, productSelectedToEdit } = props;
   const { cart, setCart } = useCart();
   const { openCart, setOpenCart } = useSideBarCart();
 
   let navigate = useNavigate();
-
+  //--------------Waiter
   const HandleAddToCart = () => {
     if (!product.product_options.some((option) => option === null)) {
       navigate("detail-product", {
@@ -53,17 +55,26 @@ export function ProductCard(props) {
       setOpenCart(true);
     }
   };
-
+  //-----------Component
   const Edit = ({ onClick }) => {
     return (
-      <button className="productAdded-card--pencilContainer" onClick={onClick}>
+      <button
+        className="productAdded-card--pencilContainer"
+        onClick={() => HandleEditProduct(product)}
+      >
         <Pencil className="productAdded-card--pencil" width={30} height={30} />
       </button>
     );
   };
 
-  const HandleEditProduct = () => {};
-  const HandleRemoveProduct = () => {};
+  //--------Product CRUD Admin
+  const HandleEditProduct = (product) => {
+    isOpen(product);
+    //  productSelectedToEdit = product;
+  };
+  const HandleRemoveProduct = (productId) => {
+    deleteProductFirebase(productId);
+  };
   return (
     <div className="product-card">
       <div
@@ -98,7 +109,7 @@ export function ProductCard(props) {
               {<Edit />}
               <div
                 className="productAdded-card--button"
-                onClick={HandleRemoveProduct}
+                onClick={() => HandleRemoveProduct(product.id)}
               >
                 {
                   <More

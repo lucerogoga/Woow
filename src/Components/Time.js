@@ -31,6 +31,7 @@ const Time = ({ start, end }) => {
       const endTime = moment(end.toDate());
       const timeDifference = endTime.diff(startTime, "seconds");
       setDuration(moment.duration(timeDifference, "seconds"));
+      clearInterval();
     } else if (start) {
       updateCounterDuration();
       return startTimer();

@@ -10,6 +10,7 @@ import {
   serverTimestamp,
   updateDoc,
   onSnapshot,
+  deleteDoc,
   limit,
   setDoc,
 } from "firebase/firestore";
@@ -228,6 +229,12 @@ export async function createProductFirebase(
     product_stock: [productStock], //array
   });
 }
+//--------------DeleteProduct
+export async function deleteProductFirebase(productId) {
+  const productRef = doc(db, "products", productId);
+  return deleteDoc(productRef);
+}
+
 //--------------CreateUser
 export function createUserFirebase(
   userID,
