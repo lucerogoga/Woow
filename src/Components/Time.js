@@ -6,80 +6,40 @@ import "moment-precise-range-plugin";
 import { MarkEmailUnreadTwoTone } from "@mui/icons-material";
 
 const Time = ({ start, end }) => {
-  console.log("tiempo INICIA?", start);
-  console.log("tiempo finaliza?", end);
   // HOLAA
+  // console.log('tiempo finaliza?', end)
   // const [time, setTime] = useState('')
   const [hoursDiff, setHoursDiff] = useState("00");
   const [minutesDiff, setMinutesDiff] = useState("00");
   const [secondsDiff, setSecondsDiff] = useState("00");
-
+  const [duration, setDuration] = useState(moment.duration(0));
   // if(end) { console.log('Ahora si tiene valor final! , ', end)}
 
-  // const b = moment("2022-03-11 15:31:15");
-
-  let interval;
-
-  const startTimer = () => {
-    // TimeStamp
-    let startTime;
-    if (start) {
-      startTime = start.toDate();
-    } else {
-      startTime = moment();
-    }
-    // const startTime = start.toDate();
-
-    interval = setInterval(() => {
-      // let startTime;
-      let now;
-
-      if (start) {
-        // startTime = start.toDate();
-        now = moment();
-      } else {
-        // startTime = moment();
-        now = { ...startTime };
-      }
-      // const now = moment();
-
-      let timeDifference;
-
-      if (end) {
-        const endTime = end.toDate();
-        timeDifference = moment.preciseDiff(startTime, endTime, true);
-      } else {
-        timeDifference = moment.preciseDiff(startTime, now, true);
-      }
-
-      let { seconds, minutes, hours } = timeDifference;
-
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      hours = hours < 10 ? "0" + hours : hours;
-
-      setHoursDiff(hours);
-      setMinutesDiff(minutes);
-      setSecondsDiff(seconds);
-    }, 1000);
-  };
-
+  // const b = moment("2022-03-11 15:31:15")
   useEffect(() => {
-    let isMounted = true;
-    if (isMounted) {
-      startTimer(); // no more error
-    }
-    return () => {
-      isMounted = false;
+    const updateCounterDuration = () => {
+      const startTime = moment(start.toDate());
+      const now = moment();
+      const timeDifference = now.diff(startTime, "seconds");
+      setDuration(moment.duration(timeDifference, "seconds"));
     };
-  }, []);
 
-  useEffect(() => {
-    return startTimer();
-    // startTimer()
-  }, [end]);
+    const startTimer = () => setInterval(updateCounterDuration, 1000);
 
-  const timeDiff = hoursDiff + ":" + minutesDiff + ":" + secondsDiff;
+    if (end) {
+      const startTime = moment(start.toDate());
+      const endTime = moment(end.toDate());
+      const timeDifference = endTime.diff(startTime, "seconds");
+      setDuration(moment.duration(timeDifference, "seconds"));
+    } else if (start) {
+      updateCounterDuration();
+      return startTimer();
+    }
+  }, [start, end]);
+
+  const formatedTimeDiff = moment
+    .utc(duration.asMilliseconds())
+    .format("HH:mm:ss");
 
   return (
     <div className="order-cart--containertime">
@@ -97,7 +57,7 @@ const Time = ({ start, end }) => {
           (hoursDiff >= 1 || minutesDiff >= 1 ? "exceeds" : "")
         }
       >
-        {timeDiff}
+        {formatedTimeDiff}
       </h3>
     </div>
   );

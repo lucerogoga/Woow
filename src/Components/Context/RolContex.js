@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import { getUser } from "../../Services/FirestoreServices";
+import { Grid } from "@mui/material";
 import { ReactComponent as Spinner } from "../../Assets/icons/Spinner.svg";
 const rolContext = createContext();
 export const useRol = () => useContext(rolContext);
@@ -24,6 +25,18 @@ export const RolProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  if (loading) return <Spinner />;
+  if (loading)
+    return (
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          height: "100vh",
+        }}
+      >
+        <Spinner />;
+      </Grid>
+    );
   return <rolContext.Provider value={userRole}>{children}</rolContext.Provider>;
 };
