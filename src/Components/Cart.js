@@ -9,6 +9,7 @@ import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
 import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
+import formatNum from "format-num";
 // ! ----
 import {
   onSnapshot,
@@ -139,7 +140,14 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             <div className="total-price">
               <h3>Total Cost</h3>
               {/* <h3 className="price-total-cost">$ {"prueba"}</h3> */}
-              <h3 className="total-price__price">$ {itemsPrice}</h3>
+              <h3 className="total-price__price">
+                {"$ " +
+                  formatNum(itemsPrice, {
+                    minFraction: 2,
+                    maxFraction: 2,
+                  })}
+              </h3>
+              {/* <h3 className="total-price__price">$ {itemsPrice}</h3> */}
             </div>
             <div className="large-button--content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />

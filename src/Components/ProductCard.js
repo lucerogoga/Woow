@@ -66,21 +66,19 @@ export function ProductCard(props) {
   const HandleRemoveProduct = () => {};
   return (
     <div className="product-card">
-      {/* <div
-        className="product-card--photoContainer"
-        style={{ backgroundImage: "url(" + product.product_photo[0] } + ")"}
-      ></div> */}
-      {/* <div
+      <div
         className="image-content--product"
         style={{ backgroundImage: `url(${product.product_photo[0]})` }}
-      ></div> */}
-      <div className="product-card--photoContainer">
+      >
+        {" "}
+      </div>
+      {/* <div className="product-card--photoContainer">
         <img
           src={product.product_photo[0]}
           className="product-image"
           alt="product.name"
         />
-      </div>
+      </div> */}
 
       <div className="product-card--textContainer">
         <div className="product-card--text">
