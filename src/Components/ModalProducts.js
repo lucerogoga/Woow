@@ -206,7 +206,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
               <div className="large-button--content" onClick={createProduct}>
                 <ActionButton
                   title={"Create Product"}
-                  className={"pink-button"}
+                  className={"button--pink"}
                 />
               </div>
             </>

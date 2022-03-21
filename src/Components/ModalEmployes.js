@@ -139,7 +139,7 @@ export default function ModalEmployes({ isOpen, onClose }) {
               <div className="large-button--content" onClick={handleCreateUser}>
                 <ActionButton
                   title={"Create Employee"}
-                  className={"pink-button"}
+                  className={"button--pink"}
                 />
               </div>
             </>

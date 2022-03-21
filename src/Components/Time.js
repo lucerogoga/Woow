@@ -14,24 +14,33 @@ const Time = ({ start, end }) => {
   const [secondsDiff, setSecondsDiff] = useState("00");
   const [duration, setDuration] = useState(moment.duration(0));
   // if(end) { console.log('Ahora si tiene valor final! , ', end)}
-
+  // console.log("duration, ", duration);
   // const b = moment("2022-03-11 15:31:15")
   useEffect(() => {
     const updateCounterDuration = () => {
       const startTime = moment(start.toDate());
       const now = moment();
       const timeDifference = now.diff(startTime, "seconds");
+      // console.log("tiempo diff,", timeDifference);
+      // _milliseconds
       setDuration(moment.duration(timeDifference, "seconds"));
     };
 
     const startTimer = () => setInterval(updateCounterDuration, 1000);
 
     if (end) {
-      const startTime = moment(start.toDate());
-      const endTime = moment(end.toDate());
-      const timeDifference = endTime.diff(startTime, "seconds");
-      setDuration(moment.duration(timeDifference, "seconds"));
-      clearInterval();
+      let timeDifference;
+      if (!start) {
+        timeDifference = moment.duration(0);
+      } else {
+        const startTime = moment(start.toDate());
+        const endTime = moment(end.toDate());
+        console.log("soy entime, ", endTime);
+        timeDifference = endTime.diff(startTime, "seconds");
+
+        setDuration(moment.duration(timeDifference, "seconds"));
+        clearInterval();
+      }
     } else if (start) {
       updateCounterDuration();
       return startTimer();
@@ -47,7 +56,7 @@ const Time = ({ start, end }) => {
       <Clock
         className={
           "order-cart--clock " +
-          (hoursDiff >= 1 || minutesDiff >= 1 ? "shake" : "")
+          (duration._milliseconds >= 60000 ? "shake" : "")
         }
         width={16}
         height={16}
@@ -55,7 +64,7 @@ const Time = ({ start, end }) => {
       <h3
         className={
           "order-cart--minutes " +
-          (hoursDiff >= 1 || minutesDiff >= 1 ? "exceeds" : "")
+          (duration._milliseconds >= 60000 ? "exceeds" : "")
         }
       >
         {formatedTimeDiff}
