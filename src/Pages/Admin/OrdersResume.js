@@ -67,7 +67,7 @@ const OrdersResumeAdmin = () => {
 
       <div>
         {orders.map((order) => (
-          <OrderCardFormat orderData={order} />
+          <OrderCardFormat key={order.id} orderData={order} />
         ))}
       </div>
     </>

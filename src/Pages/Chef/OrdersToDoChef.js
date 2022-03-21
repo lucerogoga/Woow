@@ -85,7 +85,7 @@ export const OrdersToDoChef = () => {
       <Title title="Orders To Do" quantity={orders.length} />
       <div>
         {orders.map((order) => (
-          <OrderCardFormat orderData={order} />
+          <OrderCardFormat key={order.id} orderData={order} />
         ))}
       </div>
     </>
