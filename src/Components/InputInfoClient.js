@@ -56,11 +56,11 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
         required
         onChange={(e) => handleChange(e.target.value)}
         sx={{ minWidth: 250, maxWidth: 300 }}
-        size="small"
+        // size="small"
       />
       <FormControl sx={{ minWidth: 200, maxWidth: 400 }}>
-        {/* <InputLabel id="demo-simple-select-label">Nº Table</InputLabel> */}
-        <TextField
+        <InputLabel id="demo-simple-select-label">Nº Table</InputLabel>
+        {/* <TextField
           id="outlined-basic2"
           label="N° Table"
           variant="outlined"
@@ -68,34 +68,27 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
           value={tableNumber}
           // value={clientName}
           required
-          // onChange={(e) => handleChangeTable(e.target.value)}
           sx={{ minWidth: 200, maxWidth: 300 }}
           size="small"
           select
+        > */}
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={tableNumber}
+          label="Nº Table"
+          required
+          sizeSmall
+          alignItems="center"
+          onChange={(e) => handleChangeTable(e.target.value)}
         >
-          {/* <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={tableNumber}
-            label="Nº Table"
-            required
-            sizeSmall
-            alignItems="center"
-            onChange={(e) => handleChangeTable(e.target.value)}
-          > */}
-          <MenuItem
-            onClick={(e) => handleChangeTable(e.target.value)}
-            value={"Tabla 1"}
-          >
-            Tabla 1
-          </MenuItem>
+          <MenuItem value={"Tabla 1"}>Tabla 1</MenuItem>
           <MenuItem value={"Tabla 2"}>Tabla 2</MenuItem>
           <MenuItem value={"Tabla 3"}>Tabla 3</MenuItem>
           <MenuItem value={"Tabla 4"}>Tabla 4</MenuItem>
           <MenuItem value={"Tabla 5"}>Tabla 5</MenuItem>
-          {/* </Select> */}
-        </TextField>
-        {/* ----- */}
+        </Select>
+        {/* </TextField> */}
       </FormControl>
     </>
   );

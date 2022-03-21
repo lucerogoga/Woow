@@ -18,6 +18,7 @@ html {
 .product-card {
   display: flex;
   background-color: #fff;
+  /* background-color: red; */
   border-radius: 17px;
   display: flex;
   flex-direction: row;
@@ -63,8 +64,8 @@ html {
 
 .product-card--button {
   background-color: #ff9aa3;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -74,7 +75,7 @@ html {
 
 .product-card--button:hover {
   background-color: #ffa4ac;
-  transition: .3s;
+  transition: 0.3s;
 }
 .product-image {
   width: 100%;

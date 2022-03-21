@@ -102,7 +102,7 @@ export function ProductAddedCart({ cartProduct, cantEdit }) {
             {cartProduct.product_description}
           </p>
           <div className="productAdded-card--pinkContainer">
-            <h3 className="productAdded-card--cost-dinamic">
+            <h3 className="productAdded-card__cost">
               $ {cartProduct.unitCost * state.count}
             </h3>
             {/* {cartProduct.observation && (

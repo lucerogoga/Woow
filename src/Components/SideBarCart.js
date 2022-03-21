@@ -11,8 +11,9 @@ import * as React from "react";
 const Caja = ({ onClose }) => {
   let navigate = useNavigate();
   const handleGoCart = () => {
-    navigate("../waiter/order-cart");
+    console.log("handle??");
     onClose();
+    navigate("../waiter/order-cart");
   };
 
   return (
@@ -22,13 +23,7 @@ const Caja = ({ onClose }) => {
           <X className="x-icon" width={25} />
         </span>
       </div>
-      <Cart cantEdit={true} />
-      <div className="large-button--content">
-        <ActionButton
-          title="Ver Carrito"
-          className={"pink-button-sidebarcart"}
-        ></ActionButton>
-      </div>
+      <Cart cantEdit={true} handleGoCart={handleGoCart} />
     </div>
   );
 };
@@ -38,7 +33,15 @@ const SideBarCart = ({ isOpen, onClose }) => {
     <div>
       <React.Fragment>
         <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
-          <Box sx={{ width: 500, height: "100vh", padding: "1rem" }}>
+          <Box
+            sx={{
+              width: 500,
+              height: "100vh",
+              padding: "1rem",
+              overflow: "hidden",
+              paddingBottom: "2rem",
+            }}
+          >
             <Caja onClose={onClose} />
           </Box>
         </Drawer>
@@ -46,30 +49,4 @@ const SideBarCart = ({ isOpen, onClose }) => {
     </div>
   );
 };
-
-// const SideBarCart = ({ onClose }) => {
-//   let navigate = useNavigate();
-//   const handleGoCart = () => {
-//     navigate("../waiter/order-cart");
-//     onClose();
-//   };
-//   return (
-//     <>
-//       <div className="sideBarCart-content">
-//         <div className="sidebar--header">
-//           <span onClick={onClose}>
-//             <X className="x-icon" width={25} />
-//           </span>
-//         </div>
-//         <Cart cantEdit={true} />
-//         <div className="large-button--content" onClick={handleGoCart}>
-//           <ActionButton
-//             title="Ver Carrito"
-//             className={"pink-button-sidebarcart"}
-//           ></ActionButton>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
 export default SideBarCart;

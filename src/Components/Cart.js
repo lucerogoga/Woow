@@ -4,11 +4,7 @@ import ProductAddedCart from "./ProductAddedCart";
 import Title from "./Title";
 import ActionButton from "../Components/ActionButton";
 import ControlledOpenSelect from "./SelectTable";
-import {
-  createOrder,
-  getOrderNumberCorrelative,
-  getUser,
-} from "../Services/FirestoreServices";
+import { createOrder, getUser } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
 import InputInfoClient from "./InputInfoClient";
@@ -25,7 +21,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../Config/initialize";
 
-const Cart = ({ cantEdit }) => {
+const Cart = ({ cantEdit, handleGoCart }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
@@ -140,13 +136,19 @@ const Cart = ({ cantEdit }) => {
             ))}
           </div>
           <div className="footer-content">
-            <div className="price-content">
+            <div className="total-price">
               <h3>Total Cost</h3>
               {/* <h3 className="price-total-cost">$ {"prueba"}</h3> */}
-              <h3 className="price-total-cost">$ {itemsPrice}</h3>
+              <h3 className="total-price__price">$ {itemsPrice}</h3>
             </div>
             <div className="large-button--content" onClick={handleOrder}>
-              <ActionButton title="Send to Chef" className={"pink-button"} />
+              <ActionButton title="Send to Chef" className={"button--pink"} />
+            </div>
+            <div className="large-button--content" onClick={handleGoCart}>
+              <ActionButton
+                title="Ver Carrito"
+                className={"button--white"}
+              ></ActionButton>
             </div>
           </div>
         </div>
@@ -154,5 +156,5 @@ const Cart = ({ cantEdit }) => {
     </>
   );
 };
-
+// handleGoCart
 export default Cart;
