@@ -1,15 +1,13 @@
 import React from "react";
-import "../Assets/Product-Detail.css";
+import "../Assets/DetailProduct.css";
 
-const LargeButton = (props) => {
-  const { title } = props;
+const ActionButton = (props) => {
+  const { title, className } = props;
   return (
     <>
-      <div className="observation-content">
-        <button className="btn-action">{title}</button>
-      </div>
+      <button className={className}>{title}</button>
     </>
   );
 };
 
-export default LargeButton;
+export default ActionButton;

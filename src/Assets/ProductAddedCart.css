@@ -1,0 +1,253 @@
+html {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  height: 100%;
+}
+
+.productAdded-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  padding: 1em;
+  margin: 0 auto;
+  width: 100%;
+  height: 20%;
+  overflow: hidden;
+  justify-content: center;
+  height: 130px;
+}
+
+.productAdded-card--photoContainer {
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.productAdded-card--textContainer {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.productAdded-card--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.productAdded-card--buttonContainer {
+  width: 22%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.productAdded-card--buttonIcon {
+  color: #fff;
+  font-weight: 800;
+}
+
+.productAdded-card--button {
+  background-color: #ff9aa3;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productAdded-card--button-counter {
+  width: 50px;
+  padding: 0.5rem;
+  border-radius: 100px;
+  display: flex;
+  margin-right: 20px;
+  border: #ff9aa3 3px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.productAdded-card--buttonCounter {
+  background: none;
+  border: none;
+  color: #ff9aa3;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.productAdded-image {
+  width: 100%;
+  height: 100%;
+}
+
+.productAdded-card--title {
+  display: flex;
+  align-items: flex-end;
+}
+
+.productAdded-card--productName {
+  color: #283159;
+  font-size: 1.5rem;
+}
+
+.productAdded-card--options {
+  color: #283159;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.productAdded-card--descr {
+  color: #283159;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.productAdded-card__cost {
+  color: #ff9aa3;
+  font-size: 1.3rem;
+  margin-right: 3rem;
+}
+
+/* .productAdded-card--input-qty {
+  width: fit-content;
+
+  border: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  width: fit-content;
+} */
+
+.productAdded-card--buttonsRightContainer {
+  /* background-color: red; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-evenly;
+}
+
+.productAdded-card--pencilContainer {
+  right: 8px;
+  top: -6px;
+  border: none;
+  background-color: #fff;
+}
+
+.productAdded-card--pencil {
+  width: 30px;
+}
+/* !-------------- */
+.productAdded-card--pinkContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* .productAdded-card--eye path { */
+.productAdded-card--eye path {
+  width: 15px;
+  cursor: pointer;
+}
+
+.productAdded-card--obsContainer {
+  position: absolute;
+  left: 6.6rem;
+  top: -5.5rem;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px rgb(0 0 0 / 20%);
+  border-radius: 10px 10px 10px 0px;
+  background: #fff;
+  padding: 1rem 1rem 1.5rem;
+  width: 17rem;
+  height: 6.5rem;
+}
+/* 
+/* .productAdded-card--obsText::-webkit-scrollbar { */
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff9aa3;
+  border-radius: 100vh;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fecc68;
+}
+
+/* .product-card--eye:hover ~ .productAdded-card--obsContainer {
+  display: block;
+} */
+
+.product-card--eye {
+  cursor: pointer;
+}
+
+.productAdded--x-icon {
+  transform: rotate(45deg);
+  animation: hideSidebar 0.3s ease forwards;
+}
+
+.productAdded-card--obsText {
+  color: #283159;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  resize: none;
+  border: none;
+  height: 100%;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  /* .navbar--burger-container {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  } */
+
+  /* .productAdded-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: 17px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    padding: 1em;
+    margin: 0 auto;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+    justify-content: center;
+  } */
+
+  .productAdded-card--obsText {
+    /* font-size: 2rem; */
+  }
+
+  .productAdded-card {
+    /* background-color: #fecc68; */
+  }
+}

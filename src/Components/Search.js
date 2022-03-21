@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { getProducts } from "./Context/FirestoreServices";
+import React from "react";
 import { ReactComponent as Look } from "../Assets/icons/magnifying-glass.svg";
-const Search = ({ onChange }) => {
+const Search = ({ onChange, placeholder }) => {
   const handleChange = (e) => {
     onChange(e.target.value);
   };
@@ -12,7 +11,7 @@ const Search = ({ onChange }) => {
         <input
           className="search-input"
           type="search"
-          placeholder="Search Product"
+          placeholder={placeholder}
           onChange={handleChange}
         />
       </div>
