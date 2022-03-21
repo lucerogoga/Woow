@@ -70,6 +70,10 @@ export function ProductCard(props) {
         className="product-card--photoContainer"
         style={{ backgroundImage: "url(" + product.product_photo[0] } + ")"}
       ></div> */}
+      {/* <div
+        className="image-content--product"
+        style={{ backgroundImage: `url(${product.product_photo[0]})` }}
+      ></div> */}
       <div className="product-card--photoContainer">
         <img
           src={product.product_photo[0]}

@@ -125,6 +125,24 @@ html {
     width: 100%;
     height: 250px;
   }
+
+  .image-content--product {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 100%; */
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+  }
   .product-image {
     width: 100%;
     height: 100%;
