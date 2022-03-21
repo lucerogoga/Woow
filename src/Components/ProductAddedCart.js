@@ -1,5 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import formatNum from "format-num";
 
 import "../Assets/ProductAddedCart.css";
 
@@ -103,7 +104,12 @@ export function ProductAddedCart({ cartProduct, cantEdit }) {
           </p>
           <div className="productAdded-card--pinkContainer">
             <h3 className="productAdded-card__cost">
-              $ {cartProduct.unitCost * state.count}
+              {/* $ {cartProduct.unitCost * state.count} */}
+              {/* $ {formatNum(0, { minFraction: 2, maxFraction: 2 })} */}
+              $ {formatNum(cartProduct.unitCost * state.count, {
+                minFraction: 2,
+                maxFraction: 2,
+              })}
             </h3>
             {/* {cartProduct.observation && (
               // <Eye

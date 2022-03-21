@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.6.7",
+    "format-num": "^1.0.0",
     "material-table": "^1.69.3",
     "moment": "^2.29.1",
     "moment-precise-range-plugin": "^1.3.0",

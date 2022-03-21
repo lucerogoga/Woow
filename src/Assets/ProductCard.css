@@ -92,6 +92,8 @@ html {
   font-size: 1rem;
   margin-top: 0.5rem;
   font-weight: 500;
+  display: flex;
+  align-items: flex-start;
 }
 
 .product-card--cost {
@@ -101,11 +103,13 @@ html {
 }
 
 @media (min-width: 900px) {
+  .product-card--descr {
+    height: 63px;
+  }
   .products-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    /* column-gap: 1rem; */
     padding: 1rem;
   }
   .product-card {

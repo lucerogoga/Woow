@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+import formatNum from "format-num";
 
 import "../Assets/ProductCard.css";
 
@@ -65,6 +66,10 @@ export function ProductCard(props) {
   const HandleRemoveProduct = () => {};
   return (
     <div className="product-card">
+      {/* <div
+        className="product-card--photoContainer"
+        style={{ backgroundImage: "url(" + product.product_photo[0] } + ")"}
+      ></div> */}
       <div className="product-card--photoContainer">
         <img
           src={product.product_photo[0]}
@@ -72,11 +77,18 @@ export function ProductCard(props) {
           alt="product.name"
         />
       </div>
+
       <div className="product-card--textContainer">
         <div className="product-card--text">
           <h2 className="product-card--title"> {product.product_name}</h2>
           <p className="product-card--descr"> {product.product_description}</p>
-          <h3 className="product-card--cost"> $ {product.product_cost[0]}</h3>
+          <h3 className="product-card--cost">
+            {"$ " +
+              formatNum(product.product_cost[0], {
+                minFraction: 2,
+                maxFraction: 2,
+              })}
+          </h3>
         </div>
         <div className="product-card--buttonContainer">
           {path === "/admin/add-products" ? (

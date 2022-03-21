@@ -79,7 +79,6 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
           label="Nº Table"
           required
           sizeSmall
-          alignItems="center"
           onChange={(e) => handleChangeTable(e.target.value)}
         >
           <MenuItem value={"Tabla 1"}>Tabla 1</MenuItem>
