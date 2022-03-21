@@ -14,6 +14,16 @@ import {
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
+import {
+  onSnapshot,
+  collection,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
+import { useAuth } from "../../Components/Context/AuthContext";
+import { db } from "../../Config/initialize";
+
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -26,8 +36,15 @@ const AdminProducts = () => {
     await filterProductByCategorie(catUid, catName);
 
   useEffect(() => {
-    getProducts().then((products) => setProducts(products));
+    // getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
+  }, []);
+
+  useEffect(() => {
+    const q = query(collection(db, "products"));
+    return onSnapshot(q, (snapshot) => {
+      setProducts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
   }, []);
 
   const handleClick = ({ cat_uid, cat_name }) => {

@@ -10,13 +10,15 @@ import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
 
+import { deleteProductFirebase } from "../Services/FirestoreServices";
+
 export function ProductCard(props) {
   const { product, path } = props;
   const { cart, setCart } = useCart();
   const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
 
   let navigate = useNavigate();
-
+  //--------------Waiter
   const HandleAddToCart = () => {
     if (!product.product_options.some((option) => option === null)) {
       navigate("detail-product", {
@@ -52,7 +54,7 @@ export function ProductCard(props) {
       setIsSideBarCartOpen(!isSideBarCartOpen);
     }
   };
-
+  //-----------Component
   const Edit = ({ onClick }) => {
     return (
       <button className="productAdded-card--pencilContainer" onClick={onClick}>
@@ -61,8 +63,11 @@ export function ProductCard(props) {
     );
   };
 
+  //--------Product CRUD Admin
   const HandleEditProduct = () => {};
-  const HandleRemoveProduct = () => {};
+  const HandleRemoveProduct = (productId) => {
+    deleteProductFirebase(productId);
+  };
   return (
     <div className="product-card">
       <div className="product-card--photoContainer">
@@ -84,7 +89,7 @@ export function ProductCard(props) {
               {<Edit />}
               <div
                 className="productAdded-card--button"
-                onClick={HandleRemoveProduct}
+                onClick={() => HandleRemoveProduct(product.id)}
               >
                 {
                   <More
