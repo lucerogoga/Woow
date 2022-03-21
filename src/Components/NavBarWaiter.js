@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation} from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
-
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Back } from "../Assets/icons/back.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
@@ -14,7 +12,6 @@ import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
 import { abbrevName } from "../helpers/nameFormatted";
 import { useCart } from "../Components/Context/CartContext";
 import { useAuth } from "./Context/AuthContext";
-
 import { getUser } from "../Services/FirestoreServices";
 
 const NavBarWaiter = ({
@@ -70,10 +67,15 @@ const NavBarWaiter = ({
             </Link>
           </li>
           <li className="menu--list">
-            <Link to={"orders-resume"} className={
+            <Link
+              to={"orders-resume"}
+              className={
                 "menu--link " +
-                (location.pathname === "/waiter/orders-resume" ? "menu--link--active" : "")
-              }>
+                (location.pathname === "/waiter/orders-resume"
+                  ? "menu--link--active"
+                  : "")
+              }
+            >
               Orders Resume
             </Link>
           </li>

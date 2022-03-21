@@ -3,9 +3,9 @@ import React, { useState, useContext, createContext } from "react";
 const SideBarCart = createContext();
 
 const SideBarCartContext = ({ children }) => {
-  const [isSideBarCartOpen, setIsSideBarCartOpen] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
   return (
-    <SideBarCart.Provider value={{ isSideBarCartOpen, setIsSideBarCartOpen }}>
+    <SideBarCart.Provider value={{ openCart, setOpenCart }}>
       {children}
     </SideBarCart.Provider>
   );

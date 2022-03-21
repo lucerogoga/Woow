@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+import formatNum from "format-num";
 
 import "../Assets/ProductCard.css";
 
@@ -15,7 +16,7 @@ import { deleteProductFirebase } from "../Services/FirestoreServices";
 export function ProductCard(props) {
   const { product, path, isOpen, productSelectedToEdit } = props;
   const { cart, setCart } = useCart();
-  const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
+  const { openCart, setOpenCart } = useSideBarCart();
 
   let navigate = useNavigate();
   //--------------Waiter
@@ -51,7 +52,7 @@ export function ProductCard(props) {
           },
         ]);
       }
-      setIsSideBarCartOpen(!isSideBarCartOpen);
+      setOpenCart(true);
     }
   };
   //-----------Component
@@ -76,18 +77,31 @@ export function ProductCard(props) {
   };
   return (
     <div className="product-card">
-      <div className="product-card--photoContainer">
+      <div
+        className="image-content--product"
+        style={{ backgroundImage: `url(${product.product_photo[0]})` }}
+      >
+        {" "}
+      </div>
+      {/* <div className="product-card--photoContainer">
         <img
           src={product.product_photo[0]}
           className="product-image"
           alt="product.name"
         />
-      </div>
+      </div> */}
+
       <div className="product-card--textContainer">
         <div className="product-card--text">
           <h2 className="product-card--title"> {product.product_name}</h2>
           <p className="product-card--descr"> {product.product_description}</p>
-          <h3 className="product-card--cost"> $ {product.product_cost[0]}</h3>
+          <h3 className="product-card--cost">
+            {"$ " +
+              formatNum(product.product_cost[0], {
+                minFraction: 2,
+                maxFraction: 2,
+              })}
+          </h3>
         </div>
         <div className="product-card--buttonContainer">
           {path === "/admin/add-products" ? (
@@ -107,11 +121,8 @@ export function ProductCard(props) {
               </div>
             </div>
           ) : (
-            <div className="product-card--button">
-              <div
-                onClick={HandleAddToCart}
-                className="product-card--buttonIcon"
-              >
+            <div onClick={HandleAddToCart} className="product-card--button">
+              <div className="product-card--buttonIcon">
                 {<More width={15} style={{ marginTop: "4px" }} />}
               </div>
             </div>

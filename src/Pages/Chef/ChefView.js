@@ -12,6 +12,13 @@ import OrdersToDoChef from "./OrdersToDoChef";
 
 export const ChefView = () => {
   const [open, setOpen] = useState(false);
+  const handleSidebarOpen = () => {
+    setOpen(true);
+  };
+  const handleSidebarClose = () => {
+    setOpen(false);
+  };
+
   const { logout } = useAuth();
   let location = useLocation();
   const { pathname } = location;
@@ -22,17 +29,16 @@ export const ChefView = () => {
   return (
     <>
       <NavBarChef
-        onClickMenu={() => setOpen(!open)}
+        onClickMenu={handleSidebarOpen}
         currentPath={pathname}
         onClickLogout={handleLogout}
       />
       <div>
-        {open && (
-          <SideBarChef
-            onClose={(e) => setOpen(false)}
-            onClickLogout={handleLogout}
-          />
-        )}
+        <SideBarChef
+          isOpen={open}
+          onClose={handleSidebarClose}
+          onClickLogout={handleLogout}
+        />
         <div className="content">
           <OrdersToDoChef />
         </div>

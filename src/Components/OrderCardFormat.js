@@ -24,7 +24,8 @@ const OrderCardFormat = ({ orderData }) => {
   } = useAuth();
 
   const rows = createRows(orderData);
-
+  console.log("esta tarjetaa inicia! , ", orderData.order_timestamp_start);
+  console.log("esta tarjetaa termina! , ", orderData.order_timestamp_end);
   // Getting chef_id
   let chefId;
   !orderData.chef_name
@@ -105,11 +106,9 @@ const OrderCardFormat = ({ orderData }) => {
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
               <Time
-                // start={orderData.order_timestamp}
                 start={orderData.order_timestamp_start}
                 end={orderData.order_timestamp_end}
               />
-              {/* <Time start={new Date()} end={null} /> */}
             </div>
           </div>
         </div>
