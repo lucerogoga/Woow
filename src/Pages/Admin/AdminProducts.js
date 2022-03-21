@@ -55,9 +55,10 @@ const AdminProducts = () => {
   };
 
   const [openModal, setOpenModal] = useState(false);
-
-  const handleOpen = () => {
+  const [productToEdit, setProductToEdit] = useState("");
+  const handleOpen = (product) => {
     setOpenModal(true);
+    setProductToEdit(product);
   };
   const onClose = () => {
     setOpenModal(false);
@@ -70,7 +71,7 @@ const AdminProducts = () => {
     });
     setProducts(product);
   };
-
+  console.log("producto seleccionado", productToEdit);
   return (
     <>
       <Search onChange={handleSearch} placeholder={"Search product"}></Search>
@@ -90,10 +91,22 @@ const AdminProducts = () => {
           );
         })}
       </div>
-      <ModalProducts isOpen={openModal} onClose={onClose} />
+      <ModalProducts
+        isOpen={openModal}
+        onClose={onClose}
+        productToEdit={productToEdit}
+      />
       <div className="products-container" style={{ height: "55vh" }}>
-        {products.map((p) => {
-          return <ProductCard path={pathname} product={p} key={p.id} />;
+        {products.map((product) => {
+          return (
+            <ProductCard
+              path={pathname}
+              product={product}
+              key={product.id}
+              isOpen={() => handleOpen(product)}
+              //productSelectedToEdit={() => setProduct(product)}
+            />
+          );
         })}
       </div>
       <div className="large-button--content" onClick={handleOpen}>

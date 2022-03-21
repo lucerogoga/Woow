@@ -39,12 +39,11 @@ const style = {
   p: 5,
 };
 
-export default function ModalProducts({ isOpen, onClose }) {
+export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productCategories, setProductCategories] = useState([]);
   useEffect(() => {
     getProductsCategories().then((category) => setProductCategories(category));
   }, []);
-
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -52,6 +51,14 @@ export default function ModalProducts({ isOpen, onClose }) {
   const [productOption, setProductOption] = useState(null);
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
+
+  console.log(productToEdit.product_name);
+
+  useEffect(() => {
+    if (productToEdit) {
+      setProductName(productToEdit.product_name);
+    }
+  }, [productToEdit]);
 
   const [loading, setLoading] = useState(false);
 

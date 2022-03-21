@@ -13,7 +13,7 @@ import { useSideBarCart } from "./Context/SideBarCartContext";
 import { deleteProductFirebase } from "../Services/FirestoreServices";
 
 export function ProductCard(props) {
-  const { product, path } = props;
+  const { product, path, isOpen, productSelectedToEdit } = props;
   const { cart, setCart } = useCart();
   const { isSideBarCartOpen, setIsSideBarCartOpen } = useSideBarCart();
 
@@ -57,14 +57,20 @@ export function ProductCard(props) {
   //-----------Component
   const Edit = ({ onClick }) => {
     return (
-      <button className="productAdded-card--pencilContainer" onClick={onClick}>
+      <button
+        className="productAdded-card--pencilContainer"
+        onClick={() => HandleEditProduct(product)}
+      >
         <Pencil className="productAdded-card--pencil" width={30} height={30} />
       </button>
     );
   };
 
   //--------Product CRUD Admin
-  const HandleEditProduct = () => {};
+  const HandleEditProduct = (product) => {
+    isOpen(product);
+    //  productSelectedToEdit = product;
+  };
   const HandleRemoveProduct = (productId) => {
     deleteProductFirebase(productId);
   };
