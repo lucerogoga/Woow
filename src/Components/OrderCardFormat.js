@@ -24,7 +24,8 @@ const OrderCardFormat = ({ orderData }) => {
   } = useAuth();
 
   const rows = createRows(orderData);
-
+  console.log("esta tarjetaa inicia! , ", orderData.order_timestamp_start);
+  console.log("esta tarjetaa termina! , ", orderData.order_timestamp_end);
   // Getting chef_id
   let chefId;
   !orderData.chef_name
