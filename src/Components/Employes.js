@@ -43,7 +43,7 @@ const Employes = () => {
       <div className="large-button--content" onClick={handleOpen}>
         <ActionButton
           title={"Add Employee"}
-          className={"pink-button"}
+          className={"button--pink"}
           //   onClick={openModal}
         />
       </div>

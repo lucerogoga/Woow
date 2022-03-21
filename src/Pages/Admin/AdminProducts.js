@@ -112,7 +112,7 @@ const AdminProducts = () => {
       <div className="large-button--content" onClick={handleOpen}>
         <ActionButton
           title={"Add Product"}
-          className={"pink-button"}
+          className={"button--pink"}
           //   onClick={openModal}
         />
       </div>

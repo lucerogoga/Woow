@@ -191,7 +191,7 @@ const DetailProduct = () => {
                       ? "Add to Cart"
                       : "Edit Product Cart"
                   }
-                  className={"pink-button"}
+                  className={"button--pink"}
                 />
               </div>
             </div>
