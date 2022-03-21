@@ -9,6 +9,8 @@ import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import ButtonFilter from "../../Components/ButtonFilter";
+import formatNum from "format-num";
+
 import {
   // existOrderInCollection,
   getOrderNumberCorrelative,
@@ -110,17 +112,6 @@ const DetailProduct = () => {
     }
   }, [initialSize]);
 
-  // ! prueba
-
-  // // const initialOrderCorrelative = orderCorrelative;
-  // useEffect(() => {
-  //   const [orderCorrelative, setOrderCorrelative] = useState(0);
-  //   getOrderNumberCorrelative().then(
-  //     (correlative) => console.log("aqui CORRELATIVO", correlative)
-  //     // setOrderCorrelative(correlative)
-  //   );
-  // }, []);
-
   return (
     <>
       <div
@@ -171,10 +162,14 @@ const DetailProduct = () => {
                 onChange={(ev) => setObservation(ev.target.value)}
               ></textarea>
             </div>
-            <div className="price-content">
+            <div className="total-price">
               <h3>Total Cost</h3>
               <h3 className="price-total-cost">
-                $ {product.product_cost[cost] * count}
+                {"$ " +
+                  formatNum(product.product_cost[0], {
+                    minFraction: 2,
+                    maxFraction: 2,
+                  })}
               </h3>
             </div>
 
