@@ -132,7 +132,6 @@ const DetailProduct = () => {
               Unit Price: $ {product.product_cost[cost]}
             </h2>
           </div>
-<<<<<<< HEAD
 
           {/* white container */}
         </div>
@@ -154,46 +153,6 @@ const DetailProduct = () => {
                   />
                 );
               })}
-=======
-          <div className="white-container">
-            <div>
-              <p className="size-title">Choice Size</p>
-              <div className="products-detail-container">
-                {product.product_options.map((op, i) => {
-                  return (
-                    <ButtonFilter
-                      item={op}
-                      active={op === size}
-                      icon={DetailProductsIcons[i]}
-                      key={op}
-                      onClick={() => {
-                        setSize(op);
-                        setCost(i);
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className="observation-content">
-              <p className="observation-title">Observations</p>
-              <textarea
-                className="text-area-observations"
-                type="text"
-                value={observation}
-                onChange={(ev) => setObservation(ev.target.value)}
-              ></textarea>
-            </div>
-            <div className="total-price">
-              <h3>Total Cost</h3>
-              <h3 className="price-total-cost">
-                {"$ " +
-                  formatNum(product.product_cost[0], {
-                    minFraction: 2,
-                    maxFraction: 2,
-                  })}
-              </h3>
->>>>>>> dev-lucero
             </div>
           </div>
           <div className="observation-content">

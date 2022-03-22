@@ -66,6 +66,8 @@
   width: 100%;
   padding: 1rem 4rem;
   justify-content: space-around;
+  position: absolute;
+  bottom: 0;
 }
 
 .info-product-container {
