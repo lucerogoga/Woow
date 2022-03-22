@@ -6,10 +6,10 @@
   padding: 1rem;
 }
 
-/* .navbar--absolute {
+.navbar--absolute {
   position: absolute;
   z-index: 1;
-} */
+}
 
 .navbar--container {
   width: 100%;
@@ -208,5 +208,10 @@
 
   .menu {
     display: flex;
+  }
+
+  .navbar--absolute {
+    position: relative;
+    /* z-index: 1; */
   }
 }

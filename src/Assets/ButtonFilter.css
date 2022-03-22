@@ -1,4 +1,6 @@
-.button-card {
+.button-card
+/* .button-card.button-card--detail, */
+/* .button-card.active.button-card--detail */ {
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
   border-radius: 10px;
   border: none;
@@ -15,6 +17,9 @@
   cursor: pointer;
 }
 
+/* .button-card.button-card--detail{
+
+} */
 .button-card--content {
   display: flex;
   flex-direction: column;
@@ -91,6 +96,11 @@
 }
 .button-card.active h2 {
   color: #ff9aa3;
+}
+
+.button-card--detail {
+  width: 200px;
+  height: 200px;
 }
 
 @media (min-width: 1200px) {

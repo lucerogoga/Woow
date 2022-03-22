@@ -5,10 +5,25 @@ export function ButtonFilter(props) {
   const { item, icon, onClick, active, filteredOrdersQuantity } = props;
   let location = useLocation();
   const { pathname } = location;
+
+  // className={
+  //   "navbar " +
+  //   (location.pathname.includes("detail-product") ? "navbar--absolute" : "")
+  // }
+  // --
+  // className={`button-card ${active ? "active" : ""}`}
+  const isPathnameDetail = location.pathname.includes("detail-product");
+
+  console.log("dime que si, ", isPathnameDetail);
+
   return (
     <>
       <button
-        className={`button-card ${active ? "active" : ""}`}
+        className={
+          "button-card " +
+          (active ? "active" : "") +
+          (isPathnameDetail ? "button-card--detail" : "")
+        }
         onClick={onClick}
       >
         {pathname === "/waiter/orders-resume" ? (
