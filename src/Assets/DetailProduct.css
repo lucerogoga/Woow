@@ -15,6 +15,16 @@
   justify-content: space-between;
 }
 
+.image-content--desktop {
+  background: none;
+  /* background: #fff; */
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
 .observation-content {
   color: #283159;
   font-size: 1.5rem;
@@ -66,13 +76,16 @@
   width: 100%;
   padding: 1rem 4rem;
   justify-content: space-around;
-  position: absolute;
-  bottom: 0;
 }
 
 .info-product-container {
+  /* display: block; */
+  display: flex;
+  background: #ffefc0;
+  border: none;
   width: 100%;
-  padding: 1rem;
+  height: 100%;
+  padding: 2rem 1rem;
 }
 
 .info-product-subcontainer {
@@ -82,19 +95,19 @@
 }
 
 .product--name {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   font-weight: 700;
 }
 
 .product--description {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 1.5rem;
 }
 
 .product--cost {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 3rem;
 }
@@ -159,7 +172,14 @@
 }
 
 .product-detail-container {
+  /* margin-top: 300px; */
+  /* background: red; */
+  /* height: 80%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
+  background-color: #ffefc0;
 }
 .counter-button {
   border: none;
@@ -185,3 +205,58 @@
 .total-price__price {
   color: #ff9aa3;
 }
+
+.detail--header {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  position: relative;
+}
+
+.detail--cost {
+  color: #ff9aa3;
+  position: absolute;
+  font-size: 3rem;
+  right: 0;
+  top: 0;
+}
+
+.detail--description {
+  color: #283159;
+  font-size: 2rem;
+}
+
+.detail--name {
+  font-size: 3rem;
+  color: #283159;
+}
+
+.photo-detailed {
+  width: 100%;
+  position: absolute;
+  top: 35px;
+  left: 52px;
+}
+
+/* @media (min-width: 900px) {
+  .detail--header {
+    display: flex;
+  }
+
+  .info-product-container {
+    display: none;
+  }
+
+  .image-content {
+    background-image: none;
+    position: relative;
+    background-color: rgba(255, 0, 0, 0.041);
+  }
+  .product-detail-container {
+    height: 100%;
+  }
+  .image-content--desktop {
+    background: #fff;
+    max-width: 800px;
+  }
+} */

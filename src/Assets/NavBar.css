@@ -6,10 +6,10 @@
   padding: 1rem;
 }
 
-.navbar--absolute {
+/* .navbar--absolute {
   position: absolute;
   z-index: 1;
-}
+} */
 
 .navbar--container {
   width: 100%;

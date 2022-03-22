@@ -10,6 +10,7 @@ import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import ButtonFilter from "../../Components/ButtonFilter";
 import formatNum from "format-num";
+import cakeParty from "../../Assets/cake-party.png";
 
 import {
   // existOrderInCollection,
@@ -112,77 +113,92 @@ const DetailProduct = () => {
     }
   }, [initialSize]);
 
+  console.log("la foto, ", product.product_photo[1]);
+
   return (
     <>
-      <NavBarWaiter currentPath={pathname} />
-      <div
-        className="image-content"
-        style={{ backgroundImage: `url(${product.product_photo[1]})` }}
-      >
-        {" "}
-      </div>
-      <div className="product-detail-container">
-        <div className="info-product-container">
-          <div className="info-product-subcontainer">
-            <h1 className="product--name">{product.product_name}</h1>
-            <h2 className="product--description">
-              {product.product_description}
-            </h2>
-            <h2 className="product--cost">
-              Unit Price: $ {product.product_cost[cost]}
-            </h2>
-          </div>
-
-          {/* white container */}
-        </div>
-        <div className="white-container">
-          <div>
-            <p className="size-title">Choice Size</p>
-            <div className="products-detail-container">
-              {product.product_options.map((op, i) => {
-                return (
-                  <ButtonFilter
-                    item={op}
-                    active={op === size}
-                    icon={DetailProductsIcons[i]}
-                    key={op}
-                    onClick={() => {
-                      setSize(op);
-                      setCost(i);
-                    }}
-                  />
-                );
-              })}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <NavBarWaiter currentPath={pathname} />
+        <div className="product-detail-container">
+          {/* Primera Tarjeta - Seccion */}
+          <div className="info-product-container">
+            <div className="info-product-subcontainer">
+              <h1 className="product--name">{product.product_name}</h1>
+              <h2 className="product--description">
+                {product.product_description}
+              </h2>
+              <h2 className="product--cost">
+                Unit Price: $ {product.product_cost[cost]}
+              </h2>
+            </div>
+            <div style={{ width: "50%", position: "relative" }}>
+              <img
+                className="photo-detailed"
+                src={
+                  "https://firebasestorage.googleapis.com/v0/b/woow-app-project.appspot.com/o/Products%2Fcakes%2Fcake-party.png?alt=media&token=8f2e01b5-3f4b-48dd-8299-27dbab65fa10"
+                }
+                // src={"../../Assets/cake-party.png"}
+                alt="Texto tortita"
+              ></img>
+              {/* <img src={product.product_photo[1]} alt="Texto tortita"></img> */}
             </div>
           </div>
-          <div className="observation-content">
-            <p className="observation-title">Observations</p>
-            <textarea
-              className="text-area-observations"
-              type="text"
-              value={observation}
-              onChange={(ev) => setObservation(ev.target.value)}
-            ></textarea>
-          </div>
-          <div className="total-price">
-            <h3>Total Cost</h3>
-            <h3 className="price-total-cost">
-              $ {product.product_cost[cost] * count}
-            </h3>
-          </div>
+          {/* Primera Tarjeta - Seccion */}
 
-          {/* section buttons */}
-          <div className="buttons-container">
-            <CounterHorizontal />
-            <div className="large-button--content" onClick={handleActionClick}>
-              <ActionButton
-                title={
-                  action === "createProductCart"
-                    ? "Add to Cart"
-                    : "Edit Product Cart"
-                }
-                className={"button--pink"}
-              />
+          {/* Segunda tarjeta - Seccion 2 */}
+
+          <div className="white-container">
+            <div>
+              <p className="size-title">Choice Size</p>
+              <div className="products-detail-container">
+                {product.product_options.map((op, i) => {
+                  return (
+                    <ButtonFilter
+                      item={op}
+                      active={op === size}
+                      icon={DetailProductsIcons[i]}
+                      key={op}
+                      onClick={() => {
+                        setSize(op);
+                        setCost(i);
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="observation-content">
+              <p className="observation-title">Observations</p>
+              <textarea
+                className="text-area-observations"
+                type="text"
+                value={observation}
+                onChange={(ev) => setObservation(ev.target.value)}
+              ></textarea>
+            </div>
+            <div className="total-price">
+              <h3>Total Cost</h3>
+              <h3 className="price-total-cost">
+                $ {product.product_cost[cost] * count}
+              </h3>
+            </div>
+
+            {/* section buttons */}
+            <div className="buttons-container">
+              <CounterHorizontal />
+              <div
+                className="large-button--content"
+                onClick={handleActionClick}
+              >
+                <ActionButton
+                  title={
+                    action === "createProductCart"
+                      ? "Add to Cart"
+                      : "Edit Product Cart"
+                  }
+                  className={"button--pink"}
+                />
+              </div>
             </div>
           </div>
         </div>
