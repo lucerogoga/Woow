@@ -1,10 +1,12 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/ButtonFilter.css";
+
 export function ButtonFilter(props) {
   const { item, icon, onClick, active, filteredOrdersQuantity } = props;
   let location = useLocation();
   const { pathname } = location;
+
   return (
     <>
       <button
