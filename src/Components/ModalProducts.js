@@ -52,7 +52,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
 
-  console.log(productToEdit.product_name);
+  console.log(productToEdit);
 
   useEffect(() => {
     if (productToEdit) {
@@ -61,8 +61,8 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       setProductDescription(productToEdit.product_description);
       setProductCost(productToEdit.product_cost);
       setProductStock(productToEdit.product_stock);
-      setProductOption(productToEdit.product_option[0]);
-      setProductPhoto(productToEdit.product_photo[0]);
+      setProductOption(null);
+      setProductPhoto("");
     }
   }, [productToEdit]);
 
@@ -210,10 +210,17 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 onChange={(e) => setProductPhoto(e.target.value)}
               />
               <div className="large-button--content" onClick={createProduct}>
+                {/* {productToEdit ? (
+                  <ActionButton
+                    title={"Update Product"}
+                    className={"button--pink"}
+                  />
+                ) : ( */}
                 <ActionButton
                   title={"Create Product"}
                   className={"button--pink"}
                 />
+                {/* )} */}
               </div>
             </>
           )}
