@@ -37,7 +37,13 @@ const NavBarWaiter = ({
   }, []);
   let location = useLocation();
   return (
-    <div className="navbar">
+    // <div className="navbar">
+    <div
+      className={
+        "navbar " +
+        (location.pathname.includes("detail-product") ? "navbar--absolute" : "")
+      }
+    >
       <div className="navbar--container">
         <div className="navbar--block">
           <div className="navbar--burger-container">

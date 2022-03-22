@@ -123,77 +123,75 @@ const DetailProduct = () => {
 
   return (
     <>
+      <NavBarWaiter currentPath={pathname} />
       <div
         className="image-content"
         style={{ backgroundImage: `url(${product.product_photo[1]})` }}
       >
-        <NavBarWaiter currentPath={pathname} />
-        <div className="product-detail-container">
-          <div className="info-product-container">
-            <div className="info-product-subcontainer">
-              <h1 className="product--name">{product.product_name}</h1>
-              <h2 className="product--description">
-                {product.product_description}
-              </h2>
-              <h2 className="product--cost">
-                Unit Price: $ {product.product_cost[cost]}
-              </h2>
-            </div>
-
-            {/* white container */}
+        {" "}
+      </div>
+      <div className="product-detail-container">
+        <div className="info-product-container">
+          <div className="info-product-subcontainer">
+            <h1 className="product--name">{product.product_name}</h1>
+            <h2 className="product--description">
+              {product.product_description}
+            </h2>
+            <h2 className="product--cost">
+              Unit Price: $ {product.product_cost[cost]}
+            </h2>
           </div>
-          <div className="white-container">
-            <div>
-              <p className="size-title">Choice Size</p>
-              <div className="products-detail-container">
-                {product.product_options.map((op, i) => {
-                  return (
-                    <ButtonFilter
-                      item={op}
-                      active={op === size}
-                      icon={DetailProductsIcons[i]}
-                      key={op}
-                      onClick={() => {
-                        setSize(op);
-                        setCost(i);
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-            <div className="observation-content">
-              <p className="observation-title">Observations</p>
-              <textarea
-                className="text-area-observations"
-                type="text"
-                value={observation}
-                onChange={(ev) => setObservation(ev.target.value)}
-              ></textarea>
-            </div>
-            <div className="price-content">
-              <h3>Total Cost</h3>
-              <h3 className="price-total-cost">
-                $ {product.product_cost[cost] * count}
-              </h3>
-            </div>
 
-            {/* section buttons */}
-            <div className="buttons-container">
-              <CounterHorizontal />
-              <div
-                className="large-button--content"
-                onClick={handleActionClick}
-              >
-                <ActionButton
-                  title={
-                    action === "createProductCart"
-                      ? "Add to Cart"
-                      : "Edit Product Cart"
-                  }
-                  className={"button--pink"}
-                />
-              </div>
+          {/* white container */}
+        </div>
+        <div className="white-container">
+          <div>
+            <p className="size-title">Choice Size</p>
+            <div className="products-detail-container">
+              {product.product_options.map((op, i) => {
+                return (
+                  <ButtonFilter
+                    item={op}
+                    active={op === size}
+                    icon={DetailProductsIcons[i]}
+                    key={op}
+                    onClick={() => {
+                      setSize(op);
+                      setCost(i);
+                    }}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="observation-content">
+            <p className="observation-title">Observations</p>
+            <textarea
+              className="text-area-observations"
+              type="text"
+              value={observation}
+              onChange={(ev) => setObservation(ev.target.value)}
+            ></textarea>
+          </div>
+          <div className="total-price">
+            <h3>Total Cost</h3>
+            <h3 className="price-total-cost">
+              $ {product.product_cost[cost] * count}
+            </h3>
+          </div>
+
+          {/* section buttons */}
+          <div className="buttons-container">
+            <CounterHorizontal />
+            <div className="large-button--content" onClick={handleActionClick}>
+              <ActionButton
+                title={
+                  action === "createProductCart"
+                    ? "Add to Cart"
+                    : "Edit Product Cart"
+                }
+                className={"button--pink"}
+              />
             </div>
           </div>
         </div>
