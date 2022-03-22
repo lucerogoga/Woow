@@ -92,7 +92,9 @@
 .button-card.active h2 {
   color: #ff9aa3;
 }
-
+.button-card:hover * h2 {
+  color: #ff9aa3;
+}
 @media (min-width: 1200px) {
   .button-card {
     filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
@@ -106,7 +108,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    min-width: 23%;
+    min-width: 27%;
     min-height: 00px;
     cursor: pointer;
   }
@@ -119,5 +121,17 @@
   .button-card--text-content {
     height: 35px;
     padding-left: 1rem;
+  }
+  .button-order--quatity {
+    background-color: currentColor;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
   }
 }

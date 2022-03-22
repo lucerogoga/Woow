@@ -56,7 +56,13 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
 
   useEffect(() => {
     if (productToEdit) {
+      setCategoryId(productToEdit.cat_id);
       setProductName(productToEdit.product_name);
+      setProductDescription(productToEdit.product_description);
+      setProductCost(productToEdit.product_cost);
+      setProductStock(productToEdit.product_stock);
+      setProductOption(productToEdit.product_option[0]);
+      setProductPhoto(productToEdit.product_photo[0]);
     }
   }, [productToEdit]);
 
