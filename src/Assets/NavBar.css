@@ -6,6 +6,11 @@
   padding: 1rem;
 }
 
+.navbar--absolute {
+  position: absolute;
+  z-index: 1;
+}
+
 .navbar--container {
   width: 100%;
   /* max-width: 1300px; */
@@ -203,5 +208,10 @@
 
   .menu {
     display: flex;
+  }
+
+  .navbar--absolute {
+    position: relative;
+    /* z-index: 1; */
   }
 }
