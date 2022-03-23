@@ -26,7 +26,7 @@ export function ButtonFilter(props) {
         }
         onClick={onClick}
       >
-        {pathname === "/waiter/orders-resume" ? (
+        {pathname === "/waiter/orders-resume" || pathname === "/chef" ? (
           <div className="button-order--quatity">
             <h2>{filteredOrdersQuantity}</h2>
           </div>

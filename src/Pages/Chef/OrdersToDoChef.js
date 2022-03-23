@@ -18,6 +18,8 @@ import Search from "../../Components/Search";
 import { useAuth } from "../../Components/Context/AuthContext";
 
 export const OrdersToDoChef = () => {
+  const [allOrders, setAllOrders] = useState([]);
+  const [quantityByStatus, setQuantityByStatus] = useState("");
   const [orders, setOrders] = useState([]);
   const [userName, setUserName] = useState("");
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
@@ -63,6 +65,30 @@ export const OrdersToDoChef = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
+  //!---------------------traer canticadad de cada orden ----
+  useEffect(() => {
+    const q = query(collection(db, "orders"));
+    return onSnapshot(q, (snapshot) => {
+      setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const filterOrders = () => {
+    const arrayOfOrdersByStatus = ordersStatus.map((elem) =>
+      allOrders.filter((doc) => doc.order_status === elem)
+    );
+    return arrayOfOrdersByStatus.map((elem) => elem.length);
+  };
+  const QuantityForTtitle = (elem) => {
+    const arrayOfOrdersByStatus = allOrders.filter(
+      (doc) => doc.order_status === elem
+    );
+    // setQuantityByStatus(arrayOfOrdersByStatus.length);
+    return arrayOfOrdersByStatus.length;
+  };
+  const filteredOrdersQuantity = filterOrders();
+  const QuantifiedForTitle = QuantityForTtitle(selectedOrderStatus);
+
   return (
     <>
       <Search onChange={"algo"} placeholder={"Search N° Order"}></Search>
@@ -78,11 +104,15 @@ export const OrdersToDoChef = () => {
               onClick={() => {
                 handleClick(cat);
               }}
+              filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
           );
         })}
       </div>
-      <Title title="Orders To Do" quantity={orders.length} />
+      <Title
+        title={`Orders ${selectedOrderStatus}`}
+        quantity={QuantifiedForTitle}
+      />
       <div>
         {orders.map((order) => (
           <OrderCardFormat key={order.id} orderData={order} />
