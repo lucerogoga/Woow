@@ -52,7 +52,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
   const handleOrder = () => {
-    setState("flex");
     setIsCartEmpty(false);
     setIsInfoEmpty(false);
 
@@ -61,6 +60,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     } else if (clientName === "" || tableNumber === "") {
       return setIsInfoEmpty(true);
     } else {
+      setState("flex");
       setOrderNumber(orderNumber + 1);
       createOrder(
         user.currentUser,

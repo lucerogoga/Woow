@@ -33,10 +33,8 @@ export default function Success({ estado, loading }) {
         height: "65vh",
       }}
     >
-      <Box sx={{ m: 1, position: "relative" }}>
-        <Fab aria-label="save" sx={buttonSx}>
-          {success ? <CheckIcon /> : null}
-        </Fab>
+      <Box sx={{ l: 1, position: "relative" }}>
+        <Fab sx={buttonSx}>{success ? <CheckIcon /> : null}</Fab>
         {loading && (
           <CircularProgress
             size={68}
