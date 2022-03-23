@@ -6,7 +6,7 @@ import CheckIcon from "@mui/icons-material/Check";
 
 export default function Success({ estado, loading }) {
   const [success, setSuccess] = useState(false);
-  console.log(loading);
+
   const buttonSx = {
     ...(success && {
       bgcolor: "#ff9aa3",
