@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import ButtonFilter from "../../Components/ButtonFilter";
 import ProductCard from "../../Components/ProductCard";
 import ActionButton from "../../Components/ActionButton";
 import ModalProducts from "../../Components/ModalProducts";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
+import "../../Assets/AdminProducts.css";
 
 import {
   getProducts,
@@ -90,25 +90,27 @@ const AdminProducts = () => {
         onClose={onClose}
         productToEdit={productToEdit}
       />
-      <div className="products-container" style={{ height: "58vh" }}>
-        {products.map((product) => {
-          return (
-            <ProductCard
-              path={pathname}
-              product={product}
-              key={product.id}
-              isOpen={() => handleOpen(product)}
-              //productSelectedToEdit={() => setProduct(product)}
-            />
-          );
-        })}
-      </div>
-      <div className="large-button--content" onClick={handleOpen}>
-        <ActionButton
-          title={"Add Product"}
-          className={"button--pink"}
-          //   onClick={openModal}
-        />
+      <div className="container--reverse">
+        <div className="products-container vh">
+          {products.map((product) => {
+            return (
+              <ProductCard
+                path={pathname}
+                product={product}
+                key={product.id}
+                isOpen={() => handleOpen(product)}
+                //productSelectedToEdit={() => setProduct(product)}
+              />
+            );
+          })}
+        </div>
+        <div className="large-button--content" onClick={() => handleOpen()}>
+          <ActionButton
+            title={"Add Product"}
+            className={"button--pink"}
+            //   onClick={openModal}
+          />
+        </div>
       </div>
     </>
   );

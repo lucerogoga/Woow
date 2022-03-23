@@ -1,0 +1,6 @@
+@media (min-width: 900px) {
+  .container--reverse {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
