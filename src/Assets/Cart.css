@@ -50,3 +50,6 @@
   height: inherit;
   overflow-x: scroll;
 }
+.success-container {
+  /* display: none; */
+}
