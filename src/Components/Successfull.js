@@ -30,7 +30,7 @@ export default function Success({ estado, loading }) {
         display: estado,
         alignItems: "center",
         justifyContent: "center",
-        height: "50vh",
+        height: "65vh",
       }}
     >
       <Box sx={{ m: 1, position: "relative" }}>
