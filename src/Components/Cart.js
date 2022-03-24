@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCart } from "../Components/Context/CartContext";
 import ProductAddedCart from "./ProductAddedCart";
 import Title from "./Title";
 import ActionButton from "../Components/ActionButton";
-import ControlledOpenSelect from "./SelectTable";
 import { createOrder, getUser } from "../Services/FirestoreServices";
 import Error from "./Error";
 import { useAuth } from "./Context/AuthContext";
 import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
 import formatNum from "format-num";
-// ! ----
-import {
-  onSnapshot,
-  collection,
-  query,
-  where,
-  orderBy,
-  orderRef,
-  documentSnapshots,
-} from "firebase/firestore";
+import Success from "./Successfull";
+import { onSnapshot, collection } from "firebase/firestore";
+
 import { db } from "../Config/initialize";
 
 const Cart = ({ cantEdit, handleGoCart }) => {
@@ -29,14 +21,14 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
   const [userName, setUserName] = useState("");
-  const [closeX, setCloseX] = useState(false);
+
+  const [load, setLoad] = useState(true);
+  const [state, setState] = useState("none");
 
   const [isClean, setIsClean] = useState(false);
 
   const { cart, setCart } = useCart();
   const { user } = useAuth();
-
-  // ! --------
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   useEffect(() => {
@@ -45,16 +37,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
       setUserName(user_name);
     }
     settingUserName();
-  }, []);
-
-  // ! aqui
-  // useEffect(() => {
-  //   async function settingUserName() {
-  //     const { user_name } = await getUser(user.currentUser);
-  //     setUserName(user_name);
-  //   }
-  //   settingUserName();
-  // }, []);
+  }, [user]);
 
   useEffect(() => {
     const orderRef = collection(db, "orders");
@@ -64,19 +47,20 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     });
   }, [orderCorrelative]);
 
-  // ! -------------------------------
-
+  // ! -------------------------------Sum of costs
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
   const handleOrder = () => {
     setIsCartEmpty(false);
     setIsInfoEmpty(false);
+
     if (cart.length === 0) {
       return setIsCartEmpty(true);
     } else if (clientName === "" || tableNumber === "") {
       return setIsInfoEmpty(true);
     } else {
+      setState("flex");
       setOrderNumber(orderNumber + 1);
       createOrder(
         user.currentUser,
@@ -86,12 +70,14 @@ const Cart = ({ cantEdit, handleGoCart }) => {
         "Pending",
         cart,
         orderCorrelative
-      );
-      // createOrder(user.currentUser, clientName, tableNumber, "Pending", cart);
+      ).then(() => {
+        setLoad(false);
+      });
       setCart([]);
       setIsClean(true);
     }
   };
+
   const handleChange = (nameClient) => {
     setClientName(nameClient);
   };
@@ -99,6 +85,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const handleChangeTable = (table) => {
     setTableNumber(table);
   };
+
   return (
     <>
       <div className="cart-content">
@@ -110,7 +97,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             cleanInfo={isClean} //empieza en false
           />
         </div>
-        {/* <div className="client-err-container"> */}
         {isInfoEmpty && (
           <Error
             message={"Fields must be filled"}
@@ -123,11 +109,11 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             onClose={(e) => setIsCartEmpty(false)}
           />
         )}
-        {/* </div> */}
+
         <div className="cart-product--content">
-          {/* </div> */}
           <div className="cart-product--productContainer">
-            <div></div>
+            <Success estado={state} loading={load} />
+
             {cart.map((cartProduct) => (
               <ProductAddedCart
                 cantEdit={cantEdit}
@@ -139,7 +125,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
           <div className="footer-content">
             <div className="total-price">
               <h3>Total Cost</h3>
-              {/* <h3 className="price-total-cost">$ {"prueba"}</h3> */}
               <h3 className="total-price__price">
                 {"$ " +
                   formatNum(itemsPrice, {
@@ -147,7 +132,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
                     maxFraction: 2,
                   })}
               </h3>
-              {/* <h3 className="total-price__price">$ {itemsPrice}</h3> */}
             </div>
             <div className="large-button--content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
@@ -164,5 +148,5 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     </>
   );
 };
-// handleGoCart
+
 export default Cart;

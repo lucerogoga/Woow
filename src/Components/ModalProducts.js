@@ -52,12 +52,29 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
 
-  console.log(productToEdit.product_name);
+  console.log(productToEdit);
+  const cleanForm = () => {
+    setCategoryId("");
+    setProductName("");
+    setProductDescription("");
+    setProductCost("");
+    setProductStock("");
+    setProductOption(null);
+    setProductPhoto("");
+  };
 
   useEffect(() => {
     if (productToEdit) {
+      setCategoryId(productToEdit.cat_id);
       setProductName(productToEdit.product_name);
+      setProductDescription(productToEdit.product_description);
+      setProductCost(productToEdit.product_cost);
+      setProductStock(productToEdit.product_stock);
+      setProductOption(null);
+      setProductPhoto(productToEdit.product_photo[0]);
     }
+
+    return () => cleanForm();
   }, [productToEdit]);
 
   const [loading, setLoading] = useState(false);
@@ -85,6 +102,16 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
         setLoading(false);
       });
     clear();
+  };
+
+  const editProduct = async () => {};
+
+  const handleSubmit = async (e) => {
+    if (productToEdit) {
+      editProduct();
+    } else {
+      createProduct();
+    }
   };
 
   const onChange = (e) => {
@@ -176,7 +203,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
               <TextField
                 fullWidth
                 disabled
-                //label="Proto"
                 label={productPhoto.name}
                 InputProps={{
                   endAdornment: (
@@ -199,13 +225,15 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                     </InputAdornment>
                   ),
                 }}
+                placeholder="change image"
                 variant="outlined"
                 autoComplete="off"
                 onChange={(e) => setProductPhoto(e.target.value)}
               />
-              <div className="large-button--content" onClick={createProduct}>
+              <img src={productPhoto} alt={"phoooto"} width="100px" />
+              <div className="large-button--content" onClick={handleSubmit}>
                 <ActionButton
-                  title={"Create Product"}
+                  title={productToEdit ? "Update Product" : "Create Product"}
                   className={"button--pink"}
                 />
               </div>

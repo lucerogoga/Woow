@@ -7,7 +7,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
 // import { useRol } from "./Context/RolContex";
-
+import ActionButton from "./ActionButton";
 export const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
@@ -65,6 +65,7 @@ export const Login = () => {
         <button onClick={handleSubmit} id="btnLogin" className="login--submit">
           Login
         </button>
+
         {errorMessage && (
           <div className="error"> {<Error message={errorMessage} />} </div>
         )}

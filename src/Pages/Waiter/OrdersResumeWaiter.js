@@ -72,7 +72,7 @@ const OrdersResumeWaiter = () => {
     return arrayOfOrdersByStatus.length;
   };
   const filteredOrdersQuantity = filterOrders();
-  const QuantifiedForTtitle = QuantityForTtitle(selectedOrderStatus);
+  const QuantifiedForTitle = QuantityForTtitle(selectedOrderStatus);
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
@@ -98,7 +98,7 @@ const OrdersResumeWaiter = () => {
       </div>
       <Title
         title={`Orders ${selectedOrderStatus}`}
-        quantity={QuantifiedForTtitle}
+        quantity={QuantifiedForTitle}
       />
 
       <div>

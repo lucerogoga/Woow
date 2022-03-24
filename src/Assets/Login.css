@@ -37,8 +37,8 @@ body {
 }
 
 .login--logo {
-  width: 70%;
-  margin-bottom: 50px;
+  width: 80%;
+  margin-bottom: 60px;
   /* transform: rotate(333deg); */
 }
 
@@ -59,10 +59,10 @@ body {
   margin-bottom: 0.5rem;
   border-radius: 2rem;
   border: none;
-  height: 2rem;
-  font-size: 0.9em;
+  height: 4rem;
+  font-size: 1em;
   padding: 1.5rem;
-  width: 80%;
+  width: 60%;
 }
 
 .login--input::placeholder {
@@ -73,11 +73,11 @@ body {
   margin-bottom: 0.5rem;
   border-radius: 2rem;
   border: none;
-  height: 2rem;
-  font-size: 0.8em;
+  height: 4rem;
+  font-size: 1em;
   padding: 1.5rem;
-  width: 80%;
-  background-color: #ff9aa3;
+  width: 60%;
+  background-color: #ffa4ac;
   color: #fff;
   transition: all 0.5s ease;
   cursor: pointer;
@@ -95,11 +95,10 @@ body {
   .login {
     background-image: url("./login-bg-desktop.png");
     align-items: end;
-    padding-right: 5%;
+    padding-right: 10%;
   }
   .login--logo {
-    width: 25%;
-    margin-right: 10%;
+    width: 30%;
   }
   .login--form {
     width: 50%;
