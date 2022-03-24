@@ -29,23 +29,21 @@ const BoxCart = ({ onClose }) => {
 
 const SideBarCart = ({ isOpen, onClose }) => {
   return (
-    <div>
-      <>
-        <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
-          <Box
-            sx={{
-              width: 500,
-              height: "100vh",
-              padding: "1rem",
-              overflow: "hidden",
-              paddingBottom: "2rem",
-            }}
-          >
-            <BoxCart onClose={onClose} />
-          </Box>
-        </Drawer>
-      </>
-    </div>
+    <>
+      <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
+        <Box
+          sx={{
+            width: 500,
+            height: "100vh",
+            padding: "1rem",
+            overflow: "hidden",
+            paddingBottom: "2rem",
+          }}
+        >
+          <BoxCart onClose={onClose} />
+        </Box>
+      </Drawer>
+    </>
   );
 };
 export default SideBarCart;

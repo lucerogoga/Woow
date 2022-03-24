@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useCart } from "../../Components/Context/CartContext";
-import ProductAddedCart from "../../Components/ProductAddedCart";
-import Title from "../../Components/Title";
-import ActionButton from "../../Components/ActionButton";
-import { createOrder, getUser } from "../../Services/FirestoreServices";
-import Error from "../../Components/Error";
 import { useAuth } from "../../Components/Context/AuthContext";
+
+import Title from "../../Components/Title";
+import ProductAddedCart from "../../Components/ProductAddedCart";
 import InputInfoClient from "../../Components/InputInfoClient";
-import "../../Assets/OrderCart.css";
-import formatNum from "format-num";
+import ActionButton from "../../Components/ActionButton";
+import Error from "../../Components/Error";
 import Success from "../../Components/Successfull";
-import { onSnapshot, collection } from "firebase/firestore";
+
+import formatNum from "format-num";
+
+import "../../Assets/OrderCart.css";
 
 import { db } from "../../Config/initialize";
-// import { db } from "../Config/initialize";
+import { onSnapshot, collection } from "firebase/firestore";
+import { createOrder, getUser } from "../../Services/FirestoreServices";
 
 const OrderCart = ({ cantEdit, handleGoCart }) => {
   const [clientName, setClientName] = useState("");
@@ -22,15 +25,16 @@ const OrderCart = ({ cantEdit, handleGoCart }) => {
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
   const [userName, setUserName] = useState("");
-
+  //--------states for success message
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
 
   const [isClean, setIsClean] = useState(false);
 
+  const [orderCorrelative, setOrderCorrelative] = useState(0);
+
   const { cart, setCart } = useCart();
   const { user } = useAuth();
-  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   useEffect(() => {
     async function settingUserName() {

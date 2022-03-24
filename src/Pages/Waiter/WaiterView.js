@@ -44,16 +44,14 @@ export const WaiterView = () => {
         currentPath={pathname}
         onClickLogout={handleLogout}
       />
-      <div>
-        <SideBarCart isOpen={openCart} onClose={handleSidebarCartClose} />
-        <SideBarWaiter
-          isOpen={open}
-          onClose={handleSidebarClose}
-          onClickLogout={handleLogout}
-        />
-        <div className="content">
-          <Outlet />
-        </div>
+      <SideBarCart isOpen={openCart} onClose={handleSidebarCartClose} />
+      <SideBarWaiter
+        isOpen={open}
+        onClose={handleSidebarClose}
+        onClickLogout={handleLogout}
+      />
+      <div className="content">
+        <Outlet />
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 // Login component
 import "../Assets/Login.css";
+
 import logo from "../Assets/icons/logo-rotate.svg";
 import Error from "./Error";
 import React, { useState } from "react";
@@ -47,28 +48,34 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <img alt="logoWoow" className="login--logo" src={logo} />
-      <div className="login--form ">
-        <input
-          id="email"
-          className="login--input"
-          placeholder="User email"
-          onChange={(ev) => setLoginEmail(ev.target.value)}
-        ></input>
-        <input
-          id="password"
-          type="password"
-          className="login--input"
-          placeholder="User password"
-          onChange={(ev) => setLoginPassword(ev.target.value)}
-        ></input>
-        <button onClick={handleSubmit} id="btnLogin" className="login--submit">
-          Login
-        </button>
+      <div className="login__container">
+        <img alt="logoWoow" className="login--logo" src={logo} />
+        <div className="login--form ">
+          <input
+            id="email"
+            className="login--input"
+            placeholder="User email"
+            onChange={(ev) => setLoginEmail(ev.target.value)}
+          ></input>
+          <input
+            id="password"
+            type="password"
+            className="login--input"
+            placeholder="User password"
+            onChange={(ev) => setLoginPassword(ev.target.value)}
+          ></input>
+          <button
+            onClick={handleSubmit}
+            id="btnLogin"
+            className="login--submit"
+          >
+            Login
+          </button>
 
-        {errorMessage && (
-          <div className="error"> {<Error message={errorMessage} />} </div>
-        )}
+          {errorMessage && (
+            <div className="error"> {<Error message={errorMessage} />} </div>
+          )}
+        </div>
       </div>
     </div>
   );
