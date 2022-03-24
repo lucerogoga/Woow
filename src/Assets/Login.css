@@ -93,7 +93,7 @@ body {
   background-color: #fecc68;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 900px) {
   .login {
     background-image: url("./login-bg-desktop.png");
     justify-content: flex-end;
