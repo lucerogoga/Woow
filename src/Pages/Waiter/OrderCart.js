@@ -142,7 +142,7 @@ const OrderCart = ({ cantEdit }) => {
                 </div>
                 <div className="info-order__item">
                   <h3>Products</h3>
-                  <p>3</p>
+                  <p>{qtyItems}</p>
                 </div>
               </div>
               <div className="total-cost__container">
