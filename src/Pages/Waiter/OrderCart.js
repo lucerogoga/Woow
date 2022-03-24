@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useCart } from "../Components/Context/CartContext";
-import ProductAddedCart from "./ProductAddedCart";
-import Title from "./Title";
-import ActionButton from "../Components/ActionButton";
-import { createOrder, getUser } from "../Services/FirestoreServices";
-import Error from "./Error";
-import { useAuth } from "./Context/AuthContext";
-import InputInfoClient from "./InputInfoClient";
-import "../Assets/Cart.css";
+import { useCart } from "../../Components/Context/CartContext";
+import ProductAddedCart from "../../Components/ProductAddedCart";
+import Title from "../../Components/Title";
+import ActionButton from "../../Components/ActionButton";
+import { createOrder, getUser } from "../../Services/FirestoreServices";
+import Error from "../../Components/Error";
+import { useAuth } from "../../Components/Context/AuthContext";
+import InputInfoClient from "../../Components/InputInfoClient";
+import "../../Assets/OrderCart.css";
 import formatNum from "format-num";
-import Success from "./Successfull";
+import Success from "../../Components/Successfull";
 import { onSnapshot, collection } from "firebase/firestore";
 
-import { db } from "../Config/initialize";
+import { db } from "../../Config/initialize";
+// import { db } from "../Config/initialize";
 
-const Cart = ({ cantEdit, handleGoCart }) => {
+const OrderCart = ({ cantEdit, handleGoCart }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
@@ -89,7 +90,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   return (
     <>
       <div className="cart-content">
-        <Title title="Order" quantity={qtyItems} />
+        <Title title="My Cart (Products)" quantity={qtyItems} />
         <div className="client-info--content">
           <InputInfoClient
             onChange={handleChange}
@@ -110,8 +111,8 @@ const Cart = ({ cantEdit, handleGoCart }) => {
           />
         )}
 
-        <div className="cart-product--content">
-          <div className="cart-product--productContainer">
+        <div className="cart-product--content order-cart">
+          <div className="cart-product--productContainer order-cart">
             <Success estado={state} loading={load} />
 
             {cart.map((cartProduct) => (
@@ -136,12 +137,12 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             <div className="large-button--content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
             </div>
-            <div className="large-button--content" onClick={handleGoCart}>
+            {/* <div className="large-button--content" onClick={handleGoCart}>
               <ActionButton
-                title="Check my Cart"
+                title="Esto no debería estar aquí"
                 className={"button--white"}
               ></ActionButton>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -149,4 +150,4 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   );
 };
 
-export default Cart;
+export default OrderCart;
