@@ -62,6 +62,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  padding: 0 1rem;
 }
 
 .button-options {
@@ -273,7 +274,8 @@
   display: flex;
   position: absolute;
   bottom: -25px;
-  height: 80%;
+  height: 85%;
+  width: 100%;
 }
 
 .card__header {
@@ -335,7 +337,7 @@
     min-width: 850px;
     height: 100%;
     max-width: 950px;
-    margin: 1rem 0;
+    margin-top: 2rem;
   }
 
   .product-detail-container {
@@ -359,6 +361,7 @@
     height: calc(100% - 70px);
     position: relative;
     bottom: 0;
+    padding: 1rem 0;
   }
 
   .text-area-observations {

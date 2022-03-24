@@ -7,7 +7,7 @@ import { createOrder, getUser } from "../../Services/FirestoreServices";
 import Error from "../../Components/Error";
 import { useAuth } from "../../Components/Context/AuthContext";
 import InputInfoClient from "../../Components/InputInfoClient";
-import "../../Assets/OrderCart.css";
+import "../../Assets/Cart.css";
 import formatNum from "format-num";
 import Success from "../../Components/Successfull";
 import { onSnapshot, collection } from "firebase/firestore";

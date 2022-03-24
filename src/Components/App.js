@@ -127,8 +127,8 @@ function App() {
             {/* ANIDADO */}
             <Route path="" element={<TakeOrderWaiter />} />
             <Route path="orders-resume" element={<OrdersResumeWaiter />} />
-            {/* <Route path="order-cart" element={<Cart />} /> */}
-            <Route path="order-cart" element={<OrderCart />} />
+            <Route path="order-cart" element={<Cart />} />
+            {/* <Route path="order-cart" element={<OrderCart />} /> */}
           </Route>
 
           <Route
