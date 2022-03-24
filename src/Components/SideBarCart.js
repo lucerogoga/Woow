@@ -8,10 +8,9 @@ import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import * as React from "react";
 
-const Caja = ({ onClose }) => {
+const BoxCart = ({ onClose }) => {
   let navigate = useNavigate();
   const handleGoCart = () => {
-    console.log("handle??");
     onClose();
     navigate("../waiter/order-cart");
   };
@@ -31,7 +30,7 @@ const Caja = ({ onClose }) => {
 const SideBarCart = ({ isOpen, onClose }) => {
   return (
     <div>
-      <React.Fragment>
+      <>
         <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
           <Box
             sx={{
@@ -42,10 +41,10 @@ const SideBarCart = ({ isOpen, onClose }) => {
               paddingBottom: "2rem",
             }}
           >
-            <Caja onClose={onClose} />
+            <BoxCart onClose={onClose} />
           </Box>
         </Drawer>
-      </React.Fragment>
+      </>
     </div>
   );
 };
