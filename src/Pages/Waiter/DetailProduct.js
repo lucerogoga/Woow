@@ -127,10 +127,13 @@ const DetailProduct = () => {
         {/* Div tarjeta central para el desktop */}
         <div className="info-product--main-container">
           {/* Div izquierdo para el texto en vista desktop */}
-          <div
-            className="info-product--left-container"
-            style={{ backgroundImage: `url(${product.product_photo[0]})` }}
-          ></div>
+          <div className="info-product__left-container">
+            <img
+              alt={product.product_name}
+              className="info-product__photo"
+              src={product.product_photo[0]}
+            />
+          </div>
           {/* Div derecho para el texto en vista desktop */}
           <div className="info-product--right-container">
             <div className="product-detail-container">
@@ -139,19 +142,40 @@ const DetailProduct = () => {
                 {/* Información superior del producto */}
                 <div className="info-product-subcontainer">
                   <h1 className="product--name">{product.product_name}</h1>
-                  <h2 className="product--description">
+                  <p className="product__description">
                     {product.product_description}
-                  </h2>
+                  </p>
                   <h2 className="product--cost">
-                    Unit Price: $ {product.product_cost[cost]}
+                    {"Unit Price: $ " +
+                      formatNum(product.product_cost[cost], {
+                        minFraction: 2,
+                        maxFraction: 2,
+                      })}
                   </h2>
                 </div>
 
                 {/* white container */}
               </div>
-              <div className="white-container">
+              <div className="card__white-container">
                 <div>
-                  <p className="target--title">Choice Size</p>
+                  <div className="card__header">
+                    <h1 className="card__paragrap">{product.product_name}</h1>
+                    <div className="card__cost--container">
+                      <h1 className="card__cost--text">Unit Price:</h1>
+                      <h1 className="card__cost--number">
+                        {"$ " +
+                          formatNum(product.product_cost[cost], {
+                            minFraction: 2,
+                            maxFraction: 2,
+                          })}
+                      </h1>
+                    </div>
+
+                    <p className="product__description--desktop">
+                      {product.product_description}
+                    </p>
+                  </div>
+                  <p className="card__title">Choice Size</p>
                   <div className="products-detail-container">
                     {product.product_options.map((op, i) => {
                       return (
@@ -170,7 +194,7 @@ const DetailProduct = () => {
                   </div>
                 </div>
                 <div className="observation-content">
-                  <p className="target--scnd-title">Observations</p>
+                  <p className="card__title--scnd">Observations</p>
                   <textarea
                     className="text-area-observations"
                     type="text"
@@ -181,7 +205,11 @@ const DetailProduct = () => {
                 <div className="total-price">
                   <h3>Total Cost</h3>
                   <h3 className="price-total-cost">
-                    $ {product.product_cost[cost] * count}
+                    {"$ " +
+                      formatNum(product.product_cost[cost] * count, {
+                        minFraction: 2,
+                        maxFraction: 2,
+                      })}
                   </h3>
                 </div>
 
