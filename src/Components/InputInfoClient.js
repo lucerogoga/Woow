@@ -4,28 +4,26 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
+import { useCart } from "./Context/CartContext";
 
-export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
-  // const [tableNumber, setTableNumber] = useState({value : ''});
-  const [tableNumber, setTableNumber] = useState("");
-  const [clientName, setClientName] = useState("");
+export default function InputInfoClient() {
+  const { clientName, setClientName, tableNumber, setTableNumber, isClean } =
+    useCart();
 
   const handleChange = (nameClient) => {
-    onChange(nameClient);
     setClientName(nameClient);
   };
   const handleChangeTable = (tabla) => {
     console.log("ok!, tabla:", tabla);
-    setTable(tabla);
     setTableNumber(tabla);
   };
 
   useEffect(() => {
-    if (cleanInfo) {
+    if (isClean) {
       handleChangeTable("");
       handleChange("");
     }
-  }, [cleanInfo]);
+  }, [isClean]);
 
   return (
     <>
@@ -38,7 +36,6 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
         required
         onChange={(e) => handleChange(e.target.value)}
         sx={{ minWidth: 160, maxWidth: 300 }}
-        // size="small"
       />
       <FormControl sx={{ minWidth: 160, maxWidth: 400 }}>
         <InputLabel id="demo-simple-select-label">Nº Table</InputLabel>
@@ -48,7 +45,7 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
           value={tableNumber}
           label="Nº Table"
           required
-          sizeSmall
+          // sizeSmall
           onChange={(e) => handleChangeTable(e.target.value)}
         >
           <MenuItem value={"Tabla 1"}>Tabla 1</MenuItem>
