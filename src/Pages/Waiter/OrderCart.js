@@ -17,6 +17,7 @@ import "../../Assets/OrderCart.css";
 import { db } from "../../Config/initialize";
 import { onSnapshot, collection } from "firebase/firestore";
 import { createOrder, getUser } from "../../Services/FirestoreServices";
+import TrashButton from "../../Components/Trash";
 
 const OrderCart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
@@ -102,6 +103,9 @@ const OrderCart = ({ cantEdit }) => {
             setTable={handleChangeTable}
             cleanInfo={isClean} //empieza en false
           />
+          <div width={30} onClick={() => setCart([])}>
+            <TrashButton />
+          </div>
         </div>
         {isInfoEmpty && (
           <Error

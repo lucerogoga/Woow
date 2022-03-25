@@ -10,9 +10,11 @@ import InputInfoClient from "./InputInfoClient";
 import "../Assets/Cart.css";
 import formatNum from "format-num";
 import Success from "./Successfull";
+
 import { onSnapshot, collection } from "firebase/firestore";
 
 import { db } from "../Config/initialize";
+import TrashButton from "./Trash";
 
 const Cart = ({ cantEdit, handleGoCart }) => {
   const [clientName, setClientName] = useState("");
@@ -96,6 +98,9 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             setTable={handleChangeTable}
             cleanInfo={isClean} //empieza en false
           />
+          <div width={30} onClick={() => setCart([])}>
+            <TrashButton />
+          </div>
         </div>
         {isInfoEmpty && (
           <Error

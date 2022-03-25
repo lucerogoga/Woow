@@ -9,12 +9,8 @@ import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
 
 // import { useRol } from "./Context/RolContex";
-<<<<<<< HEAD
 import ActionButton from "./ActionButton";
 import { validateEmail } from "../helpers/loginFuntions";
-=======
-
->>>>>>> dev-lucero
 export const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
@@ -31,9 +27,9 @@ export const Login = () => {
   };
   console.log("fuera de handleSubmit, ", displayError);
 
-  useEffect(() => {
-    // setDisplayError(false);
-  }, [displayError]);
+  // useEffect(() => {
+  //   // setDisplayError(false);
+  // }, [displayError]);
 
   const handleSubmit = async (e) => {
     // limpia
@@ -128,27 +124,21 @@ export const Login = () => {
             Login
           </button>
 
-<<<<<<< HEAD
-        {/* {displayError && ( */}
-        <div className="error">
-          {
-            <Error
-              message={errorMessage}
-              onClose={handleDisplayError}
-              isVisible={displayError}
-            />
-          }
-        </div>
-        {/* // )} */}
-        {/* {errorMessage && (
+          {/* {displayError && ( */}
+          <div className="error">
+            {
+              <Error
+                message={errorMessage}
+                onClose={handleDisplayError}
+                isVisible={displayError}
+              />
+            }
+          </div>
+          {/* // )} */}
+          {/* {errorMessage && (
           <div className="error"> {<Error message={errorMessage} onClose={() => setDisplayError(false)}/>} </div>
         )} */}
-=======
-          {errorMessage && (
-            <div className="error"> {<Error message={errorMessage} />} </div>
-          )}
         </div>
->>>>>>> dev-lucero
       </div>
     </div>
   );
