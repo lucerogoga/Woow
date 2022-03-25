@@ -5,24 +5,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 
-// const tables = [
-//   {
-//     value: "Table 1",
-//   },
-//   {
-//     value: "Table 2",
-//   },
-//   {
-//     value: "Table 3",
-//   },
-//   {
-//     value: "Table 4",
-//   },
-//   {
-//     value: "Table 5",
-//   },
-// ];
-
 export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
   // const [tableNumber, setTableNumber] = useState({value : ''});
   const [tableNumber, setTableNumber] = useState("");
@@ -55,23 +37,11 @@ export default function InputInfoClient({ onChange, setTable, cleanInfo }) {
         value={clientName}
         required
         onChange={(e) => handleChange(e.target.value)}
-        sx={{ minWidth: 250, maxWidth: 300 }}
+        sx={{ minWidth: 160, maxWidth: 300 }}
         // size="small"
       />
-      <FormControl sx={{ minWidth: 200, maxWidth: 400 }}>
+      <FormControl sx={{ minWidth: 160, maxWidth: 400 }}>
         <InputLabel id="demo-simple-select-label">Nº Table</InputLabel>
-        {/* <TextField
-          id="outlined-basic2"
-          label="N° Table"
-          variant="outlined"
-          autoComplete="off"
-          value={tableNumber}
-          // value={clientName}
-          required
-          sx={{ minWidth: 200, maxWidth: 300 }}
-          size="small"
-          select
-        > */}
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
