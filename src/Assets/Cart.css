@@ -39,17 +39,23 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-bottom: 40px;
 }
 
 .cart-product--productContainer {
   height: inherit;
   overflow-x: scroll;
 }
-.success-container {
-  /* display: none; */
+
+@media (min-width: 900px) {
+  .cart-product--content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 40px;
+  }
 }

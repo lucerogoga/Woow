@@ -1,6 +1,13 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from "@testing-library/react";
+import { renderHook } from "@testing-library/react-hooks";
 import Login from "../../Components/Login";
 import {
   AuthProvider,
@@ -35,39 +42,21 @@ describe("Login", () => {
 
     expect(screen.getByDisplayValue("waiter@gamail.com")).toBeInTheDocument();
     expect(screen.getByDisplayValue("123456")).toBeInTheDocument();
-
-    // -----------
-    // const wrapper = render(
-    //   <AuthProvider>
-    //     <Login />
-    //   </AuthProvider>
-    // )
-    
-    // const input = wrapper.find('input')
-    
-    // input.simulate('change')
-    // -----------
-
-
-      // expect(wrapper.find('input'))
-      
-    //   screen.getByText(title);
-    // const text = screen.getByTestId("title-text");
-    //   expect(view.container).toHaveTextContent();
-    //   expect(view.container).toHaveTextContent();
   });
 
-  test("render button Login from Login Component", () => {
+  test("click button Login from Login Component", async () => {
     const { getByText } = render(<Login />);
+
+    const handleSubmit = jest.fn();
 
     const button = screen.getByText("Login");
 
     fireEvent.click(button);
-
-    // expect(button).toBeCalled('handleSubmit');
+    await waitFor(() => {
+      expect(handleSubmit).toHaveBeenCalledTimes(0);
+    });
   });
 });
-
 
 // test('component handles button click', () => {
 //     const {getByText} = render(
@@ -77,3 +66,22 @@ describe("Login", () => {
 //     fireEvent.click(button)
 //     expect...?
 //   }
+
+// -----------
+// const wrapper = render(
+//   <AuthProvider>
+//     <Login />
+//   </AuthProvider>
+// )
+
+// const input = wrapper.find('input')
+
+// input.simulate('change')
+// -----------
+
+// expect(wrapper.find('input'))
+
+//   screen.getByText(title);
+// const text = screen.getByTestId("title-text");
+//   expect(view.container).toHaveTextContent();
+//   expect(view.container).toHaveTextContent();

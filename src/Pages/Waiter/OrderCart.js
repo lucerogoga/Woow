@@ -1,36 +1,41 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+
 import { useCart } from "../../Components/Context/CartContext";
-import ProductAddedCart from "../../Components/ProductAddedCart";
-import Title from "../../Components/Title";
-import ActionButton from "../../Components/ActionButton";
-import { createOrder, getUser } from "../../Services/FirestoreServices";
-import Error from "../../Components/Error";
 import { useAuth } from "../../Components/Context/AuthContext";
+
+import Title from "../../Components/Title";
+import ProductAddedCart from "../../Components/ProductAddedCart";
 import InputInfoClient from "../../Components/InputInfoClient";
-import "../../Assets/Cart.css";
+import ActionButton from "../../Components/ActionButton";
+import Error from "../../Components/Error";
+// import "../../Assets/Cart.css";
 import formatNum from "format-num";
 import Success from "../../Components/Successfull";
-import { onSnapshot, collection } from "firebase/firestore";
+
+import "../../Assets/OrderCart.css";
 
 import { db } from "../../Config/initialize";
-// import { db } from "../Config/initialize";
+import { onSnapshot, collection } from "firebase/firestore";
+import { createOrder, getUser } from "../../Services/FirestoreServices";
 
-const OrderCart = ({ cantEdit, handleGoCart }) => {
+const OrderCart = ({ cantEdit }) => {
   const [clientName, setClientName] = useState("");
   const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
   const [userName, setUserName] = useState("");
-
+  //--------states for success message
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
-
+  //---------clean inputs
   const [isClean, setIsClean] = useState(false);
+  //------------set de Number od the order for a better Secuency of orders
+  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
+  //we call the contex of our cart
   const { cart, setCart } = useCart();
   const { user } = useAuth();
-  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   useEffect(() => {
     async function settingUserName() {
@@ -42,14 +47,14 @@ const OrderCart = ({ cantEdit, handleGoCart }) => {
 
   useEffect(() => {
     const orderRef = collection(db, "orders");
-
     onSnapshot(orderRef, (snapshot) => {
       setOrderCorrelative(snapshot.size + 1);
     });
   }, [orderCorrelative]);
 
-  // ! -------------------------------Sum of costs
+  //-------------------------------Sum of costs of all products
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
+  //-------------------------------Sum of products in the cart
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
   const handleOrder = () => {
@@ -123,26 +128,37 @@ const OrderCart = ({ cantEdit, handleGoCart }) => {
               />
             ))}
           </div>
-          <div className="footer-content">
-            <div className="total-price">
-              <h3>Total Cost</h3>
-              <h3 className="total-price__price">
-                {"$ " +
-                  formatNum(itemsPrice, {
-                    minFraction: 2,
-                    maxFraction: 2,
-                  })}
-              </h3>
+          <div className="footer-content order-cart">
+            <div className="total-price order-cart">
+              <h3>Resume Order</h3>
+              <div className="info-order__container">
+                <div className="info-order__item">
+                  <h3>Client: </h3>
+                  <p>Name Client </p>
+                </div>
+                <div className="info-order__item">
+                  <h3>Table: </h3>
+                  <p>Table 1</p>
+                </div>
+                <div className="info-order__item">
+                  <h3>Products</h3>
+                  <p>{qtyItems}</p>
+                </div>
+              </div>
+              <div className="total-cost__container">
+                <h3>Total Cost</h3>
+                <h3 className="total-price__price">
+                  {"$ " +
+                    formatNum(itemsPrice, {
+                      minFraction: 2,
+                      maxFraction: 2,
+                    })}
+                </h3>
+              </div>
             </div>
             <div className="large-button--content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
             </div>
-            {/* <div className="large-button--content" onClick={handleGoCart}>
-              <ActionButton
-                title="Esto no debería estar aquí"
-                className={"button--white"}
-              ></ActionButton>
-            </div> */}
           </div>
         </div>
       </div>
