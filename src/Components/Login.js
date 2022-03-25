@@ -39,50 +39,48 @@ export const Login = () => {
     console.log("HE ENTRADO?");
     console.log("dentro de handleSubmit, ", displayError);
     // debugger;
-
-    console.log("fuera", loginEmail, loginPassword);
-    if (loginEmail.trim().length === 0 || loginPassword.trim().length === 0) {
-      setErrorMessage("Fields must be filled");
-      setDisplayError(false);
-      console.log("deberia estar vacio, con false, ", displayError);
-      setDisplayError(true);
-
-      // return;
-    } else if (!validateEmail(loginEmail)) {
-      console.log("entre!!");
-      setErrorMessage(
-        "Please enter your email addres in format yourname@example.com"
-      );
-      setDisplayError(false);
-      setDisplayError(true);
-      // return;
-    } else {
-      try {
-        const user = await login(loginEmail, loginPassword);
-        const { user_rol: role } = await getUser(user.user.uid);
-        if (role === "admin") navigate("/admin");
-        else if (role === "chef") navigate("/chef");
-        else navigate("/waiter");
-      } catch (e) {
-        switch (e.message) {
-          case "Firebase: Error (auth/user-not-found).":
-            setErrorMessage("User not found.");
-            break;
-          case "Firebase: Error (auth/wrong-password).":
-            setErrorMessage("Your username and/or password do not match");
-            break;
-          case "Firebase: Error (auth/user-not-found).3":
-            setErrorMessage(e.message);
-            break;
-          default:
-            setErrorMessage("Error not recognized");
-            setErrorMessage(e.message);
-            break;
-        }
-        // setErrorMessage(e.message);
+    setTimeout(async () => {
+      console.log("fuera", loginEmail, loginPassword);
+      if (loginEmail.trim().length === 0 || loginPassword.trim().length === 0) {
+        setErrorMessage("Fields must be filled");
         setDisplayError(true);
+
+        // return;
+      } else if (!validateEmail(loginEmail)) {
+        console.log("entre!!");
+        setErrorMessage(
+          "Please enter your email addres in format yourname@example.com"
+        );
+        setDisplayError(true);
+        // return;
+      } else {
+        try {
+          const user = await login(loginEmail, loginPassword);
+          const { user_rol: role } = await getUser(user.user.uid);
+          if (role === "admin") navigate("/admin");
+          else if (role === "chef") navigate("/chef");
+          else navigate("/waiter");
+        } catch (e) {
+          switch (e.message) {
+            case "Firebase: Error (auth/user-not-found).":
+              setErrorMessage("User not found.");
+              break;
+            case "Firebase: Error (auth/wrong-password).":
+              setErrorMessage("Your username and/or password do not match");
+              break;
+            case "Firebase: Error (auth/user-not-found).3":
+              setErrorMessage(e.message);
+              break;
+            default:
+              setErrorMessage("Error not recognized");
+              setErrorMessage(e.message);
+              break;
+          }
+          // setErrorMessage(e.message);
+          setDisplayError(true);
+        }
       }
-    }
+    }, 200);
   };
 
   // ! INTENTO DE CAMBIO DE VISTAS POR ROL.
@@ -126,13 +124,11 @@ export const Login = () => {
 
           {/* {displayError && ( */}
           <div className="error">
-            {
-              <Error
-                message={errorMessage}
-                onClose={handleDisplayError}
-                isVisible={displayError}
-              />
-            }
+            <Error
+              message={errorMessage}
+              onClose={handleDisplayError}
+              isVisible={displayError}
+            />
           </div>
           {/* // )} */}
           {/* {errorMessage && (
