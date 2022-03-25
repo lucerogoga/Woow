@@ -7,29 +7,81 @@ import React, { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 import { getUser } from "../Services/FirestoreServices";
-// import { useRol } from "./Context/RolContex";
 
+// import { useRol } from "./Context/RolContex";
+import ActionButton from "./ActionButton";
+import { validateEmail } from "../helpers/loginFuntions";
 export const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  // !aqui prueba hoy!
+  const [displayError, setDisplayError] = useState(false);
   // !aqui
   const { login, user } = useAuth();
   // const { userRole } = useRol();
 
+  const handleDisplayError = () => {
+    setDisplayError(false);
+  };
+  console.log("fuera de handleSubmit, ", displayError);
+
+  // useEffect(() => {
+  //   // setDisplayError(false);
+  // }, [displayError]);
+
   const handleSubmit = async (e) => {
+    // limpia
     e.preventDefault();
     setErrorMessage("");
-    try {
-      const user = await login(loginEmail, loginPassword);
-      const { user_rol: role } = await getUser(user.user.uid);
-      if (role === "admin") navigate("/admin");
-      else if (role === "chef") navigate("/chef");
-      else navigate("/waiter");
-    } catch (e) {
-      setErrorMessage(e.message);
+    setDisplayError(false);
+    console.log("HE ENTRADO?");
+    console.log("dentro de handleSubmit, ", displayError);
+    // debugger;
+
+    console.log("fuera", loginEmail, loginPassword);
+    if (loginEmail.trim().length === 0 || loginPassword.trim().length === 0) {
+      setErrorMessage("Fields must be filled");
+      setDisplayError(false);
+      console.log("deberia estar vacio, con false, ", displayError);
+      setDisplayError(true);
+
+      // return;
+    } else if (!validateEmail(loginEmail)) {
+      console.log("entre!!");
+      setErrorMessage(
+        "Please enter your email addres in format yourname@example.com"
+      );
+      setDisplayError(false);
+      setDisplayError(true);
+      // return;
+    } else {
+      try {
+        const user = await login(loginEmail, loginPassword);
+        const { user_rol: role } = await getUser(user.user.uid);
+        if (role === "admin") navigate("/admin");
+        else if (role === "chef") navigate("/chef");
+        else navigate("/waiter");
+      } catch (e) {
+        switch (e.message) {
+          case "Firebase: Error (auth/user-not-found).":
+            setErrorMessage("User not found.");
+            break;
+          case "Firebase: Error (auth/wrong-password).":
+            setErrorMessage("Your username and/or password do not match");
+            break;
+          case "Firebase: Error (auth/user-not-found).3":
+            setErrorMessage(e.message);
+            break;
+          default:
+            setErrorMessage("Error not recognized");
+            setErrorMessage(e.message);
+            break;
+        }
+        // setErrorMessage(e.message);
+        setDisplayError(true);
+      }
     }
   };
 
@@ -72,9 +124,20 @@ export const Login = () => {
             Login
           </button>
 
-          {errorMessage && (
-            <div className="error"> {<Error message={errorMessage} />} </div>
-          )}
+          {/* {displayError && ( */}
+          <div className="error">
+            {
+              <Error
+                message={errorMessage}
+                onClose={handleDisplayError}
+                isVisible={displayError}
+              />
+            }
+          </div>
+          {/* // )} */}
+          {/* {errorMessage && (
+          <div className="error"> {<Error message={errorMessage} onClose={() => setDisplayError(false)}/>} </div>
+        )} */}
         </div>
       </div>
     </div>

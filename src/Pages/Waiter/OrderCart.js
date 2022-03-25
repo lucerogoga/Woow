@@ -8,9 +8,9 @@ import ProductAddedCart from "../../Components/ProductAddedCart";
 import InputInfoClient from "../../Components/InputInfoClient";
 import ActionButton from "../../Components/ActionButton";
 import Error from "../../Components/Error";
-import Success from "../../Components/Successfull";
-
+import "../../Assets/Cart.css";
 import formatNum from "format-num";
+import Success from "../../Components/Successfull";
 
 import "../../Assets/OrderCart.css";
 
