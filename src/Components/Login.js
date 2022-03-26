@@ -122,7 +122,6 @@ export const Login = () => {
             Login
           </button>
 
-          {/* {displayError && ( */}
           <div className="error">
             <Error
               message={errorMessage}
@@ -130,10 +129,6 @@ export const Login = () => {
               isVisible={displayError}
             />
           </div>
-          {/* // )} */}
-          {/* {errorMessage && (
-          <div className="error"> {<Error message={errorMessage} onClose={() => setDisplayError(false)}/>} </div>
-        )} */}
         </div>
       </div>
     </div>
