@@ -24,14 +24,13 @@ const OrderCardFormat = ({ orderData }) => {
   } = useAuth();
 
   const rows = createRows(orderData);
-  console.log("esta tarjetaa inicia! , ", orderData.order_timestamp_start);
-  console.log("esta tarjetaa termina! , ", orderData.order_timestamp_end);
   // Getting chef_id
   let chefId;
   !orderData.chef_name
     ? (chefId = "Not assigned")
     : (chefId = orderData.chef_name);
 
+  console.log("es posible?, ", orderData.order_status);
   // ! --------------------
 
   const handleStatus = () => {
@@ -60,21 +59,6 @@ const OrderCardFormat = ({ orderData }) => {
       // ! FINALIZA EL CRONOMETRO
     }
   };
-
-  //GETTING NAME OF CHEF FOR THE ORDER
-  // useEffect(() => {
-  //   async function settingUserName() {
-  //     const { user_name } = await getUser(currentUser);
-  //     setUserName(user_name);
-  //   }
-  //   settingUserName();
-  // }, []);
-
-  // console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
-  // console.log("ORDER TIME START", orderData.order_timestamp);
-  // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
-  // ! ------------------------------------------------------------
-  const [ayudaTime, setAyudaTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
 
   // ! ------------------------------------------------------------
   return (
@@ -105,10 +89,18 @@ const OrderCardFormat = ({ orderData }) => {
           </div>
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
-              <Time
+              {orderData.order_status !== "Canceled" && (
+                <Time
+                  start={orderData.order_timestamp_start}
+                  end={orderData.order_timestamp_end}
+                  status={orderData.order_status}
+                />
+              )}
+              {/* <Time
                 start={orderData.order_timestamp_start}
                 end={orderData.order_timestamp_end}
-              />
+                status={orderData.order_status}
+              /> */}
             </div>
           </div>
         </div>
@@ -120,7 +112,7 @@ const OrderCardFormat = ({ orderData }) => {
           <div className="order-card--buttonsContainer">
             <button
               onClick={() => handleStatus()}
-              className="order-card--button--cooking"
+              className="order-card__button"
             >
               {orderData.order_status === "Pending"
                 ? "Start Cooking"
@@ -138,13 +130,13 @@ const OrderCardFormat = ({ orderData }) => {
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Cancel Order"
-                className="order-card--button--cooking"
+                className="order-card__button"
               />
             ) : orderData.order_status === "Ready to Serve" ? (
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Deliver Order"
-                className="order-card--button--cooking"
+                className="order-card__button"
               />
             ) : null}
           </div>

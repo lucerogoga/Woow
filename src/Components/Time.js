@@ -3,26 +3,19 @@ import "../Assets/Time.css";
 import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
 import moment from "moment";
 import "moment-precise-range-plugin";
-import { MarkEmailUnreadTwoTone } from "@mui/icons-material";
 
-const Time = ({ start, end }) => {
-  // HOLAA
-  // console.log('tiempo finaliza?', end)
-  // const [time, setTime] = useState('')
+const Time = ({ start, end, status }) => {
+  // order_status: "Ready to Serve"
+  console.log("miremos el status, ", status);
   const [hoursDiff, setHoursDiff] = useState("00");
   const [minutesDiff, setMinutesDiff] = useState("00");
   const [secondsDiff, setSecondsDiff] = useState("00");
   const [duration, setDuration] = useState(moment.duration(0));
-  // if(end) { console.log('Ahora si tiene valor final! , ', end)}
-  // console.log("duration, ", duration);
-  // const b = moment("2022-03-11 15:31:15")
   useEffect(() => {
     const updateCounterDuration = () => {
       const startTime = moment(start.toDate());
       const now = moment();
       const timeDifference = now.diff(startTime, "seconds");
-      // console.log("tiempo diff,", timeDifference);
-      // _milliseconds
       setDuration(moment.duration(timeDifference, "seconds"));
     };
 
@@ -35,7 +28,6 @@ const Time = ({ start, end }) => {
       } else {
         const startTime = moment(start.toDate());
         const endTime = moment(end.toDate());
-        console.log("soy entime, ", endTime);
         timeDifference = endTime.diff(startTime, "seconds");
 
         setDuration(moment.duration(timeDifference, "seconds"));
@@ -51,12 +43,21 @@ const Time = ({ start, end }) => {
     .utc(duration.asMilliseconds())
     .format("HH:mm:ss");
 
+  // 60000 ms = 1 minute
+  // 20000 ms = 20 seconds
+  // {true && <h1>hola</h1>}
   return (
     <div className="order-cart--containertime">
       <Clock
         className={
           "order-cart--clock " +
-          (duration._milliseconds >= 60000 ? "shake" : "")
+          (duration._milliseconds >= 20000 && status !== "Ready to Serve"
+            ? "shake "
+            : "") +
+          (duration._milliseconds >= 20000 && status === "Ready to Serve"
+            ? // (duration._milliseconds >= 20000 && status === "Ready to Serve"
+              "light-on"
+            : "")
         }
         width={16}
         height={16}
@@ -64,7 +65,12 @@ const Time = ({ start, end }) => {
       <h3
         className={
           "order-cart--minutes " +
-          (duration._milliseconds >= 60000 ? "exceeds" : "")
+          (duration._milliseconds >= 20000 && status !== "Ready to Serve"
+            ? "exceeds "
+            : "") +
+          (duration._milliseconds >= 20000 && status === "Ready to Serve"
+            ? "inactive"
+            : "")
         }
       >
         {formatedTimeDiff}
