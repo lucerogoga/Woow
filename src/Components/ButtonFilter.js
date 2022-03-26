@@ -27,7 +27,7 @@ export function ButtonFilter(props) {
         onClick={onClick}
       >
         {pathname === "/waiter/orders-resume" || pathname === "/chef" ? (
-          <div className="button-order--quatity">
+          <div className="button-order--quantity">
             <h2>{filteredOrdersQuantity}</h2>
           </div>
         ) : null}
@@ -99,7 +99,7 @@ export default ButtonFilter;
 //         onClick={onClick}
 //       >
 //         {pathname === "/waiter/orders-resume" ? (
-//           <div className="button-order--quatity">
+//           <div className="button-order--quantity">
 //             <h2>{filteredOrdersQuantity}</h2>
 //           </div>
 //         ) : null}
