@@ -13,6 +13,16 @@ const CartContext = ({ children }) => {
     console.log("Mi tableNumber, ", tableNumber);
     console.log("Mi isClean, ", isClean);
   }, [tableNumber, clientName, isClean]);
+
+  useEffect(() => {
+    if (isClean) {
+      // handleChangeTable("");
+      // handleChange("");
+      setTableNumber("");
+      setClientName("");
+    }
+  }, [isClean]);
+
   return (
     <Cart.Provider
       value={{

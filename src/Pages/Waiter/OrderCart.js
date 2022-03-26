@@ -31,7 +31,15 @@ const OrderCart = ({ cantEdit }) => {
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   //we call the contex of our cart
-  const { cart, setCart, clientName, tableNumber, setIsClean } = useCart();
+  const {
+    cart,
+    setCart,
+    clientName,
+    setClientName,
+    tableNumber,
+    setTableNumber,
+    setIsClean,
+  } = useCart();
 
   const { user } = useAuth();
 
@@ -82,13 +90,19 @@ const OrderCart = ({ cantEdit }) => {
     }
   };
 
+  const cleanInputs = () => {
+    setTableNumber("");
+    setClientName("");
+    setCart([]);
+  };
+
   return (
     <>
       <div className="cart-content">
         <Title title="My Cart (Products)" quantity={qtyItems} />
         <div className="client-info--content">
           <InputInfoClient />
-          <div width={30} onClick={() => setCart([])}>
+          <div width={30} onClick={cleanInputs}>
             <TrashButton />
           </div>
         </div>

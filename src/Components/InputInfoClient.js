@@ -18,12 +18,12 @@ export default function InputInfoClient() {
     setTableNumber(tabla);
   };
 
-  useEffect(() => {
-    if (isClean) {
-      handleChangeTable("");
-      handleChange("");
-    }
-  }, [isClean]);
+  // useEffect(() => {
+  //   if (isClean) {
+  //     handleChangeTable("");
+  //     handleChange("");
+  //   }
+  // }, [isClean]);
 
   return (
     <>
