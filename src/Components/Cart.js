@@ -17,8 +17,8 @@ import { db } from "../Config/initialize";
 import TrashButton from "./Trash";
 
 const Cart = ({ cantEdit, handleGoCart }) => {
-  const [clientName, setClientName] = useState("");
-  const [tableNumber, setTableNumber] = useState("");
+  // const [clientName, setClientName] = useState("");
+  // const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
@@ -27,9 +27,19 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
 
-  const [isClean, setIsClean] = useState(false);
+  // const [isClean, setIsClean] = useState(false);
 
-  const { cart, setCart } = useCart();
+  const {
+    cart,
+    setCart,
+    clientName,
+    setClientName,
+    tableNumber,
+    setTableNumber,
+    isClean,
+    setIsClean,
+  } = useCart();
+
   const { user } = useAuth();
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
@@ -80,12 +90,10 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     }
   };
 
-  const handleChange = (nameClient) => {
-    setClientName(nameClient);
-  };
-
-  const handleChangeTable = (table) => {
-    setTableNumber(table);
+  const cleanInputs = () => {
+    setTableNumber("");
+    setClientName("");
+    setCart([]);
   };
 
   return (
@@ -93,12 +101,10 @@ const Cart = ({ cantEdit, handleGoCart }) => {
       <div className="cart-content">
         <Title title="Order" quantity={qtyItems} />
         <div className="client-info--content">
-          <InputInfoClient
-            onChange={handleChange}
-            setTable={handleChangeTable}
-            cleanInfo={isClean} //empieza en false
-          />
-          <div width={30} onClick={() => setCart([])}>
+          <InputInfoClient />
+          {/* cleanInputs */}
+          {/* <div width={30} onClick={() => setCart([])}> */}
+          <div width={30} onClick={cleanInputs}>
             <TrashButton />
           </div>
         </div>
