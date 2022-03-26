@@ -124,21 +124,11 @@ export const Login = () => {
 
           {/* {displayError && ( */}
           <div className="error">
-<<<<<<< HEAD
-            {
-              <Error
-                message={errorMessage}
-                onClose={handleDisplayError}
-                isVisible={displayError}
-              />
-            }
-=======
             <Error
               message={errorMessage}
               onClose={handleDisplayError}
               isVisible={displayError}
             />
->>>>>>> dev-lucero
           </div>
           {/* // )} */}
           {/* {errorMessage && (
