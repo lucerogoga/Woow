@@ -72,7 +72,12 @@
 }
 .button-card:hover {
   background-color: #ff9aa3;
+  /* color: #ff9aa3; */
   color: #fff;
+}
+
+.button-card:hover h2 {
+  color: #ff9aa3;
 }
 
 .button-card:focus,
@@ -102,7 +107,7 @@
   margin-top: 0.5rem;
 }
 
-.button-order--quatity {
+.button-order--quantity {
   background-color: currentColor;
   position: absolute;
   top: 10px;
@@ -115,7 +120,7 @@
   height: 40px;
 }
 
-.button-order--quatity h2 {
+.button-order--quantity h2 {
   color: #fff;
 }
 
@@ -160,7 +165,7 @@
     align-items: center;
   }
 
-  .button-order--quatity {
+  .button-order--quan tity {
     background-color: currentColor;
     position: absolute;
     top: 20px;
