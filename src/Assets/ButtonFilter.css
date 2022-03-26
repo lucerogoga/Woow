@@ -156,6 +156,8 @@
   .button-card--text-content {
     height: 35px;
     padding-left: 1rem;
+    display: flex;
+    align-items: center;
   }
 
   .button-order--quatity {
