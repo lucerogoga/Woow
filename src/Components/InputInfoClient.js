@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -7,8 +7,7 @@ import TextField from "@mui/material/TextField";
 import { useCart } from "./Context/CartContext";
 
 export default function InputInfoClient() {
-  const { clientName, setClientName, tableNumber, setTableNumber, isClean } =
-    useCart();
+  const { clientName, setClientName, tableNumber, setTableNumber } = useCart();
 
   const handleChange = (nameClient) => {
     setClientName(nameClient);
@@ -17,13 +16,6 @@ export default function InputInfoClient() {
     console.log("ok!, tabla:", tabla);
     setTableNumber(tabla);
   };
-
-  // useEffect(() => {
-  //   if (isClean) {
-  //     handleChangeTable("");
-  //     handleChange("");
-  //   }
-  // }, [isClean]);
 
   return (
     <>
@@ -45,7 +37,6 @@ export default function InputInfoClient() {
           value={tableNumber}
           label="Nº Table"
           required
-          // sizeSmall
           onChange={(e) => handleChangeTable(e.target.value)}
         >
           <MenuItem value={"Tabla 1"}>Tabla 1</MenuItem>
@@ -54,7 +45,6 @@ export default function InputInfoClient() {
           <MenuItem value={"Tabla 4"}>Tabla 4</MenuItem>
           <MenuItem value={"Tabla 5"}>Tabla 5</MenuItem>
         </Select>
-        {/* </TextField> */}
       </FormControl>
     </>
   );
