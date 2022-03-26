@@ -8,11 +8,7 @@ import ProductAddedCart from "../../Components/ProductAddedCart";
 import InputInfoClient from "../../Components/InputInfoClient";
 import ActionButton from "../../Components/ActionButton";
 import Error from "../../Components/Error";
-<<<<<<< HEAD
-// import "../../Assets/Cart.css";
-=======
 import "../../Assets/Cart.css";
->>>>>>> dev-lucero
 import formatNum from "format-num";
 import Success from "../../Components/Successfull";
 
