@@ -1,15 +1,29 @@
 import React from "react";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+import { upperCaseFirstLetter } from "../helpers/nameFormatted";
 
-const Edit = ({ onClick }) => {
-  return (
-    <button className="productAdded-card--pencilContainer" onClick={onClick}>
-      <Pencil className="productAdded-card--pencil" width={30} height={30} />
-    </button>
-  );
-};
+const EmployersCard = ({ employee, isOpen }) => {
+  const status = employee.user_status ? "Active" : "Inactive";
+  console.log("roool,", employee.user_rol);
 
-const EmployersCard = ({ employee }) => {
+  const HandleEditEmployee = (employee) => {
+    isOpen(employee);
+  };
+
+  const Edit = ({ onClick }) => {
+    return (
+      <button
+        className="productAdded-card--pencilContainer"
+        // onClick={onClick}>
+        onClick={() => {
+          HandleEditEmployee(employee);
+        }}
+      >
+        <Pencil className="productAdded-card--pencil" width={30} height={30} />
+      </button>
+    );
+  };
+
   return (
     <div className="order-container">
       <div className="order-card">
@@ -22,10 +36,14 @@ const EmployersCard = ({ employee }) => {
               <h3 className="order-card--info-title">Status:</h3>
             </div>
             <div className="order-card--infos-container">
-              <div className="order-card--info-p">{employee.user_name}</div>
+              <div className="order-card--info-p">
+                {upperCaseFirstLetter(employee.user_name)}
+              </div>
               <div className="order-card--info-p">{employee.user_email}</div>
-              <div className="order-card--info-p">{employee.user_rol}</div>
-              <div className="order-card--info-p">{employee.user_status}</div>
+              <div className="order-card--info-p">
+                {upperCaseFirstLetter(employee.user_rol)}
+              </div>
+              <div className="order-card--info-p">{status}</div>
             </div>
           </div>
           <div className="order-card--right-container">
