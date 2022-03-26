@@ -75,7 +75,7 @@ export const updateStatusOrder = async (idOrder, status, userRole) => {
   }
   // "Pending" && userRole === "waiter"
 };
-
+//-------------CreateOrder in Firebase
 export const createOrder = async (
   waiterId,
   waiterName,
@@ -220,6 +220,28 @@ export async function createProductFirebase(
 ) {
   const ordersRef = collection(db, "products");
   return addDoc(ordersRef, {
+    cat_id: catId,
+    product_name: productName,
+    product_description: productDescription,
+    product_cost: [productCost], //array
+    product_options: [productOption], //array
+    product_photo: [productPhoto], //array
+    product_stock: [productStock], //array
+  });
+}
+//--------------EditProduct
+export async function editProductFirebase(
+  productId,
+  catId,
+  productName,
+  productDescription,
+  productCost,
+  productOption,
+  productPhoto,
+  productStock
+) {
+  const productRef = doc(db, "products", productId);
+  return updateDoc(productRef, {
     cat_id: catId,
     product_name: productName,
     product_description: productDescription,
