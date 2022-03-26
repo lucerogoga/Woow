@@ -9,10 +9,13 @@ import ModalEmployes from "./ModalEmployes";
 const Employes = () => {
   const [employers, setEmployers] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState("");
 
-  const handleOpen = () => {
+  const handleOpen = (employee) => {
     setOpenModal(true);
+    setEmployeeToEdit(employee);
   };
+
   const onClose = () => {
     setOpenModal(false);
   };
@@ -37,7 +40,12 @@ const Employes = () => {
       <Title title="Employes" quantity={employers.length}></Title>
       <div>
         {employers.map((employe) => (
-          <EmployersCard employee={employe} key={employe.id} />
+          // <EmployersCard employee={employe} key={employe.id} />
+          <EmployersCard
+            employee={employe}
+            key={employe.id}
+            isOpen={() => handleOpen(employe)}
+          />
         ))}
       </div>
       <div className="large-button--content" onClick={handleOpen}>
@@ -47,7 +55,11 @@ const Employes = () => {
           //   onClick={openModal}
         />
       </div>
-      <ModalEmployes isOpen={openModal} onClose={onClose} />
+      <ModalEmployes
+        isOpen={openModal}
+        onClose={onClose}
+        employeeToEdit={employeeToEdit}
+      />
     </>
   );
 };

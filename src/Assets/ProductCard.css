@@ -109,7 +109,14 @@ html {
 /* Desktop View */
 @media (min-width: 900px) {
   .product-card--descr {
-    height: 63px;
+    height: 3.5rem;
+    width: 96%;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2rem;
   }
 
   .products-container {

@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-import Grid from "@mui/material/Grid";
 import { pad } from "../helpers/mathFunctions";
 import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
 import Time from "./Time";
 import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
-import { abbrevName, UpperCaseName } from "../helpers/nameFormatted";
-import { serverTimestamp } from "firebase/firestore";
+import { abbrevName, upperCaseFirstLetter } from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
-  const [userName, setUserName] = useState("");
+  const [userName] = useState("");
   let location = useLocation();
   const { pathname } = location;
   const userRole = useRol();
@@ -78,7 +75,7 @@ const OrderCardFormat = ({ orderData }) => {
                 {pad(orderData.order_number, 6)}
               </div>
               <div className="order-card--info-p">
-                {UpperCaseName(orderData.client_name)}
+                {upperCaseFirstLetter(orderData.client_name)}
               </div>
               <div className="order-card--info-p">{chefId}</div>
               <div className="order-card--info-p">

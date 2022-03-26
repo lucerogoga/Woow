@@ -43,8 +43,9 @@ const style = {
   p: 5,
 };
 
-export default function ModalEmployes({ isOpen, onClose }) {
+export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
+  // const [userRoles, setUserRoles] = useState(["Waiter", "Chef", "Admin"]);
   const { createUser } = useAuth();
   const [userRole, setUserRole] = useState("");
   const [userName, setUserName] = useState("");
@@ -52,6 +53,15 @@ export default function ModalEmployes({ isOpen, onClose }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  console.log("hay usuario editado?, ", employeeToEdit);
 
   const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
@@ -78,6 +88,33 @@ export default function ModalEmployes({ isOpen, onClose }) {
   const handleChangeRole = (e) => {
     setUserRole(e.target.value);
   };
+
+  const cleanForm = () => {
+    setUserRole("");
+    setUserName("");
+    setUserStatus("");
+    setUserEmail("");
+    setUserPwd("");
+    // ! ----- el de abajo también?
+    setLoading("");
+  };
+
+  useEffect(() => {
+    if (employeeToEdit) {
+      setUserRole(employeeToEdit.user_rol);
+      setUserName(employeeToEdit.user_name);
+      setUserEmail(employeeToEdit.user_email);
+      setUserPwd("");
+      // ! ----- el de abajo también?
+      setLoading("");
+      // !--- el switch
+      setUserStatus(employeeToEdit.user_status);
+      setChecked(employeeToEdit.user_status);
+      // setChecked(false)
+    }
+
+    return () => cleanForm();
+  }, [employeeToEdit]);
 
   return (
     <Modal
@@ -115,6 +152,7 @@ export default function ModalEmployes({ isOpen, onClose }) {
               <TextField
                 fullWidth
                 label="User Name"
+                value={userName}
                 variant="outlined"
                 autoComplete="off"
                 onChange={(e) => setUserName(e.target.value)}
@@ -124,6 +162,7 @@ export default function ModalEmployes({ isOpen, onClose }) {
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label="Email"
                 variant="outlined"
+                value={userEmail}
                 autoComplete="off"
                 onChange={(e) => setUserEmail(e.target.value)}
               />
@@ -135,7 +174,10 @@ export default function ModalEmployes({ isOpen, onClose }) {
                 onChange={(e) => setUserPwd(e.target.value)}
               />
               <label>Activo</label>
-              <Switch />
+              <Switch checked={checked} onChange={switchHandler} />
+              {/* <Switch status={setUserStatus}/> */}
+
+              {/* <Switch/> */}
               <div className="large-button--content" onClick={handleCreateUser}>
                 <ActionButton
                   title={"Create Employee"}
