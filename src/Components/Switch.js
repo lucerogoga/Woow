@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { styled } from "@mui/system";
 import { useSwitch } from "@mui/base/SwitchUnstyled";
-import Switch from "@mui/material/Switch";
 
 const pink = {
   500: "#ff9aa3",
@@ -93,11 +92,7 @@ function BasicSwitch(props) {
 export default function UseSwitchesBasic({ checkedFromParent, handler }) {
   return (
     <div>
-      <BasicSwitch
-        checked={checkedFromParent}
-        onChange={handler}
-        inputProps={{ "aria-label": "controlled" }}
-      />
+      <BasicSwitch checked={checkedFromParent} onChange={handler} />
     </div>
   );
 }
