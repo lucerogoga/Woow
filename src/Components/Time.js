@@ -5,8 +5,6 @@ import moment from "moment";
 import "moment-precise-range-plugin";
 
 const Time = ({ start, end, status }) => {
-  // order_status: "Ready to Serve"
-  console.log("miremos el status, ", status);
   const [hoursDiff, setHoursDiff] = useState("00");
   const [minutesDiff, setMinutesDiff] = useState("00");
   const [secondsDiff, setSecondsDiff] = useState("00");
