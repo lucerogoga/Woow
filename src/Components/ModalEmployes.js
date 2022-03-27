@@ -45,7 +45,6 @@ const style = {
 };
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
-  console.log("este es employeeToEdit, ", employeeToEdit);
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
   const { createUser } = useAuth();
   const [userId, setUserId] = useState("");
@@ -61,7 +60,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   console.log("mi spinner? ", loading);
 
   const switchHandler = (event) => {
-    console.log("dejame ver evento change", event);
     setChecked(event.target.checked);
   };
 
@@ -94,16 +92,12 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     updateUser(userId, userName, userEmail, userRole, checked)
       .then((res) => {
         onClose();
-        // setLoading(false);
-        // console.log("debería dar false el loading, THEN", loading);
-        console.log("el que se updetea, ", res);
       })
       .finally(() => {
         console.log("debería dar false el loading, FINALLY", loading);
         setLoading(false);
         cleanForm();
       });
-    // cleanForm();
   };
 
   const createUserFirestore = async () => {
@@ -133,37 +127,18 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   useEffect(() => {
-    console.log("se dispara el effect", employeeToEdit);
     if (employeeToEdit) {
-      // userId, setUserId
-
       setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
       setUserEmail(employeeToEdit.user_email);
       setUserPwd("");
-      // ! ----- el de abajo también?
       setLoading(loading);
-      // !--- el switch
-      // setUserStatus(checked);
       setUserStatus(employeeToEdit.user_status);
-      // setChecked();
       setChecked(userStatus);
-      // setChecked(checked);
-      // setChecked(employeeToEdit.user_status);
-
-      // ----consolear
-      // console.log("NAME, ", userName);
-      // console.log("CORREO, ", userEmail);
-      // console.log("ROL, ", userRole);
-      // console.log("STATUS, ", userStatus);
-      // console.log("CONTRASEÑA, ", userPwd);
-      // console.log("LOADING, ", loading);
-      // console.log("CHECKED SWITCH, ", checked);
     }
-
     return () => cleanForm();
-  }, [employeeToEdit, userStatus, loading]);
+  }, [employeeToEdit, userStatus]);
 
   return (
     <Modal
@@ -223,7 +198,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 onChange={(e) => setUserPwd(e.target.value)}
               />
               <label>Status</label>
-              {/* <Switch checked={checked} onChange={switchHandler} /> */}
               <SwitchCustom
                 checkedFromParent={checked}
                 handler={switchHandler}
