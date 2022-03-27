@@ -57,6 +57,8 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
   const [checked, setChecked] = useState(false);
 
+  console.log("mi spinner? ", loading);
+
   const switchHandler = (event) => {
     console.log("dejame ver evento change", event);
     setChecked(event.target.checked);
@@ -70,12 +72,14 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     setUserEmail("");
     setUserPwd("");
     setChecked(false);
-    setLoading("");
+    setLoading(false);
   };
 
   const handleSubmit = async (e) => {
     if (employeeToEdit) {
       editUserFirestore();
+      // ! aqui el loading?
+      // loading
     } else {
       createUserFirestore();
     }
@@ -83,16 +87,21 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
   const editUserFirestore = async () => {
     setLoading(true);
+    console.log("debería dar true el loading, ", loading);
 
     updateUser(userId, userName, userEmail, userRole, checked)
       .then((res) => {
-        // onClose();
+        onClose();
+        // setLoading(false);
+        // console.log("debería dar false el loading, THEN", loading);
         console.log("el que se updetea, ", res);
       })
       .finally(() => {
+        console.log("debería dar false el loading, FINALLY", loading);
         setLoading(false);
+        cleanForm();
       });
-    cleanForm();
+    // cleanForm();
   };
 
   const createUserFirestore = async () => {
@@ -132,11 +141,12 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       setUserEmail(employeeToEdit.user_email);
       setUserPwd("");
       // ! ----- el de abajo también?
-      setLoading("");
+      setLoading(loading);
       // !--- el switch
+      // setUserStatus(checked);
       setUserStatus(employeeToEdit.user_status);
       // setChecked();
-      // setChecked(userStatus);
+      setChecked(userStatus);
       // setChecked(checked);
       // setChecked(employeeToEdit.user_status);
 
@@ -151,8 +161,11 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     }
 
     return () => cleanForm();
-  }, [employeeToEdit]);
-  // }, [employeeToEdit, userStatus]);
+    // }, [employeeToEdit, checked]);
+    // }, [employeeToEdit]);
+    // }, [employeeToEdit, userStatus, checked]);
+    // }, [employeeToEdit, userStatus]);
+  }, [employeeToEdit, userStatus, loading]);
 
   return (
     <Modal
@@ -211,21 +224,16 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 autoComplete="off"
                 onChange={(e) => setUserPwd(e.target.value)}
               />
-              <label>Activo</label>
+              <label>Status</label>
               {/* <Switch checked={checked} onChange={switchHandler} /> */}
               <SwitchCustom
                 checkedFromParent={checked}
                 handler={switchHandler}
               />
-              {/* checked,onChange */}
-              {/* <Switch status={setUserStatus}/> */}
 
-              {/* <Switch/> */}
-              {/* <div className="large-button--content" onClick={handleCreateUser}> */}
               <div className="large-button--content" onClick={handleSubmit}>
                 <ActionButton
                   title={employeeToEdit ? "Update Employee" : "Create Employee"}
-                  // title={"Create Employee"}
                   className={"button--pink"}
                 />
               </div>
