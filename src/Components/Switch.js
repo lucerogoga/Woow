@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { styled } from "@mui/system";
 import { useSwitch } from "@mui/base/SwitchUnstyled";
+import Switch from "@mui/material/Switch";
 
 const pink = {
   500: "#ff9aa3",
@@ -72,15 +73,9 @@ const BasicSwitchThumb = styled("span")`
 `;
 
 function BasicSwitch(props) {
-  // function BasicSwitch({checked, onChange }) {
-  // console.log("props, ", props);
   const { getInputProps, checked, disabled, focusVisible } = useSwitch(props);
-  console.log("este es mi checked, ", checked);
-  console.log("este es mi disabled, ", disabled);
-
   <useSwitch checked={true} disabled={true} />;
-  // <useSwitch checked={true} onChange={switchHandler}/>
-  // <useSwitch/>
+
   const stateClasses = {
     "Switch-checked": checked,
     "Switch-disabled": disabled,
@@ -95,11 +90,14 @@ function BasicSwitch(props) {
   );
 }
 
-// export default function UseSwitchesBasic({checked,onChange}) {
-export default function UseSwitchesBasic({ checked, onChange }) {
+export default function UseSwitchesBasic({ checkedFromParent, handler }) {
   return (
     <div>
-      <BasicSwitch disabled={false} checked={checked} onChange={onChange} />
+      <BasicSwitch
+        checked={checkedFromParent}
+        onChange={handler}
+        inputProps={{ "aria-label": "controlled" }}
+      />
     </div>
   );
 }

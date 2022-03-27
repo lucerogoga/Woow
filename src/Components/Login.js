@@ -25,7 +25,6 @@ export const Login = () => {
   const handleDisplayError = () => {
     setDisplayError(false);
   };
-  console.log("fuera de handleSubmit, ", displayError);
 
   // useEffect(() => {
   //   // setDisplayError(false);

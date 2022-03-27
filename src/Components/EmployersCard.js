@@ -4,7 +4,6 @@ import { upperCaseFirstLetter } from "../helpers/nameFormatted";
 
 const EmployersCard = ({ employee, isOpen }) => {
   const status = employee.user_status ? "Active" : "Inactive";
-  console.log("roool,", employee.user_rol);
 
   const HandleEditEmployee = (employee) => {
     isOpen(employee);

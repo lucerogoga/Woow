@@ -75,7 +75,7 @@ export const updateStatusOrder = async (idOrder, status, userRole) => {
   }
   // "Pending" && userRole === "waiter"
 };
-
+//-------------CreateOrder in Firebase
 export const createOrder = async (
   waiterId,
   waiterName,
@@ -229,6 +229,28 @@ export async function createProductFirebase(
     product_stock: [productStock], //array
   });
 }
+//--------------EditProduct
+export async function editProductFirebase(
+  productId,
+  catId,
+  productName,
+  productDescription,
+  productCost,
+  productOption,
+  productPhoto,
+  productStock
+) {
+  const productRef = doc(db, "products", productId);
+  return updateDoc(productRef, {
+    cat_id: catId,
+    product_name: productName,
+    product_description: productDescription,
+    product_cost: [productCost], //array
+    product_options: [productOption], //array
+    product_photo: [productPhoto], //array
+    product_stock: [productStock], //array
+  });
+}
 //--------------DeleteProduct
 export async function deleteProductFirebase(productId) {
   const productRef = doc(db, "products", productId);
@@ -252,3 +274,28 @@ export function createUserFirebase(
     user_email: userEmail,
   });
 }
+
+// -----  EditUser
+
+export async function updateUser(
+  userId,
+  userName,
+  userEmail,
+  userRole,
+  userStatus
+) {
+  console.log("ete es el userName que se envia", userName);
+  console.log("ete es el userEmail que se envia", userEmail);
+  console.log("ete es el userRole que se envia", userRole);
+  console.log("ete es el status que se envia", userStatus);
+  const userRef = doc(db, "users", userId);
+  return updateDoc(userRef, {
+    user_email: userEmail,
+    // user_id
+    user_name: userName,
+    user_rol: userRole,
+    user_status: userStatus,
+  });
+}
+
+// userName,userEmail,userRole,userStatus

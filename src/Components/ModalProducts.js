@@ -16,6 +16,7 @@ import {
   getProductsCategories,
   createProductFirebase,
   uploadImage,
+  editProductFirebase,
 } from "../Services/FirestoreServices";
 
 import ActionButton from "./ActionButton";
@@ -104,7 +105,28 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
     clear();
   };
 
-  const editProduct = async () => {};
+  const editProduct = async () => {
+    setLoading(true);
+
+    const downloadUrl = await uploadImage(productPhoto, categoryId);
+    editProductFirebase(
+      productToEdit.id,
+      categoryId,
+      productName,
+      productDescription,
+      productCost,
+      productOption,
+      downloadUrl,
+      productStock
+    )
+      .then((res) => {
+        onClose();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    clear();
+  };
 
   const handleSubmit = async (e) => {
     if (productToEdit) {

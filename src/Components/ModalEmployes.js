@@ -9,7 +9,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
-import Switch from "../Components/Switch";
+import SwitchCustom from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
@@ -19,6 +19,7 @@ import {
   createProductFirebase,
   uploadImage,
   createUserFirebase,
+  updateUser,
 } from "../Services/FirestoreServices";
 
 import ActionButton from "./ActionButton";
@@ -45,27 +46,58 @@ const style = {
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
-  // const [userRoles, setUserRoles] = useState(["Waiter", "Chef", "Admin"]);
   const { createUser } = useAuth();
-  const [userRole, setUserRole] = useState("");
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
-  const [userStatus, setUserStatus] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [userPwd, setUserPwd] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [userStatus, setUserStatus] = useState(false);
+  const [userPwd, setUserPwd] = useState("*******");
   const [loading, setLoading] = useState(false);
 
-  // const [checked, setChecked] = useState(true);
   const [checked, setChecked] = useState(false);
 
   const switchHandler = (event) => {
+    console.log("dejame ver evento change", event);
     setChecked(event.target.checked);
   };
 
-  console.log("hay usuario editado?, ", employeeToEdit);
+  const cleanForm = () => {
+    setUserId("");
+    setUserRole("");
+    setUserName("");
+    setUserStatus(false);
+    setUserEmail("");
+    setUserPwd("");
+    setChecked(false);
+    setLoading("");
+  };
 
-  const handleCreateUser = async () => {
+  const handleSubmit = async (e) => {
+    if (employeeToEdit) {
+      editUserFirestore();
+    } else {
+      createUserFirestore();
+    }
+  };
+
+  const editUserFirestore = async () => {
+    setLoading(true);
+
+    updateUser(userId, userName, userEmail, userRole, checked)
+      .then((res) => {
+        // onClose();
+        console.log("el que se updetea, ", res);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    cleanForm();
+  };
+
+  const createUserFirestore = async () => {
+    // const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
-    //primero subimos la imagen luego creamos el objeto en la base de datos
     setLoading(true);
 
     const userID = await createUser(userEmail, userPwd);
@@ -89,18 +121,12 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     setUserRole(e.target.value);
   };
 
-  const cleanForm = () => {
-    setUserRole("");
-    setUserName("");
-    setUserStatus("");
-    setUserEmail("");
-    setUserPwd("");
-    // ! ----- el de abajo también?
-    setLoading("");
-  };
-
   useEffect(() => {
+    console.log("se dispara el effect", employeeToEdit);
     if (employeeToEdit) {
+      // userId, setUserId
+
+      setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
       setUserEmail(employeeToEdit.user_email);
@@ -109,12 +135,24 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       setLoading("");
       // !--- el switch
       setUserStatus(employeeToEdit.user_status);
-      setChecked(employeeToEdit.user_status);
-      // setChecked(false)
+      // setChecked();
+      // setChecked(userStatus);
+      // setChecked(checked);
+      // setChecked(employeeToEdit.user_status);
+
+      // ----consolear
+      // console.log("NAME, ", userName);
+      // console.log("CORREO, ", userEmail);
+      // console.log("ROL, ", userRole);
+      // console.log("STATUS, ", userStatus);
+      // console.log("CONTRASEÑA, ", userPwd);
+      // console.log("LOADING, ", loading);
+      // console.log("CHECKED SWITCH, ", checked);
     }
 
     return () => cleanForm();
   }, [employeeToEdit]);
+  // }, [employeeToEdit, userStatus]);
 
   return (
     <Modal
@@ -174,13 +212,20 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 onChange={(e) => setUserPwd(e.target.value)}
               />
               <label>Activo</label>
-              <Switch checked={checked} onChange={switchHandler} />
+              {/* <Switch checked={checked} onChange={switchHandler} /> */}
+              <SwitchCustom
+                checkedFromParent={checked}
+                handler={switchHandler}
+              />
+              {/* checked,onChange */}
               {/* <Switch status={setUserStatus}/> */}
 
               {/* <Switch/> */}
-              <div className="large-button--content" onClick={handleCreateUser}>
+              {/* <div className="large-button--content" onClick={handleCreateUser}> */}
+              <div className="large-button--content" onClick={handleSubmit}>
                 <ActionButton
-                  title={"Create Employee"}
+                  title={employeeToEdit ? "Update Employee" : "Create Employee"}
+                  // title={"Create Employee"}
                   className={"button--pink"}
                 />
               </div>
