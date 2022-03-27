@@ -45,6 +45,7 @@ const style = {
 };
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
+  console.log("este es employeeToEdit, ", employeeToEdit);
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
   const { createUser } = useAuth();
   const [userId, setUserId] = useState("");
@@ -76,6 +77,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (employeeToEdit) {
       editUserFirestore();
       // ! aqui el loading?
@@ -161,10 +163,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     }
 
     return () => cleanForm();
-    // }, [employeeToEdit, checked]);
-    // }, [employeeToEdit]);
-    // }, [employeeToEdit, userStatus, checked]);
-    // }, [employeeToEdit, userStatus]);
   }, [employeeToEdit, userStatus, loading]);
 
   return (

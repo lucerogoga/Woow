@@ -10,6 +10,7 @@ const Employes = () => {
   const [employers, setEmployers] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState("");
+  console.log("employeeToEdit base, ", employeeToEdit);
 
   const handleOpen = (employee) => {
     setOpenModal(true);
@@ -40,7 +41,6 @@ const Employes = () => {
       <Title title="Employes" quantity={employers.length}></Title>
       <div>
         {employers.map((employe) => (
-          // <EmployersCard employee={employe} key={employe.id} />
           <EmployersCard
             employee={employe}
             key={employe.id}
@@ -48,7 +48,7 @@ const Employes = () => {
           />
         ))}
       </div>
-      <div className="large-button--content" onClick={handleOpen}>
+      <div className="large-button--content" onClick={() => handleOpen()}>
         <ActionButton
           title={"Add Employee"}
           className={"button--pink"}

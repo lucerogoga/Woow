@@ -28,7 +28,7 @@ const AdminProducts = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [productToEdit, setProductToEdit] = useState("");
-
+  console.log("productToEdit base, ", productToEdit);
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
 
@@ -51,7 +51,9 @@ const AdminProducts = () => {
   };
 
   const handleOpen = (product) => {
+    console.log("productToEdit base en handleOpen, ", productToEdit);
     setOpenModal(true);
+    console.log("product de handleOpen, ", product);
     setProductToEdit(product);
   };
   const onClose = () => {
