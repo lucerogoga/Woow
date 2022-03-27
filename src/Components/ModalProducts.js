@@ -247,12 +247,14 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                     </InputAdornment>
                   ),
                 }}
-                placeholder="change image"
+                placeholder={productToEdit ? "Change Image" : "add Image"}
                 variant="outlined"
                 autoComplete="off"
                 onChange={(e) => setProductPhoto(e.target.value)}
               />
-              <img src={productPhoto} alt={"phoooto"} width="100px" />
+              {productToEdit ? (
+                <img src={productPhoto} alt={"photoProduct"} width="100px" />
+              ) : null}
               <div className="large-button--content" onClick={handleSubmit}>
                 <ActionButton
                   title={productToEdit ? "Update Product" : "Create Product"}
