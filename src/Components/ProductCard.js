@@ -12,6 +12,7 @@ import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
 
 import { deleteProductFirebase } from "../Services/FirestoreServices";
+import { sentenceFormatted } from "../helpers/nameFormatted";
 
 export function ProductCard(props) {
   const { product, path, isOpen, productSelectedToEdit } = props;
@@ -70,7 +71,6 @@ export function ProductCard(props) {
   //--------Product CRUD Admin
   const HandleEditProduct = (product) => {
     isOpen(product);
-    //  productSelectedToEdit = product;
   };
   const HandleRemoveProduct = (productId) => {
     deleteProductFirebase(productId);
@@ -83,18 +83,13 @@ export function ProductCard(props) {
       >
         {" "}
       </div>
-      {/* <div className="product-card--photoContainer">
-        <img
-          src={product.product_photo[0]}
-          className="product-image"
-          alt="product.name"
-        />
-      </div> */}
-
       <div className="product-card--textContainer">
         <div className="product-card--text">
           <h2 className="product-card--title"> {product.product_name}</h2>
-          <p className="product-card--descr"> {product.product_description}</p>
+          <p className="product-card--descr">
+            {" "}
+            {sentenceFormatted(product.product_description)}
+          </p>
           <h3 className="product-card--cost">
             {"$ " +
               formatNum(product.product_cost[0], {

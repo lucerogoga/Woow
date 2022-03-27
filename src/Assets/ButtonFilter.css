@@ -10,7 +10,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 22%;
+  /* min-width: 175px; */
+  min-width: 11rem;
+  /* min-width: 22%; */
   min-height: 200px;
   cursor: pointer;
 }
@@ -72,7 +74,12 @@
 }
 .button-card:hover {
   background-color: #ff9aa3;
+  /* color: #ff9aa3; */
   color: #fff;
+}
+
+.button-card:hover h2 {
+  color: #ff9aa3;
 }
 
 .button-card:focus,
@@ -102,11 +109,11 @@
   margin-top: 0.5rem;
 }
 
-.button-order--quatity {
+.button-order--quantity {
   background-color: currentColor;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 17px;
   display: flex;
   border-radius: 100%;
   justify-content: center;
@@ -115,7 +122,7 @@
   height: 40px;
 }
 
-.button-order--quatity h2 {
+.button-order--quantity h2 {
   color: #fff;
 }
 
@@ -140,6 +147,7 @@
     min-width: 27%;
     min-height: 00px;
     cursor: pointer;
+    min-width: 16rem;
   }
 
   .button-card--content {
@@ -160,7 +168,7 @@
     align-items: center;
   }
 
-  .button-order--quatity {
+  .button-order--quan tity {
     background-color: currentColor;
     position: absolute;
     top: 20px;

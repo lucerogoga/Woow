@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { styled } from "@mui/system";
 import { useSwitch } from "@mui/base/SwitchUnstyled";
@@ -73,6 +73,7 @@ const BasicSwitchThumb = styled("span")`
 
 function BasicSwitch(props) {
   const { getInputProps, checked, disabled, focusVisible } = useSwitch(props);
+  <useSwitch checked={true} disabled={true} />;
 
   const stateClasses = {
     "Switch-checked": checked,
@@ -88,10 +89,10 @@ function BasicSwitch(props) {
   );
 }
 
-export default function UseSwitchesBasic() {
+export default function UseSwitchesBasic({ checkedFromParent, handler }) {
   return (
     <div>
-      <BasicSwitch />
+      <BasicSwitch checked={checkedFromParent} onChange={handler} />
     </div>
   );
 }

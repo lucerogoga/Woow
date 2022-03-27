@@ -99,7 +99,6 @@ const AdminProducts = () => {
                 product={product}
                 key={product.id}
                 isOpen={() => handleOpen(product)}
-                //productSelectedToEdit={() => setProduct(product)}
               />
             );
           })}

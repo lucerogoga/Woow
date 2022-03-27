@@ -8,10 +8,18 @@ export const abbrevName = (names) => {
   return `${split_names[0].charAt(0).toUpperCase() + split_names[0].slice(1)}`;
 };
 
-export const UpperCaseName = (name) => {
-  return name
+export const upperCaseFirstLetter = (string) => {
+  return string
     .toLowerCase()
     .split(" ")
     .map((el) => `${el.charAt(0).toUpperCase()}${el.slice(1)}`)
     .join(" ");
+};
+
+export const sentenceFormatted = (sentence) => {
+  return (
+    sentence.toLowerCase().trim().charAt(0).toUpperCase() +
+    "" +
+    sentence.slice(1)
+  );
 };

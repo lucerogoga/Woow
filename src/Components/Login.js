@@ -26,6 +26,10 @@ export const Login = () => {
     setDisplayError(false);
   };
 
+  // useEffect(() => {
+  //   // setDisplayError(false);
+  // }, [displayError]);
+
   const handleSubmit = async (e) => {
     // limpia
     e.preventDefault();

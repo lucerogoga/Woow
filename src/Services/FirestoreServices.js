@@ -274,3 +274,28 @@ export function createUserFirebase(
     user_email: userEmail,
   });
 }
+
+// -----  EditUser
+
+export async function updateUser(
+  userId,
+  userName,
+  userEmail,
+  userRole,
+  userStatus
+) {
+  console.log("ete es el userName que se envia", userName);
+  console.log("ete es el userEmail que se envia", userEmail);
+  console.log("ete es el userRole que se envia", userRole);
+  console.log("ete es el status que se envia", userStatus);
+  const userRef = doc(db, "users", userId);
+  return updateDoc(userRef, {
+    user_email: userEmail,
+    // user_id
+    user_name: userName,
+    user_rol: userRole,
+    user_status: userStatus,
+  });
+}
+
+// userName,userEmail,userRole,userStatus

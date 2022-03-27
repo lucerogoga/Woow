@@ -17,10 +17,9 @@ import "../../Assets/OrderCart.css";
 import { db } from "../../Config/initialize";
 import { onSnapshot, collection } from "firebase/firestore";
 import { createOrder, getUser } from "../../Services/FirestoreServices";
+import TrashButton from "../../Components/Trash";
 
 const OrderCart = ({ cantEdit }) => {
-  const [clientName, setClientName] = useState("");
-  const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
@@ -28,13 +27,20 @@ const OrderCart = ({ cantEdit }) => {
   //--------states for success message
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
-  //---------clean inputs
-  const [isClean, setIsClean] = useState(false);
-  //------------set de Number od the order for a better Secuency of orders
+  //------------set Number of the orders for a better Secuency of orders
   const [orderCorrelative, setOrderCorrelative] = useState(0);
 
   //we call the contex of our cart
-  const { cart, setCart } = useCart();
+  const {
+    cart,
+    setCart,
+    clientName,
+    setClientName,
+    tableNumber,
+    setTableNumber,
+    setIsClean,
+  } = useCart();
+
   const { user } = useAuth();
 
   useEffect(() => {
@@ -84,12 +90,10 @@ const OrderCart = ({ cantEdit }) => {
     }
   };
 
-  const handleChange = (nameClient) => {
-    setClientName(nameClient);
-  };
-
-  const handleChangeTable = (table) => {
-    setTableNumber(table);
+  const cleanInputs = () => {
+    setTableNumber("");
+    setClientName("");
+    setCart([]);
   };
 
   return (
@@ -97,11 +101,10 @@ const OrderCart = ({ cantEdit }) => {
       <div className="cart-content">
         <Title title="My Cart (Products)" quantity={qtyItems} />
         <div className="client-info--content">
-          <InputInfoClient
-            onChange={handleChange}
-            setTable={handleChangeTable}
-            cleanInfo={isClean} //empieza en false
-          />
+          <InputInfoClient />
+          <div width={30} onClick={cleanInputs}>
+            <TrashButton />
+          </div>
         </div>
         {isInfoEmpty && (
           <Error
@@ -134,11 +137,11 @@ const OrderCart = ({ cantEdit }) => {
               <div className="info-order__container">
                 <div className="info-order__item">
                   <h3>Client: </h3>
-                  <p>Name Client </p>
+                  <p>{clientName}</p>
                 </div>
                 <div className="info-order__item">
                   <h3>Table: </h3>
-                  <p>Table 1</p>
+                  <p>{tableNumber}</p>
                 </div>
                 <div className="info-order__item">
                   <h3>Products</h3>
