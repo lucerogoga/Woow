@@ -15,8 +15,8 @@ export const Login = () => {
   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
 
   const { login, user } = useAuth();

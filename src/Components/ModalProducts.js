@@ -9,6 +9,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
+import ErrorModal from "./ErrorModal";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
@@ -53,7 +54,9 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
 
-  console.log(productToEdit);
+  const [errorMessage, setErrorMessage] = useState("soy error");
+  const [displayError, setDisplayError] = useState(false);
+
   const cleanForm = () => {
     setCategoryId("");
     setProductName("");
@@ -83,25 +86,29 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const createProduct = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
-    setLoading(true);
-    //if (loading) return <Spinner />;
+    if (productPhoto === "") {
+      setErrorMessage("All Fields must be filled");
+      setDisplayError(true);
+    } else {
+      setLoading(true);
 
-    const downloadUrl = await uploadImage(productPhoto, categoryId);
-    createProductFirebase(
-      categoryId,
-      productName,
-      productDescription,
-      productCost,
-      productOption,
-      downloadUrl,
-      productStock
-    )
-      .then((res) => {
-        onClose();
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      const downloadUrl = await uploadImage(productPhoto, categoryId);
+      createProductFirebase(
+        categoryId,
+        productName,
+        productDescription,
+        productCost,
+        productOption,
+        downloadUrl,
+        productStock
+      )
+        .then((res) => {
+          onClose();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
     clear();
   };
 
@@ -129,7 +136,11 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+    setDisplayError(false);
     if (productToEdit) {
+      // setErrorMessage("Fields must be changed");
       editProduct();
     } else {
       createProduct();
@@ -150,121 +161,132 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
     setProductPhoto("");
     setProductStock("");
   };
-
+  const handleDisplayError = () => {
+    setDisplayError(false);
+  };
   return (
-    <Modal
-      open={isOpen}
-      onClose={onClose}
-      aria-labelledby="parent-modal-title"
-      aria-describedby="parent-modal-description"
-    >
-      <Box sx={{ ...style, width: "70%" }}>
-        <Grid
-          container
-          gap="1rem"
-          justifyContent="center"
-          sx={{ minHeight: "508px" }}
-        >
-          {loading ? (
-            <Spinner />
-          ) : (
-            <>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Category Product
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={categoryId}
-                  label="Category Product"
-                  onChange={handleChangeCategory}
-                >
-                  {productCategories.map((cat, i) => {
-                    return (
-                      <MenuItem value={cat.cat_uid} key={cat.cat_uid}>
-                        {cat.cat_name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <TextField
-                fullWidth
-                label="Product Name"
-                value={productName}
-                variant="outlined"
-                autoComplete="off"
-                onChange={(e) => setProductName(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                value={productDescription}
-                label="Description"
-                variant="outlined"
-                autoComplete="off"
-                onChange={(e) => setProductDescription(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                value={productCost}
-                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                label="Price"
-                variant="outlined"
-                autoComplete="off"
-                onChange={(e) => setProductCost(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                value={productStock}
-                label="Stock"
-                variant="outlined"
-                autoComplete="off"
-                onChange={(e) => setProductStock(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                disabled
-                label={productPhoto.name}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <label htmlFor="icon-button-file">
-                        <Input
-                          accept="image/*"
-                          id="icon-button-file"
-                          type="file"
-                          required
-                          onChange={onChange}
-                        />
-                        <IconButton
-                          aria-label="upload picture"
-                          component="span"
-                        >
-                          <PhotoCamera />
-                        </IconButton>
-                      </label>
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder={productToEdit ? "Change Image" : "add Image"}
-                variant="outlined"
-                autoComplete="off"
-                onChange={(e) => setProductPhoto(e.target.value)}
-              />
-              {productToEdit ? (
-                <img src={productPhoto} alt={"photoProduct"} width="100px" />
-              ) : null}
-              <div className="large-button--content" onClick={handleSubmit}>
-                <ActionButton
-                  title={productToEdit ? "Update Product" : "Create Product"}
-                  className={"button--pink"}
+    <>
+      <Modal
+        open={isOpen}
+        onClose={onClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box sx={{ ...style, width: "70%" }}>
+          <div className="error">
+            <ErrorModal
+              message={errorMessage}
+              onClose={handleDisplayError}
+              isVisible={displayError}
+            />
+          </div>
+          <Grid
+            container
+            gap="1rem"
+            justifyContent="center"
+            sx={{ minHeight: "508px" }}
+          >
+            {loading ? (
+              <Spinner />
+            ) : (
+              <>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Category Product
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={categoryId}
+                    label="Category Product"
+                    onChange={handleChangeCategory}
+                  >
+                    {productCategories.map((cat, i) => {
+                      return (
+                        <MenuItem value={cat.cat_uid} key={cat.cat_uid}>
+                          {cat.cat_name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                <TextField
+                  fullWidth
+                  label="Product Name"
+                  value={productName}
+                  variant="outlined"
+                  autoComplete="off"
+                  onChange={(e) => setProductName(e.target.value)}
                 />
-              </div>
-            </>
-          )}
-        </Grid>
-      </Box>
-    </Modal>
+                <TextField
+                  fullWidth
+                  value={productDescription}
+                  label="Description"
+                  variant="outlined"
+                  autoComplete="off"
+                  onChange={(e) => setProductDescription(e.target.value)}
+                />
+                <TextField
+                  fullWidth
+                  value={productCost}
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  label="Price"
+                  variant="outlined"
+                  autoComplete="off"
+                  onChange={(e) => setProductCost(e.target.value)}
+                />
+                <TextField
+                  fullWidth
+                  value={productStock}
+                  label="Stock"
+                  variant="outlined"
+                  autoComplete="off"
+                  onChange={(e) => setProductStock(e.target.value)}
+                />
+                <TextField
+                  fullWidth
+                  disabled
+                  label={productPhoto.name}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <label htmlFor="icon-button-file">
+                          <Input
+                            accept="image/*"
+                            id="icon-button-file"
+                            type="file"
+                            required
+                            onChange={onChange}
+                          />
+                          <IconButton
+                            aria-label="upload picture"
+                            component="span"
+                          >
+                            <PhotoCamera />
+                          </IconButton>
+                        </label>
+                      </InputAdornment>
+                    ),
+                  }}
+                  placeholder={productToEdit ? "Change Image" : "add Image"}
+                  variant="outlined"
+                  autoComplete="off"
+                  onChange={(e) => setProductPhoto(e.target.value)}
+                />
+                {productToEdit ? (
+                  <img src={productPhoto} alt={"photoProduct"} width="100px" />
+                ) : null}
+                <div className="large-button--content" onClick={handleSubmit}>
+                  <ActionButton
+                    title={productToEdit ? "Update Product" : "Create Product"}
+                    className={"button--pink"}
+                  />
+                </div>
+              </>
+            )}
+          </Grid>
+        </Box>
+      </Modal>
+    </>
   );
 }
