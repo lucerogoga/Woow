@@ -86,7 +86,14 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const createProduct = async () => {
     //aqui obtenemos todos los datos del modal
     //primero subimos la imagen luego creamos el objeto en la base de datos
-    if (productPhoto === "") {
+    if (
+      productPhoto === "" ||
+      productName === "" ||
+      productDescription === "" ||
+      productCategories === "" ||
+      productCost === "" ||
+      productStock === ""
+    ) {
       setErrorMessage("All Fields must be filled");
       setDisplayError(true);
     } else {
@@ -107,9 +114,9 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
         })
         .finally(() => {
           setLoading(false);
+          clear();
         });
     }
-    clear();
   };
 
   const editProduct = async () => {
@@ -126,7 +133,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       downloadUrl,
       productStock
     )
-      .then((res) => {
+      .then(() => {
         onClose();
       })
       .finally(() => {
