@@ -284,10 +284,6 @@ export async function updateUser(
   userRole,
   userStatus
 ) {
-  console.log("ete es el userName que se envia", userName);
-  console.log("ete es el userEmail que se envia", userEmail);
-  console.log("ete es el userRole que se envia", userRole);
-  console.log("ete es el status que se envia", userStatus);
   const userRef = doc(db, "users", userId);
   return updateDoc(userRef, {
     user_email: userEmail,
@@ -298,4 +294,27 @@ export async function updateUser(
   });
 }
 
-// userName,userEmail,userRole,userStatus
+export async function getUsers() {
+  const productsData = await getDocs(collection(db, "users"));
+  return productsData.docs.map((p) => {
+    return {
+      id: p.id,
+      ...p.data(),
+    };
+  });
+}
+
+// const q1 = query(
+//   collection(db, "orders"),
+//   where("order_status", "==", "Pending"),
+//   orderBy("product_name", "asc")
+//   // orderBy("product_name", "desc")
+// );
+// const querySnapshotProduct = await getDocs(q1);
+// const productFilterDocs = querySnapshotProduct.docs;
+// return productFilterDocs.map((p) => {
+//   return {
+//     id: p.id,
+//     ...p.data(),
+//   };
+// });
