@@ -1,4 +1,3 @@
-// ! FORKEADO HOY
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -46,7 +45,10 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   console.log("este es productToEdit, ", productToEdit);
   const [productCategories, setProductCategories] = useState([]);
   useEffect(() => {
-    getProductsCategories().then((category) => setProductCategories(category));
+    getProductsCategories().then((category) => {
+      category.shift();
+      setProductCategories(category);
+    });
   }, []);
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
@@ -56,7 +58,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productPhoto, setProductPhoto] = useState("");
   const [productStock, setProductStock] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState("soy error");
+  const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
 
   const cleanForm = () => {
@@ -222,6 +224,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 </FormControl>
                 <TextField
                   fullWidth
+                  required
                   label="Product Name"
                   value={productName}
                   variant="outlined"
@@ -230,6 +233,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 />
                 <TextField
                   fullWidth
+                  required
                   value={productDescription}
                   label="Description"
                   variant="outlined"
@@ -238,6 +242,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 />
                 <TextField
                   fullWidth
+                  required
                   value={productCost}
                   inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                   label="Price"
@@ -247,6 +252,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 />
                 <TextField
                   fullWidth
+                  required
                   value={productStock}
                   label="Stock"
                   variant="outlined"
@@ -255,6 +261,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 />
                 <TextField
                   fullWidth
+                  required
                   disabled
                   label={productPhoto.name}
                   InputProps={{
@@ -278,7 +285,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                       </InputAdornment>
                     ),
                   }}
-                  placeholder={productToEdit ? "Change Image" : "add Image"}
+                  placeholder={productToEdit ? "Change Image" : "add Image *"}
                   variant="outlined"
                   autoComplete="off"
                   onChange={(e) => setProductPhoto(e.target.value)}

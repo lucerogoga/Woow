@@ -107,5 +107,5 @@ body {
   transform: translateY(0px);
 }
 .err-msg-modal.hide {
-  transform: translateY(-15em);
+  transform: translateY(-25em);
 }
