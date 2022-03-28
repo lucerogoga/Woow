@@ -1,3 +1,4 @@
+// ! FORKEADO HOY
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -42,6 +43,7 @@ const style = {
 };
 
 export default function ModalProducts({ isOpen, onClose, productToEdit }) {
+  console.log("este es productToEdit, ", productToEdit);
   const [productCategories, setProductCategories] = useState([]);
   useEffect(() => {
     getProductsCategories().then((category) => setProductCategories(category));

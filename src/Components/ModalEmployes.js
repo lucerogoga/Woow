@@ -46,7 +46,9 @@ const style = {
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
-  const { createUser } = useAuth();
+  // const { createUser } = useAuth();
+  const { createUser, changeDataUsers, userCredential2 } = useAuth();
+
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -54,13 +56,12 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userStatus, setUserStatus] = useState(false);
   const [userPwd, setUserPwd] = useState("*******");
   const [loading, setLoading] = useState(false);
-
   const [checked, setChecked] = useState(false);
+  const [secondUser, setSecondUser] = useState([]);
 
-  console.log("mi spinner? ", loading);
+  // }, [selectedOrderStatus, currentUser]);
 
   const switchHandler = (event) => {
-    console.log("dejame ver evento change", event);
     setChecked(event.target.checked);
   };
 
@@ -76,6 +77,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (employeeToEdit) {
       editUserFirestore();
       // ! aqui el loading?
@@ -88,20 +90,23 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const editUserFirestore = async () => {
     setLoading(true);
     console.log("debería dar true el loading, ", loading);
+    // ! ------------------------------------intentando cambiar el correo!
+
+    // changeDataUsers(userEmail).then(
+    //   console.log("logré conseguir la credencial!", userCredential2)
+    // );
+
+    // ! ------------------------------------intentando cambiar el correo!
 
     updateUser(userId, userName, userEmail, userRole, checked)
       .then((res) => {
         onClose();
-        // setLoading(false);
-        // console.log("debería dar false el loading, THEN", loading);
-        console.log("el que se updetea, ", res);
       })
       .finally(() => {
         console.log("debería dar false el loading, FINALLY", loading);
         setLoading(false);
         cleanForm();
       });
-    // cleanForm();
   };
 
   const createUserFirestore = async () => {
@@ -131,41 +136,18 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   useEffect(() => {
-    console.log("se dispara el effect", employeeToEdit);
     if (employeeToEdit) {
-      // userId, setUserId
-
       setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
       setUserEmail(employeeToEdit.user_email);
       setUserPwd("");
-      // ! ----- el de abajo también?
       setLoading(loading);
-      // !--- el switch
-      // setUserStatus(checked);
       setUserStatus(employeeToEdit.user_status);
-      // setChecked();
       setChecked(userStatus);
-      // setChecked(checked);
-      // setChecked(employeeToEdit.user_status);
-
-      // ----consolear
-      // console.log("NAME, ", userName);
-      // console.log("CORREO, ", userEmail);
-      // console.log("ROL, ", userRole);
-      // console.log("STATUS, ", userStatus);
-      // console.log("CONTRASEÑA, ", userPwd);
-      // console.log("LOADING, ", loading);
-      // console.log("CHECKED SWITCH, ", checked);
     }
-
     return () => cleanForm();
-    // }, [employeeToEdit, checked]);
-    // }, [employeeToEdit]);
-    // }, [employeeToEdit, userStatus, checked]);
-    // }, [employeeToEdit, userStatus]);
-  }, [employeeToEdit, userStatus, loading]);
+  }, [employeeToEdit, userStatus]);
 
   return (
     <Modal
@@ -225,7 +207,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 onChange={(e) => setUserPwd(e.target.value)}
               />
               <label>Status</label>
-              {/* <Switch checked={checked} onChange={switchHandler} /> */}
               <SwitchCustom
                 checkedFromParent={checked}
                 handler={switchHandler}
