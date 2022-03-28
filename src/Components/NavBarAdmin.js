@@ -84,7 +84,7 @@ const NavBarAdmin = ({
                   : "")
               }
             >
-              Add Products
+              Products
             </Link>
           </li>
         </ul>
