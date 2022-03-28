@@ -89,7 +89,7 @@ const OrderCardFormat = ({ orderData }) => {
               <div className="order-card--info-p">
                 {upperCaseFirstLetter(orderData.client_name)}
               </div>
-              <div className="order-card--info-p">{chefId}</div>
+              <div className="order-card--info-p"> {abbrevName(chefId)}</div>
               <div className="order-card--info-p">
                 {abbrevName(orderData.waiter_name)}
               </div>
