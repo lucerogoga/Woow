@@ -23,11 +23,14 @@ import { useAuth } from "../Components/Context/AuthContext";
 
 const Employes = () => {
   const [employers, setEmployers] = useState([]);
-  const [filteredEmployers, setFilteredEmployers] = useState([]);
+  // const [filteredEmployers, setFilteredEmployers] = useState([...employers]);
+  const [filteredEmployers, setFilteredEmployers] = useState(employers);
   const [openModal, setOpenModal] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState("");
   const [userEmployees, setUserEmployees] = useState("");
   console.log("employeeToEdit base, ", employeeToEdit);
+  console.log("filteredEmployers, ", filteredEmployers);
+  console.log("employers, ", employers);
 
   const handleOpen = (employee) => {
     setOpenModal(true);
@@ -47,37 +50,24 @@ const Employes = () => {
 
     return onSnapshot(q, (snapshot) => {
       setEmployers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setFilteredEmployers(
+        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+      // employers
       console.log("escuchando ando, ");
     });
-
-    console.log("funcionooo?");
-    // }, [currentUser]);
   }, []);
-
-  // useEffect(() => {
-  //   getEmployers().then((employers) => setEmployers(employers));
-  // }, []);
 
   const handleSearchEmployes = async (query) => {
     console.log("mi query es, ", query);
 
-    const filteredEmployers = employers.filter((elem) => {
+    // const prueba = filteredEmployers
+    const prueba = employers;
+
+    const filteredEmployers = prueba.filter((elem) => {
       return elem.user_name.toLowerCase().includes(query.toLowerCase());
     });
-    setEmployers(filteredEmployers);
-
-    // ! mi intento de filtrado con snapshot
-    // console.log("mi query es, ", query);
-    // const employersList = employers;
-
-    // if (query.length > 0) {
-    //   const filteredEmployers = employers.filter((elem) => {
-    //     return elem.user_name.toLowerCase().includes(query.toLowerCase());
-    //   });
-    //   setEmployers(filteredEmployers);
-    // } else {
-    //   setEmployers(employersList);
-    // }
+    setFilteredEmployers(filteredEmployers);
   };
   return (
     <>
@@ -91,7 +81,8 @@ const Employes = () => {
       <div className="container--reverse-employees">
         {/* deberia colocar un nombre al div que contiene las tarjetas, el de abajo */}
         <div>
-          {employers.map((employe) => (
+          {/* {employers.map((employe) => ( */}
+          {filteredEmployers.map((employe) => (
             <EmployersCard
               employee={employe}
               key={employe.id}
