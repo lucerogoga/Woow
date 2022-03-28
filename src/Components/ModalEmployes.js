@@ -46,7 +46,9 @@ const style = {
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
-  const { createUser } = useAuth();
+  // const { createUser } = useAuth();
+  const { createUser, changeDataUsers, userCredential2 } = useAuth();
+
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -54,10 +56,10 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userStatus, setUserStatus] = useState(false);
   const [userPwd, setUserPwd] = useState("*******");
   const [loading, setLoading] = useState(false);
-
   const [checked, setChecked] = useState(false);
+  const [secondUser, setSecondUser] = useState([]);
 
-  console.log("mi spinner? ", loading);
+  // }, [selectedOrderStatus, currentUser]);
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);
@@ -88,6 +90,13 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const editUserFirestore = async () => {
     setLoading(true);
     console.log("debería dar true el loading, ", loading);
+    // ! ------------------------------------intentando cambiar el correo!
+
+    // changeDataUsers(userEmail).then(
+    //   console.log("logré conseguir la credencial!", userCredential2)
+    // );
+
+    // ! ------------------------------------intentando cambiar el correo!
 
     updateUser(userId, userName, userEmail, userRole, checked)
       .then((res) => {
