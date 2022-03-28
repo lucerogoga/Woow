@@ -75,12 +75,15 @@ const Employes = () => {
         onChange={handleSearchEmployes}
         placeholder={"Search Employes by Name"}
       ></Search>
-      <Title title="Employes" quantity={employers.length}></Title>
+      {/* <Title title="Employes" quantity={employers.length}></Title> */}
+      <Title title="Employes" quantity={filteredEmployers.length}></Title>
 
       {/* <div className="container--reverse"> */}
       <div className="container--reverse-employees">
         {/* deberia colocar un nombre al div que contiene las tarjetas, el de abajo */}
-        <div>
+        {/* <div className="products-container vh"> */}
+        <div className="products-container-employees">
+          {/* <div className="products-container-employees vh"> */}
           {/* {employers.map((employe) => ( */}
           {filteredEmployers.map((employe) => (
             <EmployersCard
