@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
 import { upperCaseFirstLetter } from "../helpers/nameFormatted";
+import { useAuth } from "./Context/AuthContext";
+import { getUser } from "../Services/FirestoreServices";
 
 const EmployersCard = ({ employee, isOpen }) => {
   const status = employee.user_status ? "Active" : "Inactive";
+  const [isPencilHide, setIsPencilHide] = useState(false);
+  const protectedNames = ["mirian arevalo", "lucero gonzalez"];
+  // const {
+  //   user: { currentUser },
+  // } = useAuth();
+  // useE
 
   const HandleEditEmployee = (employee) => {
     isOpen(employee);
@@ -46,9 +54,11 @@ const EmployersCard = ({ employee, isOpen }) => {
           </div>
         </div>
         <div className="employee-card--right-container">
-          <div className="employee-cart--containertime">
-            <Edit />
-          </div>
+          {!protectedNames.includes(employee.user_name.toLowerCase()) && (
+            <div className="employee-cart--containertime">
+              <Edit />
+            </div>
+          )}
         </div>
       </div>
     </div>
