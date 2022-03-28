@@ -402,4 +402,11 @@
     flex-direction: column;
     margin-bottom: 1rem;
   }
+
+  .large-button--content {
+    width: 100%;
+    border: solid 10px #fff;
+    position: sticky;
+    top: 0;
+  }
 }
