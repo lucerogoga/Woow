@@ -192,6 +192,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
           <Grid
             container
             gap="1rem"
+            marginTop="2rem"
             justifyContent="center"
             sx={{ minHeight: "508px" }}
           >
