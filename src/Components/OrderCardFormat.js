@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
 import { pad } from "../helpers/mathFunctions";
-import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
+import {
+  updateOrder,
+  updateStatusOrder,
+  getUser,
+} from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
 import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
@@ -12,7 +16,7 @@ import TableCard from "./TableCard";
 import { abbrevName, upperCaseFirstLetter } from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
-  const [userName] = useState("");
+  const [userName, setUserName] = useState("");
   let location = useLocation();
   const { pathname } = location;
   const userRole = useRol();
@@ -29,7 +33,14 @@ const OrderCardFormat = ({ orderData }) => {
 
   console.log("es posible?, ", orderData.order_status);
   // ! --------------------
-
+  //GETTING NAME OF CHEF FOR THE ORDER
+  useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(currentUser);
+      setUserName(user_name);
+    }
+    settingUserName();
+  }, []);
   const handleStatus = () => {
     console.log("click hola!!");
     //CONDITIONS WAITER
@@ -47,6 +58,7 @@ const OrderCardFormat = ({ orderData }) => {
     //CONDITIONS CHEF
     if (orderData.order_status === "Pending" && userRole === "chef") {
       // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
+      console.log(userName);
       // Si el estado está en pendiente, el chef puede tomar el pedido y cambia su estado Cooking
       updateOrder(currentUser, orderData.id, "Cooking", userName);
     }
