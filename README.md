@@ -28,21 +28,39 @@ Dado a su significativo crecimiento, se le ha complicado un poco al personal de 
 Por parte del administrador tendrá la posibilidad de crear, editar y dar de baja (tanto de mesero como chef) a los empleados con cuentas, podrá agregar, editar y eliminar productos en el inventario y, además, tendrá acceso a las ordenes realizadas para poder llevar un seguimiento.
 
 ### 1.2 Descripcion de Roles
-#### Mesero 💁 
-
-Se encarga de tomar nota de los pedidos de alimentos y bebidas, y enviar la comanda en la cocina para su preparación para luego servirlos en la mesa.
 
 
-#### Chef 👩‍🍳 
-Planifica y dirige la preparación de alimentos tomando en consideración las ordenes realizadas por el mesero.
-
-#### Administrador 👩‍💼
-
-Está a cargo de administrar el servicio del restaurante, realiza el seguimiento de los pedidos efectuados y del rendimiento de sus empleados para asegurar la satisfacción del cliente.
+| Rol | Función  |  
+|---|---|
+| 💁 Mesero  | Se encarga de tomar nota de los pedidos de alimentos y bebidas, y enviar la comanda en la cocina para su preparación para luego servirlos en la mesa.  |
+| 👩‍🍳 Chef        |  Planifica y dirige la preparación de alimentos tomando en consideración las ordenes realizadas por el mesero. |  
+| 👩‍💼 Administrador |  Está a cargo de administrar el servicio del restaurante, realiza el seguimiento de los pedidos efectuados y del rendimiento de sus empleados para asegurar la satisfacción del cliente. | 
 
 ### 1.3 Interaccion con la página
 
+| Rol | Correo  |  Contraseña |
+|---|---|---|
+| 💁 Mesero   | waiter@gmail.com  | 123456
+| 👩‍🍳 Chef             |  chef@gmail.com | 123456  
+| 👩‍💼 Administrador  |  admin@gmail.com | 123456 
+
+
 ## 2. Estudio del Usuario
+
+#### Mesero 💁 
+
+Podrá visualizar los productos, añadir productos al carrito, generar, visualizar y enviar órdenes al chef.
+
+
+#### Chef 👩‍🍳 
+
+Podrá visualizar los pedidos generados por los meseros, y tendrá la opción de tomar la orden que desea preparar. Cada orden se controlará con un temporizador.
+
+#### Administrador 👩‍💼
+
+Podrá gestionar los productos del menú, las cuentas de los usuarios empleados, y llevar seguimiento de las órdenes.
+
+
 
 ## 3. Historia de Usuarios y Criterios de aceptación mínimos del proyecto
 
@@ -126,14 +144,100 @@ rápidamente a los clientes que las hicieron.
 
 ✔️ Marcar pedidos que han sido entregados.
 
+---
+
+***
+
+#### [Historia de usuario 4] Meserx debe ver pedidos listos para servir
+
+Yo como meserx quiero ver los pedidos que están preparados para entregarlos
+rápidamente a lxs clientxs que las hicieron.
+
+##### Criterios de aceptación
+
+✔️ Ver listado de pedido listos para servir.
+
+✔️ Marcar pedidos que han sido entregados.
 
 ##### Definición de terminado
 
-- Debes haber recibido _code review_ de al menos una compañera.
-- Haces _test_ unitarios y, además, has testeado tu producto manualmente.
-- Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
-- Desplegaste tu aplicación y has etiquetado tu versión (git tag).
-- Los datos se deben mantener íntegros, incluso después de que un pedido ha
+✔️ Debes haber recibido _code review_ de al menos una compañera.
+
+✔️ Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+
+✔️ Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+
+✔️ Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+
+✔️ Los datos se deben mantener íntegros, incluso después de que un pedido ha terminado. Todo esto para poder tener estadísticas en el futuro.
+
+***
+
+#### [Historia de usuario 5] Administrador(a) de tienda debe administrar a sus trabajadorxs (Hacker Edition)
+
+Yo como administrador(a) de tienda quiero gestionar a los usuarios de
+la plataforma para mantener actualizado la informacion de mis trabajadorxs.
+
+##### Criterios de aceptación
+
+✔️ Ver listado de trabajadorxs.
+
+✔️ Agregar trabajadorxs.
+
+✔️ Eliminar trabajadoxs.
+
+✔️ Actualizar datos de trabajadorxs.
+
+##### Definición de terminado
+
+✔️ Debes haber recibido _code review_ de al menos una compañera.
+
+✔️ Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+
+✔️ Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+
+✔️ Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+
+***
+
+#### [Historia de usuario 6] Administrador(a) de tienda debe administrar a sus productos (Hacker Edition)
+
+Yo como administrador(a) de tienda quiero gestionar los productos
+para mantener actualizado el menú.
+
+##### Criterios de aceptación
+
+✔️ Ver listado de productos.
+
+✔️ Agregar productos.
+
+✔️ Eliminar productos.
+
+✔️ Actualizar datos de productos.
+
+##### Definición de terminado
+
+✔️ Debes haber recibido _code review_ de al menos una compañera.
+
+✔️ Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+
+✔️ Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+
+✔️ Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+
+***
+
+##### Definición de terminado
+
+✔️ Debes haber recibido _code review_ de al menos una compañera.
+
+✔️ Haces _test_ unitarios y, además, has testeado tu producto manualmente.
+
+✔️ Hiciste _tests_ de usabilidad e incorporaste el _feedback_ del usuario.
+
+✔️ Desplegaste tu aplicación y has etiquetado tu versión (git tag).
+
+✔️ Los datos se deben mantener íntegros, incluso después de que un pedido ha
   terminado. Todo esto para poder tener estadísticas en el futuro.
 
 ## 4. Hacker Edition
@@ -149,18 +253,15 @@ El proceso se realizó mediante seis etapas:
 
 Tomando en cuenta los requerimientos solicitados para la creación del sistema, definimos el público al que va dirigido, es por esto que creamos la pastelería **Woow**  🧁 , una pastelería al estilo Fancy con una excelente calidad en productos y servicios, pero que presenta una problemática actual: Llevar un buen control de pedidos.
 
-
 #### Diseño de la estrategia
 
 Este projecto se llevó a cabo en 6 Sprints. La estrategia que aplicamos fue bajo la metodología agil de Scrum, en el que secon el uso del Github Projects establecimos plazos por Sprints para asegurarnos que el lanzamiento del sistema coincida con lo planificado, y como plataforma para despliegue de nuestro proyecto definimos [Vercel](https://vercel.com/). 
 
 #### Arquitectura web
 
-El diseño lo creamos nosotras con Figma inspirándonos en otros sistemas y aplicaciones de restaurantes. En el tema del diseño UI - UX mantuvimos presente una gama de tonos pasteles y un estilo minimalista.
+El diseño lo creamos nosotras con Figma inspirándonos en otros sistemas y aplicaciones de restaurantes. En el tema del diseño UI - UX mantuvimos presente una gama de tonos pasteles y un estilo minimalista para generar una sensación dulce y atractiva.
 
 El prototipo contempla 3 módulos, uno para cada rol (mesero, chef y administrador). 
-
-A continuación, el flujo y las vistas por módulo del sistema se presentará a través del siguiente [documento PDF](https://vercel.com/). 
 
 A lo largo del desarrollo del producto digital, se hicieron constantes pruebas de usabilidad, limpieza del código y algunas mejoras para garantizar una agradable experiencia al usuario que navega en ella. Entre ellas podemos destacar.
 
@@ -169,7 +270,26 @@ A lo largo del desarrollo del producto digital, se hicieron constantes pruebas d
 - c
 - d
 
+#### Creación del contenido
 
+Tomando en cuenta que el mesero maneja un menú exteso, el contenido se basa en que se pueda visualizar los productos en un formato de tarjeta en el que pueda mostrar toda su información incluyendo su respectiva fotografía, además, las ordenes se representarán en formato de tarjeta con toda la información del pedido (nombre del cliente, del mesero que generó la orden, del chef que aceptó la orden, la duración y una tabla de productos con sus precios)
+
+A continuación, el flujo y las vistas por módulo del sistema se presentará a través del siguiente [documento PDF](https://vercel.com/). 
+
+
+5. EJECUCIÓN DEL DISEÑO Y LA PROGRAMACIÓN
+Una vez que está todo claro, es el momento de diseñar y programar. Muchas veces el diseño se hará pensando en un estándar, pero otras habrá que realizar pruebas, estudiar diferentes modelos de web y realizar un test A/B para ver cuál recibe mejores resultados y cumple mejor con tus objetivos.
+
+En la fase de diseño y programación, tanto si usamos un CMS, como si desarrollamos la web desde cero, debemos asegurarnos de que todo se ajusta a unos parámetros, que seguimos un estándar de calidad y que la web cumple realmente lo que promete.
+
+6. LANZAMIENTO Y PRUEBAS
+Cuando desarrollamos un sitio web desde cero, no podemos simplemente ponerlo a disposición de los usuarios sin haber realizado antes los convenientes tests de calidad. Es conveniente probar que todo funciona, analizar el archivo logs para ver qué errores se producen en la web, así como ver la respuesta de la web ante un alto número de solicitudes y operaciones.
+
+De esta forma, podemos resolver algunos de los errores más comunes que puedan surgir antes de poner la web a disposición de los usuarios y empezar a difundirla.
+
+Esperamos que este artículo te haya ayudado a aclarar las fases del diseño de un sitio web. Si quieres crear una página web para tu negocio, contacta con nosotros aquí.
+
+Si necesitas contenido para tu web, echa un vistazo a nuestros servicios de posicionamiento.
 ## 6. Recursos Utilizados
 
 ### Despliegue
