@@ -1,17 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
-import formatNum from "format-num";
-
 import "../Assets/ProductCard.css";
-
-import { ReactComponent as More } from "../Assets/icons/more.svg";
-
+import { v4 as uuidv4 } from "uuid";
+//Context
 import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
-
+//Components
+import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+import { ReactComponent as More } from "../Assets/icons/more.svg";
+//Firebase Conections
 import { deleteProductFirebase } from "../Services/FirestoreServices";
+//Helpers
+import formatNum from "format-num";
 import { sentenceFormatted } from "../helpers/nameFormatted";
 
 export function ProductCard(props) {

@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+
 import { styled } from "@mui/material/styles";
+//Material UI Components
+import { Grid, InputAdornment } from "@mui/material";
+import Box from "@mui/material/Box";
+import MenuItem from "@mui/material/MenuItem";
+import Modal from "@mui/material/Modal";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
+//Components
 import ErrorModal from "./ErrorModal";
-
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
-
+import ActionButton from "./ActionButton";
+//Materiaul UI Icons
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+//Firebase Conection
 import {
   getProductsCategories,
   createProductFirebase,
@@ -20,10 +25,7 @@ import {
   editProductFirebase,
 } from "../Services/FirestoreServices";
 
-import ActionButton from "./ActionButton";
-
-import { Grid, InputAdornment } from "@mui/material";
-
+//Styles for Material UI
 const Input = styled("input")({
   display: "none",
 });
@@ -49,6 +51,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       setProductCategories(category);
     });
   }, []);
+
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -57,6 +60,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [productPhoto, setProductPhoto] = useState([]);
   const [productStock, setProductStock] = useState([]);
   const [objectURL, setObjectURL] = useState("");
+  //states for error Message
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
 
@@ -92,8 +96,8 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [loading, setLoading] = useState(false);
 
   const createProduct = async () => {
-    //aqui obtenemos todos los datos del modal
-    //primero subimos la imagen luego creamos el objeto en la base de datos
+    //first we validate the fields not to be empty
+    //second we upload the image then we have the url and set in the new product
     if (
       productPhoto === "" ||
       productName === "" ||
@@ -159,7 +163,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
     setErrorMessage("");
     setDisplayError(false);
     if (productToEdit) {
-      // setErrorMessage("Fields must be changed");
       editProduct();
     } else {
       createProduct();

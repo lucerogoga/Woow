@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useCart } from "../Components/Context/CartContext";
-import ProductAddedCart from "./ProductAddedCart";
-import Title from "./Title";
-import ActionButton from "../Components/ActionButton";
-import { createOrder, getUser } from "../Services/FirestoreServices";
-import Error from "./Error";
-import { useAuth } from "./Context/AuthContext";
-import InputInfoClient from "./InputInfoClient";
+import React, { useState, useEffect } from "react";
 import "../Assets/Cart.css";
-import formatNum from "format-num";
+//Context
+import { useAuth } from "./Context/AuthContext";
+import { useCart } from "../Components/Context/CartContext";
+//Components
+import Title from "./Title";
+import ProductAddedCart from "./ProductAddedCart";
+import ActionButton from "../Components/ActionButton";
+import Error from "./Error";
 import Success from "./Successfull";
-
-import { onSnapshot, collection } from "firebase/firestore";
-
-import { db } from "../Config/initialize";
+import InputInfoClient from "./InputInfoClient";
 import TrashButton from "./Trash";
+//Helpers
+import formatNum from "format-num";
+//Firebase Conection
+import { createOrder, getUser } from "../Services/FirestoreServices";
+import { onSnapshot, collection } from "firebase/firestore";
+import { db } from "../Config/initialize";
 
 const Cart = ({ cantEdit, handleGoCart }) => {
-  // const [clientName, setClientName] = useState("");
-  // const [tableNumber, setTableNumber] = useState("");
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
   const [userName, setUserName] = useState("");
-
+  //States for success message
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
 
-  // const [isClean, setIsClean] = useState(false);
-
+  // call the info from context Cart and Auth
   const {
     cart,
     setCart,
@@ -39,10 +38,9 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     isClean,
     setIsClean,
   } = useCart();
-
   const { user } = useAuth();
-  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
+  //Setting the name of the Current User
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(user.currentUser);
@@ -50,16 +48,16 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     }
     settingUserName();
   }, [user]);
-
+  //We declare the Correlative Number od the Order
+  const [orderCorrelative, setOrderCorrelative] = useState(0);
   useEffect(() => {
     const orderRef = collection(db, "orders");
-
     onSnapshot(orderRef, (snapshot) => {
       setOrderCorrelative(snapshot.size + 1);
     });
   }, [orderCorrelative]);
 
-  // ! -------------------------------Sum of costs
+  //-------------------------------Sum of costs
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
@@ -102,8 +100,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
         <Title title="Order" quantity={qtyItems} />
         <div className="client-info--content">
           <InputInfoClient />
-          {/* cleanInputs */}
-          {/* <div width={30} onClick={() => setCart([])}> */}
           <div width={30} onClick={cleanInputs}>
             <TrashButton />
           </div>
