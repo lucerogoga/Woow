@@ -42,7 +42,6 @@ const style = {
 };
 
 export default function ModalProducts({ isOpen, onClose, productToEdit }) {
-  console.log("este es productToEdit, ", productToEdit);
   const [productCategories, setProductCategories] = useState([]);
   useEffect(() => {
     getProductsCategories().then((category) => {
@@ -53,11 +52,11 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productCost, setProductCost] = useState("");
-  const [productOption, setProductOption] = useState(null);
-  const [productPhoto, setProductPhoto] = useState("");
-  const [productStock, setProductStock] = useState("");
-
+  const [productCost, setProductCost] = useState([]);
+  const [productOption, setProductOption] = useState([null]);
+  const [productPhoto, setProductPhoto] = useState([]);
+  const [productStock, setProductStock] = useState([]);
+  const [objectURL, setObjectURL] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
 
@@ -69,7 +68,11 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
     setProductStock("");
     setProductOption(null);
     setProductPhoto("");
+    setObjectURL("");
   };
+  useEffect(() => {
+    setObjectURL("");
+  }, []);
 
   useEffect(() => {
     if (productToEdit) {
@@ -80,6 +83,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       setProductStock(productToEdit.product_stock);
       setProductOption(null);
       setProductPhoto(productToEdit.product_photo[0]);
+      setObjectURL("");
     }
 
     return () => cleanForm();
@@ -125,8 +129,12 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
 
   const editProduct = async () => {
     setLoading(true);
-
-    const downloadUrl = await uploadImage(productPhoto, categoryId);
+    let downloadUrl;
+    if (typeof productPhoto === "string") {
+      downloadUrl = productPhoto;
+    } else {
+      downloadUrl = await uploadImage(productPhoto, categoryId);
+    }
     editProductFirebase(
       productToEdit.id,
       categoryId,
@@ -160,6 +168,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
 
   const onChange = (e) => {
     setProductPhoto(e.target.files[0]);
+    setObjectURL(URL.createObjectURL(e.target.files[0]));
   };
   const handleChangeCategory = (e) => {
     setCategoryId(e.target.value);
@@ -290,9 +299,13 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                   autoComplete="off"
                   onChange={(e) => setProductPhoto(e.target.value)}
                 />
-                {productToEdit ? (
-                  <img src={productPhoto} alt={"photoProduct"} width="100px" />
+                {productToEdit && typeof productPhoto === "string" ? (
+                  <img src={productPhoto} alt={"photoProducta"} width="100px" />
                 ) : null}
+
+                {objectURL === "" ? null : (
+                  <img src={objectURL} alt={"photoProductb"} width="100px" />
+                )}
                 <div className="large-button--content" onClick={handleSubmit}>
                   <ActionButton
                     title={productToEdit ? "Update Product" : "Create Product"}
