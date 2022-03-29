@@ -47,10 +47,13 @@ const style = {
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
   // const { createUser } = useAuth();
-  const { createUser, changeDataUsers, userCredential2 } = useAuth();
+  const { createUser, changeDataUsers } = useAuth();
+  // const { createUser, changeDataUsers, userCredential2 } = useAuth();
 
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  // const [userNewEmail, setUserNewEmail] = useState("");
+  const [userNewEmail, setUserNewEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
   const [userStatus, setUserStatus] = useState(false);
@@ -67,6 +70,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
   const cleanForm = () => {
     setUserId("");
+    setUserNewEmail("");
     setUserRole("");
     setUserName("");
     setUserStatus(false);
@@ -92,13 +96,19 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     console.log("debería dar true el loading, ", loading);
     // ! ------------------------------------intentando cambiar el correo!
 
-    // changeDataUsers(userEmail).then(
-    //   console.log("logré conseguir la credencial!", userCredential2)
-    // );
+    // changeDataUsers(userEmail, userNewEmail)
+    //   .then((res) => {
+    //     console.log("terminamos en auth! , ", res);
+    //   })
+    //   .catch((e) => console.log("por fin presencio esto, ", e.message));
 
     // ! ------------------------------------intentando cambiar el correo!
 
-    updateUser(userId, userName, userEmail, userRole, checked)
+    changeDataUsers(userEmail, userNewEmail)
+      .then(() => {
+        // return updateUser(userId, userName, userEmail, userRole, checked);
+        return updateUser(userId, userName, userNewEmail, userRole, checked);
+      })
       .then((res) => {
         onClose();
       })
@@ -107,6 +117,15 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
         setLoading(false);
         cleanForm();
       });
+    // updateUser(userId, userName, userEmail, userRole, checked)
+    //   .then((res) => {
+    //     onClose();
+    //   })
+    //   .finally(() => {
+    //     console.log("debería dar false el loading, FINALLY", loading);
+    //     setLoading(false);
+    //     cleanForm();
+    //   });
   };
 
   const createUserFirestore = async () => {
@@ -140,7 +159,10 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
+      // setUserNewEmail(employeeToEdit.user_email);
+      // ! aqui !
       setUserEmail(employeeToEdit.user_email);
+
       setUserPwd("");
       setLoading(loading);
       setUserStatus(employeeToEdit.user_status);
@@ -197,7 +219,28 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 variant="outlined"
                 value={userEmail}
                 autoComplete="off"
+                // disabled="true"
+                // onChange={(e) => setUserNewEmail(e.target.value)}
+                // onChange={(e) => {
+                //   console.log("este es mi nuevo correo! , ", e.target.value);
+                //   setUserNewEmail(e.target.value);
+                // }}
                 onChange={(e) => setUserEmail(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                label="New email"
+                variant="outlined"
+                value={userNewEmail}
+                autoComplete="off"
+                // onChange={(e) => setUserNewEmail(e.target.value)}
+                onChange={(e) => {
+                  // console.log("este es mi nuevo correo! , ", e.target.value);
+                  // console.log("este es mi viejo correo! , ", userEmail);
+                  setUserNewEmail(e.target.value);
+                }}
+                // onChange={(e) => setUserEmail(e.target.value)}
               />
               <TextField
                 fullWidth
