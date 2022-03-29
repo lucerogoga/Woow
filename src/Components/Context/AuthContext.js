@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
   const loginSecondaryUser = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
       auth2,
-      // auth,
       email,
       password
     );
@@ -68,7 +67,8 @@ export const AuthProvider = ({ children }) => {
 
   // !---------------
 
-  const changeDataUsers = (email, newEmail) => {
+  // const changeDataUsers = (email, newEmail) => {
+  const changeEmailUser = (email, newEmail) => {
     console.log("entrando con viejo email, ", email);
     console.log("entrando con nuevo email, ", newEmail);
     // return loginSecondaryUser(email, "123456")
@@ -81,50 +81,19 @@ export const AuthProvider = ({ children }) => {
       })
       .then((secondUser) => {
         setSecondaryUser(secondUser);
-        console.log("MIRA MI CURRENT USER EN PRIMER THEN!!, ", secondUser);
+        // console.log("MIRA MI CURRENT USER EN PRIMER THEN!!, ", secondUser);
         return createCredential(secondUser, "123456");
       })
       .then((credential) => {
         setSecondaryUser(secondaryUser);
-        console.log("MIRA MI CREDENCIAL!, ", credential);
-        console.log("SOLO IMPORTAS TU ", secondaryUser);
-        // console.log(
-        //   "MIRA MI secondaryUser CURRENT USER!, ",
-        //   secondaryUser.auth.currentUser
-        // );
+        // console.log("MIRA MI CREDENCIAL!, ", credential);
+        // console.log("SOLO IMPORTAS TU ", secondaryUser);
         const employe = secondaryUser.auth.currentUser;
 
         return changeEmailAuth(employe, newEmail);
       });
-    // .then(() => signOut(auth2));
   };
 
-  // ! respaldo
-  // const changeDataUsers = (email, newEmail) => {
-  //   console.log("entrando con viejo email, ", email);
-  //   console.log("entrando con nuevo email, ", newEmail);
-  //   // return loginSecondaryUser(email, "123456")
-  //   // return signOut(auth2)
-  //   return loginSecondaryUser(email, "123456")
-  //     .then((secondUser) => {
-  //       setSecondaryUser(secondUser);
-  //       console.log("MIRA MI CURRENT USER EN PRIMER THEN!!, ", secondUser);
-  //       return createCredential(secondUser, "123456");
-  //     })
-  //     .then((credential) => {
-  //       setSecondaryUser(secondaryUser);
-  //       console.log("MIRA MI CREDENCIAL!, ", credential);
-  //       console.log("SOLO IMPORTAS TU ", secondaryUser);
-  //       // console.log(
-  //       //   "MIRA MI secondaryUser CURRENT USER!, ",
-  //       //   secondaryUser.auth.currentUser
-  //       // );
-  //       const employe = secondaryUser.auth.currentUser;
-
-  //       return changeEmailAuth(employe, newEmail);
-  //     });
-  //   // .then(() => signOut(auth2));
-  // };
   // !------------------------------
   const logout = () => {
     signOut(auth);
@@ -179,7 +148,7 @@ export const AuthProvider = ({ children }) => {
         // createCredential,
         // secondaryUser,
         // loginSecondaryUser,
-        changeDataUsers,
+        changeEmailUser,
         userCredential2,
       }}
     >

@@ -47,8 +47,8 @@ const style = {
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
   // const { createUser } = useAuth();
-  const { createUser, changeDataUsers } = useAuth();
-  // const { createUser, changeDataUsers, userCredential2 } = useAuth();
+  const { createUser, changeEmailUser } = useAuth();
+  // const { createUser, changeEmailUser, userCredential2 } = useAuth();
 
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
@@ -96,7 +96,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     console.log("debería dar true el loading, ", loading);
     // ! ------------------------------------intentando cambiar el correo!
 
-    // changeDataUsers(userEmail, userNewEmail)
+    // changeEmailUser(userEmail, userNewEmail)
     //   .then((res) => {
     //     console.log("terminamos en auth! , ", res);
     //   })
@@ -104,7 +104,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
     // ! ------------------------------------intentando cambiar el correo!
 
-    changeDataUsers(userEmail, userNewEmail)
+    changeEmailUser(userEmail, userNewEmail)
       .then(() => {
         // return updateUser(userId, userName, userEmail, userRole, checked);
         return updateUser(userId, userName, userNewEmail, userRole, checked);
@@ -212,21 +212,15 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 autoComplete="off"
                 onChange={(e) => setUserName(e.target.value)}
               />
-              <TextField
+              {/* <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label="Email"
                 variant="outlined"
                 value={userEmail}
                 autoComplete="off"
-                // disabled="true"
-                // onChange={(e) => setUserNewEmail(e.target.value)}
-                // onChange={(e) => {
-                //   console.log("este es mi nuevo correo! , ", e.target.value);
-                //   setUserNewEmail(e.target.value);
-                // }}
                 onChange={(e) => setUserEmail(e.target.value)}
-              />
+              /> */}
               <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
@@ -234,10 +228,9 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 variant="outlined"
                 value={userNewEmail}
                 autoComplete="off"
-                // onChange={(e) => setUserNewEmail(e.target.value)}
                 onChange={(e) => {
-                  // console.log("este es mi nuevo correo! , ", e.target.value);
-                  // console.log("este es mi viejo correo! , ", userEmail);
+                  console.log("este es mi nuevo correo! , ", e.target.value);
+                  console.log("este es mi viejo correo! , ", userEmail);
                   setUserNewEmail(e.target.value);
                 }}
                 // onChange={(e) => setUserEmail(e.target.value)}
