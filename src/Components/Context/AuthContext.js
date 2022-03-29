@@ -23,13 +23,32 @@ export const AuthProvider = ({ children }) => {
   const [secondaryUser, setSecondaryUser] = useState({});
   const [userCredential2, setUserCredential2] = useState({});
 
+  const [prueba, setPrueba] = useState(false);
+
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth2, email, password)
+    return signOut(auth2)
+      .then(() => {
+        return createUserWithEmailAndPassword(auth2, email, password);
+      })
+      .catch(() => {
+        return createUserWithEmailAndPassword(auth2, email, password);
+      })
       .then((firebaseUser) => {
         return firebaseUser.user.uid;
       })
-      .then(signOut(auth2));
+      .then((idUser) => {
+        // return signOut(auth2);
+        return { logout: signOut(auth2), userId: idUser };
+      });
+    // .then(signOut(auth2));
   };
+  // const createUser = (email, password) => {
+  //   return createUserWithEmailAndPassword(auth2, email, password)
+  //     .then((firebaseUser) => {
+  //       return firebaseUser.user.uid;
+  //     })
+  //     .then(signOut(auth2));
+  // };
 
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
@@ -67,11 +86,9 @@ export const AuthProvider = ({ children }) => {
 
   // !---------------
 
-  // const changeDataUsers = (email, newEmail) => {
   const changeEmailUser = (email, newEmail) => {
-    console.log("entrando con viejo email, ", email);
-    console.log("entrando con nuevo email, ", newEmail);
-    // return loginSecondaryUser(email, "123456")
+    let userData;
+
     return signOut(auth2)
       .then(() => {
         return loginSecondaryUser(email, "123456");
@@ -81,17 +98,14 @@ export const AuthProvider = ({ children }) => {
       })
       .then((secondUser) => {
         setSecondaryUser(secondUser);
-        // console.log("MIRA MI CURRENT USER EN PRIMER THEN!!, ", secondUser);
+        userData = secondUser;
         return createCredential(secondUser, "123456");
       })
-      .then((credential) => {
-        setSecondaryUser(secondaryUser);
-        // console.log("MIRA MI CREDENCIAL!, ", credential);
-        // console.log("SOLO IMPORTAS TU ", secondaryUser);
-        const employe = secondaryUser.auth.currentUser;
-
+      .then(() => {
+        const employe = userData.user.auth.currentUser;
         return changeEmailAuth(employe, newEmail);
-      });
+      })
+      .catch((e) => e.message);
   };
 
   // !------------------------------
@@ -124,16 +138,17 @@ export const AuthProvider = ({ children }) => {
 
       setSecondaryUser(currentUser);
       console.log("useEffect 2, mi hook secondaryUser", secondaryUser);
+
+      // ! prueba
+
       // setSecondaryUser({ currentUser: currentUser?.uid });
       //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
       setLoading2(false);
     });
 
     return () => unsubcribe2();
-  }, []);
-
-  useEffect(() => {
-    // createUser().then((user) => setProductCategories(user));
+    // }, [secondaryUser, prueba]);
+    // }, [secondaryUser]);
   }, []);
 
   return (
@@ -150,6 +165,8 @@ export const AuthProvider = ({ children }) => {
         // loginSecondaryUser,
         changeEmailUser,
         userCredential2,
+        auth2,
+        signOut,
       }}
     >
       {children}
