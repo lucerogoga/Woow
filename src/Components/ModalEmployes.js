@@ -11,6 +11,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
 import SwitchCustom from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
+import { validateEmail } from "../helpers/loginFuntions";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
@@ -80,7 +81,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     setLoading(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (employeeToEdit) {
       editUserFirestore();
@@ -92,40 +93,46 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   const editUserFirestore = async () => {
+    if (userName.trim()?.length === 0) {
+      return console.log("INGRESA UN NOMBRE VÁLIDO");
+    }
+    if (!validateEmail(userNewEmail)) {
+      // if (userNewEmail.trim()) {
+      return console.log("EL CORREO DEBE TENER UN FORMATO!");
+    }
+    if (userEmail.trim() === userNewEmail.trim()) {
+      return console.log("INGRESA UN CORREO NUEVO!");
+    }
+
+    // Si el correo nuevo está vacio entonces se ejecuta cambio en datos básicos.
     setLoading(true);
     console.log("debería dar true el loading, ", loading);
     // ! ------------------------------------intentando cambiar el correo!
+    console.log("userEmail es, ", userEmail.trim());
+    console.log("userNewEmail es, ", userNewEmail.trim());
 
-    // changeEmailUser(userEmail, userNewEmail)
-    //   .then((res) => {
-    //     console.log("terminamos en auth! , ", res);
-    //   })
-    //   .catch((e) => console.log("por fin presencio esto, ", e.message));
-
-    // ! ------------------------------------intentando cambiar el correo!
-
+    // if (userEmail !== userNewEmail) {
+    console.log("SON IGUALES?", userEmail === userNewEmail);
+    console.log("SON DIFERENTES? ", userEmail !== userNewEmail);
     changeEmailUser(userEmail, userNewEmail)
       .then(() => {
-        // return updateUser(userId, userName, userEmail, userRole, checked);
         return updateUser(userId, userName, userNewEmail, userRole, checked);
       })
       .then((res) => {
         onClose();
+        console.log("proceso exitoso!");
       })
       .finally(() => {
         console.log("debería dar false el loading, FINALLY", loading);
         setLoading(false);
         cleanForm();
       });
-    // updateUser(userId, userName, userEmail, userRole, checked)
-    //   .then((res) => {
-    //     onClose();
-    //   })
-    //   .finally(() => {
-    //     console.log("debería dar false el loading, FINALLY", loading);
-    //     setLoading(false);
-    //     cleanForm();
-    //   });
+    // } else {
+    //   console.log("SON IGUALES?", userName === userNewEmail);
+    //   console.log("no puedes actualizar tus datos!");
+    // }
+
+    // ! ------------------------------------intentando cambiar la contraseña!
   };
 
   const createUserFirestore = async () => {
@@ -212,21 +219,26 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 autoComplete="off"
                 onChange={(e) => setUserName(e.target.value)}
               />
-              {/* <TextField
+              <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label="Email"
                 variant="outlined"
-                value={userEmail}
+                defaultValue={userEmail}
+                // value={userEmail}
                 autoComplete="off"
+                disabled={true}
+                // disabled="true"
                 onChange={(e) => setUserEmail(e.target.value)}
-              /> */}
+              />
               <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                label="New email"
+                label="New Email"
                 variant="outlined"
+                // value={userEmail}
                 value={userNewEmail}
+                // defaultValue={userEmail}
                 autoComplete="off"
                 onChange={(e) => {
                   console.log("este es mi nuevo correo! , ", e.target.value);
