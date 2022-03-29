@@ -150,8 +150,8 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       })
       .finally(() => {
         setLoading(false);
+        clear();
       });
-    clear();
   };
 
   const handleSubmit = async (e) => {
