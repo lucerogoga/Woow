@@ -2,9 +2,9 @@ import React from "react";
 import "../Assets/Error.css";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 
-const Error = ({ message, onClose, isVisible }) => {
+const ErrorModal = ({ message, onClose, isVisible }) => {
   return (
-    <div className={"err-msg " + (isVisible ? "" : "hide")}>
+    <div className={"err-msg-modal " + (isVisible ? "" : "hide")}>
       <div className="err-msg__content">
         <span className="err-msg__close-icon" onClick={onClose}>
           <X className="err-msg-x" />
@@ -16,4 +16,4 @@ const Error = ({ message, onClose, isVisible }) => {
   );
 };
 
-export default Error;
+export default ErrorModal;

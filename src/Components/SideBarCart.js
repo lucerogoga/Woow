@@ -1,17 +1,16 @@
-import Cart from "./Cart";
-import "../Assets/SideBarCart.css";
-import { ReactComponent as X } from "../Assets/icons/x.svg";
-import ActionButton from "./ActionButton";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../Assets/SideBarCart.css";
+//Component
+import { ReactComponent as X } from "../Assets/icons/x.svg";
+import Cart from "./Cart";
+//Material UI Component
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import * as React from "react";
 
-const Caja = ({ onClose }) => {
+const BoxCart = ({ onClose }) => {
   let navigate = useNavigate();
   const handleGoCart = () => {
-    console.log("handle??");
     onClose();
     navigate("../waiter/order-cart");
   };
@@ -30,23 +29,21 @@ const Caja = ({ onClose }) => {
 
 const SideBarCart = ({ isOpen, onClose }) => {
   return (
-    <div>
-      <React.Fragment>
-        <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
-          <Box
-            sx={{
-              width: 500,
-              height: "100vh",
-              padding: "1rem",
-              overflow: "hidden",
-              paddingBottom: "2rem",
-            }}
-          >
-            <Caja onClose={onClose} />
-          </Box>
-        </Drawer>
-      </React.Fragment>
-    </div>
+    <>
+      <Drawer anchor={"right"} open={isOpen} onClose={onClose}>
+        <Box
+          sx={{
+            width: 500,
+            height: "100vh",
+            padding: "1rem",
+            overflow: "hidden",
+            paddingBottom: "2rem",
+          }}
+        >
+          <BoxCart onClose={onClose} />
+        </Box>
+      </Drawer>
+    </>
   );
 };
 export default SideBarCart;

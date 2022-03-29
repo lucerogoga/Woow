@@ -1,50 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-import Grid from "@mui/material/Grid";
-import { pad } from "../helpers/mathFunctions";
-import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
+//Firebase Conection
+import {
+  updateOrder,
+  updateStatusOrder,
+  getUser,
+} from "../Services/FirestoreServices";
+//Contexts
 import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
-import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
+//Components
+import ActionButton from "./ActionButton";
 import Time from "./Time";
-import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
-import { abbrevName, UpperCaseName } from "../helpers/nameFormatted";
-import { serverTimestamp } from "firebase/firestore";
+//Helpers
+import { createRows } from "../helpers/mathFunctions";
+import { pad } from "../helpers/mathFunctions";
+import { abbrevName, upperCaseFirstLetter } from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
   const [userName, setUserName] = useState("");
+
   let location = useLocation();
   const { pathname } = location;
+
   const userRole = useRol();
   const {
     user: { currentUser },
   } = useAuth();
 
   const rows = createRows(orderData);
-  console.log("esta tarjetaa inicia! , ", orderData.order_timestamp_start);
-  console.log("esta tarjetaa termina! , ", orderData.order_timestamp_end);
   // Getting chef_id
   let chefId;
   !orderData.chef_name
     ? (chefId = "Not assigned")
     : (chefId = orderData.chef_name);
 
-  // ! --------------------
+  //GETTING NAME OF CHEF FOR THE ORDER
+  useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(currentUser);
+      setUserName(user_name);
+    }
+    settingUserName();
+  }, []);
 
   const handleStatus = () => {
-    console.log("click hola!!");
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
       // Si el estado está en pendiente siendo waiter , puede cancelar la orden
       // updateStatusOrder(orderData.id, "Canceled");
-      console.log("deberia poder cancelar");
       updateStatusOrder(orderData.id, "Canceled", userRole);
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
-      console.log("Ready to Serve && waiter");
       // Si el estado está en ready to Serve, el waiter puede marcar la orden como Delivered
       updateStatusOrder(orderData.id, "Delivered");
     }
@@ -60,21 +69,6 @@ const OrderCardFormat = ({ orderData }) => {
       // ! FINALIZA EL CRONOMETRO
     }
   };
-
-  //GETTING NAME OF CHEF FOR THE ORDER
-  // useEffect(() => {
-  //   async function settingUserName() {
-  //     const { user_name } = await getUser(currentUser);
-  //     setUserName(user_name);
-  //   }
-  //   settingUserName();
-  // }, []);
-
-  // console.log("ESTE ES MI ORDER STATUS", orderData.order_status);
-  // console.log("ORDER TIME START", orderData.order_timestamp);
-  // console.log("ORDER TIME START AHORA", orderData.order_timestamp.toDate());
-  // ! ------------------------------------------------------------
-  const [ayudaTime, setAyudaTime] = useState({ ms: 0, s: 0, m: 0, h: 0 });
 
   // ! ------------------------------------------------------------
   return (
@@ -94,9 +88,9 @@ const OrderCardFormat = ({ orderData }) => {
                 {pad(orderData.order_number, 6)}
               </div>
               <div className="order-card--info-p">
-                {UpperCaseName(orderData.client_name)}
+                {upperCaseFirstLetter(orderData.client_name)}
               </div>
-              <div className="order-card--info-p">{chefId}</div>
+              <div className="order-card--info-p"> {abbrevName(chefId)}</div>
               <div className="order-card--info-p">
                 {abbrevName(orderData.waiter_name)}
               </div>
@@ -105,10 +99,13 @@ const OrderCardFormat = ({ orderData }) => {
           </div>
           <div className="order-card--right-container">
             <div className="order-cart--containertime">
-              <Time
-                start={orderData.order_timestamp_start}
-                end={orderData.order_timestamp_end}
-              />
+              {orderData.order_status !== "Canceled" && (
+                <Time
+                  start={orderData.order_timestamp_start}
+                  end={orderData.order_timestamp_end}
+                  status={orderData.order_status}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -120,7 +117,7 @@ const OrderCardFormat = ({ orderData }) => {
           <div className="order-card--buttonsContainer">
             <button
               onClick={() => handleStatus()}
-              className="order-card--button--cooking"
+              className="order-card__button"
             >
               {orderData.order_status === "Pending"
                 ? "Start Cooking"
@@ -138,13 +135,13 @@ const OrderCardFormat = ({ orderData }) => {
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Cancel Order"
-                className="order-card--button--cooking"
+                className="order-card__button"
               />
             ) : orderData.order_status === "Ready to Serve" ? (
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Deliver Order"
-                className="order-card--button--cooking"
+                className="order-card__button"
               />
             ) : null}
           </div>

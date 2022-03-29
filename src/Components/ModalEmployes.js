@@ -9,7 +9,7 @@ import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
-import Switch from "../Components/Switch";
+import SwitchCustom from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
@@ -19,6 +19,7 @@ import {
   createProductFirebase,
   uploadImage,
   createUserFirebase,
+  updateUser,
 } from "../Services/FirestoreServices";
 
 import ActionButton from "./ActionButton";
@@ -43,19 +44,74 @@ const style = {
   p: 5,
 };
 
-export default function ModalEmployes({ isOpen, onClose }) {
+export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
-  const { createUser } = useAuth();
-  const [userRole, setUserRole] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userStatus, setUserStatus] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [userPwd, setUserPwd] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const { createUser } = useAuth();
+  const { createUser, changeDataUsers, userCredential2 } = useAuth();
 
-  const handleCreateUser = async () => {
+  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [userStatus, setUserStatus] = useState(false);
+  const [userPwd, setUserPwd] = useState("*******");
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [secondUser, setSecondUser] = useState([]);
+
+  // }, [selectedOrderStatus, currentUser]);
+
+  const switchHandler = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const cleanForm = () => {
+    setUserId("");
+    setUserRole("");
+    setUserName("");
+    setUserStatus(false);
+    setUserEmail("");
+    setUserPwd("");
+    setChecked(false);
+    setLoading(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (employeeToEdit) {
+      editUserFirestore();
+      // ! aqui el loading?
+      // loading
+    } else {
+      createUserFirestore();
+    }
+  };
+
+  const editUserFirestore = async () => {
+    setLoading(true);
+    console.log("debería dar true el loading, ", loading);
+    // ! ------------------------------------intentando cambiar el correo!
+
+    // changeDataUsers(userEmail).then(
+    //   console.log("logré conseguir la credencial!", userCredential2)
+    // );
+
+    // ! ------------------------------------intentando cambiar el correo!
+
+    updateUser(userId, userName, userEmail, userRole, checked)
+      .then((res) => {
+        onClose();
+      })
+      .finally(() => {
+        console.log("debería dar false el loading, FINALLY", loading);
+        setLoading(false);
+        cleanForm();
+      });
+  };
+
+  const createUserFirestore = async () => {
+    // const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
-    //primero subimos la imagen luego creamos el objeto en la base de datos
     setLoading(true);
 
     const userID = await createUser(userEmail, userPwd);
@@ -78,6 +134,20 @@ export default function ModalEmployes({ isOpen, onClose }) {
   const handleChangeRole = (e) => {
     setUserRole(e.target.value);
   };
+
+  useEffect(() => {
+    if (employeeToEdit) {
+      setUserId(employeeToEdit.user_id);
+      setUserRole(employeeToEdit.user_rol);
+      setUserName(employeeToEdit.user_name);
+      setUserEmail(employeeToEdit.user_email);
+      setUserPwd("");
+      setLoading(loading);
+      setUserStatus(employeeToEdit.user_status);
+      setChecked(userStatus);
+    }
+    return () => cleanForm();
+  }, [employeeToEdit, userStatus]);
 
   return (
     <Modal
@@ -115,6 +185,7 @@ export default function ModalEmployes({ isOpen, onClose }) {
               <TextField
                 fullWidth
                 label="User Name"
+                value={userName}
                 variant="outlined"
                 autoComplete="off"
                 onChange={(e) => setUserName(e.target.value)}
@@ -124,6 +195,7 @@ export default function ModalEmployes({ isOpen, onClose }) {
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label="Email"
                 variant="outlined"
+                value={userEmail}
                 autoComplete="off"
                 onChange={(e) => setUserEmail(e.target.value)}
               />
@@ -134,11 +206,15 @@ export default function ModalEmployes({ isOpen, onClose }) {
                 autoComplete="off"
                 onChange={(e) => setUserPwd(e.target.value)}
               />
-              <label>Activo</label>
-              <Switch />
-              <div className="large-button--content" onClick={handleCreateUser}>
+              <label>Status</label>
+              <SwitchCustom
+                checkedFromParent={checked}
+                handler={switchHandler}
+              />
+
+              <div className="large-button--content" onClick={handleSubmit}>
                 <ActionButton
-                  title={"Create Employee"}
+                  title={employeeToEdit ? "Update Employee" : "Create Employee"}
                   className={"button--pink"}
                 />
               </div>

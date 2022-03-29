@@ -31,9 +31,21 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 0 0 10px 10px;
-  transition: all ease 0.5s;
-  flex-direction: column;
-  padding: 1rem;
+  transition: all ease 0.2s;
+  overflow: hidden;
+  transform: translateY(0px);
+}
+.err-msg.hide {
+  transform: translateY(-5em);
+}
+
+.err-msg__content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .err-msg-header {
@@ -55,4 +67,45 @@ body {
 .err-msg--text {
   color: #fff;
   font-size: 1em;
+}
+
+.err-msg__close-icon {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.5rem;
+}
+
+/* @keyframes shake {
+  25% {
+    transform: translate(-3px, 0);
+    
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  75% {
+    transform: translate(-3px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}  */
+/* Modal Error */
+.err-msg-modal {
+  background-color: #ff4b61;
+  width: 100%;
+  position: absolute;
+  height: 3.5rem;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 20px 0px 0px;
+  transition: all ease 0.3s;
+  overflow: hidden;
+  transform: translateY(0px);
+}
+.err-msg-modal.hide {
+  transform: translateY(-25em);
 }

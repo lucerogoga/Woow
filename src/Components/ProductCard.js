@@ -1,17 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
-import formatNum from "format-num";
-
 import "../Assets/ProductCard.css";
-
-import { ReactComponent as More } from "../Assets/icons/more.svg";
-
+import { v4 as uuidv4 } from "uuid";
+//Context
 import { useCart } from "../Components/Context/CartContext";
 import { useSideBarCart } from "./Context/SideBarCartContext";
-
+//Components
+import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
+import { ReactComponent as More } from "../Assets/icons/more.svg";
+//Firebase Conections
 import { deleteProductFirebase } from "../Services/FirestoreServices";
+//Helpers
+import formatNum from "format-num";
+import { sentenceFormatted } from "../helpers/nameFormatted";
 
 export function ProductCard(props) {
   const { product, path, isOpen, productSelectedToEdit } = props;
@@ -70,11 +71,11 @@ export function ProductCard(props) {
   //--------Product CRUD Admin
   const HandleEditProduct = (product) => {
     isOpen(product);
-    //  productSelectedToEdit = product;
   };
   const HandleRemoveProduct = (productId) => {
     deleteProductFirebase(productId);
   };
+
   return (
     <div className="product-card">
       <div
@@ -83,18 +84,13 @@ export function ProductCard(props) {
       >
         {" "}
       </div>
-      {/* <div className="product-card--photoContainer">
-        <img
-          src={product.product_photo[0]}
-          className="product-image"
-          alt="product.name"
-        />
-      </div> */}
-
       <div className="product-card--textContainer">
         <div className="product-card--text">
           <h2 className="product-card--title"> {product.product_name}</h2>
-          <p className="product-card--descr"> {product.product_description}</p>
+          <p className="product-card--descr">
+            {" "}
+            {sentenceFormatted(product.product_description)}
+          </p>
           <h3 className="product-card--cost">
             {"$ " +
               formatNum(product.product_cost[0], {

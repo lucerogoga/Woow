@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 import ButtonFilter from "../../Components/ButtonFilter";
 import ProductCard from "../../Components/ProductCard";
 import ActionButton from "../../Components/ActionButton";
 import ModalProducts from "../../Components/ModalProducts";
 import iconComponents from "../../Assets/iconComponent/CustomLogo";
+import "../../Assets/AdminProducts.css";
 
 import {
   getProducts,
@@ -14,14 +14,8 @@ import {
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
 
-import {
-  onSnapshot,
-  collection,
-  query,
-  where,
-  orderBy,
-} from "firebase/firestore";
-import { useAuth } from "../../Components/Context/AuthContext";
+import { onSnapshot, collection, query } from "firebase/firestore";
+
 import { db } from "../../Config/initialize";
 
 const AdminProducts = () => {
@@ -31,12 +25,14 @@ const AdminProducts = () => {
 
   const location = useLocation();
   const { pathname } = location;
-  console.log(pathname);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [productToEdit, setProductToEdit] = useState("");
+  console.log("productToEdit base, ", productToEdit);
   const handleCategorie = async (catUid, catName) =>
     await filterProductByCategorie(catUid, catName);
 
   useEffect(() => {
-    // getProducts().then((products) => setProducts(products));
     getProductsCategories().then((category) => setProductCategories(category));
   }, []);
 
@@ -54,10 +50,10 @@ const AdminProducts = () => {
     });
   };
 
-  const [openModal, setOpenModal] = useState(false);
-  const [productToEdit, setProductToEdit] = useState("");
   const handleOpen = (product) => {
+    console.log("productToEdit base en handleOpen, ", productToEdit);
     setOpenModal(true);
+    console.log("product de handleOpen, ", product);
     setProductToEdit(product);
   };
   const onClose = () => {
@@ -71,7 +67,7 @@ const AdminProducts = () => {
     });
     setProducts(product);
   };
-  console.log("producto seleccionado", productToEdit);
+
   return (
     <>
       <Search onChange={handleSearch} placeholder={"Search product"}></Search>
@@ -96,25 +92,26 @@ const AdminProducts = () => {
         onClose={onClose}
         productToEdit={productToEdit}
       />
-      <div className="products-container" style={{ height: "55vh" }}>
-        {products.map((product) => {
-          return (
-            <ProductCard
-              path={pathname}
-              product={product}
-              key={product.id}
-              isOpen={() => handleOpen(product)}
-              //productSelectedToEdit={() => setProduct(product)}
-            />
-          );
-        })}
-      </div>
-      <div className="large-button--content" onClick={handleOpen}>
-        <ActionButton
-          title={"Add Product"}
-          className={"button--pink"}
-          //   onClick={openModal}
-        />
+      <div className="container--reverse">
+        <div className="products-container vh">
+          {products.map((product) => {
+            return (
+              <ProductCard
+                path={pathname}
+                product={product}
+                key={product.id}
+                isOpen={() => handleOpen(product)}
+              />
+            );
+          })}
+        </div>
+        <div className="large-button--content" onClick={() => handleOpen()}>
+          <ActionButton
+            title={"Add Product"}
+            className={"button--pink"}
+            //   onClick={openModal}
+          />
+        </div>
       </div>
     </>
   );

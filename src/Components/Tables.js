@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+//Component
 import MaterialTable from "material-table";
 
 class Table extends Component {
@@ -32,6 +32,4 @@ class Table extends Component {
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('react-div'));
 export { Table };
-

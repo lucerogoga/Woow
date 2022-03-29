@@ -1,5 +1,7 @@
 import React from "react";
+//Component
 import { ReactComponent as Look } from "../Assets/icons/magnifying-glass.svg";
+
 const Search = ({ onChange, placeholder }) => {
   const handleChange = (e) => {
     onChange(e.target.value);

@@ -10,6 +10,8 @@ import WaiterView from "../Pages/Waiter/WaiterView";
 import TakeOrderWaiter from "../Pages/Waiter/TakeOrderWaiter";
 import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
+import OrderCart from "../Pages/Waiter/OrderCart";
+
 import Cart from "./Cart";
 
 import ChefView from "../Pages/Chef/ChefView";
@@ -125,7 +127,8 @@ function App() {
             {/* ANIDADO */}
             <Route path="" element={<TakeOrderWaiter />} />
             <Route path="orders-resume" element={<OrdersResumeWaiter />} />
-            <Route path="order-cart" element={<Cart />} />
+            {/* <Route path="order-cart" element={<Cart />} /> */}
+            <Route path="order-cart" element={<OrderCart />} />
           </Route>
 
           <Route

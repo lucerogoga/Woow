@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from "react";
-import "../Assets/Cart.css";
-//Context
-import { useAuth } from "./Context/AuthContext";
-import { useCart } from "../Components/Context/CartContext";
-//Components
-import Title from "./Title";
-import ProductAddedCart from "./ProductAddedCart";
-import ActionButton from "../Components/ActionButton";
-import Error from "./Error";
-import Success from "./Successfull";
-import InputInfoClient from "./InputInfoClient";
-import TrashButton from "./Trash";
-//Helpers
-import formatNum from "format-num";
-//Firebase Conection
-import { createOrder, getUser } from "../Services/FirestoreServices";
-import { onSnapshot, collection } from "firebase/firestore";
-import { db } from "../Config/initialize";
 
-const Cart = ({ cantEdit, handleGoCart }) => {
+import { useCart } from "../../Components/Context/CartContext";
+import { useAuth } from "../../Components/Context/AuthContext";
+
+import Title from "../../Components/Title";
+import ProductAddedCart from "../../Components/ProductAddedCart";
+import InputInfoClient from "../../Components/InputInfoClient";
+import ActionButton from "../../Components/ActionButton";
+import Error from "../../Components/Error";
+import "../../Assets/Cart.css";
+import formatNum from "format-num";
+import Success from "../../Components/Successfull";
+
+import "../../Assets/OrderCart.css";
+
+import { db } from "../../Config/initialize";
+import { onSnapshot, collection } from "firebase/firestore";
+import { createOrder, getUser } from "../../Services/FirestoreServices";
+import TrashButton from "../../Components/Trash";
+
+const OrderCart = ({ cantEdit }) => {
   const [isInfoEmpty, setIsInfoEmpty] = useState(false);
   const [isCartEmpty, setIsCartEmpty] = useState(false);
   const [orderNumber, setOrderNumber] = useState(0);
   const [userName, setUserName] = useState("");
-  //States for success message
+  //--------states for success message
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
+  //------------set Number of the orders for a better Secuency of orders
+  const [orderCorrelative, setOrderCorrelative] = useState(0);
 
-  // call the info from context Cart and Auth
+  //we call the contex of our cart
   const {
     cart,
     setCart,
@@ -35,12 +38,11 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     setClientName,
     tableNumber,
     setTableNumber,
-    isClean,
     setIsClean,
   } = useCart();
+
   const { user } = useAuth();
 
-  //Setting the name of the Current User
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(user.currentUser);
@@ -48,8 +50,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     }
     settingUserName();
   }, [user]);
-  //We declare the Correlative Number od the Order
-  const [orderCorrelative, setOrderCorrelative] = useState(0);
+
   useEffect(() => {
     const orderRef = collection(db, "orders");
     onSnapshot(orderRef, (snapshot) => {
@@ -57,8 +58,9 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     });
   }, [orderCorrelative]);
 
-  //-------------------------------Sum of costs
+  //-------------------------------Sum of costs of all products
   const itemsPrice = cart.reduce((a, b) => a + Number(b.totalCost), 0);
+  //-------------------------------Sum of products in the cart
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
   const handleOrder = () => {
@@ -97,7 +99,7 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   return (
     <>
       <div className="cart-content">
-        <Title title="Order" quantity={qtyItems} />
+        <Title title="My Cart (Products)" quantity={qtyItems} />
         <div className="client-info--content">
           <InputInfoClient />
           <div width={30} onClick={cleanInputs}>
@@ -117,8 +119,8 @@ const Cart = ({ cantEdit, handleGoCart }) => {
           />
         )}
 
-        <div className="cart-product--content">
-          <div className="cart-product--productContainer">
+        <div className="cart-product--content order-cart">
+          <div className="cart-product--productContainer order-cart">
             <Success estado={state} loading={load} />
 
             {cart.map((cartProduct) => (
@@ -129,25 +131,36 @@ const Cart = ({ cantEdit, handleGoCart }) => {
               />
             ))}
           </div>
-          <div className="footer-content">
-            <div className="total-price">
-              <h3>Total Cost</h3>
-              <h3 className="total-price__price">
-                {"$ " +
-                  formatNum(itemsPrice, {
-                    minFraction: 2,
-                    maxFraction: 2,
-                  })}
-              </h3>
+          <div className="footer-content order-cart">
+            <div className="total-price order-cart">
+              <h3>Resume Order</h3>
+              <div className="info-order__container">
+                <div className="info-order__item">
+                  <h3>Client: </h3>
+                  <p>{clientName}</p>
+                </div>
+                <div className="info-order__item">
+                  <h3>Table: </h3>
+                  <p>{tableNumber}</p>
+                </div>
+                <div className="info-order__item">
+                  <h3>Products</h3>
+                  <p>{qtyItems}</p>
+                </div>
+              </div>
+              <div className="total-cost__container">
+                <h3>Total Cost</h3>
+                <h3 className="total-price__price">
+                  {"$ " +
+                    formatNum(itemsPrice, {
+                      minFraction: 2,
+                      maxFraction: 2,
+                    })}
+                </h3>
+              </div>
             </div>
             <div className="large-button--content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
-            </div>
-            <div className="large-button--content" onClick={handleGoCart}>
-              <ActionButton
-                title="Check my Cart"
-                className={"button--white"}
-              ></ActionButton>
             </div>
           </div>
         </div>
@@ -156,4 +169,4 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   );
 };
 
-export default Cart;
+export default OrderCart;
