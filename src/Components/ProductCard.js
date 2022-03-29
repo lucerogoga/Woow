@@ -75,6 +75,7 @@ export function ProductCard(props) {
   const HandleRemoveProduct = (productId) => {
     deleteProductFirebase(productId);
   };
+
   return (
     <div className="product-card">
       <div

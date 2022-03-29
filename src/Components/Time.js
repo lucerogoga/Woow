@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Assets/Time.css";
+//Component
 import { ReactComponent as Clock } from "../Assets/icons/clock.svg";
+//Libraries
 import moment from "moment";
 import "moment-precise-range-plugin";
 
 const Time = ({ start, end, status }) => {
-  const [hoursDiff, setHoursDiff] = useState("00");
-  const [minutesDiff, setMinutesDiff] = useState("00");
-  const [secondsDiff, setSecondsDiff] = useState("00");
   const [duration, setDuration] = useState(moment.duration(0));
   useEffect(() => {
     const updateCounterDuration = () => {
@@ -40,7 +39,6 @@ const Time = ({ start, end, status }) => {
   const formatedTimeDiff = moment
     .utc(duration.asMilliseconds())
     .format("HH:mm:ss");
-
   // 60000 ms = 1 minute
   // 20000 ms = 20 seconds
   // {true && <h1>hola</h1>}

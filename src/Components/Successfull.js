@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+//Material UI Component
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Fab from "@mui/material/Fab";
+//Material UI Icons
 import CheckIcon from "@mui/icons-material/Check";
 
 export default function Success({ estado, loading }) {
   const [success, setSuccess] = useState(false);
-
+  //Styles for Material UI
   const buttonSx = {
     ...(success && {
       bgcolor: "#ff9aa3",
