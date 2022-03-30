@@ -104,7 +104,7 @@ Lo acordado que debe ocurrir para decir que la historia está terminada.
 
 ✔️ Desplegaste tu aplicación y has etiquetado tu versión (git tag).
 
-
+---
 
 #### [Historia de usuario 2] Jefe de cocina debe ver los pedidos
 
@@ -146,12 +146,9 @@ rápidamente a los clientes que las hicieron.
 
 ---
 
-***
-
 #### [Historia de usuario 4] Meserx debe ver pedidos listos para servir
 
-Yo como meserx quiero ver los pedidos que están preparados para entregarlos
-rápidamente a lxs clientxs que las hicieron.
+Yo como meserx quiero ver los pedidos que están preparados para entregarlos rápidamente a lxs clientxs que las hicieron.
 
 ##### Criterios de aceptación
 
@@ -265,10 +262,16 @@ El prototipo contempla 3 módulos, uno para cada rol (mesero, chef y administrad
 
 A lo largo del desarrollo del producto digital, se hicieron constantes pruebas de usabilidad, limpieza del código y algunas mejoras para garantizar una agradable experiencia al usuario que navega en ella. Entre ellas podemos destacar.
 
-- Creación de reloj dinámico que indique que el tiempo de creación de un producto ha excedido el tiempo aceptable
-- b
-- c
-- d
+- Creación de reloj dinámico que indique que el tiempo de creación de un producto ha excedido un tiempo definido (como tema de demostración el reloj indicará que sobrepasa el límite de 20 segundos).
+- Se añadió más datos en las ordenes como el nombre del mesero que lo envía y del
+mesero que acepta la orden.
+- Vista extra para aquellos productos que cuentan con algunas especificaciones
+(variedad de tamaños por porciones o si desea añadir algún mensaje como observación, en caso que el cliente sea alérgico a algún ingrediente).
+- Links activos en la barra de navegación en caso que la vista sea la que coincida con la ruta.
+- Visualización de la cantidad de los pedidos según su estado.
+- Cambios en la distribución del elementos en caso que la vista esté en escritorio como los botones para añadir producto o añadir empleado.
+- Se agregó otra vista para chequear detallado los productos en el carrito.
+- Implementación de botón para remover todos los productos añadidos al carrito.
 
 #### Creación del contenido
 
@@ -276,21 +279,17 @@ Tomando en cuenta que el mesero maneja un menú exteso, el contenido se basa en 
 
 A continuación, el flujo y las vistas por módulo del sistema se presentará a través del siguiente [documento PDF](https://vercel.com/). 
 
+#### Ejecución del diseño y la programación
 
-5. EJECUCIÓN DEL DISEÑO Y LA PROGRAMACIÓN
-Una vez que está todo claro, es el momento de diseñar y programar. Muchas veces el diseño se hará pensando en un estándar, pero otras habrá que realizar pruebas, estudiar diferentes modelos de web y realizar un test A/B para ver cuál recibe mejores resultados y cumple mejor con tus objetivos.
+Una vez teniendo todo lo antes mencionado, al momento de crear el diseño con código
+nos aseguramos que todas las herramientas y tecnologías implementadas se le haya aplicado las mejores prácticas posibles, siguiendo un estándar de calidad que sirven como referencia para construir una web accesible y eficiente, en la que se pueda convertirse más robusta.
 
-En la fase de diseño y programación, tanto si usamos un CMS, como si desarrollamos la web desde cero, debemos asegurarnos de que todo se ajusta a unos parámetros, que seguimos un estándar de calidad y que la web cumple realmente lo que promete.
+#### Lanzamiento y pruebas 
 
-6. LANZAMIENTO Y PRUEBAS
-Cuando desarrollamos un sitio web desde cero, no podemos simplemente ponerlo a disposición de los usuarios sin haber realizado antes los convenientes tests de calidad. Es conveniente probar que todo funciona, analizar el archivo logs para ver qué errores se producen en la web, así como ver la respuesta de la web ante un alto número de solicitudes y operaciones.
+Antes de dejar esta aplicación a disposición de los usuarios, se realizó los convenientes tests de calidad, así como volver a probar la experiencia de usuario y así probar que todas nuestras funcionalidades funcionan. De esta forma resolvimos algunos pequeños errores que se presentaron.
 
-De esta forma, podemos resolver algunos de los errores más comunes que puedan surgir antes de poner la web a disposición de los usuarios y empezar a difundirla.
-
-Esperamos que este artículo te haya ayudado a aclarar las fases del diseño de un sitio web. Si quieres crear una página web para tu negocio, contacta con nosotros aquí.
-
-Si necesitas contenido para tu web, echa un vistazo a nuestros servicios de posicionamiento.
 ## 6. Recursos Utilizados
+
 
 ### Despliegue
 
@@ -298,8 +297,11 @@ Si necesitas contenido para tu web, echa un vistazo a nuestros servicios de posi
 
 ### Otros recursos
 
-    
-#### Frameworks / libraries
+- [Figma](https://figma.com/)
+- [Adobe Photoshop](https://www.adobe.com/la/products/photoshop.html/)
+- [Adobe Illustrador](https://www.adobe.com/la/products/illustrator.html/)
+
+#### Frameworks / librerías.
 
 - [React JS](https://es.reactjs.org/)
 
@@ -311,19 +313,88 @@ Si necesitas contenido para tu web, echa un vistazo a nuestros servicios de posi
 
 #### Reglas para un buen código
 
-Al inicio del proyecto, hemos establecido algunas reglas para trabajar colaborativamente y lograr mantener un flujo de trabajo. Estas reglas son las siguientes: 
+Al inicio del proyecto, hemos establecido algunas reglas para trabajar colaborativamente y lograr mantener un flujo de trabajo apropiado. Estas reglas son las siguientes: 
 
 - Codebase y Commits en inglés.
 - Uso de Camel Case para funciones (ej. miFunción)
-- CSS - BEM(Bloque-elemento-modificador)  \*  [BEM](http://getbem.com/naming/).
+- CSS - BEM (Bloque-elemento-modificador)  \*  [BEM](http://getbem.com/naming/).
 - Nombre de las variables Pascal Case (ej. miVariable)
 - Componentes con Pascal Case MyComponent.
 
 ## 7. Resultado Final
 
+Como resultado final se adjuntará una breve videodemostración del sistema para que pueda apreciar el diseño y las funcionalidades. En caso de desear echar un vistazo y chequear la aplicación puede hacer click al siguiente link [Woow System](http://getbem.com/naming/).
+
+### Mesero Vista
+
+#### Login
+
+![giphy](https://user-images.githubusercontent.com/91838806/160939723-809caf75-a5a3-4313-82e7-6fa4d742c7fd.gif)
+
+#### Filtrado de productos
+
+![filtro-busqueda-productos](https://user-images.githubusercontent.com/91838806/160939920-62849b86-3a14-4c88-9992-f8024f243f9b.gif)
+
+#### Añadir productos al carrito (Productos con algunos detalles o especificaciones)
+
+![add-product-with-detail](https://user-images.githubusercontent.com/91838806/160940106-f186d868-164d-4796-aae9-e480991e833f.gif)
+
+#### Remover producto del carrito
+
+![delete-product](https://user-images.githubusercontent.com/91838806/160940328-116f8dcc-14fb-4bdc-b5a8-c14c12488857.gif)
+
+#### Agregar producto al carrito
+
+![add-product](https://user-images.githubusercontent.com/91838806/160940418-9edca190-ac72-4b3d-a653-c50283bb8629.gif)
+
+#### Enviar pedido al chef
+
+![send-order-to-chef](https://user-images.githubusercontent.com/91838806/160940539-b030f6e1-a0bf-4772-a151-c996f6d680ac.gif)
+
+
+#### Estado de ordenes
+
+##### Estado "Pendiente"
+
+![waiter-order-resume-order-state-pending](https://user-images.githubusercontent.com/91838806/160940963-551624c2-57b4-49f9-986c-ffb9ef035e5f.gif)
+
+##### Estado "Cancelado"
+
+![waiter-order-resume-order-state-canceled](https://user-images.githubusercontent.com/91838806/160942335-f6d7691f-bfda-45fb-954c-323fc0405c19.gif)
+
+##### Estado "Cocinando"
+
+![waiter-order-resume-order-state-cooking](https://user-images.githubusercontent.com/91838806/160942410-15d491b2-8563-4898-ba51-46a8401b2d73.gif)
+
+##### Estado "Entregado"
+
+![waiter-order-resume-order-state-delivered](https://user-images.githubusercontent.com/91838806/160942536-d8375e64-2ab0-4953-b71e-112faa63543b.gif)
+
+
+---
+
+### Chef Vista
+
+#### Login
+
+![chef-login](https://user-images.githubusercontent.com/91838806/160942663-3119ddd1-2e19-48a4-a280-85348fda47ba.gif)
+
+#### Estado de Ordenes
+
+##### Estado "Pendiente"
+
+![chef-received-orders](https://user-images.githubusercontent.com/91838806/160942785-8085658f-97b8-469f-be02-4e29de6a7e48.gif)
+
+##### Estado "
+
+
+
 ## 8. Fuente
+
+
 
 ## 9. Autores
 
 [Mirian Alejandra Arévalo 🙋](https://github.com/mirianalejandra1996).
-[Lucero Gonzáles 🙋](https://github.com/mirianalejandra1996).
+
+[Lucero Gonzáles 🙋](https://github.com/lucerogoga).
