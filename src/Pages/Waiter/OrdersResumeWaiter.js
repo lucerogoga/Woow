@@ -59,8 +59,12 @@ const OrdersResumeWaiter = () => {
   }, []);
 
   const filterOrders = () => {
-    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
-      allOrders.filter((doc) => doc.order_status === elem)
+    const arrayOfOrdersByStatus = productOrderCategories.map(
+      (elem) =>
+        allOrders.filter(
+          (doc) => doc.order_status === elem && doc.waiter_id === currentUser
+        )
+      // allOrders.filter((doc) => doc.order_status === elem)
     );
     return arrayOfOrdersByStatus.map((elem) => elem.length);
   };
@@ -96,10 +100,7 @@ const OrdersResumeWaiter = () => {
           );
         })}
       </div>
-      <Title
-        title={`Orders ${selectedOrderStatus}`}
-        quantity={QuantifiedForTitle}
-      />
+      <Title title={`Orders ${selectedOrderStatus}`} quantity={orders.length} />
 
       <div>
         {orders.map((order) => (
