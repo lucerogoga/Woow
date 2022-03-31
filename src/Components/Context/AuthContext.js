@@ -8,6 +8,7 @@ import {
   EmailAuthProvider,
   updateEmail,
   updatePassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth, auth2 } from "../../Config/initialize.js";
 
@@ -23,8 +24,6 @@ export const AuthProvider = ({ children }) => {
   const [secondaryUser, setSecondaryUser] = useState({});
   const [userCredential2, setUserCredential2] = useState({});
 
-  const [prueba, setPrueba] = useState(false);
-
   const createUser = (email, password) => {
     return signOut(auth2)
       .then(() => {
@@ -37,18 +36,9 @@ export const AuthProvider = ({ children }) => {
         return firebaseUser.user.uid;
       })
       .then((idUser) => {
-        // return signOut(auth2);
         return { logout: signOut(auth2), userId: idUser };
       });
-    // .then(signOut(auth2));
   };
-  // const createUser = (email, password) => {
-  //   return createUserWithEmailAndPassword(auth2, email, password)
-  //     .then((firebaseUser) => {
-  //       return firebaseUser.user.uid;
-  //     })
-  //     .then(signOut(auth2));
-  // };
 
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
@@ -86,6 +76,64 @@ export const AuthProvider = ({ children }) => {
 
   // !---------------
 
+  const changeNameUser = (email, pwd, name) => {
+    let userData;
+
+    return (
+      signOut(auth2)
+        .then(() => {
+          return loginSecondaryUser(email, pwd);
+        })
+        // .catch(() => {
+        //   return loginSecondaryUser(email, "123456");
+        // })
+        .then((secondUser) => {
+          userData = secondUser;
+          return createCredential(secondUser, pwd);
+        })
+        .then(() => {
+          const employe = userData.user.auth.currentUser;
+          console.log("se cambio el nombre del usuario?????, ", employe);
+
+          return updateProfile(employe, {
+            displayName: name,
+          });
+
+          // ---
+        })
+      // .then((sol) => {
+      //   return console.log("SII , ", sol);
+      // })
+      // .catch((e) =>
+      //   console.log("ERROR AL CAMBIAR EL NOMBRE POR AUTH, ", e.message)
+      // )
+    );
+  };
+
+  const changePwdUser = (email, pwd, newPwd) => {
+    let userData;
+
+    return (
+      signOut(auth2)
+        .then(() => {
+          return loginSecondaryUser(email, pwd);
+        })
+        // .catch(() => {
+        //   return loginSecondaryUser(email, "123456");
+        // })
+        .then((secondUser) => {
+          userData = secondUser;
+          return createCredential(secondUser, pwd);
+        })
+        .then(() => {
+          console.log("llegamos hasta acà?");
+          const employe = userData.user.auth.currentUser;
+          return changePasswordAuth(employe, newPwd);
+        })
+        .catch((e) => console.log(e.message))
+    );
+  };
+
   const changeEmailUser = (email, newEmail) => {
     let userData;
 
@@ -107,6 +155,47 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => e.message);
   };
+
+  // ! lograré esto! una funcion que cambie las tres cosas de frente.
+  const changeUserDataAuth = (email, newEmail, pwd, newPwd, name) => {
+    console.log("mi nuevo correo es, ", newEmail);
+
+    return changeNameUser(email, pwd, name) // (email, pwd, name)
+      .then(() => {
+        console.log("SE CAMBIO EN AUTH EL NOMBRE");
+        return changePwdUser(email, pwd, newPwd); //email, pwd, newPwd
+      })
+      .then(() => {
+        console.log("SE CAMBIO EN AUTH EL PASSWORD");
+        return changeEmailUser(email, newEmail); //email, newEmail
+      })
+      .catch((e) => {
+        return console.log("PROBLEMAS EN GRANDEEEEEEEEEEEEE", e.message);
+      });
+  };
+
+  // const changeUserDataAuth = (email, newEmail, pwd, newPwd, name) => {
+  //   const emailCurrent = newEmail ? newEmail : email;
+  //   const pwdCurrent = newPwd ? newPwd : pwd;
+
+  //   // let userData;
+
+  //   return changeNameUser(email, pwd, name) // (email, pwd, name)
+  //     .then(() => {
+  //       console.log("SE CAMBIO EN AUTH EL NOMBRE");
+  //       return changePwdUser(email, pwd, pwdCurrent); //email, pwd, newPwd
+  //     })
+  //     .then(() => {
+  //       console.log("SE CAMBIO EN AUTH EL PASSWORD");
+  //       return changeEmailUser(email, emailCurrent); //email, newEmail
+  //     })
+  //     .catch((e) => {
+  //       return console.log("PROBLEMAS EN GRANDEEEEEEEEEEEEE", e.message);
+  //     });
+  //   //   changeNameUser
+  //   // changePwdUser
+  //   // changeEmailUser
+  // };
 
   // !------------------------------
   const logout = () => {
@@ -167,6 +256,9 @@ export const AuthProvider = ({ children }) => {
         userCredential2,
         auth2,
         signOut,
+        changeUserDataAuth,
+        changePwdUser,
+        changeNameUser,
       }}
     >
       {children}
