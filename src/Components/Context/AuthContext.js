@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         return loginSecondaryUser(email, "123456");
       })
       .then((secondUser) => {
-        setSecondaryUser(secondUser);
+        // setSecondaryUser(secondUser);
         userData = secondUser;
         return createCredential(secondUser, "123456");
       })
