@@ -55,15 +55,17 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productCost, setProductCost] = useState([]);
+  const [productCost, setProductCost] = useState("");
   const [productOption, setProductOption] = useState([null]);
   const [productPhoto, setProductPhoto] = useState([]);
-  const [productStock, setProductStock] = useState([]);
+  const [productStock, setProductStock] = useState("");
   const [objectURL, setObjectURL] = useState("");
   //states for error Message
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
-
+  console.log(productStock);
+  console.log(productCost);
+  console.log(productPhoto);
   const cleanForm = () => {
     setCategoryId("");
     setProductName("");
@@ -83,13 +85,12 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       setCategoryId(productToEdit.cat_id);
       setProductName(productToEdit.product_name);
       setProductDescription(productToEdit.product_description);
-      setProductCost(productToEdit.product_cost);
-      setProductStock(productToEdit.product_stock);
+      setProductCost(productToEdit.product_cost[0]);
+      setProductStock(productToEdit.product_stock[0]);
       setProductOption(null);
       setProductPhoto(productToEdit.product_photo[0]);
       setObjectURL("");
     }
-
     return () => cleanForm();
   }, [productToEdit]);
 
@@ -145,7 +146,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       productName,
       productDescription,
       productCost,
-      productOption,
       downloadUrl,
       productStock
     )
