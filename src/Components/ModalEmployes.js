@@ -11,7 +11,12 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
 import SwitchCustom from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
-import { validateEmail } from "../helpers/loginFuntions";
+import {
+  validateEmail,
+  validateName,
+  validateEmailDomains,
+  validatePassword,
+} from "../helpers/loginFuntions";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
@@ -72,10 +77,13 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   // }, [selectedOrderStatus, currentUser]);
 
   const switchHandler = (event) => {
+    console.log("el switch funciona, ", event.target.checked);
     setChecked(event.target.checked);
   };
 
   const cleanForm = () => {
+    // console.log("crear usuario, ", userEmail, userPwd);
+    // console.log("crear usuario, ", userNewEmail, userPwd);
     setUserId("");
     setUserNewEmail("");
     setUserRole("");
@@ -141,11 +149,42 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     // const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
 
+    if (!userRole) {
+      return console.log("INGRESE UN ROL!");
+    }
+    if (userName.trim()?.length === 0) {
+      return console.log("INGRESA UN NOMBRE VALIDO");
+    }
+    if (!validateName(userName)) {
+      return console.log("SOLO INGRESE LETRAS EN EL NOMBRE");
+    }
+    if (userNewEmail.trim()?.length === 0) {
+      // if (userNewEmail.trim()) {
+      return console.log("INGRESE UN CORREO!");
+    }
+    if (!validateEmail(userNewEmail)) {
+      // if (userNewEmail.trim()) {
+      return console.log("EL CORREO DEBE TENER UN FORMATO!");
+    }
+    if (!validateEmailDomains(userNewEmail)) {
+      // if (userNewEmail.trim()) {
+      return console.log("EL CORREO DEBE SER GMAIL O YAHOO!");
+    }
+    if (userPwd.trim()?.length === 0) {
+      // if (userNewEmail.trim()) {
+      return console.log("INGRESE UNA CONTRASEÑA");
+    }
+    if (!validatePassword(userPwd)) {
+      // if (userNewEmail.trim()) {
+      return console.log("LA CONTRASEÑA DEBE TENER MINIMO 6 CARÁCTERES");
+    }
+
     cleanForm();
     setLoading(true);
 
     // const userID = await createUser(userEmail, userPwd);
 
+    console.log("crear usuario, con check en  ", checked);
     console.log("crear usuario, ", userEmail, userPwd);
     console.log("crear usuario, ", userNewEmail, userPwd);
     createUser(userNewEmail, userPwd)
@@ -160,7 +199,8 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
         return createUserFirebase(
           userID,
           userRole,
-          userStatus,
+          checked,
+          // userStatus,
           userName,
           userNewEmail,
           userPwd
