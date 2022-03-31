@@ -113,7 +113,7 @@ const OrderCardFormat = ({ orderData }) => {
           <TableCard rows={rows} />
         </div>
 
-        {pathname === "/chef" && (
+        {/* {pathname === "/chef" && (
           <div className="order-card--buttonsContainer">
             <button
               onClick={() => handleStatus()}
@@ -122,9 +122,10 @@ const OrderCardFormat = ({ orderData }) => {
               {orderData.order_status === "Pending"
                 ? "Start Cooking"
                 : "Order Ready"}
+                
             </button>
           </div>
-        )}
+        )} */}
 
         {pathname === "/waiter/orders-resume" && (
           <div
@@ -141,6 +142,27 @@ const OrderCardFormat = ({ orderData }) => {
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Deliver Order"
+                className="order-card__button"
+              />
+            ) : null}
+          </div>
+        )}
+
+        {pathname === "/chef" && (
+          <div
+            onClick={() => handleStatus()}
+            className="order-card--buttonsContainer"
+          >
+            {orderData.order_status === "Pending" ? (
+              <ActionButton
+                onClick={() => handleStatus()}
+                title="Start Cooking"
+                className="order-card__button"
+              />
+            ) : orderData.order_status === "Cooking" ? (
+              <ActionButton
+                onClick={() => handleStatus()}
+                title="Order Ready"
                 className="order-card__button"
               />
             ) : null}

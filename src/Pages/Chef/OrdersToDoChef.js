@@ -74,10 +74,31 @@ export const OrdersToDoChef = () => {
   }, []);
 
   const filterOrders = () => {
-    const arrayOfOrdersByStatus = ordersStatus.map((elem) =>
-      allOrders.filter((doc) => doc.order_status === elem)
+    // const arrayOfOrdersByStatus = ordersStatus.map((elem) =>
+    //   allOrders.filter((doc) => doc.order_status === elem)
+    // );
+
+    // En mesero solo puede ver sus ordenes en cualqiuirea  de los estados   y el otro que sirve
+    // En chef cuando esté en estado coocking - ready y deliver (que tenga id de chef)
+
+    const arrayOfPendingOrders = allOrders.filter(
+      (doc) => doc.order_status === "Pending"
+    ).length;
+
+    const arrayOfOrdersByIdChef = allOrders.filter(
+      (doc) => doc.chef_id === currentUser
     );
-    return arrayOfOrdersByStatus.map((elem) => elem.length);
+
+    const arrayOfCookingOrders = arrayOfOrdersByIdChef.filter(
+      (doc) => doc.order_status === "Cooking"
+    ).length;
+
+    const arrayOfDeliveredOrders = arrayOfOrdersByIdChef.filter(
+      (doc) => doc.order_status === "Delivered"
+    ).length;
+
+    // return arrayOfOrdersByStatus.map((elem) => elem.length);
+    return [arrayOfPendingOrders, arrayOfCookingOrders, arrayOfDeliveredOrders];
   };
   const QuantityForTtitle = (elem) => {
     const arrayOfOrdersByStatus = allOrders.filter(
@@ -111,7 +132,8 @@ export const OrdersToDoChef = () => {
       </div>
       <Title
         title={`Orders ${selectedOrderStatus}`}
-        quantity={QuantifiedForTitle}
+        // quantity={QuantifiedForTitle}
+        quantity={orders.length}
       />
       <div>
         {orders.map((order) => (

@@ -11,6 +11,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import InputLabel from "@mui/material/InputLabel";
 import SwitchCustom from "../Components/Switch";
 import { v4 as uuidv4 } from "uuid";
+import { validateEmail } from "../helpers/loginFuntions";
 
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 
@@ -46,11 +47,17 @@ const style = {
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
+  // const { createUser, changeEmailUser } = useAuth();
+
   // const { createUser } = useAuth();
-  const { createUser, changeDataUsers, userCredential2 } = useAuth();
+  const { createUser, changeEmailUser, auth2, signOut } = useAuth();
+  // const { createUser, changeEmailUser } = useAuth();
+  // const { createUser, changeEmailUser, userCredential2 } = useAuth();
 
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  // const [userNewEmail, setUserNewEmail] = useState("");
+  const [userNewEmail, setUserNewEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
   const [userStatus, setUserStatus] = useState(false);
@@ -58,6 +65,9 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
   const [secondUser, setSecondUser] = useState([]);
+
+  // !--- obteniendo el nuevo id del nuevo usuario creado
+  const [newUserId, setNewUserId] = useState("");
 
   // }, [selectedOrderStatus, currentUser]);
 
@@ -67,6 +77,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
   const cleanForm = () => {
     setUserId("");
+    setUserNewEmail("");
     setUserRole("");
     setUserName("");
     setUserStatus(false);
@@ -76,7 +87,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     setLoading(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (employeeToEdit) {
       editUserFirestore();
@@ -88,47 +99,116 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   const editUserFirestore = async () => {
+    if (userName.trim()?.length === 0) {
+      return console.log("INGRESA UN NOMBRE VÁLIDO");
+    }
+    if (!validateEmail(userNewEmail)) {
+      // if (userNewEmail.trim()) {
+      return console.log("EL CORREO DEBE TENER UN FORMATO!");
+    }
+    if (userEmail.trim() === userNewEmail.trim()) {
+      return console.log("INGRESA UN CORREO NUEVO!");
+    }
+
+    // Si el correo nuevo está vacio entonces se ejecuta cambio en datos básicos.
     setLoading(true);
     console.log("debería dar true el loading, ", loading);
     // ! ------------------------------------intentando cambiar el correo!
+    console.log("userEmail es, ", userEmail.trim());
+    console.log("userNewEmail es, ", userNewEmail.trim());
 
-    // changeDataUsers(userEmail).then(
-    //   console.log("logré conseguir la credencial!", userCredential2)
-    // );
-
-    // ! ------------------------------------intentando cambiar el correo!
-
-    updateUser(userId, userName, userEmail, userRole, checked)
+    console.log("SON IGUALES?", userEmail === userNewEmail);
+    console.log("SON DIFERENTES? ", userEmail !== userNewEmail);
+    changeEmailUser(userEmail, userNewEmail)
+      .then(() => {
+        return updateUser(userId, userName, userNewEmail, userRole, checked);
+      })
       .then((res) => {
         onClose();
+        console.log("proceso exitoso!");
       })
       .finally(() => {
         console.log("debería dar false el loading, FINALLY", loading);
         setLoading(false);
         cleanForm();
       });
+
+    // ! ------------------------------------intentando cambiar la contraseña!
   };
 
-  const createUserFirestore = async () => {
+  // const createUserFirestore = async () => {
+  const createUserFirestore = () => {
     // const handleCreateUser = async () => {
     //aqui obtenemos todos los datos del modal
+
+    cleanForm();
     setLoading(true);
 
-    const userID = await createUser(userEmail, userPwd);
-    createUserFirebase(
-      userID,
-      userRole,
-      userStatus,
-      userName,
-      userEmail,
-      userPwd
-    )
+    // const userID = await createUser(userEmail, userPwd);
+
+    console.log("crear usuario, ", userEmail, userPwd);
+    console.log("crear usuario, ", userNewEmail, userPwd);
+    createUser(userNewEmail, userPwd)
       .then((res) => {
-        onClose();
+        console.log("qué obtengo de aquí?, ", res);
+        const { logout, userId } = res;
+
+        setNewUserId(userId);
+        return userId;
       })
-      .finally(() => {
+      .then((userID) => {
+        return createUserFirebase(
+          userID,
+          userRole,
+          userStatus,
+          userName,
+          userNewEmail,
+          userPwd
+        );
+      })
+      .then((newUser) => {
+        console.log("BIENVENIDO AL NUEVO USUARIO: ", newUser);
+        return signOut(auth2);
+      })
+      .then(() => {
+        console.log("el usuario si logró desloguearse, ");
+      })
+      .catch((e) => {
+        console.log("problemas? , ", e.message);
+      })
+      .then(() => {
+        onClose();
         setLoading(false);
+        console.log("OBTUVE EL NUEVO ID! , ", newUserId);
+      })
+      .catch((e) => {
+        onClose();
+        setLoading(false);
+        console.log("ERRORES AL OBTENER EL NUEVO ID! , ", newUserId);
+        console.log("ERROR, ", e.message);
+        switch (e.message) {
+          case "Firebase: Error (auth/email-already-in-use).":
+            console.log("Email already in use.");
+            break;
+          default:
+            console.log("defult");
+        }
       });
+
+    // createUserFirebase(
+    //   userID,
+    //   userRole,
+    //   userStatus,
+    //   userName,
+    //   userEmail,
+    //   userPwd
+    // )
+    // .then((res) => {
+    onClose();
+    // })
+    // .finally(() => {
+    setLoading(false);
+    // });
   };
 
   const handleChangeRole = (e) => {
@@ -140,7 +220,10 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
+      // setUserNewEmail(employeeToEdit.user_email);
+      // ! aqui !
       setUserEmail(employeeToEdit.user_email);
+
       setUserPwd("");
       setLoading(loading);
       setUserStatus(employeeToEdit.user_status);
@@ -190,14 +273,35 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 autoComplete="off"
                 onChange={(e) => setUserName(e.target.value)}
               />
+              {employeeToEdit && (
+                <TextField
+                  fullWidth
+                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+                  label="Email"
+                  variant="outlined"
+                  defaultValue={userEmail}
+                  autoComplete="off"
+                  disabled={true}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                />
+              )}
+
               <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                label="Email"
+                label={employeeToEdit ? "New Email" : "Email"}
+                // label="New Email"
                 variant="outlined"
-                value={userEmail}
+                // value={userEmail}
+                value={userNewEmail}
+                // defaultValue={userEmail}
                 autoComplete="off"
-                onChange={(e) => setUserEmail(e.target.value)}
+                onChange={(e) => {
+                  // console.log("este es mi nuevo correo! , ", e.target.value);
+                  // console.log("este es mi viejo correo! , ", userEmail);
+                  setUserNewEmail(e.target.value);
+                }}
+                // onChange={(e) => setUserEmail(e.target.value)}
               />
               <TextField
                 fullWidth

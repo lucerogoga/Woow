@@ -28,9 +28,6 @@ const Employes = () => {
   const [openModal, setOpenModal] = useState(false);
   const [employeeToEdit, setEmployeeToEdit] = useState("");
   const [userEmployees, setUserEmployees] = useState("");
-  console.log("employeeToEdit base, ", employeeToEdit);
-  console.log("filteredEmployers, ", filteredEmployers);
-  console.log("employers, ", employers);
 
   const handleOpen = (employee) => {
     setOpenModal(true);
@@ -41,26 +38,19 @@ const Employes = () => {
     setOpenModal(false);
   };
 
-  // const {
-  //   user: { currentUser },
-  // } = useAuth();
-
   useEffect(() => {
     const q = query(collection(db, "users"));
 
     return onSnapshot(q, (snapshot) => {
+      // const usersEmployers = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       setEmployers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       setFilteredEmployers(
         snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
-      // employers
-      console.log("escuchando ando, ");
     });
   }, []);
 
   const handleSearchEmployes = async (query) => {
-    console.log("mi query es, ", query);
-
     // const prueba = filteredEmployers
     const prueba = employers;
 

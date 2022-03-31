@@ -257,7 +257,8 @@ export function createUserFirebase(
   userRole,
   userStatus,
   userName,
-  userEmail
+  userEmail,
+  userPwd
 ) {
   const userdoc = doc(db, "users", userID);
   return setDoc(userdoc, {
@@ -266,6 +267,7 @@ export function createUserFirebase(
     user_status: userStatus,
     user_name: userName,
     user_email: userEmail,
+    user_pwd: userPwd,
   });
 }
 

@@ -23,13 +23,32 @@ export const AuthProvider = ({ children }) => {
   const [secondaryUser, setSecondaryUser] = useState({});
   const [userCredential2, setUserCredential2] = useState({});
 
+  const [prueba, setPrueba] = useState(false);
+
   const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth2, email, password)
+    return signOut(auth2)
+      .then(() => {
+        return createUserWithEmailAndPassword(auth2, email, password);
+      })
+      .catch(() => {
+        return createUserWithEmailAndPassword(auth2, email, password);
+      })
       .then((firebaseUser) => {
         return firebaseUser.user.uid;
       })
-      .then(signOut(auth2));
+      .then((idUser) => {
+        // return signOut(auth2);
+        return { logout: signOut(auth2), userId: idUser };
+      });
+    // .then(signOut(auth2));
   };
+  // const createUser = (email, password) => {
+  //   return createUserWithEmailAndPassword(auth2, email, password)
+  //     .then((firebaseUser) => {
+  //       return firebaseUser.user.uid;
+  //     })
+  //     .then(signOut(auth2));
+  // };
 
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
@@ -44,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginSecondaryUser = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
-      auth,
+      auth2,
       email,
       password
     );
@@ -67,23 +86,29 @@ export const AuthProvider = ({ children }) => {
 
   // !---------------
 
-  const changeDataUsers = (email) => {
-    return loginSecondaryUser(email, "123456")
+  const changeEmailUser = (email, newEmail) => {
+    let userData;
+
+    return signOut(auth2)
+      .then(() => {
+        return loginSecondaryUser(email, "123456");
+      })
+      .catch(() => {
+        return loginSecondaryUser(email, "123456");
+      })
       .then((secondUser) => {
-        setSecondaryUser(secondUser);
+        // setSecondaryUser(secondUser);
+        userData = secondUser;
         return createCredential(secondUser, "123456");
-        // return createCredential(email, "123456");
       })
-      .then((credential) => {
-        setUserCredential2(credential);
-        console.log("MIRA MI CREDENCIAL!, ", credential);
-        return credential;
+      .then(() => {
+        const employe = userData.user.auth.currentUser;
+        return changeEmailAuth(employe, newEmail);
       })
-      .then(signOut(secondaryUser));
+      .catch((e) => e.message);
   };
 
   // !------------------------------
-  // ! PENDIENTE
   const logout = () => {
     signOut(auth);
   };
@@ -92,6 +117,9 @@ export const AuthProvider = ({ children }) => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser({ currentUser: currentUser?.uid });
       //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
+      console.log("algo cambió lucero!!, ", { currentUser: currentUser?.uid });
+      console.log("useEffect 1, mi hook user1", user);
+      // user, setUser
       setLoading(false);
     });
 
@@ -99,17 +127,28 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const unsubcribe2 = onAuthStateChanged(auth, (currentUser) => {
-      setSecondaryUser({ currentUser: currentUser?.uid });
+    const unsubcribe2 = onAuthStateChanged(auth2, (currentUser) => {
+      setSecondaryUser(currentUser);
+
+      console.log("algo cambió empleado2 obj!!, ", currentUser);
+
+      console.log("algo cambió empleado2 uid!!, ", {
+        currentUser: currentUser?.uid,
+      });
+
+      setSecondaryUser(currentUser);
+      console.log("useEffect 2, mi hook secondaryUser", secondaryUser);
+
+      // ! prueba
+
+      // setSecondaryUser({ currentUser: currentUser?.uid });
       //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
       setLoading2(false);
     });
 
     return () => unsubcribe2();
-  }, []);
-
-  useEffect(() => {
-    // createUser().then((user) => setProductCategories(user));
+    // }, [secondaryUser, prueba]);
+    // }, [secondaryUser]);
   }, []);
 
   return (
@@ -124,8 +163,10 @@ export const AuthProvider = ({ children }) => {
         // createCredential,
         // secondaryUser,
         // loginSecondaryUser,
-        changeDataUsers,
+        changeEmailUser,
         userCredential2,
+        auth2,
+        signOut,
       }}
     >
       {children}
