@@ -1,11 +1,15 @@
-import { StyledTableCell } from "../helpers/muiStyles";
+import React from "react";
+//Material UI Component
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TableBody from "@mui/material/TableBody";
 import Table from "@mui/material/Table";
+//Helpers
+import { StyledTableCell } from "../helpers/muiStyles";
 import { ccyFormat, total } from "../helpers/mathFunctions";
+
 const TableCard = ({ rows }) => {
   const totalPrice = total(rows);
 
@@ -40,7 +44,6 @@ const TableCard = ({ rows }) => {
             </TableRow>
           ))}
         </TableBody>
-
         {/* Total */}
         <TableRow>
           <TableHead>

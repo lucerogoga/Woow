@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
+//Contexts
+import { useCart } from "../Components/Context/CartContext";
+import { useAuth } from "./Context/AuthContext";
+//Firebase Conection
+import { getUser } from "../Services/FirestoreServices";
+//Components
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Back } from "../Assets/icons/back.svg";
 import { ReactComponent as Waiter } from "../Assets/icons/waiter.svg";
@@ -9,10 +15,8 @@ import { ReactComponent as ShoppingCart } from "../Assets/icons/basket.svg";
 import { ReactComponent as FoodMenu } from "../Assets/icons/menu-cart.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
+//Helpers
 import { abbrevName } from "../helpers/nameFormatted";
-import { useCart } from "../Components/Context/CartContext";
-import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
 
 const NavBarWaiter = ({
   onClickMenu,

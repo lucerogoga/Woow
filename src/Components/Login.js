@@ -1,14 +1,16 @@
-// Login component
+import React, { useState } from "react";
 import "../Assets/Login.css";
-
+//Components
 import logo from "../Assets/icons/logo-rotate.svg";
 import Error from "./Error";
-import React, { useState } from "react";
+//Router
 import { useNavigate, Navigate } from "react-router-dom";
+//Context
 import { useAuth } from "./Context/AuthContext";
+//Firebase Conection
 import { getUser } from "../Services/FirestoreServices";
-
 // import { useRol } from "./Context/RolContex";
+//Helpers
 import { validateEmail } from "../helpers/loginFuntions";
 
 export const Login = () => {
@@ -26,12 +28,7 @@ export const Login = () => {
     setDisplayError(false);
   };
 
-  // useEffect(() => {
-  //   // setDisplayError(false);
-  // }, [displayError]);
-
   const handleSubmit = async (e) => {
-    // limpia
     e.preventDefault();
     setErrorMessage("");
     setDisplayError(false);

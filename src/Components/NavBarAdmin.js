@@ -2,27 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../Assets/Navbar.css";
 import "../Assets/Sidebar.css";
+//Contexts
+import { useAuth } from "./Context/AuthContext";
+//Firebase Conection
+import { getUser } from "../Services/FirestoreServices";
+//Components
 import { ReactComponent as MenuBurger } from "../Assets/icons/menu-burger.svg";
 import { ReactComponent as Admin } from "../Assets/icons/admin.svg";
 import { ReactComponent as LogoWoow } from "../Assets/icons/logo-woow.svg";
 import { ReactComponent as Logout } from "../Assets/icons/logout.svg";
-import { abbrevName } from "../helpers/nameFormatted";
-import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
 import { ReactComponent as Back } from "../Assets/icons/back.svg";
+//Helpers
+import { abbrevName } from "../helpers/nameFormatted";
 
-const NavBarAdmin = ({
-  onClickMenu,
-  onClickSideBar,
-  currentPath,
-  onClickLogout,
-}) => {
+const NavBarAdmin = ({ onClickMenu, currentPath, onClickLogout }) => {
   const {
     user: { currentUser },
   } = useAuth();
-
-  const [userName, setUserName] = useState("");
+  let location = useLocation();
   //GETTING NAME OF CHEF FOR THE ORDER
+  const [userName, setUserName] = useState("");
   useEffect(() => {
     async function settingUserName() {
       const { user_name } = await getUser(currentUser);
@@ -30,7 +29,7 @@ const NavBarAdmin = ({
     }
     settingUserName();
   }, []);
-  let location = useLocation();
+
   return (
     <div className="navbar">
       <div className="navbar--container">

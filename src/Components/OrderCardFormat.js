@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../Assets/OrderCard.css";
-import { pad } from "../helpers/mathFunctions";
-import { updateOrder, updateStatusOrder } from "../Services/FirestoreServices";
+//Firebase Conection
+import {
+  updateOrder,
+  updateStatusOrder,
+  getUser,
+} from "../Services/FirestoreServices";
+//Contexts
 import { useAuth } from "./Context/AuthContext";
-import ActionButton from "./ActionButton";
 import { useRol } from "./Context/RolContex";
+//Components
+import ActionButton from "./ActionButton";
 import Time from "./Time";
-import { createRows } from "../helpers/mathFunctions";
 import TableCard from "./TableCard";
+//Helpers
+import { createRows } from "../helpers/mathFunctions";
+import { pad } from "../helpers/mathFunctions";
 import { abbrevName, upperCaseFirstLetter } from "../helpers/nameFormatted";
 
 const OrderCardFormat = ({ orderData }) => {
-  const [userName] = useState("");
+  const [userName, setUserName] = useState("");
+
   let location = useLocation();
   const { pathname } = location;
+
   const userRole = useRol();
   const {
     user: { currentUser },
@@ -27,20 +37,23 @@ const OrderCardFormat = ({ orderData }) => {
     ? (chefId = "Not assigned")
     : (chefId = orderData.chef_name);
 
-  console.log("es posible?, ", orderData.order_status);
-  // ! --------------------
+  //GETTING NAME OF CHEF FOR THE ORDER
+  useEffect(() => {
+    async function settingUserName() {
+      const { user_name } = await getUser(currentUser);
+      setUserName(user_name);
+    }
+    settingUserName();
+  }, []);
 
   const handleStatus = () => {
-    console.log("click hola!!");
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
       // Si el estado está en pendiente siendo waiter , puede cancelar la orden
       // updateStatusOrder(orderData.id, "Canceled");
-      console.log("deberia poder cancelar");
       updateStatusOrder(orderData.id, "Canceled", userRole);
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
-      console.log("Ready to Serve && waiter");
       // Si el estado está en ready to Serve, el waiter puede marcar la orden como Delivered
       updateStatusOrder(orderData.id, "Delivered");
     }
@@ -77,7 +90,7 @@ const OrderCardFormat = ({ orderData }) => {
               <div className="order-card--info-p">
                 {upperCaseFirstLetter(orderData.client_name)}
               </div>
-              <div className="order-card--info-p">{chefId}</div>
+              <div className="order-card--info-p"> {abbrevName(chefId)}</div>
               <div className="order-card--info-p">
                 {abbrevName(orderData.waiter_name)}
               </div>
@@ -93,11 +106,6 @@ const OrderCardFormat = ({ orderData }) => {
                   status={orderData.order_status}
                 />
               )}
-              {/* <Time
-                start={orderData.order_timestamp_start}
-                end={orderData.order_timestamp_end}
-                status={orderData.order_status}
-              /> */}
             </div>
           </div>
         </div>
@@ -105,7 +113,7 @@ const OrderCardFormat = ({ orderData }) => {
           <TableCard rows={rows} />
         </div>
 
-        {pathname === "/chef" && (
+        {/* {pathname === "/chef" && (
           <div className="order-card--buttonsContainer">
             <button
               onClick={() => handleStatus()}
@@ -114,9 +122,10 @@ const OrderCardFormat = ({ orderData }) => {
               {orderData.order_status === "Pending"
                 ? "Start Cooking"
                 : "Order Ready"}
+                
             </button>
           </div>
-        )}
+        )} */}
 
         {pathname === "/waiter/orders-resume" && (
           <div
@@ -133,6 +142,27 @@ const OrderCardFormat = ({ orderData }) => {
               <ActionButton
                 onClick={() => handleStatus()}
                 title="Deliver Order"
+                className="order-card__button"
+              />
+            ) : null}
+          </div>
+        )}
+
+        {pathname === "/chef" && (
+          <div
+            onClick={() => handleStatus()}
+            className="order-card--buttonsContainer"
+          >
+            {orderData.order_status === "Pending" ? (
+              <ActionButton
+                onClick={() => handleStatus()}
+                title="Start Cooking"
+                className="order-card__button"
+              />
+            ) : orderData.order_status === "Cooking" ? (
+              <ActionButton
+                onClick={() => handleStatus()}
+                title="Order Ready"
                 className="order-card__button"
               />
             ) : null}

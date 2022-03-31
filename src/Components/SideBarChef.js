@@ -1,8 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
+//Component
 import { ReactComponent as X } from "../Assets/icons/x.svg";
+//Material UI Component
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import * as React from "react";
 
 const SidebarChefContainer = ({ onClose, onClickLogout }) => {
   return (
