@@ -6,7 +6,7 @@ html {
 }
 
 .productAdded-card {
-  display: flex;
+  /* display: flex;
   background-color: #fff;
   border-radius: 17px;
   display: flex;
@@ -18,7 +18,17 @@ html {
   height: 20%;
   overflow: hidden;
   justify-content: center;
-  height: 130px;
+  height: 130px; */
+
+  background-color: #fff;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  margin: 0 auto;
+  overflow: hidden;
+  justify-content: center;
+  height: 8rem;
 }
 
 .productAdded-card--photoContainer {

@@ -105,7 +105,7 @@ const AdminProducts = () => {
             );
           })}
         </div>
-        <div className="large-button--content" onClick={() => handleOpen()}>
+        <div className="large-button__content" onClick={() => handleOpen()}>
           <ActionButton
             title={"Add Product"}
             className={"button--pink"}

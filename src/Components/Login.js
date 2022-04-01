@@ -38,7 +38,6 @@ export const Login = () => {
         setErrorMessage("Fields must be filled");
         setDisplayError(true);
       } else if (!validateEmail(loginEmail)) {
-        console.log("entre!!");
         setErrorMessage(
           "Please enter your email addres in format yourname@example.com"
         );

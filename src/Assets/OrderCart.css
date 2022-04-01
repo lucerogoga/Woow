@@ -2,7 +2,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 85%;
 }
 
 .total-price.order-cart {
@@ -43,20 +43,17 @@
 }
 @media (min-width: 900px) {
   .cart-product--content.order-cart {
-    padding: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     height: 100%;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 40px;
+    padding: 20px 10px;
   }
 
   .cart-product--productContainer.order-cart {
     height: inherit;
     overflow-x: scroll;
-    width: 45%;
+    /* width: 45%; */
   }
   .footer-content.order-cart {
     width: 30%;

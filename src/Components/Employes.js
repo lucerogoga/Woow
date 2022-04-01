@@ -83,7 +83,10 @@ const Employes = () => {
             />
           ))}
         </div>
-        <div className="large-button--content" onClick={() => handleOpen()}>
+        <div
+          className="large-button__content--view"
+          onClick={() => handleOpen()}
+        >
           <ActionButton
             title={"Add Employee"}
             className={"button--pink"}

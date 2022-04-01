@@ -159,7 +159,7 @@ const OrderCart = ({ cantEdit }) => {
                 </h3>
               </div>
             </div>
-            <div className="large-button--content" onClick={handleOrder}>
+            <div className="large-button__content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
             </div>
           </div>

@@ -297,7 +297,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
               <TextField
                 fullWidth
                 label="New User Name"
-                // defaultValue={userName}
                 value={userNewName}
                 variant="outlined"
                 autoComplete="off"
@@ -310,7 +309,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label={employeeToEdit ? "New Email" : "Email"}
                 variant="outlined"
-                // defaultValue={userEmail}
                 value={userNewEmail}
                 autoComplete="off"
                 onChange={(e) => {
@@ -319,7 +317,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
               />
               <TextField
                 fullWidth
-                // label="New Password"
                 label={employeeToEdit ? "New Password" : "Password"}
                 variant="outlined"
                 autoComplete="off"
@@ -332,7 +329,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                 handler={switchHandler}
               />
 
-              <div className="large-button--content" onClick={handleSubmit}>
+              <div className="large-button__content" onClick={handleSubmit}>
                 <ActionButton
                   title={employeeToEdit ? "Update Employee" : "Create Employee"}
                   className={"button--pink"}

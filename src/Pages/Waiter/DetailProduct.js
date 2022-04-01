@@ -217,7 +217,7 @@ const DetailProduct = () => {
                 <div className="buttons-container">
                   <CounterHorizontal />
                   <div
-                    className="large-button--content"
+                    className="large-button__content"
                     onClick={handleActionClick}
                   >
                     <ActionButton

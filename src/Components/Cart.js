@@ -27,6 +27,13 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const [load, setLoad] = useState(true);
   const [state, setState] = useState("none");
 
+  //States for error Message
+  const [errorMessage, setErrorMessage] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+
+  const handleDisplayError = () => {
+    setDisplayError(false);
+  };
   // call the info from context Cart and Auth
   const {
     cart,
@@ -62,30 +69,39 @@ const Cart = ({ cantEdit, handleGoCart }) => {
   const qtyItems = cart.reduce((a, b) => a + Number(b.qty), 0);
 
   const handleOrder = () => {
-    setIsCartEmpty(false);
-    setIsInfoEmpty(false);
-
-    if (cart.length === 0) {
-      return setIsCartEmpty(true);
-    } else if (clientName === "" || tableNumber === "") {
-      return setIsInfoEmpty(true);
-    } else {
-      setState("flex");
-      setOrderNumber(orderNumber + 1);
-      createOrder(
-        user.currentUser,
-        userName,
-        clientName,
-        tableNumber,
-        "Pending",
-        cart,
-        orderCorrelative
-      ).then(() => {
-        setLoad(false);
-      });
-      setCart([]);
-      setIsClean(true);
-    }
+    setErrorMessage("");
+    setDisplayError(false);
+    // setIsCartEmpty(false);
+    // setIsInfoEmpty(false);
+    setTimeout(async () => {
+      if (cart.length === 0) {
+        setErrorMessage("The cart must not be empty");
+        setDisplayError(true);
+        return;
+        // return setIsCartEmpty(true);
+      } else if (clientName === "" || tableNumber === "") {
+        setErrorMessage("Fields must be filled");
+        setDisplayError(true);
+        return;
+        // return setIsInfoEmpty(true);
+      } else {
+        setState("flex");
+        setOrderNumber(orderNumber + 1);
+        createOrder(
+          user.currentUser,
+          userName,
+          clientName,
+          tableNumber,
+          "Pending",
+          cart,
+          orderCorrelative
+        ).then(() => {
+          setLoad(false);
+        });
+        setCart([]);
+        setIsClean(true);
+      }
+    }, 200);
   };
 
   const cleanInputs = () => {
@@ -96,6 +112,11 @@ const Cart = ({ cantEdit, handleGoCart }) => {
 
   return (
     <>
+      <Error
+        message={errorMessage}
+        onClose={handleDisplayError}
+        isVisible={displayError}
+      />
       <div className="cart-content">
         <Title title="Order" quantity={qtyItems} />
         <div className="client-info--content">
@@ -104,18 +125,19 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             <TrashButton />
           </div>
         </div>
-        {isInfoEmpty && (
+        {/* {isInfoEmpty && (
           <Error
             message={"Fields must be filled"}
             onClose={(e) => setIsInfoEmpty(false)}
           />
+          
         )}
         {isCartEmpty && (
           <Error
             message={"The cart must not be empty"}
             onClose={(e) => setIsCartEmpty(false)}
           />
-        )}
+        )} */}
 
         <div className="cart-product--content">
           <div className="cart-product--productContainer">
@@ -140,10 +162,13 @@ const Cart = ({ cantEdit, handleGoCart }) => {
                   })}
               </h3>
             </div>
-            <div className="large-button--content" onClick={handleOrder}>
+            <div className="large-button__content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
             </div>
-            <div className="large-button--content" onClick={handleGoCart}>
+            <div
+              className="large-button__content--white"
+              onClick={handleGoCart}
+            >
               <ActionButton
                 title="Check my Cart"
                 className={"button--white"}

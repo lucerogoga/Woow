@@ -309,7 +309,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 {objectURL === "" ? null : (
                   <img src={objectURL} alt={"photoProductb"} width="100px" />
                 )}
-                <div className="large-button--content" onClick={handleSubmit}>
+                <div className="large-button__content" onClick={handleSubmit}>
                   <ActionButton
                     title={productToEdit ? "Update Product" : "Create Product"}
                     className={"button--pink"}
