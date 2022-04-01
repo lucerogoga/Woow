@@ -75,21 +75,6 @@ body {
   right: 0.5rem;
 }
 
-/* @keyframes shake {
-  25% {
-    transform: translate(-3px, 0);
-    
-  }
-  50% {
-    transform: translate(0, 0);
-  }
-  75% {
-    transform: translate(-3px, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}  */
 /* Modal Error */
 .err-msg-modal {
   background-color: #ff4b61;
