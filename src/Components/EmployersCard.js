@@ -41,6 +41,7 @@ const EmployersCard = ({ employee, isOpen }) => {
             <h3 className="employee-card--info-title">Email:</h3>
             <h3 className="employee-card--info-title">Rol:</h3>
             <h3 className="employee-card--info-title">Status:</h3>
+            <h3 className="employee-card--info-title">Password:</h3>
           </div>
           <div className="employee-card--infos-container">
             <div className="employee-card--info-p">
@@ -51,6 +52,7 @@ const EmployersCard = ({ employee, isOpen }) => {
               {upperCaseFirstLetter(employee.user_rol)}
             </div>
             <div className="employee-card--info-p">{status}</div>
+            <div className="employee-card--info-p">{employee.user_pwd}</div>
           </div>
         </div>
         <div className="employee-card--right-container">
