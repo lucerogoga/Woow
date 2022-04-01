@@ -44,6 +44,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   ];
   const { createUser, auth2, changeUserDataAuth, signOut } = useAuth();
 
+  // todo: join all the inputs to object and put it inside a state
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userNewName, setUserNewName] = useState("");
@@ -60,7 +61,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [displayError, setDisplayError] = useState(false);
 
   const switchHandler = (event) => {
-    console.log("el switch funciona, ", event.target.checked);
     setChecked(event.target.checked);
   };
 
@@ -94,7 +94,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const editUserFirestore = async () => {
     setErrorMessage("");
     setDisplayError(false);
-    // ! los states del formulario arreglar
+
     if (
       userNewName.trim()?.length === 0 ||
       userNewEmail.trim()?.length === 0 ||

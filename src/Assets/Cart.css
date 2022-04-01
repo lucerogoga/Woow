@@ -46,6 +46,7 @@
 .cart-product__product-container {
   height: inherit;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 @media (min-width: 900px) {

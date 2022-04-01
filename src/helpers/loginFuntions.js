@@ -11,15 +11,10 @@ export const validateEmail = (email) => {
 };
 
 export const validateEmailDomains = (name) => {
-  // ! buena abajo
-  // const expression = /\w+([-+.]\w+)*@(yahoo\.com|gmail\.com)/;
   const expression = /\w+([-+.]\w+)*@(hotmail\.com|gmail\.com|outlook\.com)/;
 
   return expression.test(name);
 };
-
-// const prueba = "miriana@yahoo.com";
-// console.log("dominio?, ", validateEmailDomains(prueba));
 
 export const validateName = (name) => {
   const expression = /^[a-zA-Z\s]*$/;
@@ -27,7 +22,6 @@ export const validateName = (name) => {
   return expression.test(name);
 };
 
-//  ! Buscar un mejor regex
 export const validatePassword = (pwd) => {
   return pwd.trim().length >= 6;
 };

@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
 import { upperCaseFirstLetter } from "../helpers/nameFormatted";
-import { useAuth } from "./Context/AuthContext";
-import { getUser } from "../Services/FirestoreServices";
 
 const EmployersCard = ({ employee, isOpen }) => {
   const status = employee.user_status ? "Active" : "Inactive";
-  const [isPencilHide, setIsPencilHide] = useState(false);
-  const protectedNames = ["mirian arevalo", "lucero gonzalez"];
-  // const {
-  //   user: { currentUser },
-  // } = useAuth();
-  // useE
+  const protectedNames = ["admin account", "waiter account", "chef account"];
 
   const HandleEditEmployee = (employee) => {
     isOpen(employee);
   };
 
-  const Edit = ({ onClick }) => {
+  const Edit = () => {
     return (
       <button
         className="productAdded-card--pencilContainer"
-        // onClick={onClick}>
         onClick={() => {
           HandleEditEmployee(employee);
         }}
@@ -32,7 +24,6 @@ const EmployersCard = ({ employee, isOpen }) => {
   };
 
   return (
-    // <div className="employee-container">
     <div className="employee-card user">
       <div className="employee-card--header">
         <div className="employee-card--info-container">
@@ -64,7 +55,6 @@ const EmployersCard = ({ employee, isOpen }) => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

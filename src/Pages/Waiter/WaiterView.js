@@ -32,7 +32,6 @@ export const WaiterView = () => {
   let location = useLocation();
   const { pathname } = location;
   const handleLogout = async () => {
-    console.log("ejecutado logout");
     await logout();
   };
 

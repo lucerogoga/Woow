@@ -7,15 +7,7 @@ export function ButtonFilter(props) {
   let location = useLocation();
   const { pathname } = location;
 
-  // className={
-  //   "navbar " +
-  //   (location.pathname.includes("detail-product") ? "navbar--absolute" : "")
-  // }
-  // --
-  // className={`button-card ${active ? "active" : ""}`}
   const isPathnameDetail = location.pathname.includes("detail-product");
-
-  console.log("dime que si, ", isPathnameDetail);
 
   return (
     <>
@@ -31,7 +23,7 @@ export function ButtonFilter(props) {
             <h2>{filteredOrdersQuantity}</h2>
           </div>
         ) : null}
-        {/* renderiamos el icono por props */}
+        {/* render icono to props */}
         <div
           className={
             isPathnameDetail
@@ -55,7 +47,7 @@ export function ButtonFilter(props) {
                 : "button-card--text-content"
             }
           >
-            {/* renderizamos el item name por props */}
+            {/* render the item name to props */}
             <h3 className="button-card--title">{item}</h3>
           </div>
         </div>
@@ -65,53 +57,3 @@ export function ButtonFilter(props) {
 }
 
 export default ButtonFilter;
-
-// button-card--content
-// button-card--icon-container
-// button-card--text-content
-
-// button-card--content-detail
-// button-card--icon-container-detail
-// button-card--text-content-detail
-
-// export function ButtonFilter(props) {
-//   const { item, icon, onClick, active, filteredOrdersQuantity } = props;
-//   let location = useLocation();
-//   const { pathname } = location;
-
-//   // className={
-//   //   "navbar " +
-//   //   (location.pathname.includes("detail-product") ? "navbar--absolute" : "")
-//   // }
-//   // --
-//   // className={`button-card ${active ? "active" : ""}`}
-//   const isPathnameDetail = location.pathname.includes("detail-product");
-
-//   console.log("dime que si, ", isPathnameDetail);
-
-//   return (
-//     <>
-//       <button
-//         className={
-//           (isPathnameDetail ? "button-card--detail " : "button-card ") +
-//           (active ? "active" : "")
-//         }
-//         onClick={onClick}
-//       >
-//         {pathname === "/waiter/orders-resume" ? (
-//           <div className="button-order--quantity">
-//             <h2>{filteredOrdersQuantity}</h2>
-//           </div>
-//         ) : null}
-//         {/* renderiamos el icono por props */}
-//         <div className="button-card--content">
-//           {icon}
-//           <div className="button-card--text-content">
-//             {/* renderizamos el item name por props */}
-//             <h3 className="button-card--title">{item}</h3>
-//           </div>
-//         </div>
-//       </button>
-//     </>
-//   );
-// }

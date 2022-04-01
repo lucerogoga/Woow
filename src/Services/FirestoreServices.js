@@ -16,7 +16,7 @@ import {
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../Config/initialize";
 
-//*----------------------------------------------------------------------- User Functions
+//*------------- User Functions
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
 
@@ -29,17 +29,12 @@ export const getUser = async (userId) => {
   return {};
 };
 
-//*------------------------------------------------------------------------ Order Functions
+//*--------- Order Functions
 
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
 
   return onSnapshot(orderRef, (snapshot) => {});
-};
-
-export const ordersListener = () => {
-  const q = query(collection(db, "orders"));
-  return onSnapshot(q, (snapshot) => {});
 };
 
 export const updateOrder = async (chefId, idOrder, status, chefName) => {
@@ -55,9 +50,7 @@ export const updateOrder = async (chefId, idOrder, status, chefName) => {
 
 export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
-  console.log("STATUS: ", status, "Y ROLE: ", userRole);
   if (userRole === "waiter" || status === "Ready to Serve") {
-    console.log("deberia funcionar");
     return await updateDoc(orderRef, {
       order_status: status,
       order_timestamp_end: serverTimestamp(),
@@ -115,7 +108,7 @@ export async function getOrders() {
   });
 }
 
-//*-------------------------------------------------------------------------- Product Functions
+//*--------- Product Functions
 export async function getProducts() {
   const productsData = await getDocs(collection(db, "products"));
   return productsData.docs.map((p) => {
@@ -187,7 +180,7 @@ export async function getEmployers() {
     };
   });
 }
-//-------------uploadimage for products
+//------------- uploadimage for products
 export function uploadImage(file, catName) {
   const productPath = "Products";
   const fileName = file.name;
@@ -220,7 +213,7 @@ export async function createProductFirebase(
     product_stock: [productStock], //array
   });
 }
-//--------------------------------------------------
+
 export async function editProductFirebase(
   productId,
   catId,
@@ -240,13 +233,12 @@ export async function editProductFirebase(
     product_stock: [productStock], //array
   });
 }
-//------------------------------------------------------
+
 export async function deleteProductFirebase(productId) {
   const productRef = doc(db, "products", productId);
   return deleteDoc(productRef);
 }
 
-//-----------------------------------------------------
 export function createUserFirebase(
   userID,
   userRole,
@@ -265,8 +257,6 @@ export function createUserFirebase(
     user_pwd: userPwd,
   });
 }
-
-//-----------------------------------------------------
 
 export async function updateUser(
   userId,

@@ -49,24 +49,21 @@ const OrderCardFormat = ({ orderData }) => {
   const handleStatus = () => {
     //CONDITIONS WAITER
     if (orderData.order_status === "Pending" && userRole === "waiter") {
-      // Si el estado está en pendiente siendo waiter , puede cancelar la orden
-      // updateStatusOrder(orderData.id, "Canceled");
+      // If the status is pending being waiter , the waiter can cancel the order
       updateStatusOrder(orderData.id, "Canceled", userRole);
     }
     if (orderData.order_status === "Ready to Serve" && userRole === "waiter") {
-      // Si el estado está en ready to Serve, el waiter puede marcar la orden como Delivered
+      // If the status is ready to Serve, the waiter can mark the order as Delivered
       updateStatusOrder(orderData.id, "Delivered");
     }
     //CONDITIONS CHEF
     if (orderData.order_status === "Pending" && userRole === "chef") {
-      // ! EMPIEZA EL CRONOMETRO CUANDO HAYA EMPEZADO.
-      // Si el estado está en pendiente, el chef puede tomar el pedido y cambia su estado Cooking
+      // If the status is pending, the chef can take the order and changes his Cooking status
       updateOrder(currentUser, orderData.id, "Cooking", userName);
     }
     if (orderData.order_status === "Cooking" && userRole === "chef") {
-      // Si el estado está en Cooking, el chef cambia su estado a Ready to Serve
+      // If the status is Cooking, the chef changes his status to Ready to Serve
       updateStatusOrder(orderData.id, "Ready to Serve", userName);
-      // ! FINALIZA EL CRONOMETRO
     }
   };
 
