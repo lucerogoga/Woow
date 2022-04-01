@@ -17,7 +17,7 @@ import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 import ActionButton from "./ActionButton";
 //Materiaul UI Icons
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-//Firebase Conection
+//Firebase Connection
 import {
   getProductsCategories,
   createProductFirebase,
