@@ -74,31 +74,31 @@ const OrderCardFormat = ({ orderData }) => {
   return (
     <div className="order-container">
       <div className="order-card">
-        <div className="order-card--header">
-          <div className="order-card--info-container">
-            <div className="order-card--titles-container">
-              <h3 className="order-card--info-title">Order N°:</h3>
-              <h3 className="order-card--info-title">Client:</h3>
-              <h3 className="order-card--info-title">Chef:</h3>
-              <h3 className="order-card--info-title">Waiter:</h3>
-              <h3 className="order-card--info-title">Table N°:</h3>
+        <div className="order-card__header">
+          <div className="order-card__info-container">
+            <div className="order-card__titles-container">
+              <h3 className="order-card__info-title">Order N°:</h3>
+              <h3 className="order-card__info-title">Client:</h3>
+              <h3 className="order-card__info-title">Chef:</h3>
+              <h3 className="order-card__info-title">Waiter:</h3>
+              <h3 className="order-card__info-title">Table N°:</h3>
             </div>
-            <div className="order-card--infos-container">
-              <div className="order-card--info-p">
+            <div className="order-card__infos-container">
+              <div className="order-card__info-p">
                 {pad(orderData.order_number, 6)}
               </div>
-              <div className="order-card--info-p">
+              <div className="order-card__info-p">
                 {upperCaseFirstLetter(orderData.client_name)}
               </div>
-              <div className="order-card--info-p"> {abbrevName(chefId)}</div>
-              <div className="order-card--info-p">
+              <div className="order-card__info-p"> {abbrevName(chefId)}</div>
+              <div className="order-card__info-p">
                 {abbrevName(orderData.waiter_name)}
               </div>
-              <div className="order-card--info-p">{orderData.table}</div>
+              <div className="order-card__info-p">{orderData.table}</div>
             </div>
           </div>
-          <div className="order-card--right-container">
-            <div className="order-cart--containertime">
+          <div className="order-card__right-container">
+            <div className="order-cart__containertime">
               {orderData.order_status !== "Canceled" && (
                 <Time
                   start={orderData.order_timestamp_start}
@@ -109,28 +109,13 @@ const OrderCardFormat = ({ orderData }) => {
             </div>
           </div>
         </div>
-        <div className="order-card--table-container">
+        <div className="order-card__table-container">
           <TableCard rows={rows} />
         </div>
-
-        {/* {pathname === "/chef" && (
-          <div className="order-card--buttonsContainer">
-            <button
-              onClick={() => handleStatus()}
-              className="order-card__button"
-            >
-              {orderData.order_status === "Pending"
-                ? "Start Cooking"
-                : "Order Ready"}
-                
-            </button>
-          </div>
-        )} */}
-
         {pathname === "/waiter/orders-resume" && (
           <div
             onClick={() => handleStatus()}
-            className="order-card--buttonsContainer"
+            className="order-card__buttonsContainer"
           >
             {orderData.order_status === "Pending" ? (
               <ActionButton
@@ -151,7 +136,7 @@ const OrderCardFormat = ({ orderData }) => {
         {pathname === "/chef" && (
           <div
             onClick={() => handleStatus()}
-            className="order-card--buttonsContainer"
+            className="order-card__buttonsContainer"
           >
             {orderData.order_status === "Pending" ? (
               <ActionButton

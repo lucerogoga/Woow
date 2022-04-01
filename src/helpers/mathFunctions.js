@@ -14,6 +14,7 @@ export function createData(name, observation, size, qty, unitPrice) {
 }
 
 export const createRows = (orderData) => {
+  console.log("como entraba esta información?? , ", orderData);
   return orderData.order_products.map((product) => {
     let observation = "";
     let size = "";
@@ -51,5 +52,3 @@ export const pad = (number, length) => {
   }
   return str;
 };
-
-

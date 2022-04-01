@@ -45,10 +45,12 @@ export const Login = () => {
       } else {
         try {
           const user = await login(loginEmail, loginPassword);
-          const { user_rol: role } = await getUser(user.user.uid);
-          if (role === "admin") navigate("/admin");
-          else if (role === "chef") navigate("/chef");
-          else navigate("/waiter");
+          const userFirestore = await getUser(user.user.uid);
+          console.log("mira mi doc de firestore, ", userFirestore);
+          // const { user_rol: role } = await getUser(user.user.uid);
+          // if (role === "admin") navigate("/admin");
+          // else if (role === "chef") navigate("/chef");
+          // else navigate("/waiter");
         } catch (e) {
           switch (e.message) {
             case "Firebase: Error (auth/user-not-found).":

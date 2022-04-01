@@ -42,7 +42,6 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     setClientName,
     tableNumber,
     setTableNumber,
-    isClean,
     setIsClean,
   } = useCart();
   const { user } = useAuth();
@@ -125,22 +124,9 @@ const Cart = ({ cantEdit, handleGoCart }) => {
             <TrashButton />
           </div>
         </div>
-        {/* {isInfoEmpty && (
-          <Error
-            message={"Fields must be filled"}
-            onClose={(e) => setIsInfoEmpty(false)}
-          />
-          
-        )}
-        {isCartEmpty && (
-          <Error
-            message={"The cart must not be empty"}
-            onClose={(e) => setIsCartEmpty(false)}
-          />
-        )} */}
 
-        <div className="cart-product--content">
-          <div className="cart-product--productContainer">
+        <div className="cart-product__content">
+          <div className="cart-product__product-container">
             <Success estado={state} loading={load} />
 
             {cart.map((cartProduct) => (

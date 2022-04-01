@@ -125,7 +125,7 @@ const DetailProduct = () => {
 
       <main className="detail-desktop">
         {/* Div tarjeta central para el desktop */}
-        <div className="info-product--main-container">
+        <div className="info-product__main-container">
           {/* Div izquierdo para el texto en vista desktop */}
           <div className="info-product__left-container">
             <img
@@ -135,17 +135,17 @@ const DetailProduct = () => {
             />
           </div>
           {/* Div derecho para el texto en vista desktop */}
-          <div className="info-product--right-container">
+          <div className="info-product__right-container">
             <div className="product-detail-container">
               {/* El div que contiene la descripción del producto y la tarjeta TABLET */}
               <div className="info-product-container">
                 {/* Información superior del producto */}
                 <div className="info-product-subcontainer">
-                  <h1 className="product--name">{product.product_name}</h1>
+                  <h1 className="product__name">{product.product_name}</h1>
                   <p className="product__description">
                     {product.product_description}
                   </p>
-                  <h2 className="product--cost">
+                  <h2 className="product__cost">
                     {"Unit Price: $ " +
                       formatNum(product.product_cost[cost], {
                         minFraction: 2,

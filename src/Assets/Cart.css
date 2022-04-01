@@ -36,20 +36,20 @@
 .labelTable {
   color: #ff9aa3;
 }
-.cart-product--content {
+.cart-product__content {
   padding: 10px;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.cart-product--productContainer {
+.cart-product__product-container {
   height: inherit;
   overflow-x: scroll;
 }
 
 @media (min-width: 900px) {
-  .cart-product--content {
+  .cart-product__content {
     padding: 10px;
     display: flex;
     flex-direction: column;
