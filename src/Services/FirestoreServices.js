@@ -34,9 +34,7 @@ export const getUser = async (userId) => {
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
 
-  return onSnapshot(orderRef, (snapshot) => {
-    // setOrderCorrelative(snapshot.size + 1);
-  });
+  return onSnapshot(orderRef, (snapshot) => {});
 };
 
 export const ordersListener = () => {
@@ -52,14 +50,12 @@ export const updateOrder = async (chefId, idOrder, status, chefName) => {
     chef_id: chefId,
     chef_name: chefName,
     order_timestamp_start: serverTimestamp(),
-    // order_timestamp_end: serverTimestamp(),
   });
 };
 
 export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
   console.log("STATUS: ", status, "Y ROLE: ", userRole);
-  // if (status === "Canceled" && userRole === "waiter"){
   if (userRole === "waiter" || status === "Ready to Serve") {
     console.log("deberia funcionar");
     return await updateDoc(orderRef, {
@@ -181,7 +177,7 @@ export async function filterProductByCategorie(catId, catName) {
   }
 }
 
-//*----------------------------------------------------------------------------- Admin Functions
+//*-------------- Admin Functions
 export async function getEmployers() {
   const usersData = await getDocs(collection(db, "users"));
   return usersData.docs.map((e) => {
@@ -202,6 +198,7 @@ export function uploadImage(file, catName) {
     })
     .catch((err) => console.log(err));
 }
+
 //------------------------------------------------
 export async function createProductFirebase(
   catId,
@@ -276,15 +273,16 @@ export async function updateUser(
   userName,
   userEmail,
   userRole,
-  userStatus
+  userStatus,
+  userPwd
 ) {
   const userRef = doc(db, "users", userId);
   return updateDoc(userRef, {
     user_email: userEmail,
-    // user_id
     user_name: userName,
     user_rol: userRole,
     user_status: userStatus,
+    user_pwd: userPwd,
   });
 }
 
@@ -297,18 +295,3 @@ export async function getUsers() {
     };
   });
 }
-
-// const q1 = query(
-//   collection(db, "orders"),
-//   where("order_status", "==", "Pending"),
-//   orderBy("product_name", "asc")
-//   // orderBy("product_name", "desc")
-// );
-// const querySnapshotProduct = await getDocs(q1);
-// const productFilterDocs = querySnapshotProduct.docs;
-// return productFilterDocs.map((p) => {
-//   return {
-//     id: p.id,
-//     ...p.data(),
-//   };
-// });
