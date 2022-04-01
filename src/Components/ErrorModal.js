@@ -1,5 +1,5 @@
 import React from "react";
-import "../Assets/Error.css";
+import "../Assets/ErrorModal.css";
 import { ReactComponent as X } from "../Assets/icons/x.svg";
 
 const ErrorModal = ({ message, onClose, isVisible }) => {
