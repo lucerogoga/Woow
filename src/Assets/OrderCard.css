@@ -44,7 +44,6 @@
   color: #283159;
   font-size: 1rem;
   font-weight: 700;
-  /* width: 5rem; */
 }
 
 .order-card__info-p {
@@ -68,8 +67,6 @@
 }
 
 .order-card__button {
-  /* .order-card__button__cooking { */
-  /* background-color: red; */
   background-color: #ff9aa3;
   border: none;
   color: #fff;

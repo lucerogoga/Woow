@@ -53,7 +53,6 @@ body {
 }
 
 .err-msg-header {
-  /* background-color: aqua; */
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -64,10 +63,8 @@ body {
 }
 
 .err-msg-x path {
-  /* transform: rotate(45deg); */
   fill: #fff;
 }
-/* FF4B61 */
 .err-msg--text {
   color: #fff;
   font-size: 1em;

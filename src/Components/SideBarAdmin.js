@@ -66,7 +66,6 @@ const SidebarAdminContainer = ({ onClose, onClickLogout }) => {
 };
 
 const SideBarAdmin = ({ isOpen, onClose, onClickLogout }) => {
-  console.log(isOpen);
   return (
     <div>
       <React.Fragment>

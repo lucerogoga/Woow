@@ -63,9 +63,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   //states for error Message
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
-  console.log(productStock);
-  console.log(productCost);
-  console.log(productPhoto);
   const cleanForm = () => {
     setCategoryId("");
     setProductName("");

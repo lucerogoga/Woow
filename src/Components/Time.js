@@ -41,7 +41,6 @@ const Time = ({ start, end, status }) => {
     .format("HH:mm:ss");
   // 60000 ms = 1 minute
   // 20000 ms = 20 seconds
-  // {true && <h1>hola</h1>}
   return (
     <div className="order-cart--containertime">
       <Clock
@@ -51,8 +50,7 @@ const Time = ({ start, end, status }) => {
             ? "shake "
             : "") +
           (duration._milliseconds >= 20000 && status === "Ready to Serve"
-            ? // (duration._milliseconds >= 20000 && status === "Ready to Serve"
-              "light-on"
+            ? "light-on"
             : "")
         }
         width={16}

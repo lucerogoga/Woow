@@ -17,13 +17,8 @@ export const RolProvider = ({ children }) => {
   useEffect(() => {
     if (currentUser) {
       async function getUserFirestore() {
-        // const { user_rol, user_status } = await getUser(currentUser);
         const { user_rol } = await getUser(currentUser);
-        // console.log("está active?, ", user_status);
-
-        // user_status ? setUserRole(user_rol) : setUserRole(user_status);
         setUserRole(user_rol);
-        // setUserRole(user_rol);
       }
       setLoading(true);
       getUserFirestore().finally(() => setLoading(false));

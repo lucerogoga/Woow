@@ -18,7 +18,6 @@ html {
 .product-card {
   display: flex;
   background-color: #fff;
-  /* background-color: red; */
   border-radius: 17px;
   display: flex;
   flex-direction: row;

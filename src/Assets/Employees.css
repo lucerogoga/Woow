@@ -12,7 +12,6 @@
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
-  /* width: 500px; */
   height: 11rem;
   width: 31rem;
 }
@@ -48,7 +47,6 @@
   color: #283159;
   font-size: 1rem;
   font-weight: 700;
-  /* width: 5rem; */
 }
 
 .employee-card--info-p {
@@ -72,8 +70,6 @@
 }
 
 .employee-card__button {
-  /* .employee-card--button--cooking { */
-  /* background-color: red; */
   background-color: #ff9aa3;
   bemployee: none;
   color: #fff;

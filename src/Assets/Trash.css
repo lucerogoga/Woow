@@ -1,4 +1,3 @@
-/* .trash-button path { */
 .trash-button {
   height: 50px;
   width: 50px;
@@ -7,7 +6,6 @@
   align-items: center;
   border-radius: 10px;
   background-color: #ff9aa3;
-  /* background: #ff9aa3; */
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
@@ -20,9 +18,3 @@
 .trash-button__icon {
   width: 30px;
 }
-
-/* .button-card:hover { */
-/* .trash-button:hover {
-  background-color: #ff9aa3;
-  color: #fff;
-} */

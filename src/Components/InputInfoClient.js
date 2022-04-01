@@ -15,7 +15,6 @@ export default function InputInfoClient() {
     setClientName(nameClient);
   };
   const handleChangeTable = (tabla) => {
-    console.log("ok!, tabla:", tabla);
     setTableNumber(tabla);
   };
 
