@@ -1,39 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+//Material UI Components
+import { Grid } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { styled } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import SwitchCustom from "../Components/Switch";
-import { v4 as uuidv4 } from "uuid";
 import {
   validateEmail,
   validateName,
   validateEmailDomains,
   validatePassword,
 } from "../helpers/loginFuntions";
-
 import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
-
-import {
-  getProductsCategories,
-  createProductFirebase,
-  uploadImage,
-  createUserFirebase,
-  updateUser,
-} from "../Services/FirestoreServices";
-
-import ActionButton from "./ActionButton";
-
-import { Grid, InputAdornment } from "@mui/material";
+//Firebase Connection
+import { createUserFirebase, updateUser } from "../Services/FirestoreServices";
 import { useAuth } from "./Context/AuthContext";
-
-const Input = styled("input")({
-  display: "none",
-});
+//Components
+import ActionButton from "./ActionButton";
+import ErrorModal from "./ErrorModal";
 
 const style = {
   position: "absolute",
@@ -49,11 +37,16 @@ const style = {
 };
 
 export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
-  const [userRoles, setUserRoles] = useState(["waiter", "chef", "admin"]);
+  const options = [
+    { label: "Waiter", value: "waiter" },
+    { label: "Chef", value: "chef" },
+    { label: "Admin", value: "admin" },
+  ];
   const { createUser, auth2, changeUserDataAuth, signOut } = useAuth();
 
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  const [userNewName, setUserNewName] = useState("");
   const [userNewEmail, setUserNewEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
@@ -62,7 +55,9 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   const [userNewPwd, setUserNewPwd] = useState("");
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [secondUser, setSecondUser] = useState([]);
+  //states for error Message
+  const [errorMessage, setErrorMessage] = useState("");
+  const [displayError, setDisplayError] = useState(false);
 
   const switchHandler = (event) => {
     console.log("el switch funciona, ", event.target.checked);
@@ -74,11 +69,17 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
     setUserNewEmail("");
     setUserRole("");
     setUserName("");
+    setUserNewName("");
     setUserStatus(false);
     setUserEmail("");
     setUserPwd("");
+    setUserNewPwd("");
     setChecked(false);
     setLoading(false);
+  };
+
+  const handleDisplayError = () => {
+    setDisplayError(false);
   };
 
   const handleSubmit = (e) => {
@@ -91,21 +92,37 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   const editUserFirestore = async () => {
-    if (userName.trim()?.length === 0) {
-      return console.log("INGRESA UN NOMBRE VÁLIDO");
+    setErrorMessage("");
+    setDisplayError(false);
+    // ! los states del formulario arreglar
+    if (
+      userNewName.trim()?.length === 0 ||
+      userNewEmail.trim()?.length === 0 ||
+      userNewPwd.trim()?.length === 0
+    ) {
+      setErrorMessage("Fields must be filled");
+      setDisplayError(true);
+      return;
     }
     if (
       userNewEmail.trim()?.length !== 0 &&
       !validateEmailDomains(userNewEmail)
     ) {
-      return console.log("EL CORREO DEBE TENER UN FORMATO!");
+      setErrorMessage("The email must have format example@mail.com");
+      setDisplayError(true);
+      return;
     }
-    if (userEmail.trim() === userNewEmail.trim()) {
-      return console.log("INGRESA UN CORREO NUEVO!");
+    if (!validateEmailDomains(userNewEmail)) {
+      setErrorMessage(
+        "The email must have the domain of gmail, hotmail or outlook"
+      );
+      setDisplayError(true);
+      return;
     }
     if (userNewPwd.trim()?.length !== 0 && !validatePassword(userNewPwd)) {
-      console.log("quee?, ", userNewPwd);
-      return console.log("LA CONTRASEÑA DEBE TENER MINIMO 6 CARÁCTERES");
+      setErrorMessage("Password must have at least 6 characters");
+      setDisplayError(true);
+      return;
     }
 
     // The spinner is active
@@ -120,7 +137,7 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
 
         return updateUser(
           userId,
-          userName,
+          userNewName,
           emailCurrent,
           userRole,
           checked,
@@ -129,73 +146,79 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       })
       .catch((e) => console.log(e.message))
       .finally(() => {
-        // onClose();
         setLoading(false);
         cleanForm();
       });
   };
 
   const createUserFirestore = () => {
+    setErrorMessage("");
+    setDisplayError(false);
     if (!userRole) {
-      return console.log("INGRESE UN ROL!");
+      setErrorMessage("Enter a Rol");
+      setDisplayError(true);
+      return;
     }
-    if (userName.trim()?.length === 0) {
-      return console.log("INGRESA UN NOMBRE VALIDO");
+    if (userNewName.trim()?.length === 0) {
+      setErrorMessage("Enter a Name");
+      setDisplayError(true);
+      return;
     }
-    if (!validateName(userName)) {
-      return console.log("SOLO INGRESE LETRAS EN EL NOMBRE");
+    if (!validateName(userNewName)) {
+      setErrorMessage("The name must only contain letters");
+      setDisplayError(true);
+      return;
     }
     if (userNewEmail.trim()?.length === 0) {
-      return console.log("INGRESE UN CORREO!");
+      setErrorMessage("Enter a Email");
+      setDisplayError(true);
+      return;
     }
     if (!validateEmail(userNewEmail)) {
-      return console.log("EL CORREO DEBE TENER UN FORMATO!");
+      setErrorMessage("The email must have format example@mail.com");
+      setDisplayError(true);
+      return;
     }
     if (!validateEmailDomains(userNewEmail)) {
-      return console.log(
-        "EL CORREO DEBE SER GMAIL O OUTLOOK O HOTMAIL!  con .com"
+      setErrorMessage(
+        "The email must have the domain of gmail, hotmail or outlook"
       );
+      setDisplayError(true);
+      return;
     }
     if (userNewPwd.trim()?.length === 0) {
-      return console.log("INGRESE UNA CONTRASEÑA");
+      setErrorMessage("Enter a Password");
+      setDisplayError(true);
+      return;
     }
 
     if (!validatePassword(userNewPwd)) {
-      return console.log("LA CONTRASEÑA DEBE TENER MINIMO 6 CARÁCTERES");
+      setErrorMessage("Password must have at least 6 characters");
+      setDisplayError(true);
+      return;
     }
-
-    cleanForm();
     setLoading(true);
 
     createUser(userNewEmail, userNewPwd)
-      // .then((res) => {
-      //   console.log("qué obtengo de aquí?, ", res);
-      //   const { userId } = res;
-      //   return userId;
-      // })
       .then((userID) => {
         return createUserFirebase(
           userID,
           userRole,
           checked,
-          userName,
+          userNewName,
           userNewEmail,
           userNewPwd
         );
       })
-      .then((newUser) => {
-        return signOut(auth2);
-      })
       .then(() => {
         onClose();
-        setLoading(false);
+        return signOut(auth2);
       })
       .catch((e) => {
-        onClose();
-        setLoading(false);
         switch (e.message) {
           case "Firebase: Error (auth/email-already-in-use).":
-            console.log("Email already in use.");
+            setErrorMessage("Email already in use.");
+            setDisplayError(true);
             break;
           default:
             console.log("Error not handled: ", e.message);
@@ -203,7 +226,6 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       })
       .finally(() => {
         setLoading(false);
-        onClose();
         cleanForm();
       });
   };
@@ -213,18 +235,23 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
   };
 
   useEffect(() => {
+    cleanForm();
+    setErrorMessage("");
+    setDisplayError(false);
     if (employeeToEdit) {
       setUserId(employeeToEdit.user_id);
       setUserRole(employeeToEdit.user_rol);
       setUserName(employeeToEdit.user_name);
       setUserEmail(employeeToEdit.user_email);
       setUserPwd(employeeToEdit.user_pwd);
-      setLoading(loading);
+      setUserNewName(employeeToEdit.user_name);
+      setUserNewEmail(employeeToEdit.user_email);
+      setUserNewPwd(employeeToEdit.user_pwd);
       setUserStatus(employeeToEdit.user_status);
       setChecked(userStatus);
     }
     return () => cleanForm();
-  }, [employeeToEdit, userStatus]);
+  }, [employeeToEdit, userStatus, onClose]);
 
   return (
     <Modal
@@ -234,11 +261,19 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
       aria-describedby="parent-modal-description"
     >
       <Box sx={{ ...style, width: "70%" }}>
+        <div className="error">
+          <ErrorModal
+            message={errorMessage}
+            onClose={handleDisplayError}
+            isVisible={displayError}
+          />
+        </div>
         <Grid container gap="1rem" sx={{ minHeight: "425px" }}>
           {loading ? (
             <Spinner />
           ) : (
             <>
+              <div style={{ height: "1rem" }}> </div>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
                   Category Rol
@@ -250,10 +285,10 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
                   label="Category Rol"
                   onChange={handleChangeRole}
                 >
-                  {userRoles.map((cat, i) => {
+                  {options?.map((option) => {
                     return (
-                      <MenuItem value={cat} key={uuidv4()}>
-                        {cat}
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label ?? option.value}
                       </MenuItem>
                     );
                   })}
@@ -261,54 +296,34 @@ export default function ModalEmployes({ isOpen, onClose, employeeToEdit }) {
               </FormControl>
               <TextField
                 fullWidth
-                label="User Name"
-                value={userName}
+                label="New User Name"
+                // defaultValue={userName}
+                value={userNewName}
                 variant="outlined"
                 autoComplete="off"
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserNewName(e.target.value);
                 }}
               />
-              {employeeToEdit && (
-                <TextField
-                  fullWidth
-                  inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                  label="Email"
-                  variant="outlined"
-                  defaultValue={userEmail}
-                  autoComplete="off"
-                  disabled={true}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                />
-              )}
-
               <TextField
                 fullWidth
                 inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                 label={employeeToEdit ? "New Email" : "Email"}
                 variant="outlined"
+                // defaultValue={userEmail}
                 value={userNewEmail}
                 autoComplete="off"
                 onChange={(e) => {
                   setUserNewEmail(e.target.value);
                 }}
               />
-              {employeeToEdit && (
-                <TextField
-                  fullWidth
-                  label="Password"
-                  variant="outlined"
-                  autoComplete="off"
-                  disabled={true}
-                  defaultValue={userPwd}
-                />
-              )}
-
               <TextField
                 fullWidth
-                label="New Password"
+                // label="New Password"
+                label={employeeToEdit ? "New Password" : "Password"}
                 variant="outlined"
                 autoComplete="off"
+                value={userNewPwd}
                 onChange={(e) => setUserNewPwd(e.target.value)}
               />
               <label>Status</label>
