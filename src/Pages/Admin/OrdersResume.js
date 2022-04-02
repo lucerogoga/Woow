@@ -18,42 +18,23 @@ import Title from "../../Components/Title";
 
 const OrdersResumeAdmin = () => {
   const [allOrders, setAllOrders] = useState([]);
-  const [productOrderCategories, setProductOrderCategories] = useState([
+  const [orders, setOrders] = useState([]);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
+  const {
+    user: { currentUser },
+  } = useAuth();
+
+  const productOrderCategories = [
     "Pending",
     "Cooking",
     "Ready to Serve",
     "Delivered",
     "Canceled",
-  ]);
-  const [orders, setOrders] = useState([]);
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
-  const [orderStatusQuantity, setOrderStatusQuantity] = useState([]);
-  const {
-    user: { currentUser },
-  } = useAuth();
-
-  // const filterOrders = () => {
-  //   const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
-  //     allOrders.filter((doc) => doc.order_status === elem)
-  //   );
-  //   return arrayOfOrdersByStatus.map((elem) => elem.length);
-  // };
-
-  // useEffect(() => {
-  //   const q = query(
-  //     collection(db, "orders"),
-  //     orderBy("order_timestamp", "desc")
-  //   );
-
-  //   return onSnapshot(q, (snapshot) => {
-  //     setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   });
-  // }, [selectedOrderStatus, currentUser]);
+  ];
   useEffect(() => {
     const q = query(
       collection(db, "orders"),
       where("order_status", "==", selectedOrderStatus),
-      // where("waiter_id", "==", currentUser),
       orderBy("order_timestamp", "desc")
     );
 
@@ -71,10 +52,7 @@ const OrdersResumeAdmin = () => {
 
   const filterOrders = () => {
     const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
-      allOrders.filter(
-        // (doc) => doc.order_status === elem && doc.waiter_id === currentUser
-        (doc) => doc.order_status === elem
-      )
+      allOrders.filter((doc) => doc.order_status === elem)
     );
     return arrayOfOrdersByStatus.map((elem) => elem.length);
   };
@@ -98,7 +76,6 @@ const OrdersResumeAdmin = () => {
               onClick={() => {
                 handleClick(cat);
               }}
-              // allOrders={allOrders}
               orders={allOrders}
               filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
