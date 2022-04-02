@@ -387,7 +387,19 @@ Como resultado final se adjuntará una breve videodemostración del sistema para
 
 ##### Estado "
 
+---
 
+### Mesero Vista
+
+[![Woow - App para gestión de pedidos en un restaurante - Rol de Mesero](https://res.cloudinary.com/marcomontalbano/image/upload/v1648874873/video_to_markdown/images/youtube--dam9josz84g-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=dam9josz84g "Woow - App para gestión de pedidos en un restaurante - Rol de Mesero")
+
+### Chef Vista
+
+[![Woow - App para gestión de pedidos en un restaurante - Rol de Chef](https://res.cloudinary.com/marcomontalbano/image/upload/v1648875386/video_to_markdown/images/youtube--c9RHvgwpO7A-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/c9RHvgwpO7A "Woow - App para gestión de pedidos en un restaurante - Rol de Chef")
+
+### Administrador Vista
+
+[![Woow - App para gestión de pedidos en un restaurante - Rol de Administrador](https://res.cloudinary.com/marcomontalbano/image/upload/v1648875727/video_to_markdown/images/youtube--cXvr9y1_NWc-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/cXvr9y1_NWc "Woow - App para gestión de pedidos en un restaurante - Rol de Administrador")
 
 ## 8. Fuente
 
