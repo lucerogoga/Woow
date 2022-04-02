@@ -408,7 +408,7 @@ Como resultado final se adjuntará una breve videodemostración del sistema para
 
 También puedes hacer click en la imagen para visualizar los prototipos
 
-<a href="https://www.canva.com/design/DAE8w_YadWU/uUWhRE8RcBGOllDDWLqTSw/view?utm_content=DAE8w_YadWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" rel="some text">![Woow](https://user-images.githubusercontent.com/91838806/161398019-121a84aa-eeb6-45f7-ad7f-c136176abbd4.jpg)</a>
+<a target="_blank" href="https://www.canva.com/design/DAE8w_YadWU/uUWhRE8RcBGOllDDWLqTSw/view?utm_content=DAE8w_YadWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" rel="some text">![Woow](https://user-images.githubusercontent.com/91838806/161398019-121a84aa-eeb6-45f7-ad7f-c136176abbd4.jpg)</a>
 
 ## 9. Lighthouse - Reporte
 
