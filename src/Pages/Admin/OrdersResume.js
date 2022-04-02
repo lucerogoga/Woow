@@ -62,7 +62,6 @@ const OrdersResumeAdmin = () => {
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
-  console.log("estas son todas las ordenes, ", allOrders);
   return (
     <>
       <div className="categories-container">
