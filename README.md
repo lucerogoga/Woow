@@ -277,8 +277,6 @@ mesero que acepta la orden.
 
 Tomando en cuenta que el mesero maneja un menú exteso, el contenido se basa en que se pueda visualizar los productos en un formato de tarjeta en el que pueda mostrar toda su información incluyendo su respectiva fotografía, además, las ordenes se representarán en formato de tarjeta con toda la información del pedido (nombre del cliente, del mesero que generó la orden, del chef que aceptó la orden, la duración y una tabla de productos con sus precios)
 
-A continuación, el flujo y las vistas por módulo del sistema se presentará a través del siguiente [documento PDF](https://vercel.com/). 
-
 #### Ejecución del diseño y la programación
 
 Una vez teniendo todo lo antes mencionado, al momento de crear el diseño con código
@@ -403,6 +401,13 @@ Como resultado final se adjuntará una breve videodemostración del sistema para
 
 ## 8. Fuente
 
+[Descargar Prototipos de baja y alta fidelidad en PDF](https://github.com/mirianalejandra1996/LIM016-burger-queen/files/8403271/Woow.1.pdf)
+
+[Visualizar en diapositivas](https://www.canva.com/design/DAE8w_YadWU/uUWhRE8RcBGOllDDWLqTSw/view?utm_content=DAE8w_YadWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+También puedes hacer click en la imagen para visualizar los prototipos
+
+<a href="https://www.canva.com/design/DAE8w_YadWU/uUWhRE8RcBGOllDDWLqTSw/view?utm_content=DAE8w_YadWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" rel="some text">![Woow](https://user-images.githubusercontent.com/91838806/161398019-121a84aa-eeb6-45f7-ad7f-c136176abbd4.jpg)</a>
 
 
 ## 9. Autores
