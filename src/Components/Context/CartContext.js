@@ -8,16 +8,10 @@ const CartContext = ({ children }) => {
   const [tableNumber, setTableNumber] = useState("");
   const [isClean, setIsClean] = useState(false);
 
-  useEffect(() => {
-    console.log("Mi client name, ", clientName);
-    console.log("Mi tableNumber, ", tableNumber);
-    console.log("Mi isClean, ", isClean);
-  }, [tableNumber, clientName, isClean]);
+  useEffect(() => {}, [tableNumber, clientName, isClean]);
 
   useEffect(() => {
     if (isClean) {
-      // handleChangeTable("");
-      // handleChange("");
       setTableNumber("");
       setClientName("");
     }

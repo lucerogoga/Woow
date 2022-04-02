@@ -12,8 +12,6 @@ import OrdersResumeWaiter from "../Pages/Waiter/OrdersResumeWaiter";
 import DetailProduct from "../Pages/Waiter/DetailProduct";
 import OrderCart from "../Pages/Waiter/OrderCart";
 
-import Cart from "./Cart";
-
 import ChefView from "../Pages/Chef/ChefView";
 
 import AdminView from "../Pages/Admin/AdminView";

@@ -9,9 +9,6 @@ import formatNum from "format-num";
 import { ReactComponent as More } from "../Assets/icons/more.svg";
 import { ReactComponent as Pencil } from "../Assets/icons/pencil.svg";
 import EyePopover from "./EyePopover";
-// import { ReactComponent as Eye } from "../Assets/icons/eye.svg";
-// import TableRow from "@mui/material/TableRow";
-
 //Cart Reducer Hook Function
 const cartReducer = (state, action) => {
   switch (action.type) {

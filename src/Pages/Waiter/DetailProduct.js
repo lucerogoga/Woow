@@ -3,18 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocation } from "react-router-dom";
 import "../../Assets/DetailProduct.css";
 import DetailProductsIcons from "../../Assets/iconComponent/DetailsProductsIcons";
-// import ButtonFilter from "../../Components/ButtonFilter";
 import NavBarWaiter from "../../Components/NavBarWaiter";
 import ActionButton from "../../Components/ActionButton";
 import { useCart } from "../../Components/Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import ButtonFilter from "../../Components/ButtonFilter";
 import formatNum from "format-num";
-
-import {
-  // existOrderInCollection,
-  getOrderNumberCorrelative,
-} from "../../Services/FirestoreServices";
 
 const DetailProduct = () => {
   const { cart, setCart } = useCart();
@@ -112,7 +106,6 @@ const DetailProduct = () => {
     }
   }, [initialSize]);
 
-  console.log("la foto, ", product.product_photo[1]);
   return (
     <>
       <NavBarWaiter currentPath={pathname} />
@@ -124,9 +117,9 @@ const DetailProduct = () => {
       </div>
 
       <main className="detail-desktop">
-        {/* Div tarjeta central para el desktop */}
-        <div className="info-product--main-container">
-          {/* Div izquierdo para el texto en vista desktop */}
+        {/* Div central card for the desktop */}
+        <div className="info-product__main-container">
+          {/* Left div for text in desktop view*/}
           <div className="info-product__left-container">
             <img
               alt={product.product_name}
@@ -134,18 +127,18 @@ const DetailProduct = () => {
               src={product.product_photo[0]}
             />
           </div>
-          {/* Div derecho para el texto en vista desktop */}
-          <div className="info-product--right-container">
+          {/* Right div for text in desktop view */}
+          <div className="info-product__right-container">
             <div className="product-detail-container">
-              {/* El div que contiene la descripción del producto y la tarjeta TABLET */}
+              {/* The div that contains the product description and the TABLET card */}
               <div className="info-product-container">
-                {/* Información superior del producto */}
+                {/* Product Top Information */}
                 <div className="info-product-subcontainer">
-                  <h1 className="product--name">{product.product_name}</h1>
+                  <h1 className="product__name">{product.product_name}</h1>
                   <p className="product__description">
                     {product.product_description}
                   </p>
-                  <h2 className="product--cost">
+                  <h2 className="product__cost">
                     {"Unit Price: $ " +
                       formatNum(product.product_cost[cost], {
                         minFraction: 2,
@@ -217,7 +210,7 @@ const DetailProduct = () => {
                 <div className="buttons-container">
                   <CounterHorizontal />
                   <div
-                    className="large-button--content"
+                    className="large-button__content"
                     onClick={handleActionClick}
                   >
                     <ActionButton

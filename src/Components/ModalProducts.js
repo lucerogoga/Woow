@@ -17,7 +17,7 @@ import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 import ActionButton from "./ActionButton";
 //Materiaul UI Icons
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-//Firebase Conection
+//Firebase Connection
 import {
   getProductsCategories,
   createProductFirebase,
@@ -63,9 +63,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   //states for error Message
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
-  console.log(productStock);
-  console.log(productCost);
-  console.log(productPhoto);
   const cleanForm = () => {
     setCategoryId("");
     setProductName("");
@@ -309,7 +306,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 {objectURL === "" ? null : (
                   <img src={objectURL} alt={"photoProductb"} width="100px" />
                 )}
-                <div className="large-button--content" onClick={handleSubmit}>
+                <div className="large-button__content" onClick={handleSubmit}>
                   <ActionButton
                     title={productToEdit ? "Update Product" : "Create Product"}
                     className={"button--pink"}

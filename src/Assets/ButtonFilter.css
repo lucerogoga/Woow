@@ -10,9 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* min-width: 175px; */
   min-width: 11rem;
-  /* min-width: 22%; */
   min-height: 200px;
   cursor: pointer;
 }
@@ -75,7 +73,6 @@
 }
 .button-card:hover {
   background-color: #ff9aa3;
-  /* color: #ff9aa3; */
   color: #fff;
 }
 
@@ -132,7 +129,6 @@
 }
 
 @media (min-width: 900px) {
-  /* @media (min-width: 1200px) { */
   .button-card {
     filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
     border-radius: 4rem;
@@ -161,7 +157,6 @@
   .button-card--content-detail {
     justify-content: flex-end;
   }
-  /* ver esta de abajo AQUI aqui */
   .button-card--text-content {
     height: 35px;
     padding-left: 1rem;

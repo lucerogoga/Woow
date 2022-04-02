@@ -18,19 +18,15 @@ import { db } from "../../Config/initialize";
 
 const OrdersResumeWaiter = () => {
   const [allOrders, setAllOrders] = useState([]);
-  const [quantityByStatus, setQuantityByStatus] = useState("");
-  const [productOrderCategories, setProductOrderCategories] = useState([
+  const [orders, setOrders] = useState([]);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
+  const productOrderCategories = [
     "Pending",
     "Cooking",
     "Ready to Serve",
     "Delivered",
     "Canceled",
-  ]);
-  const [orders, setOrders] = useState([]);
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
-
-  // const handleCategorie = async (catUid, catName) =>
-  //   await filterProductByCategorie(catUid, catName);
+  ];
 
   const {
     user: { currentUser },
@@ -46,11 +42,9 @@ const OrdersResumeWaiter = () => {
 
     return onSnapshot(q, (snapshot) => {
       setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log("escuchando ando, ");
     });
   }, [selectedOrderStatus, currentUser]);
 
-  //!---------------------traer canticadad de cada orden ----
   useEffect(() => {
     const q = query(collection(db, "orders"));
     return onSnapshot(q, (snapshot) => {
@@ -59,24 +53,20 @@ const OrdersResumeWaiter = () => {
   }, []);
 
   const filterOrders = () => {
-    const arrayOfOrdersByStatus = productOrderCategories.map(
-      (elem) =>
-        allOrders.filter(
-          (doc) => doc.order_status === elem && doc.waiter_id === currentUser
-        )
-      // allOrders.filter((doc) => doc.order_status === elem)
+    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+      allOrders.filter(
+        (doc) => doc.order_status === elem && doc.waiter_id === currentUser
+      )
     );
     return arrayOfOrdersByStatus.map((elem) => elem.length);
   };
-  const QuantityForTtitle = (elem) => {
-    const arrayOfOrdersByStatus = allOrders.filter(
-      (doc) => doc.order_status === elem
-    );
-    // setQuantityByStatus(arrayOfOrdersByStatus.length);
-    return arrayOfOrdersByStatus.length;
-  };
+  // const QuantityForTtitle = (elem) => {
+  //   const arrayOfOrdersByStatus = allOrders.filter(
+  //     (doc) => doc.order_status === elem
+  //   );
+  //   return arrayOfOrdersByStatus.length;
+  // };
   const filteredOrdersQuantity = filterOrders();
-  const QuantifiedForTitle = QuantityForTtitle(selectedOrderStatus);
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };

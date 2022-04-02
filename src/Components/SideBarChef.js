@@ -32,7 +32,6 @@ const SidebarChefContainer = ({ onClose, onClickLogout }) => {
 };
 
 const SideBarChef = ({ isOpen, onClose, onClickLogout }) => {
-  console.log(isOpen);
   return (
     <div>
       <React.Fragment>

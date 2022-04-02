@@ -6,20 +6,14 @@
   padding: 1rem 0;
 }
 
-/* .employee-card.user {
-  width: 500px;
-  height: 150px;
-  background-color: aqua;
-} */
-
 .employee-card {
   filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.2));
   border-radius: 10px;
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
-  width: 500px;
-  height: 150px;
+  height: 11rem;
+  width: 31rem;
 }
 
 .employee-card--header {
@@ -53,7 +47,6 @@
   color: #283159;
   font-size: 1rem;
   font-weight: 700;
-  /* width: 5rem; */
 }
 
 .employee-card--info-p {
@@ -77,8 +70,6 @@
 }
 
 .employee-card__button {
-  /* .employee-card--button--cooking { */
-  /* background-color: red; */
   background-color: #ff9aa3;
   bemployee: none;
   color: #fff;
