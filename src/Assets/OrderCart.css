@@ -72,6 +72,7 @@
 
   .cart-product__product-container.order-cart {
     height: inherit;
+    width: 100%;
     overflow-x: scroll;
   }
   .footer-content.order-cart {

@@ -142,7 +142,9 @@
   height: 50px;
   cursor: pointer;
   transition: all 0.3s;
+  min-width: 17rem;
 }
+
 .button--pink:hover {
   background-color: #ffa4ac;
   transition: all 0.3s;

@@ -4,6 +4,8 @@ import "../Assets/ButtonFilter.css";
 
 export function ButtonFilter(props) {
   const { item, icon, onClick, active, filteredOrdersQuantity } = props;
+
+  console.log("filteredOrdersQuantity, ", filteredOrdersQuantity);
   let location = useLocation();
   const { pathname } = location;
 
@@ -18,7 +20,9 @@ export function ButtonFilter(props) {
         }
         onClick={onClick}
       >
-        {pathname === "/waiter/orders-resume" || pathname === "/chef" ? (
+        {pathname === "/waiter/orders-resume" ||
+        pathname === "/chef" ||
+        pathname === "/admin/orders" ? (
           <div className="button-order--quantity">
             <h2>{filteredOrdersQuantity}</h2>
           </div>
