@@ -39,6 +39,7 @@ const Time = ({ start, end, status }) => {
   const formatedTimeDiff = moment
     .utc(duration.asMilliseconds())
     .format("HH:mm:ss");
+
   // 60000 ms = 1 minute
   // 20000 ms = 20 seconds
   return (
@@ -46,10 +47,10 @@ const Time = ({ start, end, status }) => {
       <Clock
         className={
           "order-cart--clock " +
-          (duration._milliseconds >= 20000 && status !== "Ready to Serve"
+          (duration._milliseconds >= 20000 && status === "Cooking"
             ? "shake "
             : "") +
-          (duration._milliseconds >= 20000 && status === "Ready to Serve"
+          (duration._milliseconds >= 20000 && status !== "Cooking"
             ? "light-on"
             : "")
         }
@@ -59,10 +60,10 @@ const Time = ({ start, end, status }) => {
       <h3
         className={
           "order-cart--minutes " +
-          (duration._milliseconds >= 20000 && status !== "Ready to Serve"
+          (duration._milliseconds >= 20000 && status === "Cooking"
             ? "exceeds "
             : "") +
-          (duration._milliseconds >= 20000 && status === "Ready to Serve"
+          (duration._milliseconds >= 20000 && status !== "Cooking"
             ? "inactive"
             : "")
         }
