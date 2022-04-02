@@ -14,8 +14,10 @@ import {
 } from "firebase/firestore";
 import { useAuth } from "../../Components/Context/AuthContext";
 import { db } from "../../Config/initialize";
+import Title from "../../Components/Title";
 
 const OrdersResumeAdmin = () => {
+  const [allOrders, setAllOrders] = useState([]);
   const [productOrderCategories, setProductOrderCategories] = useState([
     "Pending",
     "Cooking",
@@ -30,11 +32,28 @@ const OrdersResumeAdmin = () => {
     user: { currentUser },
   } = useAuth();
 
+  // const filterOrders = () => {
+  //   const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+  //     allOrders.filter((doc) => doc.order_status === elem)
+  //   );
+  //   return arrayOfOrdersByStatus.map((elem) => elem.length);
+  // };
+
+  // useEffect(() => {
+  //   const q = query(
+  //     collection(db, "orders"),
+  //     orderBy("order_timestamp", "desc")
+  //   );
+
+  //   return onSnapshot(q, (snapshot) => {
+  //     setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   });
+  // }, [selectedOrderStatus, currentUser]);
   useEffect(() => {
     const q = query(
       collection(db, "orders"),
       where("order_status", "==", selectedOrderStatus),
-      where("waiter_id", "==", currentUser),
+      // where("waiter_id", "==", currentUser),
       orderBy("order_timestamp", "desc")
     );
 
@@ -43,10 +62,29 @@ const OrdersResumeAdmin = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
+  useEffect(() => {
+    const q = query(collection(db, "orders"));
+    return onSnapshot(q, (snapshot) => {
+      setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const filterOrders = () => {
+    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+      allOrders.filter(
+        // (doc) => doc.order_status === elem && doc.waiter_id === currentUser
+        (doc) => doc.order_status === elem
+      )
+    );
+    return arrayOfOrdersByStatus.map((elem) => elem.length);
+  };
+
+  const filteredOrdersQuantity = filterOrders();
+
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
-
+  console.log("estas son todas las ordenes, ", allOrders);
   return (
     <>
       <div className="categories-container">
@@ -60,11 +98,15 @@ const OrdersResumeAdmin = () => {
               onClick={() => {
                 handleClick(cat);
               }}
+              // allOrders={allOrders}
+              orders={allOrders}
+              filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
           );
         })}
       </div>
 
+      <Title title={`Orders ${selectedOrderStatus}`} quantity={orders.length} />
       <div>
         {orders.map((order) => (
           <OrderCardFormat key={order.id} orderData={order} />
