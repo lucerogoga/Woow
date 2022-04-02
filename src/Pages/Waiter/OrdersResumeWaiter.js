@@ -60,14 +60,13 @@ const OrdersResumeWaiter = () => {
     );
     return arrayOfOrdersByStatus.map((elem) => elem.length);
   };
-  const QuantityForTtitle = (elem) => {
-    const arrayOfOrdersByStatus = allOrders.filter(
-      (doc) => doc.order_status === elem
-    );
-    return arrayOfOrdersByStatus.length;
-  };
+  // const QuantityForTtitle = (elem) => {
+  //   const arrayOfOrdersByStatus = allOrders.filter(
+  //     (doc) => doc.order_status === elem
+  //   );
+  //   return arrayOfOrdersByStatus.length;
+  // };
   const filteredOrdersQuantity = filterOrders();
-  const QuantifiedForTitle = QuantityForTtitle(selectedOrderStatus);
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
