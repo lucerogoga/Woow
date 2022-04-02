@@ -12,8 +12,9 @@
 - [5. Desing Process](#5-desing-process)
 - [6. Recursos Utilizados](#6-recursos-utilizados)
 - [7. Resultado Final](#7-pistas-tips-y-lecturas-complementarias)
-- [8. Fuente](#8-fuente)
-- [9. Autores](#9-autores)
+- [8. Fuentes](#8-fuentes)
+- [9. Lighthouse - Reporte](#9-lighthouse---reporte)
+- [10. Autores](#10-autores)
 
 ---
 
@@ -399,7 +400,7 @@ Como resultado final se adjuntará una breve videodemostración del sistema para
 
 [![Woow - App para gestión de pedidos en un restaurante - Rol de Administrador](https://res.cloudinary.com/marcomontalbano/image/upload/v1648875727/video_to_markdown/images/youtube--cXvr9y1_NWc-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/cXvr9y1_NWc "Woow - App para gestión de pedidos en un restaurante - Rol de Administrador")
 
-## 8. Fuente
+## 8. Fuentes
 
 [Descargar Prototipos de baja y alta fidelidad en PDF](https://github.com/mirianalejandra1996/LIM016-burger-queen/files/8403271/Woow.1.pdf)
 
@@ -409,8 +410,11 @@ También puedes hacer click en la imagen para visualizar los prototipos
 
 <a href="https://www.canva.com/design/DAE8w_YadWU/uUWhRE8RcBGOllDDWLqTSw/view?utm_content=DAE8w_YadWU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" rel="some text">![Woow](https://user-images.githubusercontent.com/91838806/161398019-121a84aa-eeb6-45f7-ad7f-c136176abbd4.jpg)</a>
 
+## 9. Lighthouse - Reporte
 
-## 9. Autores
+<div align=center><img width="100%" src="https://user-images.githubusercontent.com/91838806/161400074-a39113c1-5ac8-4f39-9159-f4ba5b21158c.jpeg" ></div>
+
+## 10. Autores
 
 [Mirian Alejandra Arévalo 🙋](https://github.com/mirianalejandra1996).
 
