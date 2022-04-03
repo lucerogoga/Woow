@@ -25,7 +25,7 @@ export function ButtonFilter(props) {
             <h2>{filteredOrdersQuantity}</h2>
           </div>
         ) : null}
-        {/* render icono to props */}
+        {/* render icons to props */}
         <div
           className={
             isPathnameDetail

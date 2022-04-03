@@ -146,7 +146,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     });
 
-    return () => unsubcribe();
+    // return () => unsubcribe();
+    return unsubcribe;
+    // return unsubcribe();
   }, []);
 
   return (
