@@ -11,14 +11,10 @@ import {
   filterProductByCategorie,
 } from "../../Services/FirestoreServices";
 import Search from "../../Components/Search";
-import Time from "../../Components/Time";
-// ! -----
-
-// ! -----
 
 const TakeOrderWaiter = () => {
   const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [productCategories, setProductCategories] = useState([]);
 
   const handleCategorie = async (catUid, catName) =>
@@ -53,7 +49,7 @@ const TakeOrderWaiter = () => {
             <ButtonFilter
               item={cat.cat_name}
               uid={cat.cat_uid}
-              active={cat.cat_uid === selectedCategory}
+              active={cat.cat_name === selectedCategory}
               icon={iconComponents[i]}
               key={cat.cat_uid}
               onClick={() => {
@@ -64,8 +60,6 @@ const TakeOrderWaiter = () => {
         })}
       </div>
       <div className="products-container">
-        {/* <Time start={new Date()} end={null} /> */}
-        {/* <Time startOrderTime={new Date()} endOrderTime={null} /> */}
         {products.map((p) => {
           return <ProductCard product={p} key={p.id} />;
         })}

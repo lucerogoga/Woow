@@ -119,8 +119,8 @@ const OrderCart = ({ cantEdit }) => {
           />
         )}
 
-        <div className="cart-product--content order-cart">
-          <div className="cart-product--productContainer order-cart">
+        <div className="cart-product__content order-cart">
+          <div className="cart-product__product-container order-cart">
             <Success estado={state} loading={load} />
 
             {cart.map((cartProduct) => (
@@ -133,18 +133,20 @@ const OrderCart = ({ cantEdit }) => {
           </div>
           <div className="footer-content order-cart">
             <div className="total-price order-cart">
-              <h3>Resume Order</h3>
+              <div className="total-cost__header">
+                <h3>Resume Order</h3>
+              </div>
               <div className="info-order__container">
                 <div className="info-order__item">
                   <h3>Client: </h3>
-                  <p>{clientName}</p>
+                  <p className="info-order__text--name">{clientName}</p>
                 </div>
                 <div className="info-order__item">
                   <h3>Table: </h3>
                   <p>{tableNumber}</p>
                 </div>
                 <div className="info-order__item">
-                  <h3>Products</h3>
+                  <h3>Products (qty):</h3>
                   <p>{qtyItems}</p>
                 </div>
               </div>
@@ -159,7 +161,7 @@ const OrderCart = ({ cantEdit }) => {
                 </h3>
               </div>
             </div>
-            <div className="large-button--content" onClick={handleOrder}>
+            <div className="large-button__content" onClick={handleOrder}>
               <ActionButton title="Send to Chef" className={"button--pink"} />
             </div>
           </div>

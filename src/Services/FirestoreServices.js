@@ -16,7 +16,7 @@ import {
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../Config/initialize";
 
-//*----------------------------------------------------------------------- User Functions
+//*------------- User Functions
 export const getUser = async (userId) => {
   const userRef = doc(db, "users", userId);
 
@@ -29,19 +29,12 @@ export const getUser = async (userId) => {
   return {};
 };
 
-//*------------------------------------------------------------------------ Order Functions
+//*--------- Order Functions
 
 export const getOrderNumberCorrelative = async () => {
   const orderRef = collection(db, "orders");
 
-  return onSnapshot(orderRef, (snapshot) => {
-    // setOrderCorrelative(snapshot.size + 1);
-  });
-};
-
-export const ordersListener = () => {
-  const q = query(collection(db, "orders"));
-  return onSnapshot(q, (snapshot) => {});
+  return onSnapshot(orderRef, (snapshot) => {});
 };
 
 export const updateOrder = async (chefId, idOrder, status, chefName) => {
@@ -52,16 +45,12 @@ export const updateOrder = async (chefId, idOrder, status, chefName) => {
     chef_id: chefId,
     chef_name: chefName,
     order_timestamp_start: serverTimestamp(),
-    // order_timestamp_end: serverTimestamp(),
   });
 };
 
 export const updateStatusOrder = async (idOrder, status, userRole) => {
   const orderRef = doc(db, "orders", idOrder);
-  console.log("STATUS: ", status, "Y ROLE: ", userRole);
-  // if (status === "Canceled" && userRole === "waiter"){
   if (userRole === "waiter" || status === "Ready to Serve") {
-    console.log("deberia funcionar");
     return await updateDoc(orderRef, {
       order_status: status,
       order_timestamp_end: serverTimestamp(),
@@ -119,7 +108,7 @@ export async function getOrders() {
   });
 }
 
-//*-------------------------------------------------------------------------- Product Functions
+//*--------- Product Functions
 export async function getProducts() {
   const productsData = await getDocs(collection(db, "products"));
   return productsData.docs.map((p) => {
@@ -181,7 +170,7 @@ export async function filterProductByCategorie(catId, catName) {
   }
 }
 
-//*----------------------------------------------------------------------------- Admin Functions
+//*-------------- Admin Functions
 export async function getEmployers() {
   const usersData = await getDocs(collection(db, "users"));
   return usersData.docs.map((e) => {
@@ -191,7 +180,7 @@ export async function getEmployers() {
     };
   });
 }
-//-------------uploadimage for products
+//------------- uploadimage for products
 export function uploadImage(file, catName) {
   const productPath = "Products";
   const fileName = file.name;
@@ -202,6 +191,7 @@ export function uploadImage(file, catName) {
     })
     .catch((err) => console.log(err));
 }
+
 //------------------------------------------------
 export async function createProductFirebase(
   catId,
@@ -223,14 +213,13 @@ export async function createProductFirebase(
     product_stock: [productStock], //array
   });
 }
-//--------------------------------------------------
+
 export async function editProductFirebase(
   productId,
   catId,
   productName,
   productDescription,
   productCost,
-  productOption,
   productPhoto,
   productStock
 ) {
@@ -240,18 +229,16 @@ export async function editProductFirebase(
     product_name: productName,
     product_description: productDescription,
     product_cost: [productCost], //array
-    // product_options: [...productOption], //array
     product_photo: [productPhoto], //array
     product_stock: [productStock], //array
   });
 }
-//------------------------------------------------------
+
 export async function deleteProductFirebase(productId) {
   const productRef = doc(db, "products", productId);
   return deleteDoc(productRef);
 }
 
-//-----------------------------------------------------
 export function createUserFirebase(
   userID,
   userRole,
@@ -271,22 +258,21 @@ export function createUserFirebase(
   });
 }
 
-//-----------------------------------------------------
-
 export async function updateUser(
   userId,
   userName,
   userEmail,
   userRole,
-  userStatus
+  userStatus,
+  userPwd
 ) {
   const userRef = doc(db, "users", userId);
   return updateDoc(userRef, {
     user_email: userEmail,
-    // user_id
     user_name: userName,
     user_rol: userRole,
     user_status: userStatus,
+    user_pwd: userPwd,
   });
 }
 
@@ -299,18 +285,3 @@ export async function getUsers() {
     };
   });
 }
-
-// const q1 = query(
-//   collection(db, "orders"),
-//   where("order_status", "==", "Pending"),
-//   orderBy("product_name", "asc")
-//   // orderBy("product_name", "desc")
-// );
-// const querySnapshotProduct = await getDocs(q1);
-// const productFilterDocs = querySnapshotProduct.docs;
-// return productFilterDocs.map((p) => {
-//   return {
-//     id: p.id,
-//     ...p.data(),
-//   };
-// });

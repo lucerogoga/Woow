@@ -6,19 +6,15 @@ html {
 }
 
 .productAdded-card {
-  display: flex;
   background-color: #fff;
   border-radius: 17px;
   display: flex;
   flex-direction: row;
-  max-width: 100%;
   padding: 1em;
   margin: 0 auto;
-  width: 100%;
-  height: 20%;
   overflow: hidden;
   justify-content: center;
-  height: 130px;
+  height: 8rem;
 }
 
 .productAdded-card--photoContainer {
@@ -102,6 +98,7 @@ html {
   color: #283159;
   font-size: 1.3rem;
   font-weight: 500;
+  margin-left: 0.5rem;
 }
 
 .productAdded-card--descr {
@@ -117,19 +114,7 @@ html {
   margin-right: 3rem;
 }
 
-/* .productAdded-card--input-qty {
-  width: fit-content;
-
-  border: none;
-}
-
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  width: fit-content;
-} */
-
 .productAdded-card--buttonsRightContainer {
-  /* background-color: red; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -156,7 +141,6 @@ input[type="number"]::-webkit-inner-spin-button {
   position: relative;
 }
 
-/* .productAdded-card--eye path { */
 .productAdded-card--eye path {
   width: 15px;
   cursor: pointer;
@@ -175,8 +159,7 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 17rem;
   height: 6.5rem;
 }
-/* 
-/* .productAdded-card--obsText::-webkit-scrollbar { */
+
 ::-webkit-scrollbar {
   width: 1em;
 }
@@ -189,10 +172,6 @@ input[type="number"]::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb:hover {
   background: #fecc68;
 }
-
-/* .product-card--eye:hover ~ .productAdded-card--obsContainer {
-  display: block;
-} */
 
 .product-card--eye {
   cursor: pointer;
@@ -217,37 +196,4 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .hidden {
   display: none;
-}
-
-@media (min-width: 900px) {
-  /* .navbar--burger-container {
-    display: none;
-  }
-
-  .menu {
-    display: flex;
-  } */
-
-  /* .productAdded-card {
-    display: flex;
-    background-color: #fff;
-    border-radius: 17px;
-    display: flex;
-    flex-direction: row;
-    max-width: 100%;
-    padding: 1em;
-    margin: 0 auto;
-    width: 100%;
-    height: 130px;
-    overflow: hidden;
-    justify-content: center;
-  } */
-
-  .productAdded-card--obsText {
-    /* font-size: 2rem; */
-  }
-
-  .productAdded-card {
-    /* background-color: #fecc68; */
-  }
 }

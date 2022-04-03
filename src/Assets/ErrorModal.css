@@ -1,3 +1,7 @@
+/* position: absolute;
+top: 0.5rem;
+right: 0.8rem; */
+
 html {
   box-sizing: border-box;
 
@@ -68,8 +72,8 @@ body {
 
 .err-msg__close-icon {
   position: absolute;
-  top: 0.2rem;
-  right: 0.5rem;
+  top: 0.5rem;
+  right: 0.8rem;
 }
 
 /* Modal Error */

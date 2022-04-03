@@ -17,7 +17,7 @@ import { ReactComponent as Spinner } from "../Assets/icons/Spinner.svg";
 import ActionButton from "./ActionButton";
 //Materiaul UI Icons
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-//Firebase Conection
+//Firebase Connection
 import {
   getProductsCategories,
   createProductFirebase,
@@ -55,15 +55,14 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
   const [categoryId, setCategoryId] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productCost, setProductCost] = useState([]);
+  const [productCost, setProductCost] = useState("");
   const [productOption, setProductOption] = useState([null]);
   const [productPhoto, setProductPhoto] = useState([]);
-  const [productStock, setProductStock] = useState([]);
+  const [productStock, setProductStock] = useState("");
   const [objectURL, setObjectURL] = useState("");
   //states for error Message
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
-
   const cleanForm = () => {
     setCategoryId("");
     setProductName("");
@@ -83,13 +82,12 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       setCategoryId(productToEdit.cat_id);
       setProductName(productToEdit.product_name);
       setProductDescription(productToEdit.product_description);
-      setProductCost(productToEdit.product_cost);
-      setProductStock(productToEdit.product_stock);
+      setProductCost(productToEdit.product_cost[0]);
+      setProductStock(productToEdit.product_stock[0]);
       setProductOption(null);
       setProductPhoto(productToEdit.product_photo[0]);
       setObjectURL("");
     }
-
     return () => cleanForm();
   }, [productToEdit]);
 
@@ -145,7 +143,6 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
       productName,
       productDescription,
       productCost,
-      productOption,
       downloadUrl,
       productStock
     )
@@ -309,7 +306,7 @@ export default function ModalProducts({ isOpen, onClose, productToEdit }) {
                 {objectURL === "" ? null : (
                   <img src={objectURL} alt={"photoProductb"} width="100px" />
                 )}
-                <div className="large-button--content" onClick={handleSubmit}>
+                <div className="large-button__content" onClick={handleSubmit}>
                   <ActionButton
                     title={productToEdit ? "Update Product" : "Create Product"}
                     className={"button--pink"}

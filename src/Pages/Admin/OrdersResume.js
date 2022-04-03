@@ -14,27 +14,27 @@ import {
 } from "firebase/firestore";
 import { useAuth } from "../../Components/Context/AuthContext";
 import { db } from "../../Config/initialize";
+import Title from "../../Components/Title";
 
 const OrdersResumeAdmin = () => {
-  const [productOrderCategories, setProductOrderCategories] = useState([
+  const [allOrders, setAllOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
+  const {
+    user: { currentUser },
+  } = useAuth();
+
+  const productOrderCategories = [
     "Pending",
     "Cooking",
     "Ready to Serve",
     "Delivered",
     "Canceled",
-  ]);
-  const [orders, setOrders] = useState([]);
-  const [selectedOrderStatus, setSelectedOrderStatus] = useState("Pending");
-  const [orderStatusQuantity, setOrderStatusQuantity] = useState([]);
-  const {
-    user: { currentUser },
-  } = useAuth();
-
+  ];
   useEffect(() => {
     const q = query(
       collection(db, "orders"),
       where("order_status", "==", selectedOrderStatus),
-      where("waiter_id", "==", currentUser),
       orderBy("order_timestamp", "desc")
     );
 
@@ -43,10 +43,25 @@ const OrdersResumeAdmin = () => {
     });
   }, [selectedOrderStatus, currentUser]);
 
+  useEffect(() => {
+    const q = query(collection(db, "orders"));
+    return onSnapshot(q, (snapshot) => {
+      setAllOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const filterOrders = () => {
+    const arrayOfOrdersByStatus = productOrderCategories.map((elem) =>
+      allOrders.filter((doc) => doc.order_status === elem)
+    );
+    return arrayOfOrdersByStatus.map((elem) => elem.length);
+  };
+
+  const filteredOrdersQuantity = filterOrders();
+
   const handleClick = (cat) => {
     setSelectedOrderStatus(cat);
   };
-
   return (
     <>
       <div className="categories-container">
@@ -60,11 +75,14 @@ const OrdersResumeAdmin = () => {
               onClick={() => {
                 handleClick(cat);
               }}
+              orders={allOrders}
+              filteredOrdersQuantity={filteredOrdersQuantity[i]}
             />
           );
         })}
       </div>
 
+      <Title title={`Orders ${selectedOrderStatus}`} quantity={orders.length} />
       <div>
         {orders.map((order) => (
           <OrderCardFormat key={order.id} orderData={order} />

@@ -13,12 +13,12 @@
   background-color: #fff;
 }
 
-.order-card--header {
+.order-card__header {
   display: flex;
   justify-content: space-between;
 }
 
-.order-card--infos-container {
+.order-card__infos-container {
   color: #283159;
   display: grid;
   grid-row-gap: 2rem;
@@ -26,50 +26,47 @@
   min-width: fit-content;
 }
 
-.order-card--titles-container {
+.order-card__titles-container {
   display: grid;
   grid-row-gap: 2rem;
   row-gap: 0.8rem;
   min-width: fit-content;
   margin-right: 0.5rem;
 }
-.order-card--info-container {
+.order-card__info-container {
   display: flex;
 }
-.order-card--info {
+.order-card__info {
   display: flex;
 }
 
-.order-card--info-title {
+.order-card__info-title {
   color: #283159;
   font-size: 1rem;
   font-weight: 700;
-  /* width: 5rem; */
 }
 
-.order-card--info-p {
+.order-card__info-p {
   color: #283159;
   font-size: 1rem;
 }
 
-.order-card--right-container {
+.order-card__right-container {
   display: flex;
   align-items: flex-start;
 }
 
-.order-card--table-container {
+.order-card__table-container {
   margin-top: 1rem;
 }
 
-.order-card--buttonsContainer {
+.order-card__buttonsContainer {
   display: flex;
   width: 100%;
   margin-top: 1rem;
 }
 
 .order-card__button {
-  /* .order-card--button--cooking { */
-  /* background-color: red; */
   background-color: #ff9aa3;
   border: none;
   color: #fff;

@@ -4,10 +4,10 @@ import {
   onAuthStateChanged,
   signOut,
   createUserWithEmailAndPassword,
-  reauthenticateWithCredential,
   EmailAuthProvider,
   updateEmail,
   updatePassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth, auth2 } from "../../Config/initialize.js";
 
@@ -19,11 +19,6 @@ export const useAuth = () => useContext(authContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
-  const [secondaryUser, setSecondaryUser] = useState({});
-  const [userCredential2, setUserCredential2] = useState({});
-
-  const [prueba, setPrueba] = useState(false);
 
   const createUser = (email, password) => {
     return signOut(auth2)
@@ -37,18 +32,9 @@ export const AuthProvider = ({ children }) => {
         return firebaseUser.user.uid;
       })
       .then((idUser) => {
-        // return signOut(auth2);
-        return { logout: signOut(auth2), userId: idUser };
+        return idUser;
       });
-    // .then(signOut(auth2));
   };
-  // const createUser = (email, password) => {
-  //   return createUserWithEmailAndPassword(auth2, email, password)
-  //     .then((firebaseUser) => {
-  //       return firebaseUser.user.uid;
-  //     })
-  //     .then(signOut(auth2));
-  // };
 
   const login = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
@@ -59,8 +45,6 @@ export const AuthProvider = ({ children }) => {
     return userCredential;
   };
 
-  // ! intentando conseguir loguarse con segunda cuenta para cambiar el correo y contraseña!-------------------------------
-
   const loginSecondaryUser = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(
       auth2,
@@ -70,42 +54,84 @@ export const AuthProvider = ({ children }) => {
     return userCredential;
   };
 
-  // Siempre me pedirán credencial para eliminar cuenta, cambiar contraseña o correo
+  // It will always ask me for a credential to modify account name, password or email
   const createCredential = (email, password) => {
     const credential = EmailAuthProvider.credential(email, password);
     return credential;
   };
-  // El método indicará la funcion (si es para actualizar el correo o la contraseña)
-  const reauth = async (user, credential) =>
-    reauthenticateWithCredential(user, credential);
-
-  const changePasswordAuth = (user, newPassword) =>
-    updatePassword(user, newPassword);
-
-  const changeEmailAuth = (user, newEmail) => updateEmail(user, newEmail);
 
   // !---------------
 
-  const changeEmailUser = (email, newEmail) => {
+  const changeNameUser = (email, pwd, name) => {
     let userData;
 
     return signOut(auth2)
       .then(() => {
-        return loginSecondaryUser(email, "123456");
-      })
-      .catch(() => {
-        return loginSecondaryUser(email, "123456");
+        return loginSecondaryUser(email, pwd);
       })
       .then((secondUser) => {
-        // setSecondaryUser(secondUser);
         userData = secondUser;
-        return createCredential(secondUser, "123456");
+        return createCredential(secondUser, pwd);
       })
       .then(() => {
         const employe = userData.user.auth.currentUser;
-        return changeEmailAuth(employe, newEmail);
+        return updateProfile(employe, {
+          displayName: name,
+        });
+      });
+  };
+
+  const changePwdUser = (email, pwd, newPwd) => {
+    let userData;
+
+    return signOut(auth2)
+      .then(() => {
+        return loginSecondaryUser(email, pwd);
       })
-      .catch((e) => e.message);
+      .then((secondUser) => {
+        userData = secondUser;
+        return createCredential(secondUser, pwd);
+      })
+      .then(() => {
+        const employe = userData.user.auth.currentUser;
+        return updatePassword(employe, newPwd);
+      })
+      .catch((e) => console.log(e.message));
+  };
+
+  const changeEmailUser = (email, newEmail, pwd) => {
+    let userData;
+
+    return signOut(auth2)
+      .then(() => {
+        return loginSecondaryUser(email, pwd);
+      })
+      .then((secondUser) => {
+        userData = secondUser;
+        return createCredential(secondUser, pwd);
+      })
+      .then(() => {
+        const employe = userData.user.auth.currentUser;
+        return updateEmail(employe, newEmail);
+      })
+      .then((e) => {
+        return signOut(auth2);
+      })
+      .catch((e) => console.log(e.message));
+  };
+
+  const changeUserDataAuth = (email, newEmail, pwd, newPwd, name) => {
+    return changeNameUser(email, pwd, name)
+      .then(() => {
+        return changePwdUser(email, pwd, newPwd);
+      })
+      .then(() => {
+        return changeEmailUser(email, newEmail, newPwd);
+      })
+      .then(() => {
+        return signOut(auth2);
+      })
+      .catch((e) => console.log(e.message));
   };
 
   // !------------------------------
@@ -116,39 +142,13 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (currentUser) => {
       setUser({ currentUser: currentUser?.uid });
-      //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
-      console.log("algo cambió lucero!!, ", { currentUser: currentUser?.uid });
-      console.log("useEffect 1, mi hook user1", user);
-      // user, setUser
+      //* We put a boolean on it when the user is already authenticated, it change to false so that it is no longer displayed but remember that the tmb role has to wait.
       setLoading(false);
     });
 
-    return () => unsubcribe();
-  }, []);
-
-  useEffect(() => {
-    const unsubcribe2 = onAuthStateChanged(auth2, (currentUser) => {
-      setSecondaryUser(currentUser);
-
-      console.log("algo cambió empleado2 obj!!, ", currentUser);
-
-      console.log("algo cambió empleado2 uid!!, ", {
-        currentUser: currentUser?.uid,
-      });
-
-      setSecondaryUser(currentUser);
-      console.log("useEffect 2, mi hook secondaryUser", secondaryUser);
-
-      // ! prueba
-
-      // setSecondaryUser({ currentUser: currentUser?.uid });
-      //*LE PONEMOS UN BOOLEANO CUANDO EL USUARIO YA ESTE AUTENTICADO CAMBIA A FALSE PARA QUE YA NO SE MUESTRE PERO RECUERDA QUE EL ROL TMB TIENE QUE ESPERAR.
-      setLoading2(false);
-    });
-
-    return () => unsubcribe2();
-    // }, [secondaryUser, prueba]);
-    // }, [secondaryUser]);
+    // return () => unsubcribe();
+    return unsubcribe;
+    // return unsubcribe();
   }, []);
 
   return (
@@ -158,15 +158,10 @@ export const AuthProvider = ({ children }) => {
         logout,
         user,
         loading,
-        // loading2,
         createUser,
-        // createCredential,
-        // secondaryUser,
-        // loginSecondaryUser,
-        changeEmailUser,
-        userCredential2,
         auth2,
         signOut,
+        changeUserDataAuth,
       }}
     >
       {children}

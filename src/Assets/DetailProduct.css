@@ -83,7 +83,7 @@
   background-color: #fff;
   border-radius: 30px 30px 0 0;
   width: 100%;
-  padding: 3rem 3rem;
+  padding: 2rem 3rem 4rem;
   justify-content: space-around;
 }
 
@@ -101,7 +101,7 @@
   margin-left: 3rem;
 }
 
-.product--name {
+.product__name {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   font-weight: 700;
@@ -127,7 +127,7 @@
   min-height: 3rem;
 }
 
-.product--cost {
+.product__cost {
   font-size: 1.8rem;
   font-weight: 600;
 }
@@ -142,7 +142,9 @@
   height: 50px;
   cursor: pointer;
   transition: all 0.3s;
+  min-width: 17rem;
 }
+
 .button--pink:hover {
   background-color: #ffa4ac;
   transition: all 0.3s;
@@ -173,8 +175,23 @@
   display: flex;
   flex-direction: row;
 }
-.large-button--content {
+
+.large-button__content--view{
+  width: 100%; 
+    background: #fff;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+}
+
+
+.large-button__content {
   width: 100%;
+}
+
+.large-button__content--white {
+  width: 100%;
+  margin-bottom: 0;
 }
 .counter-content {
   display: flex;
@@ -254,7 +271,7 @@
   left: 52px;
 }
 
-.info-product--right-container {
+.info-product__right-container {
   align-items: flex-end;
   width: 100%;
 }
@@ -265,7 +282,7 @@
   display: none;
 }
 
-.info-product--main-container {
+.info-product__main-container {
   width: 100%;
   display: flex;
 }
@@ -326,7 +343,7 @@
     display: none;
   }
 
-  .info-product--main-container {
+  .info-product__main-container {
     padding: 1rem;
     position: relative;
     width: 90%;
@@ -335,7 +352,7 @@
     background-color: #fff;
     display: flex;
     min-width: 850px;
-    height: 100%;
+    height: auto;
     max-width: 950px;
     margin-top: 2rem;
   }
@@ -344,7 +361,7 @@
     padding: 0;
   }
 
-  .info-product--right-container {
+  .info-product__right-container {
     align-items: flex-end;
     width: 50%;
   }
@@ -403,7 +420,11 @@
     margin-bottom: 1rem;
   }
 
-  .large-button--content {
+  .large-button__content--white {
+    margin-bottom: 1.5rem;
+  }
+
+  .large-button__content--view {
     width: 100%;
     border: solid 10px #fff;
     position: sticky;

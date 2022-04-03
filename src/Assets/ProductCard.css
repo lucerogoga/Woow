@@ -12,13 +12,12 @@ html {
 }
 
 .products-container.vh {
-  height: 58vh;
+  height: 55vh;
 }
 
 .product-card {
   display: flex;
   background-color: #fff;
-  /* background-color: red; */
   border-radius: 17px;
   display: flex;
   flex-direction: row;
