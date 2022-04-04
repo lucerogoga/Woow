@@ -22,9 +22,9 @@
 
 ### 1.1 Descripcion del Proyecto
 
-**Woow** 🧁 es una pastelería especializada en el arte en azúcar que se inició durante la pandemia, y como se ha enfocado en satisfacer las necesidades de sus clientes con su excelente atención y productos artesanales de calidad ha sido bien recibida por su público.
+**Woow** 🧁 es un restaurante especializada en el arte en azúcar que se inició durante la pandemia, y como se ha enfocado en satisfacer las necesidades de sus clientes con su excelente atención y productos artesanales de calidad ha sido bien recibida por su público.
 
-Dado a su significativo crecimiento, se le ha complicado un poco al personal de Woow el llevar el control de sus pedidos, y es por esto que están solicitando un sistema que pueda facilitar la gestión de comandas para el personal de la pastelería, asi podrán desempeñarse mejor, de manera que el mesero pueda realizar y enviar los pedidos usando una tablet y así enviarle al chef para que se preparen ordenada y eficientemente.
+Dado a su significativo crecimiento, se le ha complicado un poco al personal de Woow el llevar el control de sus pedidos, y es por esto que están solicitando un sistema que pueda facilitar la gestión de comandas para el personal del restaurante, asi podrán desempeñarse mejor, de manera que el mesero pueda realizar y enviar los pedidos usando una tablet y así enviarle al chef para que se preparen ordenada y eficientemente.
 
 Por parte del administrador tendrá la posibilidad de crear, editar y dar de baja (tanto de mesero como chef) a los empleados con cuentas, podrá agregar, editar y eliminar productos en el inventario y, además, tendrá acceso a las ordenes realizadas para poder llevar un seguimiento.
 
@@ -249,7 +249,7 @@ El proceso se realizó mediante seis etapas:
 
 #### Análisis
 
-Tomando en cuenta los requerimientos solicitados para la creación del sistema, definimos el público al que va dirigido, es por esto que creamos la pastelería **Woow**  🧁 , una pastelería al estilo Fancy con una excelente calidad en productos y servicios, pero que presenta una problemática actual: Llevar un buen control de pedidos.
+Tomando en cuenta los requerimientos solicitados para la creación del sistema, definimos el público al que va dirigido, es por esto que creamos **Woow**  🧁 , un restaurante al estilo Fancy enfocada principalmente en dulces como postres y pasteles con una excelente calidad en sus productos y servicios, pero que presenta una problemática actual: Llevar un buen control de pedidos.
 
 #### Diseño de la estrategia
 
