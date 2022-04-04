@@ -40,8 +40,8 @@ const Cart = ({ cantEdit, handleGoCart }) => {
     setCart,
     clientName,
     setClientName,
-    tableNumber,
     setTableNumber,
+    tableNumber,
     setIsClean,
   } = useCart();
   const { user } = useAuth();
@@ -94,11 +94,16 @@ const Cart = ({ cantEdit, handleGoCart }) => {
           "Pending",
           cart,
           orderCorrelative
-        ).then(() => {
-          setLoad(false);
-        });
-        setCart([]);
-        setIsClean(true);
+        )
+          .then(() => {
+            setLoad(false);
+          })
+          .finally(() => {
+            setCart([]);
+            setIsClean(true);
+            setClientName("");
+            setTableNumber("");
+          });
       }
     }, 200);
   };
