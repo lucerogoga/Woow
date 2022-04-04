@@ -4,6 +4,7 @@ import "../Assets/ButtonFilter.css";
 
 export function ButtonFilter(props) {
   const { item, icon, onClick, active, filteredOrdersQuantity } = props;
+
   let location = useLocation();
   const { pathname } = location;
 
