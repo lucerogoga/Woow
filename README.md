@@ -412,7 +412,7 @@ También puedes hacer click en la imagen para visualizar los prototipos
 
 ## 9. Lighthouse - Reporte
 
-<div align=center><img width="100%" src="https://user-images.githubusercontent.com/91838806/161400074-a39113c1-5ac8-4f39-9159-f4ba5b21158c.jpeg" ></div>
+<div align=center><img width="100%" src="https://user-images.githubusercontent.com/91838806/161584645-109e0524-1e7b-4a6e-9898-de1ab0cd0812.jpeg" ></div>
 
 ## 10. Autores
 
