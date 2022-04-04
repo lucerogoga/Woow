@@ -14,6 +14,22 @@ export const RolProvider = ({ children }) => {
     user: { currentUser },
   } = useAuth();
 
+  // useEffect(() => {
+  //   const prueba = () => {
+  //     if (currentUser) {
+  //       async function getUserFirestore() {
+  //         const { user_rol } = await getUser(currentUser);
+  //         setUserRole(user_rol);
+  //       }
+  //       setLoading(true);
+  //       getUserFirestore().finally(() => setLoading(false));
+  //     }
+  //   };
+
+  //   return () => prueba;
+  //   // return prueba;
+  // }, [currentUser]);
+
   useEffect(() => {
     if (currentUser) {
       async function getUserFirestore() {
@@ -23,7 +39,8 @@ export const RolProvider = ({ children }) => {
       setLoading(true);
       getUserFirestore().finally(() => setLoading(false));
     }
-  }, [currentUser]);
+  }, []);
+  // }, [currentUser]);
 
   if (loading)
     return (
