@@ -14,7 +14,6 @@ import { getUser } from "../Services/FirestoreServices";
 import { validateEmail } from "../helpers/loginFuntions";
 
 export const Login = () => {
-  const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -22,65 +21,52 @@ export const Login = () => {
   const [displayError, setDisplayError] = useState(false);
 
   const { login, user } = useAuth();
-  // const { userRole } = useRol();
 
   const handleDisplayError = () => {
     setDisplayError(false);
   };
 
+  const handleErrorMessage = (e) => {
+    setDisplayError(true);
+    switch (e.message) {
+      case "Firebase: Error (auth/user-not-found).":
+        setErrorMessage("User not found.");
+        break;
+      case "Firebase: Error (auth/wrong-password).":
+        setErrorMessage("Your username and/or password do not match");
+        break;
+      case "Firebase: Error (auth/user-not-found).3":
+        setErrorMessage(e.message);
+        break;
+      default:
+        setErrorMessage("Error not recognized");
+        setErrorMessage(e.message);
+        break;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setDisplayError(false);
-    setTimeout(async () => {
-      console.log("fuera", loginEmail, loginPassword);
-      if (loginEmail.trim().length === 0 || loginPassword.trim().length === 0) {
-        setErrorMessage("Fields must be filled");
-        setDisplayError(true);
-      } else if (!validateEmail(loginEmail)) {
-        setErrorMessage(
-          "Please enter your email addres in format yourname@example.com"
-        );
-        setDisplayError(true);
-      } else {
-        try {
-          const user = await login(loginEmail, loginPassword);
-          const userFirestore = await getUser(user.user.uid);
-          console.log("mira mi doc de firestore, ", userFirestore);
-          // const { user_rol: role } = await getUser(user.user.uid);
-          // if (role === "admin") navigate("/admin");
-          // else if (role === "chef") navigate("/chef");
-          // else navigate("/waiter");
-        } catch (e) {
-          switch (e.message) {
-            case "Firebase: Error (auth/user-not-found).":
-              setErrorMessage("User not found.");
-              break;
-            case "Firebase: Error (auth/wrong-password).":
-              setErrorMessage("Your username and/or password do not match");
-              break;
-            case "Firebase: Error (auth/user-not-found).3":
-              setErrorMessage(e.message);
-              break;
-            default:
-              setErrorMessage("Error not recognized");
-              setErrorMessage(e.message);
-              break;
-          }
-          setDisplayError(true);
-        }
-      }
-    }, 200);
-  };
+    if (loginEmail.trim().length === 0 || loginPassword.trim().length === 0) {
+      setErrorMessage("Fields must be filled");
+      setDisplayError(true);
+      return;
+    }
+    if (!validateEmail(loginEmail)) {
+      setErrorMessage(
+        "Please enter your email addres in format yourname@example.com"
+      );
+      setDisplayError(true);
+      return;
+    }
 
-  // ! INTENTO DE CAMBIO DE VISTAS POR ROL.
-  // if (user.currentUser && userRole === "waiter") {
-  //   return <Navigate to="/waiter" />;
-  // } else if (user.currentUser && userRole === "chef") {
-  //   return <Navigate to="/chef" />;
-  // } else if (user.currentUser && userRole === "admin") {
-  //   return <Navigate to="/admin" />;
-  // }
+    try {
+      await login(loginEmail, loginPassword);
+    } catch (e) {
+      handleErrorMessage(e);
+    }
+  };
 
   if (user.currentUser) {
     return <Navigate to="/admin" />;

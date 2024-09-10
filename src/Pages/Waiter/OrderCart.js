@@ -40,7 +40,6 @@ const OrderCart = ({ cantEdit }) => {
     setTableNumber,
     setIsClean,
   } = useCart();
-
   const { user } = useAuth();
 
   useEffect(() => {

@@ -37,12 +37,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return userCredential;
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      return userCredential;
+    } catch (error) {
+      return error;
+    }
   };
 
   const loginSecondaryUser = async (email, password) => {
