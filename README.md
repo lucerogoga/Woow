@@ -22,9 +22,7 @@
 ### 1.1 Project Description
 
 **Woow** 🧁 Woow is a bakery specialized in sugar art that started during the pandemic, and as it has focused on satisfying the needs of its customers with its excellent service and quality artisanal products, it has been well received by its public.
-
 Due to its significant growth, it has become a bit complicated for Woow's staff to keep track of their orders, and that is why they are requesting a system that can facilitate the management of orders for the bakery staff, so they can perform better, so that the waiter can make and send the orders using a tablet and thus send them to the chef so that they are prepared in an orderly and efficient manner.
-
 The administrator will have the possibility to create, edit and deregister (both waiter and chef) employees with accounts, will be able to add, edit and delete products in the inventory and, in addition, will have access to the orders placed to be able to keep track.
 
 ### 1.2 Role Description
@@ -392,7 +390,7 @@ You can also click on the image to view the prototypes
 
 ## 9. Lighthouse - Reports
 
-<div align=center><img width="100%" src="https://user-images.githubusercontent.com/91838806/161400074-a39113c1-5ac8-4f39-9159-f4ba5b21158c.jpeg" ></div>
+<div align=center><img width="100%" src="https://user-images.githubusercontent.com/91838806/161584645-109e0524-1e7b-4a6e-9898-de1ab0cd0812.jpeg" ></div>
 
 ## 10. Authors
 

@@ -20,7 +20,7 @@ import { db } from "../../Config/initialize";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [productCategories, setProductCategories] = useState([]);
 
   const location = useLocation();
@@ -74,7 +74,7 @@ const AdminProducts = () => {
             <ButtonFilter
               item={cat.cat_name}
               uid={cat.cat_uid}
-              active={cat.cat_uid === selectedCategory}
+              active={cat.cat_name === selectedCategory}
               icon={iconComponents[i]}
               key={cat.cat_uid}
               onClick={() => {
