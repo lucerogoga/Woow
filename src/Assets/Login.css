@@ -86,8 +86,7 @@
 @media (min-width: 900px) {
   .login {
     background-color: var(--yellow);
-    justify-content: flex-end;
-    background-size: 50% 100%;
+    background-size: 50% auto;
     background-position: 0%;
   }
   .login__container {
