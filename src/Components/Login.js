@@ -3,13 +3,12 @@ import "../Assets/Login.css";
 //Components
 import logo from "../Assets/icons/logo-rotate.svg";
 import Error from "./Error";
+import Button from "./ui/Button";
+import Input from "./ui/Input";
 //Router
-import { useNavigate, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 //Context
 import { useAuth } from "./Context/AuthContext";
-//Firebase Conection
-import { getUser } from "../Services/FirestoreServices";
-// import { useRol } from "./Context/RolContex";
 //Helpers
 import { validateEmail } from "../helpers/loginFuntions";
 
@@ -44,6 +43,7 @@ export const Login = () => {
         break;
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -60,7 +60,6 @@ export const Login = () => {
       setDisplayError(true);
       return;
     }
-
     try {
       await login(loginEmail, loginPassword);
     } catch (e) {
@@ -74,36 +73,37 @@ export const Login = () => {
 
   return (
     <div className="login">
+      <Error
+        message={errorMessage}
+        onClose={handleDisplayError}
+        isVisible={displayError}
+      />
       <div className="login__container">
         <img alt="logoWoow" className="login--logo" src={logo} />
-        <div className="login--form ">
-          <input
+        <div className="login--form">
+          <h1 className="subtitle">
+            <span>Welcome </span>
+            <span>Back!</span>
+          </h1>
+          <Input
             id="email"
             className="login--input"
-            placeholder="User email"
+            placeholder="enter your email"
             onChange={(ev) => setLoginEmail(ev.target.value)}
-          ></input>
-          <input
+          />
+          <Input
             id="password"
             type="password"
             className="login--input"
-            placeholder="User password"
+            placeholder="enter your password"
             onChange={(ev) => setLoginPassword(ev.target.value)}
-          ></input>
-          <button
+          />
+          <Button
             onClick={handleSubmit}
             id="btnLogin"
             className="login--submit"
-          >
-            Login
-          </button>
-          <div className="error">
-            <Error
-              message={errorMessage}
-              onClose={handleDisplayError}
-              isVisible={displayError}
-            />
-          </div>
+            text="Login"
+          />
         </div>
       </div>
     </div>

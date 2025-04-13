@@ -2,38 +2,48 @@
   background-image: url("./login-bg-movil.jpg");
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 450px 675px;
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  width: 100%;
+  transform: scale(1);
 }
 .login__container {
-  flex-basis: 75%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 80%;
+  height: 100%;
+  width: 100%;
 }
 .login--logo {
-  width: 70%;
-  margin-bottom: 3rem;
+  width: 65%;
+  margin-top: 5rem;
 }
 
 .login--form {
+  background: rgba(255, 255, 255, 0.37);
+  border-radius: 32px 32px 0 0px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.3px);
+  -webkit-backdrop-filter: blur(7.3px);
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
+  height: 55%;
+  padding: 2.5rem;
 }
 
 .login--title {
   color: #fff;
 }
-
+.subtitle {
+  color: var(--blue);
+  font-size: 1.5rem;
+  align-self: flex-start;
+  padding-bottom: 2rem;
+}
 .login--input {
   margin-bottom: 0.5rem;
   border-radius: 2rem;
@@ -41,7 +51,7 @@
   height: 2rem;
   font-size: 1em;
   padding: 1.5rem;
-  width: 60%;
+  width: 100%;
 }
 
 .login--input::placeholder {
@@ -49,40 +59,58 @@
 }
 
 .login--submit {
-  margin-bottom: 0.5rem;
+  height: 2rem;
   border-radius: 2rem;
   border: none;
-  height: 2rem;
-  font-size: 1em;
-  padding: 1.5rem;
-  width: 60%;
-  background-color: #ffa4ac;
-  color: #fff;
-  transition: all 0.5s ease;
   cursor: pointer;
-  margin-top: 1.5em;
+  font-size: 1em;
+  color: #fff;
+  background-color: #ffa4ac;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.5rem;
+  margin-top: 1.5em;
+  transition: all 0.5s ease;
 }
 
 .login--submit:hover {
   background-color: #fecc68;
 }
 
+.error {
+  position: relative;
+}
+
 @media (min-width: 900px) {
   .login {
-    background-image: url("./login-bg-desktop.png");
+    background-color: var(--yellow);
     justify-content: flex-end;
+    background-size: 50% 100%;
+    background-position: 0%;
   }
   .login__container {
-    flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
     gap: 1rem;
   }
   .login--logo {
-    width: 50%;
+    width: 30%;
+    margin: auto;
   }
   .login--form {
     align-items: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .subtitle {
+    font-size: 4rem;
+  }
+
+  h1 span {
+    display: block;
+    text-align: left;
   }
 }
